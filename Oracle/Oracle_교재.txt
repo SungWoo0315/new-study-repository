@@ -303,7 +303,7 @@ check
 Primary key(PK)
 ----------------
 	▶not null, unique 의 제약조건 성질을 가진다. 즉 행과 행을 구분할 수 있는 유일한 데이터가 입력된다.
-	▶차후에 foreign key에 의해 참조 당하는 키다.
+	▶차후에 foreign key에 의해 참조 당할수도 있다.
 
 ----------------
 foreign key(FK)
