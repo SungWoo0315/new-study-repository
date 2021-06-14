@@ -458,3 +458,14 @@ OX문제 20210611.md 참고.
 		관리하고 싶은 정보는 고객명, 전화번호, 주민번호, 담당직원명 입니다.
 	연봉등급을 관리하고 싶어요
 		관리하고 싶은 정보는 연봉등급, 등급별최소연봉, 등급별최대연봉
+-------------------------------------------------------------------
+create table dept(
+    dep_no       number(3)       primary key
+    ,dep_name    varchar2(20)    not null unique
+    ,loc         varchar2(20)    not null
+);
+
+insert into dept(dep_no, dep_name, loc) values(10, '총무부', '서울');
+insert into dept(dep_no, dep_name, loc) values(20, '영업부', '부산');
+insert into dept(dep_no, dep_name, loc) values(30, '전산부', '대전');
+insert into dept(dep_no, dep_name, loc) values(40, '자재부', '광주');
