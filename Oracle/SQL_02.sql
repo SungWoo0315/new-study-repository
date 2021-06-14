@@ -22,6 +22,8 @@ create table employee(
     ,dep_no     number(3)
     ,jikup      varchar2(20)    not null
     ,salary     number(9)       default 0
+    ,hire_date  date            default sysdate YYYY-MM-DD --입사일 저장
+    ,jumin_num  char(13)        not null
 
     ,primary key(emp_no)
     ,foreign key(dep_no) references dept(dep_no)
@@ -32,8 +34,8 @@ create table employee(
 
 
 
-//commit;
+--commit;      -- 커밋
 
 
 
-//drop table dept;
+--drop table dept;  --테이블 삭제
