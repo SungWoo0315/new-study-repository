@@ -75,7 +75,9 @@ insert into employee values( 20, '깨똥이', 10, '과장', 4500, '1990-05-01', 
 
 
 
-
+/*
+  주석처리
+*/
 
 commit;      -- 커밋
 
