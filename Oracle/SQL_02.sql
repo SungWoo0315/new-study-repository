@@ -22,19 +22,24 @@ create table employee(
     ,dep_no     number(3)
     ,jikup      varchar2(20)    not null
     ,salary     number(9)       default 0
-    ,hire_date  date            default sysdate YYYY-MM-DD --입사일 저장
-    ,jumin_num  char(13)        not null
+    ,hire_date  date            default sysdate  --입사일 저장
+    ,jumin_num  char(13)        not null unique
+    ,phone      varchar2(15)    not null
+    ,mgr_emp_no number(3)
 
-    ,primary key(emp_no)
-    ,foreign key(dep_no) references dept(dep_no)
+    , primary key(emp_no)
+    , foreign key(dep_no) references dept(dep_no)
+    , constraint employee_mgr_emp_no_fk foreign key(mgr_emp_no) references employee(emp_no)  -- 제약조건에 이름을 부여.
 );
 
+select * from employee;
 
 
 
 
 
---commit;      -- 커밋
+
+commit;      -- 커밋
 
 
 
