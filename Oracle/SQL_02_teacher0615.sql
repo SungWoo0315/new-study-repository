@@ -96,17 +96,9 @@ alter session set nls_date_format = 'yyyy-mm-dd' ;
 --employee 테이블에 20개 행 입력하기.
 --------------------------------------------
 insert into employee values( emp_sq.nextval, '홍길동', 10, '사장', 5000, '1980-01-01', '7211271109410', '01099699515', null );
-
-
 insert into employee values( emp_sq.nextval, '한국남', 20, '부장', 3000, '1988-11-01', '6002061841224', '01024948424', 1 );
-
-
-
 insert into employee values( emp_sq.nextval, '이순신', 20, '과장', 3500, '1989-03-01', '6209172010520', '01026352672', 2 );
 insert into employee values( emp_sq.nextval, '이미라', 30, '대리', 2503, '1983-04-01', '8409282070226', '01094215694', 17 );
-
-
-
 insert into employee values( emp_sq.nextval, '이순라', 20, '사원', 1200, '1990-05-01', '8401041483626', '01028585900', 3 );
 insert into employee values( emp_sq.nextval, '공부만', 30, '과장', 4003, '1995-05-01', '8402121563616', '01191338328', 17 );
 insert into employee values( emp_sq.nextval, '놀기만', 20, '과장', 2300, '1996-06-01', '8011221713914', '01029463523', 2 );
@@ -123,7 +115,6 @@ insert into employee values( emp_sq.nextval, '이성계', 30, '부장', 2803, '1
 insert into employee values( emp_sq.nextval, '강감찬', 30, '사원', 1003, '1986-07-01', '8203121977315', '01033583130', 4 );
 insert into employee values( emp_sq.nextval, '임꺽정', 20, '사원', 2200, '1988-04-01', '8701301040111', '01086253078', 7 );
 insert into employee values( emp_sq.nextval, '깨똥이', 10, '과장', 4500, '1990-05-01', '8811232452719', '01090084876', 13 );
-
 
 select * from employee;
 
@@ -192,3 +183,15 @@ select * from salary_grade;
 commit;
 
 
+
+
+
+
+select
+		emp_no          as "직원번호"
+		, emp_name      as "직원명"
+		, jikup         as "직급"
+		, salary        as "연봉"
+		, hire_date     as "입사일"
+	from
+		employee;
