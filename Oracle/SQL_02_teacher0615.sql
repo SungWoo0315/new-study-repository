@@ -220,3 +220,13 @@ select * from employee where salary>=3000;
 select * from employee order by salary asc;
 
 select * from employee order by salary desc;
+
+select * from employee order by dep_no asc, salary desc;
+
+select * from employee order by decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4);
+
+select * from employee where dep_no=20 and jikup='과장';
+
+select * from employee where dep_no=20 or jikup='과장';
+
+select * from employee where salary*0.88>=4000;
