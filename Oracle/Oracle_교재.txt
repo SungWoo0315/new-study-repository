@@ -464,18 +464,51 @@ OX문제 20210611.md 참고.
 		관리하고 싶은 정보는 연봉등급, 등급별최소연봉, 등급별최대연봉
 	-----------------------------------------------------------------
 
+	SQL_02_teacher0615.sql 에 정답 있음.
 
 
-		
--------------------------------------------------------------------
-create table dept(
-    dep_no       number(3)       primary key
-    ,dep_name    varchar2(20)    not null unique
-    ,loc         varchar2(20)    not null
-);
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<15> employee 테이블에서 모든 컬럼, 모든행의 데이터를 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	-----------------------------------------------------------------
+	select * from employee;
+	-----------------------------------------------------------------
+	select emp_no, emp_name, dep_no, jikup, salary, hire_date, jumin_num, phone_num mgr_emp_no from employee;
+	-----------------------------------------------------------------
+	select
+		emp_no
+		, emp_name
+		, dep_no
+		, jikup, salary
+		, hire_date, jumin_num
+		, phone_num
+		, mgr_emp_no
 
-insert into dept(dep_no, dep_name, loc) values(10, '총무부', '서울');
-insert into dept(dep_no, dep_name, loc) values(20, '영업부', '부산');
-insert into dept(dep_no, dep_name, loc) values(30, '전산부', '대전');
-insert into dept(dep_no, dep_name, loc) values(40, '자재부', '광주');
--------------------------------------------------------------------
+	from
+		employee;
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<16> employee 테이블에서 emp_no, emp_name, jikup, salary, hire_date 컬럼의 데이터를 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select
+		emp_no, emp_name, jikup, salary, hire_date
+	from
+		employee;
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<17> employee 테이블에서 emp_no, emp_name, jikup, salary, hire_date 을 검색하면서
+	별칭(=alias)을 즉, 헤더를 사원번호, 직원명, 직급, 연봉, 입사일로 하고 연봉에 '만원' 이란 문자를 붙여 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+	-----------------------------------------------------------------
+	select
+		emp_no          as "직원번호"
+		, emp_name      as "직원명"
+		, jikup         as "직급"
+		, salary        as "연봉"
+		, hire_date     as "입사일"
+	from
+		employee;
+	-----------------------------------------------------------------
+		<참고> as 생략이 가능하다.
+		<참고> 별칭에 공백이 없으면 "" 도 생략이 가능하다. 그치만 무조건 사용하는것이 좋다. 일단 한놈만 패자...
