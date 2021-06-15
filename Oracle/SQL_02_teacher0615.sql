@@ -210,7 +210,12 @@ select distinct jikup from employee;
 
 select unique jikup from employee;
 
+select distinct jikup from employee order by 1;
+
 select distinct dep_no , jikup from employee;
+
+select distinct dep_no , jikup from employee order by 1;
+
 
 select unique dep_no, jikup from employee;
 
@@ -230,3 +235,9 @@ select * from employee where dep_no=20 and jikup='과장';
 select * from employee where dep_no=20 or jikup='과장';
 
 select * from employee where salary*0.88>=4000;
+
+select * from employee where dep_no=20 and salary>=2000 and salary<=3000;
+
+select * from employee where dep_no=20 and salary between 2000 and 3000;
+
+select * from employee where mgr_emp_no is null;
