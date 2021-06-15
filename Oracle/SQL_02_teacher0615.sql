@@ -52,29 +52,32 @@ create table employee(
       ,dep_no       number(3)                                 -- [소속부서번호]가 저장되는 컬럼 선언.
       ,jikup        varchar2(20)    not null                  -- [직급]이 저장되는 컬럼 선언. 제약조건은 비지마!
       ,salary       number(9)       default 0                 -- [연봉]이 저장되는 컬럼 선언. 제약조건은 안주면 0줄게!
-      ,hire_date    date            default  sysdate
-      ,jumin_num    char(13)        not null unique
-      ,phone	    varchar2(15)	not null
-	  ,mgr_emp_no	number(3)
+      ,hire_date    date            default  sysdate          -- [입사일]이 저장되는 컬럼 선언. 제약조건은 안주면 지금 시간을 넣어줄게!
+      ,jumin_num    char(13)        not null unique           -- [주민번호]가 저장되는 컬럼 선언. 제약조건은 비지마! 중복마!
+      ,phone	    varchar2(15)	not null                  -- [전화번호]가 저장되는 컬럼 선언. 제약조건은 비지마!
+	  ,mgr_emp_no	number(3)                                 -- [직속상관직원번호]가 저장되는 컬럼 선언.
 
-      , primary key(emp_no)
-      , foreign key(dep_no)  references dept(dep_no)
+      , primary key(emp_no)                                   -- [직원번호] 컬럼에 PK 제약조건 주기
+      , foreign key(dep_no)  references dept(dep_no)          -- [소속부서번호] 컬럼에 FK 제약조건 주기. dept 테이블에 dep_np 컬럼 참조하게 하기
       , constraint  employee_mgr_emp_no_fk foreign key(mgr_emp_no)  references employee(emp_no)
-);
-
+);                                                            -- [직속상관직원번호] 컬럼에 FK 제약조건 주기. employee 테이블에 emp_no 컬럼 참조하게 하기
+                                                              -- employee_mgr_emp_no_fk 는 제약 조건에 붙이는 이름이다.
 select * from employee;
 
 --------------------------------------------
---FK 제약조건 끄기
+-- employee_mgr_emp_no_fk 라는 이름의 FK 제약조건 끄기. 제약 조건 임시 무력화.(임시, 다시 켤 수 있음)
 --------------------------------------------
 alter table employee disable constraint employee_mgr_emp_no_fk;
 
 
 --------------------------------------------
---●날짜 데이터는 '년-월-일'  로 입력 가능하게 하기
+--지금 현재 로그인 한 계정이 날짜 데이터는 '년-월-일'  로 취급하게 하기
 --------------------------------------------
 alter session set nls_date_format = 'yyyy-mm-dd' ;
 
+--------------------------------------------
+--employee 테이블에 20개 행 입력하기.
+--------------------------------------------
 insert into employee values( 1, '홍길동', 10, '사장', 5000, '1980-01-01', '7211271109410', '01099699515', null );
 insert into employee values( 2, '한국남', 20, '부장', 3000, '1988-11-01', '6002061841224', '01024948424', 1 );
 insert into employee values( 3, '이순신', 20, '과장', 3500, '1989-03-01', '6209172010520', '01026352672', 2 );
@@ -97,14 +100,10 @@ insert into employee values( 19, '임꺽정', 20, '사원', 2200, '1988-04-01', 
 insert into employee values( 20, '깨똥이', 10, '과장', 4500, '1990-05-01', '8811232452719', '01090084876', 13 );
 
 --------------------------------------------
---FK 제약조건 키기
+-- employee_mgr_emp_no_fk 라는 이름의 FK 제약조건 켜기. 즉 제약 조건 임시 활성화.
 --------------------------------------------
 alter table employee enable constraint employee_mgr_emp_no_fk;
 
-
-
-
-  number(6,2)
 
 
 
