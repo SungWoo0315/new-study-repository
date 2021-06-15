@@ -627,3 +627,26 @@ OX문제 20210611.md 참고.
 <30> employee 테이블에서 실수령 액이 4000만원이상 받는 직원을 검색하면? 단, 세금이 12% 라고 가정하자.
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	select * from employee where salary*0.88>=4000;
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<31> employee 테이블에서 세금을 제일 많이 내는 직원 순서로 나열하면서 부서번호가 내림차순이면서
+	사장이 아닌 직원을 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select * from employee order by salary*0.12 desc, dep_no desc where jikup!='사장';
+	select * from employee where jikup != '사장' order by salary*0.12 desc , dep_no desc;
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<32> employee 테이블에서 20번 부서 중에 연봉 2000~3000 사이 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select * from employee where dep_no=20 and salary>=2000 and salary<=3000;
+	select * from employee where dep_no=20 and salary between 2000 and 3000;
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<33> employee 테이블에서 직속 상관이 없는 직원을 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select * from employee where mgr_emp_no is null;
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<34> employee 테이블에서 직속 상관이 있는 직원을 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select * from employee where mgr_emp_no is not null;
