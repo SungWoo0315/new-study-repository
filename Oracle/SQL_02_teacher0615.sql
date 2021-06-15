@@ -8,7 +8,6 @@ create user king  identified by k123;   -- 계정생성 명령
 -- king 계정에 system 과 비슷한 권한 주기
 -------------------------------------
 grant connect,resource,dba to king;     -- 권한부여 명령
-
 -------------------------------------
 -- employee 테이블 제거
 -------------------------------------
@@ -22,27 +21,37 @@ drop table dept;
 
 
 
-
+-------------------------------------
+--dept 테이블 만들기
+-------------------------------------
 create table dept(
-    dep_no       number(3)
-    ,dep_name    varchar2(20)    not null unique
-    ,loc         varchar2(20)    not null
-    , primary key(dep_no)
+    dep_no       number(3)                               -- [부서 번호] 저장 컬럼 선언. 자료형은 숫자형
+    ,dep_name    varchar2(20)    not null unique         -- [부서 명] 저장 컬럼 선언. 자료형은 문자형. 제약조건 비지마! 중복마!
+    ,loc         varchar2(20)    not null                -- [부서위치] 저장 컬럼 선언. 자료형은 문자형. 제약조건은 비지마!
+    , primary key(dep_no)                                -- dep_no 컬럼에 primary key 설정하기.
 );
+-- 4 행 입력하기
 insert into dept(dep_no,dep_name,loc) values(10,'총무부','서울');
 insert into dept(dep_no,dep_name,loc) values(20,'영업부','부산');
 insert into dept(dep_no,dep_name,loc) values(30,'전산부','대전');
 insert into dept(dep_no,dep_name,loc) values(40,'자재부','광주');
 
+-------------------------------------------------
+-- dept 테이블의 모든 컬럼과 모든 행을 검색하기
+-------------------------------------------------
 select * from dept;
+-------------------------------------------------
+select * from dept where dep_no=10;  -- 행을 골라내는 sql 구문.  where절.
 
-
+-------------------------------------------------
+-- employee 테이블 만들기. 직원 정보가 저장되는 테이블이다.
+-------------------------------------------------
 create table employee(
-      emp_no        number(3)
-      ,emp_name		varchar2(20)	not null
-      ,dep_no       number(3)
-      ,jikup        varchar2(20)    not null
-      ,salary       number(9)       default 0
+      emp_no        number(3)                                 -- [직원번호]가 저장되는 컬럼 선언.
+      ,emp_name		varchar2(20)	not null                  -- [직원명]이 저장되는 컬럼 선언.
+      ,dep_no       number(3)                                 -- [소속부서번호]가 저장되는 컬럼 선언.
+      ,jikup        varchar2(20)    not null                  -- [직급]이 저장되는 컬럼 선언. 제약조건은 비지마!
+      ,salary       number(9)       default 0                 -- [연봉]이 저장되는 컬럼 선언. 제약조건은 안주면 0줄게!
       ,hire_date    date            default  sysdate
       ,jumin_num    char(13)        not null unique
       ,phone	    varchar2(15)	not null
