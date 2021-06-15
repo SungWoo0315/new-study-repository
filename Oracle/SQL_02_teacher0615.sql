@@ -188,10 +188,35 @@ commit;
 
 
 select
-		emp_no          as "직원번호"
-		, emp_name      as "직원명"
-		, jikup         as "직급"
-		, salary        as "연봉"
-		, hire_date     as "입사일"
+		emp_no             as "직원번호"
+		, emp_name||' 님'  as "직원명"
+		, jikup            as "직급"
+		, salary||'만원'   as "연봉"
+		, hire_date        as "입사일"
 	from
 		employee;
+
+
+select
+	emp_name               as "직원명"
+	, jikup                as "직급"
+	, salary*0.12||'만원'   as "세금"
+	, salary*0.88||'만원'   as "실수령액"
+from
+	employee;
+
+
+select distinct jikup from employee;
+
+select unique jikup from employee;
+
+select distinct dep_no , jikup from employee;
+
+select unique dep_no, jikup from employee;
+
+
+select * from employee where salary>=3000;
+
+select * from employee order by salary asc;
+
+select * from employee order by salary desc;
