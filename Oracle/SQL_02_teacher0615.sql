@@ -546,7 +546,7 @@ select
 	from
 		employee;
 
--------56번 과제 연습 시작
+-------56번 과제 시작
 
 select
   emp_no                                                 "직원번호"
