@@ -454,6 +454,65 @@ select
 
 
 
+select
+		emp_no "직원번호"
+		,emp_name "직원명"
+		, floor((to_number(to_char(sysdate,'YYYY'))
+		 - to_number(
+		  case
+ 			substr(jumin_num,7,1) when '1' then '19'
+ 			when '2' then '19' else '20'
+			end ||substr(jumin_num,1,2)
+		 ) + 1) * 0.1)  ||'0대'    "연령대"
+	from
+		employee;
+
+
+
+
+
+	select
+		emp_no "직원번호"
+		, emp_name "직원명"
+		, to_date(
+			case
+				substr(jumin_num,7,1) when '1' then '19'
+				when '2' then '19' else '20'
+			end||substr(jumin_num,1,6), 'YYYYMMDD' )+100  "100일잔치날짜"
+from
+	employee;
+
+
+
+
+	select
+		emp_no "직원번호"
+		, emp_name "직원명"
+		, to_char(
+				to_date(
+				case
+					substr(jumin_num,7,1) when '1' then '19'
+					when '2' then '19' else '20'
+				end||substr(jumin_num,1,6), 'YYYYMMDD' )+100
+				, 'YYYY-MM-DD'
+				)  "100일잔치날짜"
+	from
+		employee;
+
+
+
+	select
+		to_date('20211110', 'YYYYMMDD')
+		-
+		to_date('20210512', 'YYYYMMDD')       as  "학원생활"
+	from
+		dual;
+
+
+
+
+
+
 
 
 
