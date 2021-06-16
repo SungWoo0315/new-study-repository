@@ -278,4 +278,57 @@ select
 
 
 
+select
+  cus_no
+  ,cus_name
+  ,call_num
+  ,substr(jumin_num,1,6)||'-'||substr(jumin_num,7,1)||'******'
+  ,emp_no
+from
+  customer;
 
+
+
+select
+  cus_no
+  ,cus_name
+  ,nvl(emp_no||'','없음')
+from
+  customer;
+
+
+
+select
+  cus_no
+  ,cus_name
+  ,nvl2(emp_no,'있음', '없음')
+from
+  customer;
+
+
+
+select
+  emp_no
+  ,emp_name
+  ,jikup
+  ,case
+    substr(jumin_num,7,1)
+    when '1' then '남'
+    when '3' then '남'
+    when '2' then '여'
+    when '4' then '여'
+  end          as "성별"
+from
+  employee;
+
+select
+		emp_no
+		,emp_name
+		,jikup
+		,case
+			when substr(jumin_num,7,1)='1' then '남'
+			when substr(jumin_num,7,1)='3' then '남'
+			else '여'
+		end
+	from
+		employee;
