@@ -432,3 +432,30 @@ select
 		 ) + 1     ||'살'    as "나이"
 	from
 		employee;
+
+
+select
+		emp_no "직원번호"
+		,emp_name "직원명"
+		, sysdate - hire_date
+	from
+		employee;
+
+
+
+	select
+		emp_no                                      "직원번호"
+		,emp_name                                   "직원명"
+		, ceil((sysdate - hire_date)/365)||'년차'    "근무년차"
+	from
+		employee;
+
+
+
+
+
+
+
+
+
+
