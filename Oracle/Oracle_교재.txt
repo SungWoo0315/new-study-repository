@@ -792,3 +792,62 @@ OX문제 20210611.md 참고.
 		end
 	from
 		employee;
+	--------------------------------------------------
+	select
+		emp_no
+		,emp_name
+		,jikup
+		,decode(substr(jumin_num,7,1)
+		,'1','남'
+		,'3','남'
+		,'여'
+		)
+	from
+		employee;
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<45> employee 테이블에서 직원번호, 직원명, 직급, 출생년도(4자리) 를 출력하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	--------------------------------------------------
+	select
+		emp_no
+		,emp_name
+		,jikup
+		,case
+			when substr(jumin_num,7,1)='1' then '19'
+			when substr(jumin_num,7,1)='2' then '19'
+			else '20'
+		end ||substr(jumin_num,1,2) "출생년도"
+	from
+		employee;
+	--------------------------------------------------
+	select
+		emp_no
+		,emp_name
+		,jikup
+		,decode(substr(jumin_num,7,1)
+		,'1','19'
+		,'2','19'
+		,'20'
+		) ||substr(jumin_num,1,2) "출생년도"
+	from
+		employee;
+	---------------------------------------------------
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<46> employee 테이블에서 직원번호, 직원명, 직급, 출생년대(4자리) 를 출력하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+	select
+		emp_no
+		,emp_name
+		,jikup
+		,case
+			when substr(jumin_num,7,1)='1' then '19'
+			when substr(jumin_num,7,1)='2' then '19'
+			else '20'
+		end ||substr(jumin_num,1,1)||'0년' "출생년대"
+	from
+		employee;
