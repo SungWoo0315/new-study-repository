@@ -377,3 +377,58 @@ select
 		end ||substr(jumin_num,1,1)||'0' "출생년대"
 	from
 		employee;
+
+
+
+	select
+	 *
+
+	from
+		employee
+	order by
+		case
+			when substr(jumin_num,7,1)='1' then '19'
+			when substr(jumin_num,7,1)='2' then '19'
+			else '20'
+		end || substr(jumin_num,1,6)
+
+		asc; --asc는 생략 가능하다.
+
+
+
+select * from employee
+	order by
+		case jikup
+			when '사장' then '1'
+			when '부장' then '2'
+			when '과장' then '3'
+			when '대리' then '4'
+			when '주임' then '5' else '6'
+		end
+		asc;
+
+
+
+select emp_no, emp_name, hire_date from employee;
+
+
+
+select
+		emp_no
+		, emp_name
+		, to_char(hire_date,'YYYY.MM-DD')
+	from
+		employee;
+
+
+select
+		emp_no
+		, emp_name
+		, to_number(to_char(sysdate,'YYYY'))
+		 - to_number(
+		 case
+ 			substr(jumin_num,7,1) when '1' then '19'
+ 			when '2' then '19' else '20' end ||substr(jumin_num,1,2)
+		 ) + 1     ||'살'    as "나이"
+	from
+		employee;
