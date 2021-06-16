@@ -249,3 +249,33 @@ select
 
 	from
 		employee;
+
+
+
+select
+
+		min( salary )    as "최소연봉"
+		,max( salary )   as "최대연봉"
+		,avg( salary )   as "평균연봉"
+		,sum( salary )   as "연봉총합"
+		,count( salary ) as "총인원수"
+	from
+		employee;
+
+
+select count(emp_no) from customer;
+
+select count(distinct emp_no) from customer;
+
+select count(mgr_emp_no) from employee;
+
+select
+		emp_no                          "직원번호"
+		,emp_name                       "직원명"
+		,substr(jumin_num,3,2)||'-'||substr(jumin_num,5,2)   "생일월일"  -- 세번째에서 두개 출력
+	from
+		employee;
+
+
+
+
