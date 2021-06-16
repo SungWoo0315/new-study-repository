@@ -546,6 +546,153 @@ select
 	from
 		employee;
 
+-------56번 과제 연습 시작
+
+select
+  emp_no                                                 "직원번호"
+  , emp_name                                             "직원명"
+  , jumin_num                                            "주민번호"
+  , to_char(
+         to_date(
+                 case when
+                 to_number(to_char(sysdate, 'MMDD'))
+                 - to_number(substr(jumin_num,3,4)
+                 ) >=0 then '2022'||substr(jumin_num,3,4)  else '2021'||substr(jumin_num,3,4) end
+                , 'YYYYMMDD'
+                )
+           ,'YYYY-MM-DD'
+           )                                                     "다가올생일날"
+  , to_char(
+    (
+    to_number(to_char(sysdate, 'MMDD'))
+    - to_number(substr(jumin_num,3,4))
+    )
+           )
+                                                    "생일까지남은일수"   -- 날짜계산을 하여야 하는데.. number 계산은 아닌것 같다..
+
+from
+  employee;
+
+
+select
+
+    to_date(to_char(sysdate, 'YYYYMMDD'),'YYYYMMDD')
+    -
+    to_date(case substr(jumin_num,7,1) when '1' then '19' when '2' then '19' else '20' end
+				||substr(jumin_num,1,6), 'YYYYMMDD')      -- 현재 2021년인데 1972 이런식으로 계산하니까 숫자가 엄청크게 나옴...
+from
+employee;
+
+
+TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE('19930315'), -- 두 날짜 사이 일수 계산
+
+
+ select
+    to_number(to_char(sysdate, 'MMDD'))
+    - to_number(substr(jumin_num,3,4))    -- 단순 숫자계산.. 날짜계산이 안나옴.
+
+ from
+ employee;
+
+
+ select
+    to_date(to_char(sysdate, 'MMDD'))
+    - to_date((substr(jumin_num,3,4)),'MMDD')      -- 오류...
+
+ from
+ employee;
+
+
+
+
+
+select
+
+to_date(to_char(sysdate, 'YYYYMMDD'),'YYYYMMDD')
+-
+to_date(
+                 case when
+                 to_number(to_char(sysdate, 'MMDD'))
+                 - to_number(substr(jumin_num,3,4)
+                 ) >=0 then '2022'||substr(jumin_num,3,4)  else '2021'||substr(jumin_num,3,4) end
+                , 'YYYYMMDD'
+                )     "생일까지남은일수"               -- 다가올 생일에서 현재날짜를 빼주면?
+
+from
+employee;
+
+
+
+ --------- 최종 테스트    (음수가 떠서 인터넷 찾고 ABS 해줌..음수값 날리고 절대값표시.)
+
+
+select
+  emp_no                                                 "직원번호"
+  , emp_name                                             "직원명"
+  , jumin_num                                            "주민번호"
+  , to_char(
+         to_date(
+                 case when
+                 to_number(to_char(sysdate, 'MMDD'))
+                 - to_number(substr(jumin_num,3,4)
+                 ) >=0 then '2022'||substr(jumin_num,3,4)  else '2021'||substr(jumin_num,3,4) end
+                , 'YYYYMMDD'
+                )
+           ,'YYYY-MM-DD'
+           )                                                     "다가올생일날"
+  , ABS(
+
+         to_date(to_char(sysdate, 'YYYYMMDD'),'YYYYMMDD')
+         -
+         to_date(
+                 case when
+                 to_number(to_char(sysdate, 'MMDD'))
+                 - to_number(substr(jumin_num,3,4)
+                 ) >=0 then '2022'||substr(jumin_num,3,4)  else '2021'||substr(jumin_num,3,4) end
+                , 'YYYYMMDD'
+                )-1
+        )   "생일까지남은일수"
+
+from
+  employee;
+
+
+--음수 제거 테스트   ABS() 쓰지 않고,
+
+
+select
+  emp_no                                                 "직원번호"
+  , emp_name                                             "직원명"
+  , jumin_num                                            "주민번호"
+  , to_char(
+         to_date(
+                 case when
+                 to_number(to_char(sysdate, 'MMDD'))
+                 - to_number(substr(jumin_num,3,4)
+                 ) >=0 then '2022'||substr(jumin_num,3,4)  else '2021'||substr(jumin_num,3,4) end
+                , 'YYYYMMDD'
+                )
+           ,'YYYY-MM-DD'
+           )                                                     "다가올생일날"
+  ,
+
+
+
+         to_date(
+                 case when
+                 to_number(to_char(sysdate, 'MMDD'))
+                 - to_number(substr(jumin_num,3,4)
+                 ) >=0 then '2022'||substr(jumin_num,3,4)  else '2021'||substr(jumin_num,3,4) end
+                , 'YYYYMMDD'
+                )
+         -
+         to_date(to_char(sysdate, 'YYYYMMDD'),'YYYYMMDD') + 1
+           "생일까지남은일수"
+
+from
+  employee;
+
+
 
 
 
