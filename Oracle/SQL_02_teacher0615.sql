@@ -332,3 +332,48 @@ select
 		end
 	from
 		employee;
+
+
+
+select
+	emp_no
+	,emp_name
+	,jikup
+	,case
+		when substr(jumin_num,7,1)='1' then '19'
+		when substr(jumin_num,7,1)='2' then '19'
+		else '20'
+	end ||substr(jumin_num,1,2) "출생년도"
+from
+	employee;
+
+
+
+
+select
+		emp_no
+		,emp_name
+		,jikup
+		,decode(substr(jumin_num,7,1)
+		,'1','19'
+		,'2','19'
+		,'20'
+		) ||substr(jumin_num,1,2) "출생년도"
+	from
+		employee;
+
+
+
+
+
+	select
+		emp_no
+		,emp_name
+		,jikup
+		,case
+			when substr(jumin_num,7,1)='1' then '19'
+			when substr(jumin_num,7,1)='2' then '19'
+			else '20'
+		end ||substr(jumin_num,1,1)||'0' "출생년대"
+	from
+		employee;
