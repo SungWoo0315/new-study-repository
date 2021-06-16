@@ -926,6 +926,6 @@ OX문제 20210611.md 참고.
 		  case
  			substr(jumin_num,7,1) when '1' then '19'
  			when '2' then '19' else '20' end ||substr(jumin_num,1,2)
-		 ) + 1
+		 ) + 1  ||'세'
 	from
 		employee;
