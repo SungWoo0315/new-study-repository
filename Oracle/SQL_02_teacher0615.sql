@@ -241,3 +241,11 @@ select * from employee where dep_no=20 and salary>=2000 and salary<=3000;
 select * from employee where dep_no=20 and salary between 2000 and 3000;
 
 select * from employee where mgr_emp_no is null;
+
+
+select
+
+		min( salary )
+
+	from
+		employee;
