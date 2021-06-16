@@ -848,6 +848,84 @@ OX문제 20210611.md 참고.
 			when substr(jumin_num,7,1)='1' then '19'
 			when substr(jumin_num,7,1)='2' then '19'
 			else '20'
-		end ||substr(jumin_num,1,1)||'0년' "출생년대"
+		end ||substr(jumin_num,1,1)||'0년대' "출생년대"
+	from
+		employee;
+
+	----------------------------------------------
+	select
+		emp_no
+		,emp_name
+		,jikup
+		,decode(substr(jumin_num,7,1)
+		,'1','19'
+		,'2','19'
+		,'20'
+		) ||substr(jumin_num,1,1)||'0년대' "출생년도"
+	from
+		employee;
+	----------------------------------------------
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<47> employee 테이블에서 나이순으로 출력하면? 연장자가 먼저 나오도록.
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select
+	 *
+	from
+		employee
+	order by
+		case
+			when substr(jumin_num,7,1)='1' then '19'
+			when substr(jumin_num,7,1)='2' then '19'
+			else '20'
+		end || substr(jumin_num,1,6)
+
+		asc; --asc는 생략 가능하다.
+	----------------------------------------------
+	아래 처럼하면 안된다. 2000년 생이 먼저 나온다. 2000년 생은 주민번호가 00 으로 시작한다.
+	----------------------------------------------
+	select * from employee order by jumin_num asc;
+	----------------------------------------------
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<48> employee 테이블에서 직급순서대로 정렬하여 모든 컬럼을 보이면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select * from employee
+	order by
+		case jikup
+			when '사장' then '1'
+			when '부장' then '2'
+			when '과장' then '3'
+			when '대리' then '4'
+			when '주임' then '5' else '6'
+		end
+		asc;
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<49> mployee 테이블에서 직원번호, 직원명, 입사일(년-월-일) 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select
+		emp_no
+		, emp_name
+		, to_char(hire_date,'YYYY-MM-DD')
+	from
+		employee;
+	----------------------------------------------
+	to_char(날짜또는숫자, '출력문자패턴')
+	지정한 날짜 또는 숫자를 원하는 출력문자패턴 으로 바꾸어 주는 변환함수의 일종
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<50> mployee 테이블에서 직원번호, 직원명, 나이 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select
+		emp_no
+		, emp_name
+		, to_number(to_char(sysdate,'YYYY'))
+		 - to_number(
+		  case
+ 			substr(jumin_num,7,1) when '1' then '19'
+ 			when '2' then '19' else '20' end ||substr(jumin_num,1,2)
+		 ) + 1
 	from
 		employee;
