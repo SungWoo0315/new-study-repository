@@ -1059,13 +1059,28 @@ OX문제 20210611.md 참고.
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <49-1> employee 테이블에서 직원번호, 직원명, 입사일(X년-X월-X일(요일) X분기 X시X분X초) 검색하면?
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-select
-	emp_no
-	, emp_name
-	, to_char(hire_date,'YYYY"년-"MM"월-"DD"일" (DY) Q"분기" HH"시"MI"분"SS"초"' , 'NLS_DATE_LANGUAGE = Korean')
-from
-	employee;        
+	1999년-12월-25일(화) 4분기 11시 10분 22초
 
+	select
+		emp_no
+		,emp_name
+		,to_char(hire_date, 'YYYY')||'년'
+		|| to_char(hire_date, 'MM')||'월'
+		|| to_char(hire_date, 'DD')||'일'
+		|| to_char(hire_date, '(DY)' , 'NLS_DATE_LANGUAGE = Korean')
+		|| to_char(hire_date, 'AM HH')||'시'
+		|| to_char(hire_date, 'MI')||'분'
+		|| to_char(hire_date, 'SS')||'초'
+	from
+		employee;
+	----------------------------------------------
+	select
+		emp_no
+		, emp_name
+		, to_char(hire_date,'YYYY"년-"MM"월-"DD"일" (DY) Q"분기" HH"시"MI"분"SS"초"' , 'NLS_DATE_LANGUAGE = Korean')
+	from
+		employee;
+	----------------------------------------------
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <50> employee 테이블에서 직원번호, 직원명, 나이 검색하면?
@@ -1073,14 +1088,27 @@ from
 	select
 		emp_no
 		, emp_name
-		, to_number(to_char(sysdate,'YYYY'))
+		, to_number(  to_char(sysdate,'YYYY')  )
 		 - to_number(
 		  case
  			substr(jumin_num,7,1) when '1' then '19'
  			when '2' then '19' else '20' end ||substr(jumin_num,1,2)
-		 ) + 1  ||'세'
+		 ) + 1  ||'세'                 "나이"
 	from
 		employee;
+	----------------------------------------------
+	select
+		emp_no
+		, emp_name
+		, 현재년도
+		  -
+			출생년도+1||'세'
+	from
+		employee;
+	----------------------------------------------
+	to_number(숫자문자내장된컬럼명) => 컬럼명 안의 숫자 문자를 숫자로 변경하는 변환함수
+	----------------------------------------------
+
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <51> employee 테이블에서 직원번호, 직원명, 근무년차를 검색해서 출력하면?
@@ -1093,13 +1121,14 @@ from
 		employee;
 	----------------------------------------------
 	select
-		emp_no                                      "직원번호"
-		,emp_name                                   "직원명"
-		, ceil((sysdate - hire_date)/365)||'년차'    "근무년차"
+		emp_no                                       "직원번호"
+		, emp_name                                   "직원명"
+		, ceil((sysdate - hire_date)/365)||'년차'     "근무년차"
 	from
 		employee;
 	----------------------------------------------
 	오라클은 날짜-날짜 의 결과값은 날짜차이만큼의 일수이다.
+	----------------------------------------------
 	ceil(~)  => 소수 첫째 자리에서 무조건 올림해서 리턴하는 수학 함수의 일종이다.
 	floor(~) => 소수 첫째 자리에서 무조건 내림해서 리턴하는 수학 함수이다.
 
@@ -1110,7 +1139,7 @@ from
 		emp_no "직원번호"
 		,emp_name "직원명"
 		, floor(
-		(
+		  (
 			to_number(to_char(sysdate,'YYYY'))
 		 	- to_number(
 		  	case
@@ -1131,12 +1160,12 @@ from
 		, emp_name "직원명"
 		, to_char(
 				to_date(
-					case
-					substr(jumin_num,7,1) when '1' then '19'
-					when '2' then '19' else '20'
-				end||substr(jumin_num,1,6), 'YYYYMMDD' )+100
+					case substr(jumin_num,7,1) when '1' then '19'
+					when '2' then '19' else '20' end||substr(jumin_num,1,6)
+					, 'YYYYMMDD'
+				) + 100
 				, 'YYYY-MM-DD'
-				)                    "100일잔치날짜"
+			)                           "100일잔치날짜"
 	from
 		employee;
 
