@@ -1242,8 +1242,7 @@ OX문제 20210611.md 참고.
 						)
 						,'YYYY-MM-DD'
 				)
-			else
-				내년 생일을 년-월-일 로 리턴하는 식
+			else  --내년 생일을 년-월-일 로 리턴하는 식
 				to_char(
 						to_date(
 								to_number(to_char(sysdate,'YYYY'))+1||substr(jumin_num,3,4)
