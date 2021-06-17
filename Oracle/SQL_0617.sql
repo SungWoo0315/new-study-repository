@@ -215,3 +215,31 @@ where
       , '(DY)'
       , 'NLS_DATE_LANGUAGE = Korean'
     )     = '(수)' ;
+
+
+--<60>번
+
+select chr(19) from dual;
+
+select upper('abcd') from dual;
+
+select lower('ABCD') from dual;
+
+select length('asdfasdfasdf') from dual;
+
+select substr( 'You are not alone', 9, 3 ) from dual;
+select substr( 'You are not alone', 0, 5 ) from dual;
+select substr( 'You are not alone', 5 ) from dual;
+select substr( 'You are not alone', -5, 2 ) from dual;
+select substr( 'You are not alone', 5, 0 ) from dual;
+
+select
+to_char('          I am your father... no~ ! ! !                ')
+,trim('        I am your father... no~ ! ! !         ')    "trim공백제거"
+,to_char('          I am your father... no~ ! ! !                ')
+,ltrim(to_char('I am your father... no~ ! ! !'), 'I am your')
+,rtrim(to_char('I am your father... no~ ! ! !'), 'no~ ! ! !')
+
+from dual;
+
+----
