@@ -1317,7 +1317,7 @@ to_char(
 			when '2' then '19' else '20' end||substr(jumin_num,1,6)
 			, 'YYYYMMDD'
 		)
-		, 'YYYY-MM-DD(DY)'
+		, 'DY'
 		, 'NLS_DATE_LANGUAGE = Korean'
 	) = '수';
 
