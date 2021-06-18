@@ -232,4 +232,75 @@ jumin_num not like '______1%' and jumin_num not like '______3%'
 
 
 
+--<85>
+
+select * from employee where
+(substr(jumin_num,1,1) = '6' or substr(jumin_num,1,1) = '7')
+and substr(jumin_num,7,1) = '1';
+---------------------------------------------------------
+select * from employee where
+substr(jumin_num,1,1) in ('6','7') and substr(jumin_num,7,1) = '1';
+---------------------------------------------------------
+select * from employee where
+jumin_num like '6_____1%' or jumin_num like '7_____1%' ;
+
+
+
+
+
+--<86>
+
+select
+	employee.emp_no
+	,employee.emp_name
+	,dept.dep_name
+from
+	employee , dept
+where
+	employee.dep_no=dept.dep_no  ;
+
+
+select
+	e.emp_no
+	,e.emp_name
+	,d.dep_name
+from
+	employee e, dept d
+where
+	e.dep_no=d.dep_no    ;
+
+
+
+--<87>
+select
+	c.cus_no                 "고객번호"
+	,c.cus_name              "고객명"
+	,e.emp_name              "고객담당직원이름"
+from
+	customer c, employee e
+where
+	c.emp_no=e.emp_no
+
+
+
+select
+	c.cus_no                 "고객번호"
+	,c.cus_name              "고객명"
+	,e.emp_name              "고객담당직원이름"
+from
+	customer c, employee e
+where
+	c.emp_no=e.emp_no(+)
+
+
+
+
+
+--<88>
+
+select * from employee where salary >= (select avg(salary) from employee);
+
+
+
+
 
