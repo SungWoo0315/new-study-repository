@@ -144,3 +144,37 @@ where
 select * from employee where
 	to_number(to_char(hire_date, 'yyyy')) between 1990 and 1999;
 -------------------------------------------------
+
+
+--<75>
+select * from employee where
+dep_no in(10,30)
+and salary < 3000
+and hire_date < to_date('1996-01-01', 'YYYY-MM-DD');
+
+
+
+--<76>
+select * from employee where substr(emp_name, 1,1) = '김';
+select * from employee where emp_name like '김%';
+
+
+--<77>
+
+select * from employee where
+	substr(emp_name, 1,1) = '황'
+	and
+	substr(emp_name, 1,2) != '황보';
+
+
+select * from employee where
+	emp_name like '황%'
+	and
+	emp_name not like '황보%';
+
+
+
+
+
+
+
