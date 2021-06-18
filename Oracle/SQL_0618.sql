@@ -293,7 +293,7 @@ select
 from
 	customer c, employee e
 where
-	c.emp_no=e.emp_no
+	c.emp_no=e.emp_no     and c.cus_no = 10       -- EQUI JOIN에 AND 연산.
 
 
 
