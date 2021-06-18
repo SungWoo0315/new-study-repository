@@ -172,8 +172,63 @@ select * from employee where
 	and
 	emp_name not like '황보%';
 
+--<78>
+
+select * from employee where length(emp_name) = 2;
 
 
+--<79>
+
+select * from employee where emp_name like '%남';
+
+select * from employee where substr(emp_name, length(emp_name), 1) = '남';
+
+select * from employee where substr(emp_name, -1, 1) = '남';
+
+
+--<80>
+
+select * from employee where substr(emp_name, 1, 1) = '김'
+and length(emp_name) = 3;
+
+select * from employee where emp_name like '김%'
+and length(emp_name) = 3;
+
+select * from employee where emp_name like '김__'
+and length(emp_name) = 3;
+
+
+
+--<81>
+select * from employee where emp_name like '%김%';
+
+
+--<83>
+
+select * from employee where emp_name like '_%미%_';
+-- 내가한것 맞는지 확인해보기.
+
+
+select * from employee where emp_name like '%미%'
+and emp_name not like '미%'
+and emp_name not like '%미';
+
+
+
+ --<84>
+-------------------------------------------------
+select * from employee where
+substr(jumin_num,7,1) = '2' or substr(jumin_num,7,1) ='4';
+-------------------------------------------------
+select * from employee where
+substr(jumin_num, 7, 1) in('2','4');
+-------------------------------------------------
+select * from employee where
+jumin_num like '______2%' or jumin_num like '______4%'
+-------------------------------------------------
+select * from employee where
+jumin_num not like '______1%' and jumin_num not like '______3%'
+-------------------------------------------------
 
 
 
