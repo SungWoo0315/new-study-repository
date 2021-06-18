@@ -124,6 +124,23 @@ select * from employee where dep_no in(10, 20) and jikup = '과장';
 
 
 
+--<69>
+select * from customer where (emp_no != 9) or emp_no is null;
 
 
 
+--<73>
+
+select * from employee where hire_date >= to_date('1995-1-1','YYYY-MM-DD');
+
+--<74>
+
+select * from employee
+where
+	hire_date >= to_date('1990-1-1','YYYY-MM-DD')
+	and
+	hire_date < to_date('2000-1-1','YYYY-MM-DD');
+-------------------------------------------------
+select * from employee where
+	to_number(to_char(hire_date, 'yyyy')) between 1990 and 1999;
+-------------------------------------------------
