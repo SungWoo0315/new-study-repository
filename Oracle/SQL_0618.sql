@@ -120,14 +120,25 @@ select * from employee where jikup = any('과장', '부장');
 select * from employee where (dep_no = 10 or dep_no = 20) and jikup = '과장';
 select * from employee where dep_no in(10, 20) and jikup = '과장';
 
+--<67>
+select * from customer where emp_no is null;
 
-
-
+--<68>
+select * from customer where emp_no is not null;
 
 --<69>
 select * from customer where (emp_no != 9) or emp_no is null;
 
+--<70>
+select * from employee where salary >= 3000 and salary <= 4000;
+select * from employee where salary between 3000 and 4000;
 
+--<71>
+select * from employee where salary >= 3000 and salary < 4000;
+select * from employee where (salary between 3000 and 4000) and salary != 4000;
+
+--<72>
+select * from employee where salary*1.05 >= 3000
 
 --<73>
 
@@ -202,11 +213,14 @@ and length(emp_name) = 3;
 --<81>
 select * from employee where emp_name like '%김%';
 
+--<82>
+select * from employee where emp_name not like '김%';
+
 
 --<83>
 
 select * from employee where emp_name like '_%미%_';
--- 내가한것 맞는지 확인해보기.
+-- 내가한것 맞는지 확인해보기. -- 틀림. 앞자리 김이 들어갈수도 있기 때문.
 
 
 select * from employee where emp_name like '%미%'
