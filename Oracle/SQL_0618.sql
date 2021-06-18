@@ -304,3 +304,12 @@ select * from employee where salary >= (select avg(salary) from employee);
 
 
 
+--<89>
+select
+	jikup
+	,avg(salary)
+from
+employee
+group by
+	jikup;
+
