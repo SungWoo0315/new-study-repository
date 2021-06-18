@@ -98,5 +98,32 @@ select
 
 ----
 
+--<62>
+select * from employee
+where
+jikup = '과장';
+
+--<63>
+select * from employee where jikup != '과장';
+select * from employee where jikup <> '과장';
+
+
+--<64>
+select * from employee where dep_no = 10 and jikup = '과장';
+
+--<65>
+select * from employee where jikup = '과장' or jikup = '부장';
+select * from employee where jikup in('과장', '부장');
+select * from employee where jikup = any('과장', '부장');
+
+--<66>
+select * from employee where (dep_no = 10 or dep_no = 20) and jikup = '과장';
+select * from employee where dep_no in(10, 20) and jikup = '과장';
+
+
+
+
+
+
 
 
