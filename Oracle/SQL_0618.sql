@@ -85,8 +85,8 @@ select
 select
 		emp_no                                         "직원번호"
 		,emp_name                                      "직원명"
-		,sysdate-hire_date                             "근무일수"
-		,months_between(sysdate,hire_date)             "근무개월수"
+		,round(sysdate-hire_date, 3)                   "근무일수"
+		,trunc(months_between(sysdate,hire_date), 2)   "근무개월수"
 		,to_char(add_months(hire_date,5), 'YYYY-MM-DD')  "입사후5개월후날짜"
 		,to_char(last_day(hire_date), 'YYYY-MM-DD')  "입사한달의마지막날짜"
 		,to_char(next_day(hire_date,1), 'YYYY-MM-DD') "입사일오는일요일날짜"
@@ -96,7 +96,7 @@ select
 
 
 
-
+----
 
 
 
