@@ -320,8 +320,8 @@ select * from employee where salary >= (select avg(salary) from employee);
 
 --<89>
 select
-	jikup
-	,avg(salary)
+	jikup         "직급"
+	,ceil(avg(salary))  "평균연봉"
 from
 employee
 group by
