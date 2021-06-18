@@ -1320,19 +1320,60 @@ to_char(
 		, 'DY'
 		, 'NLS_DATE_LANGUAGE = Korean'
 	) = '수';
-
-
+--------------------------------------------------
+select * from employee
+where
+to_char(
+	to_date(
+      decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,6), 'YYYYMMDD'
+		)
+		,'DAY'
+		,'NLS_DATE_LANGUAGE = Korean'
+)
+= '수요일';
+--------------------------------------------------
+select * from employee
+where
+to_char(
+	to_date(
+      decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,6), 'YYYYMMDD'
+		)
+		,'D'
+		,'NLS_DATE_LANGUAGE = Korean'
+)
+= '4';
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <58> employee 테이블에서 70년대생 남자 직원을 검색하라 (새로추가)
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	--------------------------------------------------
+	select * from employee
+	where
+		substr(jumin_num,1,1) = '7'
+		and
+		substr(jumin_num,7,1) = '1' ;
+	--------------------------------------------------
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<59> employee 테이블에서 1960년대, 1970년대 출생자중 남자만 검색하라
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 select * from employee
 where
-substr(jumin_num,1,1) = '7'and substr(jumin_num,7,1) = '1' ;
+	(substr(jumin_num,1,1) = '6'
+	or
+	substr(jumin_num,1,1) = '7'
+	)
+	and
+	(substr(jumin_num,7,1) = '1'
+	or
+	substr(jumin_num,7,1) = '3'
+	);
+
+
 
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<59> 오라클의 자주 사용되는 숫자함수 예를 보여주세요
+<> 오라클의 자주 사용되는 숫자함수 예를 보여주세요
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 -----------------------------------------------
 abs( n )
