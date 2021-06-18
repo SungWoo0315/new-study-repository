@@ -1,4 +1,4 @@
--- 20210618
+﻿-- 20210618
 
 
 -- <57>
@@ -12,7 +12,7 @@ to_char(
         )
         , 'DY'
         , 'NLS_DATE_LANGUAGE = Korean'
-	) = '��';
+	) = '수';
 
 
 
@@ -52,22 +52,47 @@ where
 	);
 
 
--<60>
+--<60>
+
+	select * from employee
+	order by
+
+	to_number(sysdate-hire_date)
+
+	desc;
+
+
+	select * from employee
+	order by
+		(sysdate-hire_date)
+	desc;
+
+-- 두가지 방법
+
+
+--<61>
+
+select
+		emp_no                              "직원번호"
+		,emp_name                           "직원명"
+		,sysdate-hire_date                  "근무일수"
+		,months_between(sysdate,hire_date)  "근무개월수"
+ from
+ 	employee;
 
 
 
+select
+		emp_no                                         "직원번호"
+		,emp_name                                      "직원명"
+		,sysdate-hire_date                             "근무일수"
+		,months_between(sysdate,hire_date)             "근무개월수"
+		,to_char(add_months(hire_date,5), 'YYYY-MM-DD')  "입사후5개월후날짜"
+		,to_char(last_day(hire_date), 'YYYY-MM-DD')  "입사한달의마지막날짜"
+		,to_char(next_day(hire_date,1), 'YYYY-MM-DD') "입사일오는일요일날짜"
 
-
-
-
-
-
-
-
-
-
-
-
+ from
+ 	employee;
 
 
 
