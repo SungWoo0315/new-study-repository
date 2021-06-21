@@ -1,4 +1,4 @@
-
+ï»¿
 
 --<90>
 
@@ -12,7 +12,7 @@ select
         employee.dep_no=dept.dep_no
 
 
--- º°Äª ¹öÀü.
+-- ë³„ì¹­ ë²„ì „.
 select
             e.emp_no
             ,e.emp_name
@@ -38,10 +38,10 @@ on
 --<91>
 
 select
-	c.cus_name	"°í°´¸í"
-	,c.tel_num	"°í°´ÀüÈ­¹øÈ£"
-	,e.emp_name	"´ã´çÁ÷¿ø¸í"
-	,e.jikup	"´ã´çÁ÷¿øÁ÷±Ş"
+	c.cus_name	"ê³ ê°ëª…"
+	,c.tel_num	"ê³ ê°ì „í™”ë²ˆí˜¸"
+	,e.emp_name	"ë‹´ë‹¹ì§ì›ëª…"
+	,e.jikup	"ë‹´ë‹¹ì§ì›ì§ê¸‰"
 from
 	customer c, employee e
 where
@@ -52,10 +52,10 @@ where
 
 --Oracle join
 select
-		c.cus_name	"°í°´¸í"
-		,c.tel_num	"°í°´ÀüÈ­¹øÈ£"
-		,e.emp_name	"´ã´çÁ÷¿ø¸í"
-		,e.jikup	"´ã´çÁ÷¿øÁ÷±Ş"
+		c.cus_name	"ê³ ê°ëª…"
+		,c.tel_num	"ê³ ê°ì „í™”ë²ˆí˜¸"
+		,e.emp_name	"ë‹´ë‹¹ì§ì›ëª…"
+		,e.jikup	"ë‹´ë‹¹ì§ì›ì§ê¸‰"
 	from
 		customer c, employee e
 	where
@@ -64,10 +64,10 @@ select
 
 --ANSI join
 select
-		c.cus_name	"°í°´¸í"
-		,c.tel_num	"°í°´ÀüÈ­¹øÈ£"
-		,e.emp_name	"´ã´çÁ÷¿ø¸í"
-		,e.jikup	"´ã´çÁ÷¿øÁ÷±Ş"
+		c.cus_name	"ê³ ê°ëª…"
+		,c.tel_num	"ê³ ê°ì „í™”ë²ˆí˜¸"
+		,e.emp_name	"ë‹´ë‹¹ì§ì›ëª…"
+		,e.jikup	"ë‹´ë‹¹ì§ì›ì§ê¸‰"
 	from
 		customer c inner join employee e
 	on
@@ -79,10 +79,10 @@ select
 --<93>
 
 select
-	c.cus_name	"°í°´¸í"
-	,c.tel_num	"°í°´ÀüÈ­¹øÈ£"
-	,e.emp_name	"´ã´çÁ÷¿ø¸í"
-	,e.jikup	"´ã´çÁ÷¿øÁ÷±Ş"
+	c.cus_name	"ê³ ê°ëª…"
+	,c.tel_num	"ê³ ê°ì „í™”ë²ˆí˜¸"
+	,e.emp_name	"ë‹´ë‹¹ì§ì›ëª…"
+	,e.jikup	"ë‹´ë‹¹ì§ì›ì§ê¸‰"
 from
 	customer c, employee e
 where
@@ -90,10 +90,10 @@ where
 
 
 select
-	c.cus_name	"°í°´¸í"
-	,c.tel_num	"°í°´ÀüÈ­¹øÈ£"
-	,e.emp_name	"´ã´çÁ÷¿ø¸í"
-	,e.jikup	"´ã´çÁ÷¿øÁ÷±Ş"
+	c.cus_name	"ê³ ê°ëª…"
+	,c.tel_num	"ê³ ê°ì „í™”ë²ˆí˜¸"
+	,e.emp_name	"ë‹´ë‹¹ì§ì›ëª…"
+	,e.jikup	"ë‹´ë‹¹ì§ì›ì§ê¸‰"
 from
 	customer c inner join employee e
 on
@@ -105,14 +105,14 @@ where
 --<94>
 
 -------------------------------------------------
-¿À¶óÅ¬ Á¶ÀÎ
+ì˜¤ë¼í´ ì¡°ì¸
 -------------------------------------------------
 select
-	e.emp_name	"Á÷¿ø¸í"
-	,e.jikup	"Á÷¿øÁ÷±Ş"
-	,d.dep_name	"Á÷¿øºÎ¼­¸í"
-	,c.cus_name	"´ã´ç°í°´¸í"
-	,c.tel_num "°í°´ÀüÈ­¹øÈ£"
+	e.emp_name	"ì§ì›ëª…"
+	,e.jikup	"ì§ì›ì§ê¸‰"
+	,d.dep_name	"ì§ì›ë¶€ì„œëª…"
+	,c.cus_name	"ë‹´ë‹¹ê³ ê°ëª…"
+	,c.tel_num "ê³ ê°ì „í™”ë²ˆí˜¸"
 from
 	 employee e, dept d, customer c
 where
@@ -120,14 +120,14 @@ where
 order by
 	e.emp_name asc;
 -------------------------------------------------
-ANSI Á¶ÀÎ
+ANSI ì¡°ì¸
 -------------------------------------------------
 select
-	e.emp_name	"Á÷¿ø¸í"
-	,e.jikup	"Á÷¿øÁ÷±Ş"
-	,d.dep_name	"Á÷¿øºÎ¼­¸í"
-	,c.cus_name	"´ã´ç°í°´¸í"
-	,c.tel_num "°í°´ÀüÈ­¹øÈ£"
+	e.emp_name	"ì§ì›ëª…"
+	,e.jikup	"ì§ì›ì§ê¸‰"
+	,d.dep_name	"ì§ì›ë¶€ì„œëª…"
+	,c.cus_name	"ë‹´ë‹¹ê³ ê°ëª…"
+	,c.tel_num "ê³ ê°ì „í™”ë²ˆí˜¸"
 from
 	 (employee e inner join dept d on e.dep_no=d.dep_no)
 	 inner join customer c on c.emp_no=e.emp_no
@@ -139,17 +139,17 @@ order by
 
 --<95>
 select
-	e.emp_name	"Á÷¿ø¸í"
-	,e.jikup	"Á÷¿øÁ÷±Ş"
-	,d.dep_name	"¼Ò¼ÓºÎ¼­¸í"
-	,s.sal_grade_no "¿¬ºÀµî±Ş"
+	e.emp_name	"ì§ì›ëª…"
+	,e.jikup	"ì§ì›ì§ê¸‰"
+	,d.dep_name	"ì†Œì†ë¶€ì„œëª…"
+	,s.sal_grade_no "ì—°ë´‰ë“±ê¸‰"
 from
 	 employee e, dept d, salary_grade s
 where
 	e.dep_no=d.dep_no and (e.salary>=s.min_salary and e.salary<=s.max_salary)
 order by
 	s.sal_grade_no asc
-	,decode(e.jikup, '»çÀå',1,'ºÎÀå',2, '°úÀå',3, '´ë¸®',4,'ÁÖÀÓ',5,6) asc
+	,decode(e.jikup, 'ì‚¬ì¥',1,'ë¶€ì¥',2, 'ê³¼ì¥',3, 'ëŒ€ë¦¬',4,'ì£¼ì„',5,6) asc
 	,	case
 			when substr(e.jumin_num,7,1) in('1','2') then '19'
 			else '20'
@@ -159,21 +159,24 @@ order by
 
 --ANSI
 select
-  e.emp_name	"Á÷¿ø¸í"
-  ,e.jikup	"Á÷¿øÁ÷±Ş"
-  ,d.dep_name	"¼Ò¼ÓºÎ¼­¸í"
-  ,s.sal_grade_no "¿¬ºÀµî±Ş"
+  e.emp_name	"ì§ì›ëª…"
+  ,e.jikup	"ì§ì›ì§ê¸‰"
+  ,d.dep_name	"ì†Œì†ë¶€ì„œëª…"
+  ,s.sal_grade_no "ì—°ë´‰ë“±ê¸‰"
 from
 	 (employee e inner join dept d on e.dep_no=d.dep_no)
 	 inner join salary_grade s on (e.salary>=s.min_salary and e.salary<=s.max_salary)
 order by
 	s.sal_grade_no asc
-	,decode(e.jikup, '»çÀå',1 ,'ºÎÀå',2, '°úÀå',3, '´ë¸®',4,'ÁÖÀÓ',5,6) asc
+	,decode(e.jikup, 'ì‚¬ì¥',1 ,'ë¶€ì¥',2, 'ê³¼ì¥',3, 'ëŒ€ë¦¬',4,'ì£¼ì„',5,6) asc
 	,	case
 		when substr(e.jumin_num,7,1) in('1','2') then '19'
 		else '20'
 	end || substr(jumin_num,1,6)
 	asc;
+
+
+
 
 
 
