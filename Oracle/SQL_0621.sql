@@ -47,6 +47,17 @@ from
 where
 	c.emp_no=e.emp_no
 
+--ANSI 조인
+select
+  c.cus_name	"고객명"
+  ,c.tel_num	"고객전화번호"
+  ,e.emp_name	"담당직원명"
+  ,e.jikup	"담당직원직급"
+from
+  customer c inner join employee e
+on
+  c.emp_no=e.emp_no
+
 
 --<92>
 
