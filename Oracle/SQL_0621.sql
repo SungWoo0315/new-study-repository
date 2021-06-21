@@ -99,7 +99,7 @@ from
 where
 	c.emp_no=e.emp_no and e.salary >= 3000;
 
-
+--ANSI join
 select
 	c.cus_name	"고객명"
 	,c.tel_num	"고객전화번호"
