@@ -382,31 +382,32 @@ where
 
 --<104>
 select
-	nvl(c.cus_no||'','없음')	"고객번호"
-	,nvl(c.cus_name,'없음') "고객명"
-	,nvl(e.emp_no||'','없음')	"담당직원번호"
-	,nvl(e.emp_name,'없음') "담당직원명"
+	c.cus_no	"고객번호"
+	,c.cus_name "고객명"
+	,nvl(to_char(e1.emp_no),'없음')	"담당직원번호"
+	,nvl(e1.emp_name,'없음') "담당직원명"
 	,nvl(d.dep_name,'없음') "담당직원소속부서명"
-	,nvl(s.sal_grade_no||'','없음') "담당직원연봉등급"
+	,nvl(to_char(s1.sal_grade_no),'없음') "담당직원연봉등급"
 	,nvl(e2.emp_name,'없음') "담당직원직속상관명"
 	,nvl(e2.jikup,'없음') "담당직원직속상관직급"
-	,nvl(s2.sal_grade_no||'','없음') "직속상관연봉등급"
+	,nvl(to_char(s2.sal_grade_no),'없음') "직속상관연봉등급"
 	--,nvl(c.cus_name||'','없음')
 from
-	customer c, employee e, dept d, salary_grade s, employee e2, salary_grade s2
+	customer c, employee e1, dept d, salary_grade s1, employee e2, salary_grade s2
 where
-	c.emp_no=e.emp_no(+)
+	c.emp_no = e1.emp_no(+)
 	and
-	e.dep_no=d.dep_no(+)
+	e1.dep_no = d.dep_no(+)
 	and
-	e.emp_no=e2.mgr_emp_no(+)
+	e1.mgr_emp_no = e2.emp_no(+)
 	and
-	s.min_salary(+) <= e.salary and s.max_salary(+) >= e.salary
+	--s1.min_salary(+) <= e1.salary and s1.max_salary(+) >= e1.salary
+	e1.salary between s1.min_salary(+) and s1.max_salary(+)
 	and
-	s2.min_salary(+) <= e2.salary and s2.max_salary(+) >= e2.salary
+	--s2.min_salary(+) <= e2.salary and s2.max_salary(+) >= e2.salary
+	e2.salary between s2.min_salary(+) and s2.max_salary(+)
 order by
- c.cus_no asc
-
+c.cus_no asc;
 
 
 
