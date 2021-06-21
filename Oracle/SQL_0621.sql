@@ -146,7 +146,9 @@ select
 from
 	 employee e, dept d, salary_grade s
 where
-	e.dep_no=d.dep_no and (e.salary>=s.min_salary and e.salary<=s.max_salary)
+	--e.dep_no=d.dep_no and (e.salary>=s.min_salary and e.salary<=s.max_salary)
+     e.dep_no=d.dep_no and (e.salary between s.min_salary and s.max_salary) --between을 써도 된다.
+
 order by
 	s.sal_grade_no asc
 	,decode(e.jikup, '사장',1,'부장',2, '과장',3, '대리',4,'주임',5,6) asc
@@ -177,11 +179,30 @@ order by
 
 
 
+--<96>
+select
+	e1.emp_name	"직원명"
+	,e1.jikup	"직원직급"
+	,e2.emp_name	"직속상관명"
+	,e2.jikup "직속상관직급"
+from
+	employee e1, employee e2
+where
+	e1.mgr_emp_no = e2.emp_no;
 
 
 
+--<97>
+select
+	e2.emp_name	"직속상관명"
+	,e2.jikup "직속상관직급"
+	,e1.emp_name	"직원명"
+	,e1.jikup	"직원직급"
 
-
+from
+	employee e1, employee e2
+where
+	e2.emp_no = e1.mgr_emp_no;
 
 
 
