@@ -3,9 +3,9 @@
 --<90>
 
 select
-        employee.emp_no
-        ,employee.emp_name
-        ,dept.dep_name
+        employee.emp_no           "직원번호"
+        ,employee.emp_name        "직원명"
+        ,dept.dep_name            "소속부서명"
     from
         employee, dept
     where
@@ -14,9 +14,9 @@ select
 
 -- 별칭 버전.
 select
-            e.emp_no
-            ,e.emp_name
-            ,d.dep_name
+            e.emp_no             "직원번호"
+            ,e.emp_name          "직원명"
+            ,d.dep_name          "소속부서명"
         from
             employee e, dept d
         where
@@ -26,9 +26,9 @@ select
 
 -- ANSI inner join
 select
-	e.emp_no
-	,e.emp_name
-	,d.dep_name
+	e.emp_no                      "직원번호"
+	,e.emp_name                   "직원명"
+	,d.dep_name                   "소속부서명"
 from
 	employee e inner join dept d
 on
