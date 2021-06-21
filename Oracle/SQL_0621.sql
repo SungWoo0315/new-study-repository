@@ -193,6 +193,7 @@ where
 
 
 --<97>
+--내가한것.
 select
 	e2.emp_name	"직속상관명"
 	,e2.jikup "직속상관직급"
@@ -205,11 +206,64 @@ where
 	e2.emp_no = e1.mgr_emp_no;
 
 
+--정답.
+select
+	e1.emp_name	"직속상관명"
+	,e1.jikup	"직속상관직급"
+	,e2.emp_name	"직원명"
+	,e2.jikup "직원직급"
+from
+	employee e1, employee e2
+where
+	e1.emp_no = e2.mgr_emp_no ;
 
 
+-------------------------------------------------
+--ANSI 조인
+-------------------------------------------------
+select
+	e1.emp_name	"직속상관명"
+	,e1.jikup	"직속상관직급"
+	,e2.emp_name	"직원명"
+	,e2.jikup "직원직급"
+from
+	employee e1 inner join employee e2 on e1.emp_no = e2.mgr_emp_no;
 
 
+--<98>
+select
+	e1.emp_name	"직원명"
+	,e1.jikup	"직원직급"
+	,d.dep_name	"소속부서명"
+	,s.sal_grade_no "연본등급"
+	,e2.emp_name "직속상관명"
+	,e2.jikup "직속상관직급"
+	,c.cus_name "담당고객명"
+from
+	employee e1, dept d, salary_grade s, employee e2, customer c
+where
+	e1.dep_no = d.dep_no
+	and (e1.salary between s.min_salary and s.max_salary)
+	and e2.emp_no = e1.mgr_emp_no
+	and e1.emp_no = c.emp_no;
 
+
+-------------------------------------------------
+--ANSI 조인
+-------------------------------------------------
+select
+	e1.emp_name	"직원명"
+	,e1.jikup	"직원직급"
+	,d.dep_name	"소속부서명"
+	,s.sal_grade_no "연본등급"
+	,e2.emp_name "직속상관명"
+	,e2.jikup "직속상관직급"
+	,c.cus_name "담당고객명"
+from
+	(((employee e1 inner join dept d on e1.dep_no = d.dep_no)
+	inner join salary_grade s on e1.salary between s.min_salary and s.max_salary)
+	inner join employee e2 on e2.emp_no = e1.mgr_emp_no)
+	inner join customer c on e1.emp_no = c.emp_no;
 
 
 
