@@ -58,10 +58,10 @@ select
 	,nvl(to_char(s2.sal_grade_no),'없음') "직속상관연봉등급"
 	--,nvl(c.cus_name||'','없음') -> to_char 대신 쓰는 방법.
 from ((((customer c left outer join employee e1 on c.emp_no = e1.emp_no)
-lef outer join dept d on e1.dep_no = d.dep_no)
-lef outer join salary_grade s1 on e1.salary between s1.min_salary and s1.max_salary)
-lef outer join employee e2 on e1.mgr_emp_no = e2.emp_no)
-lef outer join salary_grade s2 on e2.salary between s2.min_salary and s2.max_salary
+left outer join dept d on e1.dep_no = d.dep_no)
+left outer join salary_grade s1 on e1.salary between s1.min_salary and s1.max_salary)
+left outer join employee e2 on e1.mgr_emp_no = e2.emp_no)
+left outer join salary_grade s2 on e2.salary between s2.min_salary and s2.max_salary
 order by c.cus_no asc;
 
 
@@ -80,7 +80,7 @@ from
     ((((customer c left outer join employee e1 on c.emp_no = e1.emp_no)
     left outer join dept d on e1.dep_no = d.dep_no)
     left outer join salary_grade s1 on e1.salary between s1.min_salary and s1.max_salary)
-    left outer join employee e2on e1.mgr_emp_no = e2.emp_no)
+    left outer join employee e2 on e1.mgr_emp_no = e2.emp_no)
     left outer join salary_grade s2 on e2.salary between s2.min_salary and s2.max_salary
 order by c.cus_no asc;
 
@@ -141,3 +141,49 @@ select
 from dual;
 
 
+--<108>
+
+select * from employee
+	where salary = (select max(salary) from employee);
+
+
+
+
+--<110>
+select * from employee
+where salary = (select max(salary) from employee where dep_no = 20)
+
+--<주의> 다른부서의 3500 받는사람도있으면 출력되어 버린다.
+--20번 부서의 최고연봉자와 같은연봉을 받는사람이 다 출력된다.
+
+select * from employee
+where salary = (select max(salary) from employee where dep_no = 20) and dep_no = 20;
+
+--또한번 20번 부서를 정해줘야지. 20번 부서에서 최고 연봉자만 나온다.
+
+
+--<111>
+
+--<join 으로>
+
+select
+c.cus_no         "고객번호"
+,c.cus_name      "고객명"
+,e.emp_no        "직원번호"
+,e.emp_name      "직원이름"
+,e.jikup         "직급"
+
+from
+customer c, employee e
+
+where
+c.emp_no = e.emp_no;
+
+
+--<subquery 로>
+select
+cus_no "고객번호"
+,cus_name "고객명"
+,to_number(select emp_no from employee) "직원번호"
+
+from customer
