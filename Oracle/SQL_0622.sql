@@ -298,9 +298,15 @@ where
 
 
 
-
-
-
+--<112> 상관쿼리로 풀이.
+select
+	c.cus_no
+	,c.cus_name
+	,c.emp_no
+from
+	customer c
+where
+	(select e.dep_no from employee e where c.emp_no=e.emp_no) = 10;
 
 
 
