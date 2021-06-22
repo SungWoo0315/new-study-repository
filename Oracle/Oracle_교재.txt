@@ -2380,22 +2380,79 @@ union all 을 쓰면 중복행을 허락한다.
 		select, update, delete 안의 서브커리는 꼭 ( )로 묶는다.
 		경우에 따라 조인대신 서브쿼리를 써도 같은 결과를 낼 수 있다. 이때 join 보다 서브쿼리의 부하가 더 많이 걸린다.
 		현업가면 개성마다 다르다.
+	----------------------------
+	서브쿼리 종류
+	----------------------------
+		비상관쿼리(Noncorrelated Subquery)
+		----------
+			[서브쿼리]와 [외부쿼리]가 연관성이 없다.
+			[서브쿼리] 실행 후의 결과값을 가지고 [외부쿼리] 실행된다.
+
+			<예> 평균 연봉 이상 받는 직원을 검색하면?
+			select * from employee where salary >= (select avg(salary) from employee)
+		----------
+		상관쿼리(Correlated Subquery)
+		----------
+			[서브쿼리]와 [외부쿼리]가 연관성이 있다.
+			[서브쿼리]와 [외부쿼리]가 서로 통신하면서 쿼리가 진행된다.
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<108> 최고 연봉을 받는 직원을 검색하라
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select * from employee
+	where salary = (select max(salary) from employee);
+	---------------------------------------------------
+	서브쿼리 select max(salary) from employee 가 먼저 실행되고 난 후 리턴되는 최고연봉을 가지고 바깥 쿼리가 실행 된다.
+	위 쿼리는 비상관 쿼리이다.[서브쿼리] 실행 후의 결과값을 가지고 [외부쿼리] 실행되기 때문이다.
+	<주의> ~ where salary = max(salary); -> 이렇게 하면 안된다.
 
 
 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<109> 평균 연봉 이상을 받는 직원을 검색하라
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select * from employee
+	where salary >= (select avg(salary) from employee)
 
 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<110> 20번 부서에서 최고 연봉자 직원을 검색하라
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	select * from employee
+	where salary = (select max(salary) from employee where dep_no = 20)
+
+	<주의> 다른부서의 3500 받는사람도있으면 출력되어 버린다.
+	20번 부서의 최고연봉자와 같은연봉을 받는사람이 다 출력된다.
+
+	select * from employee
+	where salary = (select max(salary) from employee where dep_no = 20) and dep_no = 20;
+
+	또한번 20번 부서를 정해줘야지. 20번 부서에서 최고 연봉자만 나온다.
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<111> 10번 부서 직원들이 관리하는 [고객번호], [고객명], [직원번호]을 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<join 으로>
+select
+c.cus_no
+,c.cus_name
+,e.emp_no
+
+from
+customer c, employee e
+
+where
+c.emp_no = e.emp_no;
 
 
+<subquery 로>
 
+select
+cus_no "고객번호"
+,cus_name "고객명"
+,to_char(select emp_no from employee) "직원번호"
 
-
-
-
-
-
-
-
+from customer
 
 
 
