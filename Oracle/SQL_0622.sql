@@ -162,7 +162,7 @@ where salary = (select max(salary) from employee where dep_no = 20) and dep_no =
 --또한번 20번 부서를 정해줘야지. 20번 부서에서 최고 연봉자만 나온다.
 
 
---<111>
+--<>
 
 --<join 으로>
 
@@ -184,6 +184,97 @@ c.emp_no = e.emp_no;
 select
 cus_no "고객번호"
 ,cus_name "고객명"
-,to_number(select emp_no from employee) "직원번호"
+,(select emp_no from employee) "직원번호"
 
 from customer
+
+
+--<111>
+select
+    emp_name "직원명"
+    ,jikup "직급"
+    ,salary "연봉"
+    ,floor(salary / (select sum(salary) from employee) * 100) ||'%' "연봉비율"
+from
+    employee
+order by
+    salary/(select sum(salary) from employee)*100 desc;
+
+-- order by 에서는 floor 써서 소수점 버릴 필요가 없다. 오히려 소수점이 있으면 더 정확하게 나열한다.
+-------------------------------------------------------------------
+select
+    emp_name "직원명"
+    ,jikup "직급"
+    ,salary "연봉"
+    ,trunc(salary / (select sum(salary) from employee) * 100, 1) ||'%' "연봉비율"   -- trunc 사용하여 소수점 조절.
+from
+    employee
+order by
+    salary/(select sum(salary) from employee)*100, desc;
+
+--<주의>정렬할때는 소수점 컨트롤을 하지 말고 소수점이 널부러지게 하고 정렬해야 정확한 정렬이 된다.
+
+
+--<112>
+-------------------------------------------------------------------
+--조인(join) 답
+-------------------------------------------------------------------
+select
+	c.cus_no
+	,c.cus_name
+	,c.emp_no
+from
+	customer c, employee e
+where
+	c.emp_no = e.emp_no and e.dep_no = 10;
+-------------------------------------------------------------------
+--서브쿼리(subquery) 답
+-------------------------------------------------------------------
+select
+	cus_no "고객번호"
+	,cus_name "고객명"
+	,emp_no
+from
+	customer
+where
+	emp_no in(select emp_no from employee where dep_no=10)
+-------------------------------------------------------------------
+--n행1열 서브쿼리 쓰면 , 자동으로 붙어서 나오게 된다.
+-------------------------------------------------------------------
+--	in 뒤에 n행 1열의 결과가 나오는 서브쿼리가 나오면 n행 1열의 데이터가 in 뒤에 콤마(,)로 나열된다.
+-------------------------------------------------------------------
+--서브쿼리(subquery) 답
+-------------------------------------------------------------------
+	select
+		cus_no "고객번호"
+		,cus_name "고객명"
+		,emp_no
+	from
+		customer
+	where
+		emp_no = any(select emp_no from employee where dep_no=10)
+
+--<113>
+select
+	emp_name "직원명"
+	,salary "연봉"
+	, (select avg(salary)from employee)  "전체평균연봉"
+	, (select max(salary)from employee)  "전체최대연봉"
+from
+	employee
+where
+	salary>= (select avg(salary) from employee)
+	and
+	salary< (select max(salary) from employee);
+
+
+
+
+
+
+
+
+
+
+
+
