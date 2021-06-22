@@ -2518,6 +2518,35 @@ where
 
 -
 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<114> 최고연봉 직원의 [직원번호], [직원명], [부서명], [연봉]을 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+select
+	e.emp_no
+	,e.emp_name
+	,d.dep_name
+	,e.salary
+
+from
+ dept d, employee e
+
+where
+d.dep_no = e.dep_no
+and
+e.salary = (select max(salary) from employee);
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<115> 담당 고객이 2명 이상인 [직원번호], [직원명], [직급]을 검색하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+select
+	e.emp_no
+	,e.emp_name
+	,e.jikup
+from
+	employee e
+where
+	(select count(*) from customer c where e.emp_no=c.emp_no) >=2;
 
 
 
