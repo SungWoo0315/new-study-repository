@@ -2641,16 +2641,27 @@ select
 	,e.emp_name
 	,e.jikup
 	,e.jumin_num
-	,(select * from employee e where decode( jikup
+	,(select count(*) from employee e2 where decode( e2.jikup
 		,'사장', 1
 		,'부장', 2
 		,'과장', 3
 		,'대리', 4
 		,'주임', 5
 		,6
-	) ) "직급서열순위"
+	)|| decode substr(e.2jumin_num,7,1), '1', '19', '2', '19', '20' )
+	< decode( e1.jikup
+		,'사장', 1
+		,'부장', 2
+		,'과장', 3
+		,'대리', 4
+		,'주임', 5
+		,6
+
+
+
+	 "직급서열순위"
 from
-	employee e
+	employee e1
 order by
 	5 asc;
 
