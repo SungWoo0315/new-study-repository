@@ -355,5 +355,11 @@ order by
 	4 asc;
 
 
-
+--<118>
+select
+	e.emp_no    "직원번호"
+	,e.emp_name "직원명"
+	,(select count(*) from customer c where c.emp_no = e.emp_no) "담당고객수"
+from
+	employee e;
 
