@@ -382,19 +382,30 @@ from
 
 --<120>
 select
-	e.emp_no
-	,e.emp_name
-	,e.jikup
-	,e.jumin_num
-	,(select * from employee e where decode( e.jikup
+	e1.emp_no
+	,e1.emp_name
+	,e1.jikup
+	,e1.jumin_num
+	,(select count(*)+1 from employee e2 where decode( e2.jikup
 		,'사장', 1
 		,'부장', 2
 		,'과장', 3
 		,'대리', 4
 		,'주임', 5
 		,6
-	) ) "직급서열순위"
+	)|| decode (substr(e2.jumin_num,7,1), '1', '19', '2', '19', '20' )
+    || substr(e2.jumin_num,1,6)
+	< decode( e1.jikup
+		,'사장', 1
+		,'부장', 2
+		,'과장', 3
+		,'대리', 4
+		,'주임', 5
+		,6
+	)|| decode (substr(e1.jumin_num,7,1), '1', '19', '2', '19', '20' )
+    || substr(e1.jumin_num,1,6) )
+	 "직급서열순위"
 from
-	employee e
+	employee e1
 order by
 	5 asc;
