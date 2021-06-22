@@ -363,3 +363,38 @@ select
 from
 	employee e;
 
+
+
+--<119>
+
+update employee set dep_no=40 where emp_no=2;
+
+commit;
+
+-- 부서번호 수정 후. 하기.
+select
+	d.dep_name "부서명"
+	,(select count(*) from employee e where d.dep_no = e.dep_no)||'명'  "부서직원수"
+	,(select count(*) from customer c, employee e where d.dep_no = e.dep_no and c.emp_no = e.emp_no)||'명' "부서담당고객수"
+from
+	dept d;
+
+
+--<120>
+select
+	e.emp_no
+	,e.emp_name
+	,e.jikup
+	,e.jumin_num
+	,(select * from employee e where decode( e.jikup
+		,'사장', 1
+		,'부장', 2
+		,'과장', 3
+		,'대리', 4
+		,'주임', 5
+		,6
+	) ) "직급서열순위"
+from
+	employee e
+order by
+	5 asc;
