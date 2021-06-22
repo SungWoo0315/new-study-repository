@@ -2637,18 +2637,19 @@ from
 단, 직급이 같으면 나이 많은 직원이 [직급서열순위] 위이다. 그리고 [직급서열순위]를 오름차순 유지.
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 select
-	e.emp_no
-	,e.emp_name
-	,e.jikup
-	,e.jumin_num
-	,(select count(*) from employee e2 where decode( e2.jikup
+	e1.emp_no
+	,e1.emp_name
+	,e1.jikup
+	,e1.jumin_num
+	,(select count(*)+1 from employee e2 where decode( e2.jikup
 		,'사장', 1
 		,'부장', 2
 		,'과장', 3
 		,'대리', 4
 		,'주임', 5
 		,6
-	)|| decode substr(e.2jumin_num,7,1), '1', '19', '2', '19', '20' )
+	)|| decode (substr(e2.jumin_num,7,1), '1', '19', '2', '19', '20' )
+    || substr(e2.jumin_num,1,6)
 	< decode( e1.jikup
 		,'사장', 1
 		,'부장', 2
@@ -2656,9 +2657,8 @@ select
 		,'대리', 4
 		,'주임', 5
 		,6
-
-
-
+	)|| decode (substr(e1.jumin_num,7,1), '1', '19', '2', '19', '20' )
+    || substr(e1.jumin_num,1,6) )
 	 "직급서열순위"
 from
 	employee e1
