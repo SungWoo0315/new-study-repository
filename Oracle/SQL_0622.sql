@@ -99,14 +99,45 @@ select cus_name, call_num from customer
 
 
 
+--<86> 함수 다시 해보기.
 
 
 
 
 
+--replace
+select replace( 'You are not alone', 'You', 'We' ) from dual;
+select replace( 'You are not alone', 'not' ) from dual;
+select replace( 'You are not alone', 'not', '' ) from dual;
+-------------------------------
+select translate( 'You are not alone', 'You', 'We' ) from dual;
+
+
+--initcap
+select  initcap( 'abc def' ) from dual;
+
+
+--lpad( s1, n, s2 )
+
+select lpad( 'abc', 7, ' ' ) from dual;
+
+select lpad( 'abc', 7, '#' ) from dual;
+
+
+--rpad( s1, n, s2 )
+
+select rpad( 'abc', 7, '#' ) from dual;
 
 
 
 
+--instr( s1, s2, n1, n2 )
+
+select
+  instr( 'Every Sha-la-la-la Every wo-o-wo-o', 'la' ),
+  instr( 'Every Sha-la-la-la Every wo-o-wo-o', 'la', 1),
+  instr( 'Every Sha-la-la-la Every wo-o-wo-o', 'la', 1, 2),
+  instr( 'Every Sha-la-la-la Every wo-o-wo-o', 'la', 12, 2)
+from dual;
 
 
