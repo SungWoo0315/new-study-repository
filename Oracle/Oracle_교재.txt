@@ -2509,8 +2509,15 @@ from
 	customer c
 where
 	(select e.dep_no from employee e where c.emp_no=e.emp_no) = 10;
-
-
+-------------------------------------------------------------------
+select
+	c.cus_no
+	,c.cus_name
+	,c.emp_no
+from
+	customer c
+where
+	(select count(*) from employee e where c.emp_no = e.emp_no and e.dep_no=10)>0;
 
 
 
