@@ -270,6 +270,43 @@ where
 
 
 
+--<114>
+select
+	e.emp_no
+	,e.emp_name
+	,d.dep_name
+	,e.salary
+
+from
+ employee e, dept d
+
+where
+ e.dep_no = d.dep_no
+and
+e.salary = (select max(salary) from employee);
+
+
+--<115>
+select
+	e.emp_no
+	,e.emp_name
+	,e.jikup
+from
+	employee e
+where
+	(select count(c.emp_no) from customer c where e.emp_no=c.emp_no) >=2;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
