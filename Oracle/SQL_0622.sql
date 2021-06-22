@@ -320,11 +320,39 @@ where
 
 
 
+--<116>
+--조인(join) 답
+-----------------------------------------------------------------
+select
+	e.emp_no    "직원번호"
+	,e.emp_name "직원명"
+	,d.dep_name "소속부서명"
+from
+	employee e, dept d
+where
+	e.dep_no = d.dep_no;
+
+-----------------------------------------------------------------
+--서브쿼리 답
+-----------------------------------------------------------------
+select
+	e.emp_no    "직원번호"
+	,e.emp_name "직원명"
+	,(select d.dep_name from dept d where d.dep_no = e.dep_no) "소속부서명"
+from
+	employee e;
 
 
-
-
-
+--<117>
+select
+	e1.emp_no    "직원번호"
+	,e1.emp_name "직원명"
+	,e1.salary   "연봉"
+	,(select count(*)+1 from employee e2 where e2.salary>e1.salary)  "연봉순위"
+from
+ employee e1
+order by
+	4 asc;
 
 
 
