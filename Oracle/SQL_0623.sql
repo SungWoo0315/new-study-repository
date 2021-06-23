@@ -330,8 +330,63 @@ select
 from
 	employee
 group by
-	hire_date
+	to_char(hire_date, 'YYYY')
+order by "입사년도" asc;
+
+
+
+--<130>
+
+select
+	dep_no     "부서번호"
+	,round(  avg( (SYSDATE - hire_date)/365 ), 1  ) ||'년'    "평균근무년수"
+
+from
+	employee
+group by
+	dep_no
 order by 1 asc;
+
+
+
+--<131>
+select
+    to_char(hire_date, 'Q')||'분기'    "입사분기"
+    ,count(*)||'명'                    "인원수"
+from
+    employee
+group by
+    to_char(hire_date, 'Q')||'분기';
+
+
+--<132>
+select
+	trunc(extract(year from hire_date), -1)||'년대'                       "입사연대"
+	,case when substr(jumin_num,7,1) in('1','3') then '남' else '여' end  "성"
+	,count(*)                                                             "연대별입사자수"
+from
+	employee
+group by
+	trunc(extract(year from hire_date), -1)||'년대', case when substr(jumin_num,7,1) in('1','3') then '남' else '여' end
+order by "입사연대"
+
+--<133>
+select
+emp_name    "직원명"
+,to_char(hire_date, 'YYYY"년"-MM"월"-DD"일" Q"분기" DAY', 'NLS_DATE_LANGUAGE = Korean') "입사일"
+,to_char(add_months(hire_date + (365*20),5) + 10, 'YYYY"년"-MM"월"-DD"일"', 'NLS_DATE_LANGUAGE = Korean') "퇴직일"
+
+from
+	employee
+group by
+	emp_name
+	, to_char(hire_date, 'YYYY"년"-MM"월"-DD"일" Q"분기" DAY', 'NLS_DATE_LANGUAGE = Korean')
+	, to_char(add_months(hire_date + (365*20),5) + 10, 'YYYY"년"-MM"월"-DD"일"', 'NLS_DATE_LANGUAGE = Korean')
+
+
+--<134>
+
+
 
 
 
