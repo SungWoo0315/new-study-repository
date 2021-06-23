@@ -386,12 +386,34 @@ group by
 
 --<134>
 
+select
+	d.dep_no          "부서번호"
+	,d.loc            "부서위치"
+	,count(e.emp_no)||'명' "직원수"
+from
+	employee e, dept d
+where
+	e.dep_no = d.dep_no
+group by
+	d.dep_no, d.loc;
 
 
+--<135>
 
 
+--<136>
 
 
+--<137>
+
+
+--<138>
+
+
+--<139>
+
+
+--<140>
 
 
 
