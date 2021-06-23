@@ -2943,18 +2943,86 @@ order by
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 	select
-		hire_date     "입사년도"
-		,count(*)     "인원수"
+		to_char(hire_date, 'YYYY')||'년'     "입사년도"
+		,count(*)||'명'     "인원수"
+
 	from
 		employee
 	group by
-		hire_date
+		to_char(hire_date, 'YYYY')
 	order by 1 asc;
 
 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<130> 부서별로 [부서번호], [평균근무년수]를 출력하면? (근년수는 소수점 2째 자리에서 반올림할 것)
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	--------------------------------------------------------------
+	select
+		dep_no     "부서번호"
+		,round(  avg( (SYSDATE - hire_date)/365 ), 1  ) ||'년'    "평균근무년수"
+
+	from
+		employee
+	group by
+		dep_no
+	order by 1 asc;
+	--------------------------------------------------------------
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<131> 입사분기별로 [입사분기], [인원수] 출력하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+	select
+		to_char(hire_date, 'Q')||'분기'    "입사분기"
+		,count(*)||'명'                    "인원수"
+	from
+		employee
+	group by
+		to_char(hire_date, 'Q')||'분기';
 
 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<132> 입사연대별, 성별로 [입사연대], [성], [연대별입사자수] 출력하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+select
+	trunc(extract(year from hire_date), -1)||'년대'                       "입사연대"
+	,case when substr(jumin_num,7,1) in('1','3') then '남' else '여' end  "성"
+	,count(*)                                                             "연대별입사자수"
+from
+	employee
+group by
+	trunc(extract(year from hire_date), -1)||'년대', case when substr(jumin_num,7,1) in('1','3') then '남' else '여' end
+order by "입사연대"
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<133> [직원명], [입사일](년-월-일 ~4분기 ~요일), [퇴직일](년-월-일) 출력하면? <조건>퇴직일은 입사 후 20년 5개월 10일 후
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+select
+emp_name    "직원명"
+,to_char(hire_date, 'YYYY"년"-MM"월"-DD"일" Q"분기" DAY', 'NLS_DATE_LANGUAGE = Korean') "입사일"
+,to_char(add_months(hire_date + (365*20),5) + 10, 'YYYY"년"-MM"월"-DD"일"', 'NLS_DATE_LANGUAGE = Korean') "퇴직일"
+
+from
+	employee
+group by
+	emp_name
+	, to_char(hire_date, 'YYYY"년"-MM"월"-DD"일" Q"분기" DAY', 'NLS_DATE_LANGUAGE = Korean')
+	, to_char(add_months(hire_date + (365*20),5) + 10, 'YYYY"년"-MM"월"-DD"일"', 'NLS_DATE_LANGUAGE = Korean')
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<134> 직원들이 있는 부서별로 [부서번호], [부서위치], [직원수]를 출력하면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+select
+	dep_no "부서번호"
+	,"부서위치"
+	,count(*)||'명' "직원수"
+from
+	employee
+group by
 
 
 
