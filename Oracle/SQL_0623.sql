@@ -370,6 +370,9 @@ group by
 	trunc(extract(year from hire_date), -1)||'년대', case when substr(jumin_num,7,1) in('1','3') then '남' else '여' end
 order by "입사연대"
 
+
+
+
 --<133>
 select
 emp_name    "직원명"
@@ -383,9 +386,20 @@ group by
 	, to_char(hire_date, 'YYYY"년"-MM"월"-DD"일" Q"분기" DAY', 'NLS_DATE_LANGUAGE = Korean')
 	, to_char(add_months(hire_date + (365*20),5) + 10, 'YYYY"년"-MM"월"-DD"일"', 'NLS_DATE_LANGUAGE = Korean')
 
+--강사님 정답
+
+select
+	emp_name    "직원명"
+	,to_char(hire_date, 'YYYY-MM-DD Q')|| '/4분기' || to_char(hire_date, 'DAY', 'NLS_DATE_LANGUAGE = Korean') "입사일"
+	,to_char(add_months(hire_date, 5 + 20*12 ) + 10, 'YYYY-MM-DD', 'NLS_DATE_LANGUAGE = Korean') "퇴직일"
+from
+	employee
+
+
 
 --<134>
 
+--내가 한것.
 select
 	d.dep_no          "부서번호"
 	,d.loc            "부서위치"
@@ -393,9 +407,38 @@ select
 from
 	employee e, dept d
 where
-	e.dep_no = d.dep_no
+	e.dep_no(+) = d.dep_no
 group by
-	d.dep_no, d.loc;
+	d.dep_no, d.loc
+order by 1
+-----------------------------------------------
+
+--ANSI 방식으로 작성해보기
+select
+	d.dep_no          "부서번호"
+	,d.loc            "부서위치"
+	,count(e.emp_no)||'명' "직원수"
+from
+  employee e right outer join dept d
+on
+  e.dep_no(+) = d.dep_no
+group by
+  d.dep_no, d.loc
+order by 1 ;
+
+
+--강사님 정답
+select
+	d.dep_no "부서번호"
+	,d.loc "부서위치"
+	,(select count(*) from employee e where e.dep_no = d.dep_no)||'명' "직원수"
+from
+	dept d
+--where
+  --(select count(*) from employee e where e.dep_no = d.dep_no) > 0;
+
+
+
 
 
 --<135>
@@ -408,7 +451,7 @@ from
 group by
 	to_char(hire_date, 'MM')||'월'
 order by
-	"입사월";
+	"입사월" asc;
 
 
 
