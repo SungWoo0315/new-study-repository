@@ -225,12 +225,14 @@ order by
 
 --<124>
 select
-	dep_no            "부서번호"
-	,sum(salary)      "급여합"
-	,floor(avg(salary))      "평균급여"
-	,count(*)         "인원수"
-from employee
-group by dep_no ;
+  dep_no            "부서번호"
+  ,sum(salary)      "급여합"
+  ,round(avg(salary),1) "평균급여"
+  ,count(*)         "인원수"
+from
+  employee
+group by
+  dep_no ;
 
 
 
@@ -238,7 +240,7 @@ group by dep_no ;
 select
   jikup             "직급"
   ,sum(salary)      "급여합"
-  ,avg(salary)      "평균급여"
+  ,round(avg(salary),1) "평균급여"
   ,count(*)||'명'   "인원수"
 from
   employee
@@ -246,17 +248,90 @@ group by
   jikup ;
 
 
+--<126>
+select
+  dep_no            "부서번호"
+  ,jikup             "직급"
+  ,sum(salary)      "급여합"
+  ,round(avg(salary),1) "평균급여"
+  ,count(*)||'명'   "인원수"
+from
+  employee
+group by
+  dep_no, jikup;
 
 
 
+--<127>
+select
+    dep_no                "부서번호"
+    ,jikup                "직급"
+    ,sum(salary)          "급여합"
+    ,round(avg(salary),1) "평균급여"
+    ,count(*)||'명'       "인원수"
+from
+    employee
+group by
+    dep_no, jikup
+having
+    count(*) >= 3;
+
+
+--<128>
+select
+		dep_no                 "부서번호"
+		,case when substr(jumin_num,7,1) in('1','3') then '남' else '여' end "성"
+		,sum(salary)           "급여합"
+		,round(avg(salary),1)  "평균급여"
+		,count(*)||'명'        "인원수"
+	from
+		employee
+	group by
+		dep_no, case when substr(jumin_num,7,1) in('1','3') then '남' else '여' end
+
+
+-- decode로 해봄.
+select
+	dep_no                 "부서번호"
+	,decode(substr(jumin_num,7,1)
+	,'1','남'
+	,'3','남'
+	,'여'
+	) "성"
+	,sum(salary)           "급여합"
+	,round(avg(salary),1)  "평균급여"
+	,count(*)||'명'        "인원수"
+from
+	employee
+group by
+	dep_no, decode(substr(jumin_num,7,1),'1','남','3','남','여');
 
 
 
+--<129>
+
+select
+	hire_date     "입사년도"
+	,count(*)     "인원수"
+
+from
+	employee
+group by
+	hire_date
+order by 1 asc;
 
 
+-- 연도만 나오게 해보기.
 
+select
+	to_char(hire_date, 'YYYY')||'년'     "입사년도"
+	,count(*)||'명'     "인원수"
 
-
+from
+	employee
+group by
+	hire_date
+order by 1 asc;
 
 
 
