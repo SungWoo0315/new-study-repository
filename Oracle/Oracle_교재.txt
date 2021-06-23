@@ -2682,35 +2682,13 @@ order by
 
 
 
-■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<87> 고객번호, 고객명, 고객담당직원이름 검색?
-■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-select
-	c.cus_no                 "고객번호"
-	,c.cus_name              "고객명"
-	,e.emp_name              "고객담당직원이름"
-from
-	customer c, employee e
-where
-	c.emp_no=e.emp_no
-------------------------------------------------
-select
-	c.cus_no                 "고객번호"
-	,c.cus_name              "고객명"
-	,e.emp_name              "고객담당직원이름"
-from
-	customer c, employee e
-where
-	c.emp_no=e.emp_no(+)
 
-■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<88> 평균 연봉 보다 많이 받는 직원 검색?
-■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-select * from employee where salary >= (select avg(salary) from employee)
+
+
 
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<89> 직급별, 평균 연봉 검색?
+<> 직급별, 평균 연봉 검색?
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 select
 	jikup
@@ -2727,4 +2705,3 @@ group by
 			select * from employee where instr(emp_name, '김')=1;
 			select * from employee where emp_name like '김%'
 =======================================================
-ㅇ
