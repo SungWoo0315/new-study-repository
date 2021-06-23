@@ -3093,7 +3093,7 @@ select
 	,ceil((sysdate - e1.hire_date)/365)||'년차' "근무년차"
 	,60
 	- (extract(year from sysdate)
-	- to_number(decode(substr(e1.jumin_num,7,1),'1','19','2','19','20')||substr(e1.jumin_num,1,2)) )+1                                        "퇴직일까지 남은 년도"
+	- to_number(decode(substr(e1.jumin_num,7,1),'1','19','2','19','20')||substr(e1.jumin_num,1,2)) +1)                                        "퇴직일까지 남은 년도"
 	,case when
 			to_date(
 				to_char(sysdate,'YYYY')||substr(e1.jumin_num,3,4)
