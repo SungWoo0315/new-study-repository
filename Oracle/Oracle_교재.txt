@@ -3030,18 +3030,31 @@ group by
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <135> 월별로 [입사월], [인원수]를 검색하면?
 	<조건>입사월 오름차순 유지하십쇼
-	<조건>위 결과에서 2월, 9월은 없어서 빠진다. 2월, 9월 도 포함 시키고 인원수는 0으로 포함하려면?
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-select 
-
-
+select
+	to_char(hire_date, 'MM')||'월' "입사월"
+	,count(emp_no)||'명' "입사인원수"
+from
+	employee
+group by
+	to_char(hire_date, 'MM')||'월'
+order by
+	"입사월";
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <136> employee 테이블에서 직급순서대로 정렬하여 직급별로 [직급], [직급평균연봉], [인원수]를 검색하면?
-(높은직급이 먼저 나와야함. 직급이 같으면 먼저태어난 직원이 먼저나오기)
+(높은직급이 먼저 나와야함.)
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
+select
+	jikup                           "직급"
+	,round(avg(salary),1)           "직급평균연봉"
+	,count(*)||'명'   "인원수"
+from
+	employee
+group by
+	jikup
+order by decode( jikup,'사장', 1,'부장', 2,'과장', 3,'대리', 4,'주임', 5, 6)
 
 
 
@@ -3049,23 +3062,86 @@ select
 <137> 부서별 [부서번호], [부서명], [직원수], [관리고객수]를 검색하면?
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-
-
+select
+	d.dep_no          "부서번호"
+	,d.dep_name       "부서명"
+	,count(distinct(e.emp_no))  "직원수"
+	,count(c.emp_no)           "관리고객수"
+from
+	employee e, dept d, customer c
+where
+	d.dep_no = e.dep_no(+)
+	and
+	e.emp_no = c.emp_no(+)
+group by
+	d.dep_no, d.dep_name;
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <138> 퇴직일이 60세 라는 기준 하에 아래 처럼 출력하면?
 [직원번호], [직원명], [근무년차], [퇴직일까지 남은 년도], [생일(년-월-일 요일명)], [소속부서명], [직속상관명], [직속상관부서명] 단, 모든 직원 다 나오고, 직급 높은 먼저 나오고 직급이 같으면 나이가 많은 사람이 나와야함.
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+select
+	e1.emp_no                                "직원번호"
+	,e1.emp_name                             "직원명"
+	,ceil((sysdate - e1.hire_date)/365)||'년차' "근무년차"
+	,60
+	- (extract(year from sysdate)
+	- to_number(decode(substr(e1.jumin_num,7,1),'1','19','2','19','20')||substr(e1.jumin_num,1,2)) )+1                                        "퇴직일까지 남은 년도"
+	,case when
+			to_date(
+				to_char(sysdate,'YYYY')||substr(e1.jumin_num,3,4)
+				, 'YYYYMMDD'
+			)
+			-
+			sysdate
+			>=0
+		then	--올해 생일을 년-월-일 로 리턴하는 식
+			to_char(
+					to_date(
+							to_char(sysdate,'YYYY')||substr(e1.jumin_num,3,4)
+							, 'YYYYMMDD'
+					)
+					,'YYYY-MM-DD (dy)' , 'NLS_DATE_LANGUAGE = Korean'
+			)
+		else  --내년 생일을 년-월-일 로 리턴하는 식
+			to_char(
+					to_date(
+							to_number(to_char(sysdate,'YYYY'))+1||substr(e1.jumin_num,3,4)
+							, 'YYYYMMDD'
+					)
+					,'YYYY-MM-DD (dy)' , 'NLS_DATE_LANGUAGE = Korean'
+			)
+	end                                      "생일"
+	,d1.dep_name                             "소속부서명"
+	,e2.emp_name                             "직속상관명"
+	,d2.dep_name                             "직속상관부서명"
+from
+	employee e1, dept d1, employee e2, dept d2
+where
+	e1.dep_no = d1.dep_no(+)
+	and e1.mgr_emp_no = e2.emp_no(+)
+	and e2.dep_no = d2.dep_no(+)
+order by
+	decode( e1.jikup,'사장', 1,'부장', 2,'과장', 3,'대리', 4,'주임', 5, 6)||decode(substr(e1.jumin_num,7,1),'1','19','2','19','20') ||substr(e1.jumin_num,1,6);
+
+
+
+
+
+
+
+
+
+
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<139> 오늘부터 10일 이후 까지 날짜 중에 토요일, 일요일, 월요일을 제외한 날의 개수를 구하면?
+<139> 오늘부터 10일 이후 까지 날짜 중에 토요일, 일요일, 월요일을 제외한 날의 개수를 구하면? -inline view
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 
-
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<140> 이번달 중에 토요일, 일요일을 제외한 날의 개수를 구하면? = 이번달 평일 수 구하기
+<140> 이번달 중에 토요일, 일요일을 제외한 날의 개수를 구하면? = 이번달 평일 수 구하기 -inline view
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 
