@@ -177,19 +177,73 @@ order by
 
 --<122>
 
+--서브쿼리 답
+select
+  c.cus_no     "고객번호"
+  ,c.cus_name  "고객명"
+  ,c.tel_num   "고객전화번호"
+  ,(select e.emp_name from employee e where e.emp_no = c.emp_no and e.dep_no=10 ) "담당직원명"
+  ,(select e.jikup from employee e where e.emp_no = c.emp_no and e.dep_no=10 ) "담당직원직급"
+  ,(select e.dep_no from employee e where e.emp_no = c.emp_no and e.dep_no=10 )"부서번호"
+from customer c;
+
+--조인 답(오라클조인)
+select
+  c.cus_no     "고객번호"
+  ,c.cus_name  "고객명"
+  ,c.tel_num   "고객전화번호"
+  ,e.emp_name  "담당직원명"
+  ,e.jikup     "담당직원직급"
+  ,e.dep_no    "부서번호"
+from
+  customer c, employee e
+where
+  c.emp_no = e.emp_no(+) and e.dep_no(+)=10
+order by
+1 asc;
+
+--조인 답(ANSI 조인)
+select
+  c.cus_no     "고객번호"
+  ,c.cus_name  "고객명"
+  ,c.tel_num   "고객전화번호"
+  ,e.emp_name  "담당직원명"
+  ,e.jikup     "담당직원직급"
+  ,e.dep_no    "부서번호"
+from
+  --customer c left outer join employee e
+  employee e right outer join customer c     -- 이렇게 바꾸어 적어도 잘 된다.
+on
+  c.emp_no = e.emp_no
+  and e.dep_no=10
+order by
+1 asc;
+
+--<123>
 
 
 
+--<124>
+select
+	dep_no            "부서번호"
+	,sum(salary)      "급여합"
+	,floor(avg(salary))      "평균급여"
+	,count(*)         "인원수"
+from employee
+group by dep_no ;
 
 
 
-
-
-
-
-
-
-
+--<125>
+select
+  jikup             "직급"
+  ,sum(salary)      "급여합"
+  ,avg(salary)      "평균급여"
+  ,count(*)||'명'   "인원수"
+from
+  employee
+group by
+  jikup ;
 
 
 
