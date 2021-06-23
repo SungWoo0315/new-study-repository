@@ -62,25 +62,24 @@ select
     ,e1.emp_name   "직원명"
     ,e1.jikup      "직급"
     ,e1.jumin_num  "주민번호"
-    , (select count(*)+1 from employee e2 where case (e2.jikup
+    , (select count(*)+1 from employee e2 where (case e2.jikup
         when '사장' then 1
         when '부장' then 2
 		when '과장' then 3
 		when '대리' then 4
-		when '주임' then 5 else 6 end)||case (substr(e2.jumin_num,7,1)
+		when '주임' then 5 else 6 end||case substr(e2.jumin_num,7,1)
 	 	when '1' then '19'
 		when '2' then '19'
-		else '20' end)||substr(e2.jumin_num,1,6)
-< case (e1.jikup
+		else '20' end||substr(e2.jumin_num,1,6)
+< case e1.jikup
 	when '사장' then 1
 	when '부장' then 2
 	when '과장' then 3
 	when '대리' then 4
-	when '주임' then 5 else 6 end)||case(substr(e1.jumin_num,7,1)
+	when '주임' then 5 else 6 end||case substr(e1.jumin_num,7,1)
 	when '1' then '19'
 	when '2' then '19'
-	else '20' end)||substr(e1.jumin_num,1,6)
-) "직급서열순위"
+	else '20' end||substr(e1.jumin_num,1,6))) "직급서열순위"
 from
 	employee e1
 order by 5;
