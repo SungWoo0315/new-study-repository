@@ -112,30 +112,37 @@ order by
 -- 강사님 정답풀이.
 
 select
-	e1.emp_no                                                                                "[직원번호]"
-	, e1.emp_name                                                                            "[직원명]"
-	, ceil((sysdate-e1.hire_date)/365)                                                       "[근무년차]"
-	, to_number(to_char(sysdate,'yyyy'))-to_number((case substr(e1.jumin_num,7,1)
-		when '1' then '19' when '2' then '19'else '20'end)||substr(e1.jumin_num,1,2))+1  "[나이]"
-	, 60-(to_number(to_char(sysdate,'yyyy'))-to_number((case substr(e1.jumin_num,7,1)
-		when '1' then '19' when '2' then '19'else '20'end)||substr(e1.jumin_num,1,2))+1) "[퇴직년도까지]"
-	, to_char(to_date(case substr(e1.jumin_num,7,1)
-		when '1' then '19' when '2' then '19' else '20' end
-			||substr(e1.jumin_num,1,6),'yyyymmdd'),'yyyy-mm-dd')||' '
-			||to_char(to_date(case substr(e1.jumin_num,7,1)
-				when '1' then '19' when '2' then '19' else '20' end
-			||substr(e1.jumin_num,1,6),'yyyymmdd'),'dy','nls_date_language = korean') "[생일]"
-	, e1.jikup                                                                                "[직급]"
-	, d1.dep_name                                                                             "[소속부서명]"
-    , e2.emp_name                                                                             "[직속상관명]"
-    , nvl(d2.dep_name, '----없음----')                                                        "[직속상관소속부서명]"
+  e1.emp_no "[직원번호]"
+  , e1.emp_name "[직원명]"
+  , ceil((sysdate-e1.hire_date)/365) "[근무년차]" --(오늘날짜-입사날짜)/365 구한 후 소수점 올림.
+  , to_number(to_char(sysdate,'yyyy'))-to_number((case substr(e1.jumin_num,7,1)
+    when '1' then '19' when '2' then '19'else '20'end)||substr(e1.jumin_num,1,2))+1 "[나이]"
+    --나이는 (현재연도 - 출생년도)
+  , 60-(to_number(to_char(sysdate,'yyyy'))-to_number((case substr(e1.jumin_num,7,1)
+    when '1' then '19' when '2' then '19'else '20'end)||substr(e1.jumin_num,1,2))+1) "[퇴직년도까지]"
+
+  , to_char(to_date(case substr(e1.jumin_num,7,1)
+    when '1' then '19' when '2' then '19' else '20' end
+      ||substr(e1.jumin_num,1,6),'yyyymmdd'),'yyyy-mm-dd')||' '
+      ||to_char(to_date(case substr(e1.jumin_num,7,1)
+        when '1' then '19' when '2' then '19' else '20' end
+      ||substr(e1.jumin_num,1,6),'yyyymmdd'),'dy','nls_date_language = korean') "생일"
+
+  ,e1.jikup        "[직급]"
+  ,d1.dep_name     "[소속부서명]"
+  ,e2.emp_name     "[직속상관명]"
+  ,nvl(d2.dep_name, '---없음---')   "[직속상관소속부서명]"   --null값 변경
 from
-    employee e1, dept d1,employee e2, dept d2
+  employee e1, dept d1, employee e2, dept d2
+
 where
-    e1.dep_no  = d1.dep_no(+) and e1.mgr_emp_no = e2.emp_no(+) and e2.dep_no = d2.dep_no(+)
+  e1.dep_no = d1.dep_no(+)
+  and e1.mgr_emp_no = e2.emp_no(+)
+  and e2.dep_no = d2.dep_no(+)
 order by
-    decode(e1.jikup ,'사장',1 ,'부장',2 ,'과장',3 ,'대리',4 ,5)
-    , case substr(e1.jumin_num,7,1)  when '1' then '19' when '2' then '19' else '20' end ||substr(e1.jumin_num,1,6)
+  decode( e1.jikup,'사장', 1,'부장', 2,'과장', 3,'대리', 4, 5) asc
+  ,
+  case substr(e1.jumin_num,7,1) when '1' then '19' when '2' then '19' else '20' end ||substr(e1.jumin_num,1,6) asc
 ----------------------------------------------------------------------------------------------------------------
 select
     e1.emp_no "[직원번호]"
