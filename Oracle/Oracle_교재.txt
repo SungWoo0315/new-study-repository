@@ -3069,29 +3069,45 @@ order by
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <137> 부서별 [부서번호], [부서명], [직원수], [직원이관리하는고객수]를 검색하면?
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+-------------------------------------------------------------
+답1
+-------------------------------------------------------------
+	select
+		d.dep_no          "부서번호"
+		,d.dep_name       "부서명"
+		,count(distinct(e.emp_no))  "직원수"
+		,count(c.emp_no)           "관리고객수"
+	from
+		employee e, dept d, customer c
+	where
+		d.dep_no = e.dep_no(+)
+		and
+		e.emp_no = c.emp_no(+)
+	group by
+		d.dep_no, d.dep_name;
+	-----------------------------------------------
+	count(distinct e.emp_no)를 count(e.emp_no) 하면 안됨.
+	distinct 안 쓰면 직원수가 중복되서 나온다.
+	-----------------------------------------------
 
-select
-	d.dep_no          "부서번호"
-	,d.dep_name       "부서명"
-	,count(distinct(e.emp_no))  "직원수"
-	,count(c.emp_no)           "관리고객수"
-from
-	employee e, dept d, customer c
-where
-	d.dep_no = e.dep_no(+)
-	and
-	e.emp_no = c.emp_no(+)
-group by
-	d.dep_no, d.dep_name;
------------------------------------------------
-count(distinct e.emp_no)를 count(e.emp_no) 하면 안됨.
-distinct 안 쓰면 직원수가 중복되서 나온다.
------------------------------------------------
+	-----------------------------------------------
+	count(c.emp_no)를 count(distinct c.emp_no) 하면 안됨.
+	distinct 쓰면 고객을 담당하는 직원수가 된다.
+	-----------------------------------------------
+-------------------------------------------------------------
+답2
+-------------------------------------------------------------
+	select
+		d.dep_no as "부서번호"
+		,d.dep_name "부서명"
+		,(select count(*)||'명' from employee e where e.dep_no = d.dep_no) "부서직원수"
+		,(select count(*)||'명' from employee e, customer c where e.dep_no = d.dep_no and e.emp_no = c.emp_no) "담당 고객 수"
+	from
+		dept d;
 
------------------------------------------------
-count(c.emp_no)를 count(distinct c.emp_no) 하면 안됨.
-distinct 쓰면 고객을 담당하는 직원수가 된다.
------------------------------------------------
+
+
+
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <138> 퇴직일이 60세 라는 기준 하에 아래 처럼 출력하면?
