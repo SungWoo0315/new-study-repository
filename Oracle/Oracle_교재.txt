@@ -3134,6 +3134,7 @@ select
 	,60
 	- (extract(year from sysdate)
 	- to_number(decode(substr(e1.jumin_num,7,1),'1','19','2','19','20')||substr(e1.jumin_num,1,2)) +1)                                        "퇴직일까지 남은 년도"
+
   , to_char(to_date(case substr(e1.jumin_num,7,1)
     when '1' then '19' when '2' then '19' else '20' end
       ||substr(e1.jumin_num,1,6),'yyyymmdd'),'yyyy-mm-dd(dy)','nls_date_language = korean' )  "생일"
