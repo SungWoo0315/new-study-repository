@@ -61,7 +61,85 @@ from
     dept d;
 
 
+--<138>
 
+select
+    e1.emp_no                                "직원번호"
+    ,e1.emp_name                             "직원명"
+    ,ceil((sysdate - e1.hire_date)/365)||'년차' "근무년차"
+    ,60
+    - (extract(year from sysdate)
+    - to_number(decode(substr(e1.jumin_num,7,1),'1','19','2','19','20')||substr(e1.jumin_num,1,2)) +1)                                        "퇴직일까지 남은 년도"
+    ,case when
+            to_date(
+                to_char(sysdate,'YYYY')||substr(e1.jumin_num,3,4)
+                , 'YYYYMMDD'
+            )
+            -
+            sysdate
+            >=0
+        then    --올해 생일을 년-월-일 로 리턴하는 식
+            to_char(
+                    to_date(
+                            to_char(sysdate,'YYYY')||substr(e1.jumin_num,3,4)
+                            , 'YYYYMMDD'
+                    )
+                    ,'YYYY-MM-DD (dy)' , 'NLS_DATE_LANGUAGE = Korean'
+            )
+        else  --내년 생일을 년-월-일 로 리턴하는 식
+            to_char(
+                    to_date(
+                            to_number(to_char(sysdate,'YYYY'))+1||substr(e1.jumin_num,3,4)
+                            , 'YYYYMMDD'
+                    )
+                    ,'YYYY-MM-DD (dy)' , 'NLS_DATE_LANGUAGE = Korean'
+            )
+    end                                      "생일"
+    ,d1.dep_name                             "소속부서명"
+    ,e2.emp_name                             "직속상관명"
+    ,d2.dep_name                             "직속상관부서명"
+from
+    employee e1, dept d1, employee e2, dept d2
+where
+    e1.dep_no = d1.dep_no(+)
+    and e1.mgr_emp_no = e2.emp_no(+)
+    and e2.dep_no = d2.dep_no(+)
+order by
+    decode( e1.jikup,'사장', 1,'부장', 2,'과장', 3,'대리', 4,'주임', 5, 6)||decode(substr(e1.jumin_num,7,1),'1','19','2','19','20') ||substr(e1.jumin_num,1,6);
+
+
+
+-- 강사님 정답풀이.
+
+select
+  e1.emp_no "[직원번호]"
+  , e1.emp_name "[직원명]"
+  , ceil((sysdate-e1.hire_date)/365) "[근무년차]"
+  , to_number(to_char(sysdate,'yyyy'))-to_number((case substr(e1.jumin_num,7,1)
+    when '1' then '19' when '2' then '19'else '20'end)||substr(e1.jumin_num,1,2))+1 "[나이]"
+  , 60-(to_number(to_char(sysdate,'yyyy'))-to_number((case substr(e1.jumin_num,7,1)
+    when '1' then '19' when '2' then '19'else '20'end)||substr(e1.jumin_num,1,2))+1) "[퇴직년도까지]"
+  , to_char(to_date(case substr(e1.jumin_num,7,1)
+    when '1' then '19' when '2' then '19' else '20' end
+      ||substr(e1.jumin_num,1,6),'yyyymmdd'),'yyyy-mm-dd')||' '
+      ||to_char(to_date(case substr(e1.jumin_num,7,1)
+        when '1' then '19' when '2' then '19' else '20' end
+      ||substr(e1.jumin_num,1,6),'yyyymmdd'),'dy','nls_date_language = korean') "생일"
+  ,e1.jikup        "[직급]"
+  ,d1.dep_name  "[소속부서명]"
+  ,e2.emp_name  "[직속상관명]"
+  ,d2.dep_name   "[직속상관소속부서명]"
+from
+  employee e1, dept d1, employee e2, dept d2
+
+where
+  e1.dep_no = d1.dep_no(+)
+  and e1.mgr_emp_no = e2.emp_no(+)
+  and e2.dep_no = d2.dep_no(+)
+order by
+  decode( e1.jikup,'사장', 1,'부장', 2,'과장', 3,'대리', 4, 5) asc
+  ,
+  case substr(e1.jumin_num,7,1) when '1' then '19' when '2' then '19' else '20' end ||substr(e1.jumin_num,1,6) asc
 
 
 
