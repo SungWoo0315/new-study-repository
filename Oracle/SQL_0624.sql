@@ -33,6 +33,23 @@ order by
 
 
 
+--<137>
+
+select
+	d.dep_no                        "부서번호"
+	,d.dep_name                     "부서명"
+	,count(distinct(e.emp_no))      "직원수"      -- 중복된 직원수를 제거해야 한다.
+	,count((c.emp_no))              "직원이관리하는고객수"
+from
+	employee e, dept d, customer c
+where --컬럼을 붙이는 조건.
+	d.dep_no = e.dep_no(+)
+	and
+	e.emp_no = c.emp_no(+)
+group by
+	d.dep_no, d.dep_name;
+
+
 
 
 
