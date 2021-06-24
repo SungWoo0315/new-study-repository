@@ -49,6 +49,16 @@ where --컬럼을 붙이는 조건.
 group by
 	d.dep_no, d.dep_name;
 
+-------------------------------------------------------------
+--답2
+-------------------------------------------------------------
+select
+    d.dep_no as "부서번호"
+    ,d.dep_name "부서명"
+    ,(select count(*)||'명' from employee e where e.dep_no = d.dep_no) "부서직원수"
+    ,(select count(*)||'명' from employee e, customer c where e.dep_no = d.dep_no and e.emp_no = c.emp_no) "담당 고객 수"
+from
+    dept d;
 
 
 
