@@ -462,9 +462,15 @@ select
 	,count(*)||'명'   "인원수"
 from
 	employee
+--where
+
 group by
 	jikup
-order by decode( jikup,'사장', 1,'부장', 2,'과장', 3,'대리', 4,'주임', 5, 6)
+--having            --인원수 5명 이상만 보고 싶을때 having을 써서 골라낸다.
+    --count(*)>=5
+order by
+    decode( jikup,'사장', 1,'부장', 2,'과장', 3,'대리', 4,'주임', 5, 6) asc;
+
 
 
 --<137>
