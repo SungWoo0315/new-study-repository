@@ -1,2 +1,6 @@
-﻿<2021-06-25 금요일>
+﻿--<2021-06-25 금요일>--
+
+SELECT * FROM EMPLOYEE;
+
+SELECT dep_no FROM DEPT;
 
