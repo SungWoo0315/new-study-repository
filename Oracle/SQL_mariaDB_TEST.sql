@@ -25,5 +25,8 @@ insert into dept(dep_no,dep_name,loc) values(40,'자재부','광주');
 
 select * from dept;
 
+commit;
+
+desc dept;
 
 
