@@ -101,3 +101,20 @@ FROM
 
 select * from employee where salary >= (select avg(salary) from employee)  --서브쿼리
 
+
+-- 나이
+--   to_number(to_char(sysdate, 'YYYY'))
+--   -
+--   to_number((decode(substr(e1.jumin_num,7,1), '1', '19', '2', '19', '20'))
+--   ||substr(e1.jumin_num,1,2))+1
+
+
+-- 나이구하기.
+select
+	cus_name
+	,to_number(to_char(sysdate, 'YYYY'))
+	-
+	to_number((decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20'))||substr(jumin_num,1,2))+1
+from
+	customer
+order by 2 desc;
