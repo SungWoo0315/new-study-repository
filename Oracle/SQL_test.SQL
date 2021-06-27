@@ -42,11 +42,16 @@ SELECT
 --,TO_CHAR(SYSDATE,'SS') 		--10 (초을 01 ~ 59 형태로 표시)
 
 --분기
-TO_CHAR(SYSDATE,'Q')       -- 분기.
+--TO_CHAR(SYSDATE,'Q')       -- 분기.
 
 ----세기 포맷
 --,TO_CHAR(SYSDATE,'CC')			--21 (세기)
 --,TO_CHAR(SYSDATE,'BC')			--서기
+
+--테스트
+to_char(sysdate, 'YYYY-MM-DD(DY) YY"년" MON HH24:MI : SS <Q"분기">')
+,to_char(sysdate, 'CC"세기" DL')
+
 FROM
 dual;
 
