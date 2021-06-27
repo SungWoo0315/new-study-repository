@@ -99,3 +99,5 @@ FROM
 	employee;
 
 
+select * from employee where salary >= (select avg(salary) from employee)  --서브쿼리
+
