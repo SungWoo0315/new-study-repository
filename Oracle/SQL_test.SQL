@@ -118,3 +118,43 @@ select
 from
 	customer
 order by 2 desc;
+
+
+
+--<127> -- group by -- group by 안에는 select에서 묶어준 일반컬럼이 다 들어가야 한다.
+select
+    dep_no                "부서번호"
+    ,jikup                "직급"
+    ,sum(salary)          "급여합"
+    ,round(avg(salary),1) "평균급여"
+    ,count(*)||'명'       "인원수"
+from
+    employee
+group by
+    dep_no, jikup
+having
+    count(*) >= 3;
+
+
+select
+    dep_no                "부서번호"
+    ,jikup                "직급"
+    ,sum(salary)          "급여합"
+    ,round(avg(salary),1) "평균급여"
+    ,count(*)||'명'       "인원수"
+from
+    employee
+where
+	 jikup not like '%사원%'
+group by
+    dep_no, jikup
+having
+    count(*) >= 3;
+
+
+-- 카디시안 곱 (Cartesian Product)
+select
+*
+from
+	dept
+	,employee
