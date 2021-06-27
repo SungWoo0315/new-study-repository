@@ -56,5 +56,46 @@ FROM
 dual;
 
 
+select
+max(hire_date) "최근입사일"
+,min(hire_date) "오래전입사"
+FROM
+employee;
+
+
+
+select
+	count(*)
+FROM
+	employee;
+
+
+select
+	count(*)  -- null 을 포함한 모든 행 개수 구함.
+FROM
+	customer
+where
+	emp_no is null;  -- null을 골라내면 2가 나옴.
+
+
+
+select
+	count(emp_no)  -- null 을 제외한 모든 행 개수 구함.
+FROM
+	customer
+where
+	emp_no is null;  -- null을 제외 하여서. 0개가 나올수 밖에 없음.
+
+
+select
+	count(mgr_emp_no)
+from
+	employee;
+
+
+select
+ count(distinct mgr_emp_no)  -- 중복제거
+FROM
+	employee;
 
 
