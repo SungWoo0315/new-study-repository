@@ -3071,8 +3071,54 @@ order by
 <새끼문제> 위 문제는 없는 달은 나오지 않는다.
 없는 달도 포함하여, 즉 1월~12월 까지 다 나오게 하려면?
 -----------------------------------------------
-
-
+group by, join 사용
+-----------------------------------------------
+select
+  m.month||'월'                      "입사월"
+  ,count(e.emp_name)||'명'           "입사인원수"
+from
+(
+select '01' "MONTH" from dual union
+select '02' from dual union
+select '03' from dual union
+select '04' from dual union
+select '05' from dual union
+select '06' from dual union
+select '07' from dual union
+select '08' from dual union
+select '09' from dual union
+select '10' from dual union
+select '11' from dual union
+select '12' from dual
+) m
+,employee e
+where
+  to_char(e.hire_date(+), 'MM') = m.month
+group by
+  m.month||'월'
+order by
+  "입사월";
+-----------------------------------------------
+상관쿼리 사용
+-----------------------------------------------
+select
+	  m.month||'월'                      "입사월"
+		,(select count(*) from employee e where to_char(e.hire_date, 'MM')=m.month )    "입사인원수"
+from
+(
+select '01' "MONTH" from dual union
+select '02' from dual union
+select '03' from dual union
+select '04' from dual union
+select '05' from dual union
+select '06' from dual union
+select '07' from dual union
+select '08' from dual union
+select '09' from dual union
+select '10' from dual union
+select '11' from dual union
+select '12' from dual
+) m
 
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -3377,33 +3423,62 @@ select * from ( select rownum RNUM, zxcvb.* from (
 ) zxcvb where rownum<=5 ) where RNUM>=2;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <141> 오늘부터 10일 이후 까지 날짜 중에 토요일, 일요일, 월요일을 제외한 날의 개수를 구하면? -inline view
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+select count(*) from
+(
+	select sysdate "XDAY" from dual
+	union select sysdate+1 from dual
+	union select sysdate+2 from dual
+	union select sysdate+3 from dual
+	union select sysdate+4 from dual
+	union select sysdate+5 from dual
+	union select sysdate+6 from dual
+	union select sysdate+7 from dual
+	union select sysdate+8 from dual
+	union select sysdate+9 from dual
+	union select sysdate+10 from dual
+) d
+where
+	to_char(d.xday, 'dy', 'nls_date_language = korean')!='토'
+	and to_char(d.xday, 'dy', 'nls_date_language = korean')!='일'
+	and to_char(d.xday, 'dy', 'nls_date_language = korean')!='월'
+
+
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-140> 이번달 중에 토요일, 일요일을 제외한 날의 개수를 구하면? = 이번달 평일 수 구하기 -inline view
+<142> 이번달 중에 토요일, 일요일을 제외한 날의 개수를 구하면? = 이번달 평일 수 구하기 -inline view
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 <> 직급별, 평균 연봉 검색?
