@@ -203,9 +203,38 @@ order by
 
 
 -- inline view 사용
+-- m.month => m.월월 변경. 그래도 실행 가능.
 select
-  m.month||'월'                      "입사월"
+  m.월월||'월'                         "입사월"
   ,count(e.emp_name)||'명'           "입사인원수"
+from
+(
+select '01' "월월" from dual union
+select '02' from dual union
+select '03' from dual union
+select '04' from dual union
+select '05' from dual union
+select '06' from dual union
+select '07' from dual union
+select '08' from dual union
+select '09' from dual union
+select '10' from dual union
+select '11' from dual union
+select '12' from dual
+) m
+,employee e
+where
+  to_char(e.hire_date(+), 'MM') = m.월월
+group by
+  m.월월||'월'
+order by
+  "입사월";
+
+--상관쿼리로 풀이
+
+select
+	  m.month||'월'                      "입사월"
+		,(select count(*) from employee e where to_char(e.hire_date, 'MM')=m.month )||'명'    "입사인원수"
 from
 (
 select '01' "MONTH" from dual union
@@ -221,16 +250,58 @@ select '10' from dual union
 select '11' from dual union
 select '12' from dual
 ) m
-,employee e
+
+
+-- 올바른 풀이는 아니지만 참고. rownum 사용.
+select
+	  m.month||'월'                      "입사월"
+		,(select count(*) from employee e where to_char(e.hire_date, 'MM')=m.month )    "입사인원수"
+from
+(
+  select case when rownum<10 then '0' else '' end||rownum "MONTH" from employee where rownum<=12
+) m
+
+
+--<141>
+--내가 한것.
+select
+	count(*) from
+(
+select to_char(sysdate+1, 'DAY') "D" from dual union
+select to_char(sysdate+2, 'DAY') from dual union
+select to_char(sysdate+3, 'DAY') from dual union
+select to_char(sysdate+4, 'DAY') from dual union
+select to_char(sysdate+5, 'DAY') from dual union
+select to_char(sysdate+6, 'DAY') from dual union
+select to_char(sysdate+7, 'DAY') from dual union
+select to_char(sysdate+8, 'DAY') from dual union
+select to_char(sysdate+9, 'DAY') from dual union
+select to_char(sysdate+10, 'DAY') from dual
+) d
 where
-  to_char(e.hire_date(+), 'MM') = m.month
-group by
-  m.month||'월'
-order by
-  "입사월";
+d.D!='토'
+and d.D!='일'
+and d.D!='월'
 
 
 
+-- 정답
 
-
-
+select count(*) from
+(
+	select sysdate "XDAY" from dual
+	union select sysdate+1 from dual
+	union select sysdate+2 from dual
+	union select sysdate+3 from dual
+	union select sysdate+4 from dual
+	union select sysdate+5 from dual
+	union select sysdate+6 from dual
+	union select sysdate+7 from dual
+	union select sysdate+8 from dual
+	union select sysdate+9 from dual
+	union select sysdate+10 from dual
+) d
+where
+	to_char(d.xday, 'dy', 'nls_date_language = korean')!='토'
+	and to_char(d.xday, 'dy', 'nls_date_language = korean')!='일'
+	and to_char(d.xday, 'dy', 'nls_date_language = korean')!='월'
