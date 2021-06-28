@@ -3,8 +3,9 @@ select * from all_users;
 
 -- 테이블 컬럼명 변경.
 alter table customer rename column call_num to tel_num
-
+alter table employee rename column call_num to phone_num
 commit;
+
 
 DESC employee;
 
