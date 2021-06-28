@@ -439,6 +439,20 @@ where
 	(select e.dep_no from employee e where c.emp_no=e.emp_no) = 10;
 
 
+-- 위의 문제를 [join 조인]으로 적은것.
+select
+	c.cus_no
+	,c.cus_name
+	,c.emp_no
+from
+	customer c, employee e
+where
+	c.emp_no = e.emp_no and e.dep_no = 10;
+
+
+
+
+-- <117>
 
 
 
