@@ -428,6 +428,16 @@ where
 --주의할것. 50번 부서는 존재하지 않기때문. 검색이 안될 뿐. 에러가 아니다.
 
 
+-- 위의 문제를 [상관 쿼리]로 적은것.
+select
+	c.cus_no
+	,c.cus_name
+	,c.emp_no
+from
+	customer c
+where
+	(select e.dep_no from employee e where c.emp_no=e.emp_no) = 10;
+
 
 
 
