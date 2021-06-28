@@ -267,7 +267,8 @@ from
 select
 	count(*) from
 (
-select to_char(sysdate+1, 'DAY') "D" from dual union
+select to_char(sysdate, 'DAY') "D" from dual union
+select to_char(sysdate+1, 'DAY') from dual union
 select to_char(sysdate+2, 'DAY') from dual union
 select to_char(sysdate+3, 'DAY') from dual union
 select to_char(sysdate+4, 'DAY') from dual union
@@ -305,3 +306,81 @@ where
 	to_char(d.xday, 'dy', 'nls_date_language = korean')!='토'
 	and to_char(d.xday, 'dy', 'nls_date_language = korean')!='일'
 	and to_char(d.xday, 'dy', 'nls_date_language = korean')!='월'
+
+
+
+--<142>
+select
+	count(*)
+from
+	(
+		select
+				to_date(to_char(sysdate, 'YYYY-MM')||'-01', 'YYYY-MM-DD')+RNUM-1 "XDAY"
+			from
+			(
+				select rownum RNUM from employee union select rownum+20 from employee)
+				where RNUM<=to_number(to_char(last_day(sysdate), 'dd')
+			)
+	) d
+where
+	to_char( d.xday, 'dy', 'nls_date_language = korean')!='토'
+	and to_char(d.xday, 'dy', 'nls_date_language = korean')!='일'
+	and XDAY <= last_day(sysdate)
+
+
+--<42> 다시 풀이
+select
+	cus_no
+	,cus_name
+	,emp_no
+from
+	customer;
+
+-- 정답1 숫자형을 숫자문자형으로 변환.
+select
+	cus_no
+	,cus_name
+	,nvl(to_char(emp_no),'없음')
+from
+	customer;
+
+-- 정답2 숫자형뒤에 길이가 없는 문자데이터 ||'' 을 이어 붙여주어서 앞의 숫자형이 자동으로 문자형으로 형변환 된다.
+select
+	cus_no
+	,cus_name
+	,nvl(emp_no||'','없음')
+from
+	customer;
+
+
+--<43> 다시풀이
+
+select
+  	cus_no
+  	,cus_name
+  	,nvl2(emp_no,'있음', '없음')
+	from
+  	customer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
