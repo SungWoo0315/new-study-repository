@@ -145,3 +145,92 @@ select * from ( select rownum RNUM, zxcvb.* from (
 		decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4, '주임', 5, '사원', 6) asc
 ) zxcvb where rownum<=5 ) where RNUM>=2;
 
+
+
+
+-- <127>번 문제를 인라인뷰로 풀이.
+
+
+-- group by
+select
+  dep_no                "부서번호"
+  ,jikup                "직급"
+  ,sum(salary)          "급여합"
+  ,round(avg(salary),1) "평균급여"
+  ,count(*)||'명'       "인원수"
+from
+  employee
+group by
+  dep_no, jikup
+having
+  count(*) >= 3;
+------------------------------------------------------------
+group by 결과물에서 행을 골라낼 때에는 where 을 쓰지 말고 having 을 사용한다.
+
+-- inline view
+select
+  *
+from
+(
+select
+  dep_no                DEP_NO
+  ,jikup                JIKUP
+  ,sum(salary)          TOT_SALARY
+  ,round(avg(salary),1) AVG_SALARY
+  ,count(*)             EMP_CNT
+from
+  employee
+group by
+  dep_no, jikup
+)
+where
+  EMP_CNT >= 3
+
+
+
+-- <135>번 인라인뷰 사용.
+
+-- <135>
+select
+	to_char(hire_date, 'MM')||'월' "입사월"
+	,count(emp_no)||'명' "입사인원수"
+from
+	employee
+group by
+	to_char(hire_date, 'MM')||'월'
+order by
+	"입사월" asc;
+
+
+-- inline view 사용
+select
+  m.month||'월'                "입사월"
+  ,count(e.emp_name)||'명'           "입사인원수"
+from
+(
+select '01' "MONTH" from dual union
+select '02' from dual union
+select '03' from dual union
+select '04' from dual union
+select '05' from dual union
+select '06' from dual union
+select '07' from dual union
+select '08' from dual union
+select '09' from dual union
+select '10' from dual union
+select '11' from dual union
+select '12' from dual
+) m
+,employee e
+where
+  to_char(e.hire_date(+), 'MM') = m.month
+group by
+  m.month||'월'
+order by
+  "입사월";
+
+
+
+
+
+
