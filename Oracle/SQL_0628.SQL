@@ -204,7 +204,7 @@ order by
 
 -- inline view 사용
 select
-  m.month||'월'                "입사월"
+  m.month||'월'                      "입사월"
   ,count(e.emp_name)||'명'           "입사인원수"
 from
 (
