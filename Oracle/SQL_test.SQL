@@ -7,6 +7,7 @@ alter table employee rename column call_num to phone_num
 alter table 변경대상테이블명 rename column 현재컬럼명 to 바꿀컬럼명
 commit;
 
+select * from employee;
 
 DESC employee;
 
