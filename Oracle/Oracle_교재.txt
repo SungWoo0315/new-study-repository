@@ -3388,7 +3388,7 @@ rownum 컬럼이 where 절에 들어갈 때 주의사항
 		where rownum>1 (X)
 		where rownum = 2 (X)
 		where rownum >=1 and rownum <=3 (ㅇ)
-		where rownum >=2 and rownum <=3 (ㅇ)
+		where rownum >=2 and rownum <=3 (X)
 -------------------------------------------------------------
 인라인 뷰, 즉, from 절에 나오는 select 는 바깥쪽 select 입장에서는 테이블 처럼 생각한다.
 인라인뷰 안에 rownum 컬럼이 있다면 바깥쪽 select 입장에서 안쪽 rownum 컬럼은 단순한 일반컬럼이 된다.
