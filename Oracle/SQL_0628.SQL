@@ -453,14 +453,45 @@ where
 
 
 -- <117>
+-- 상관쿼리
+select
+	e1.emp_no    "직원번호"
+	,e1.emp_name "직원명"
+	,e1.salary   "연봉"
+	,(select count(*)+1 from employee e2 where e2.salary>e1.salary)  "연봉순위"
+from
+ employee e1
+order by
+	4 asc;
 
 
 
+-- <121>
+-- join 답
+select
+	  c.cus_no     "고객번호"
+	  ,c.cus_name  "고객명"
+	  ,c.tel_num   "고객전화번호"
+	  ,e.emp_name  "담당직원명"
+	  ,e.jikup     "담당직원직급"
+	  ,e.dep_no    "부서번호"
+	from
+	  customer c, employee e
+	where
+	  c.emp_no = e.emp_no(+)
+	order by
+	1 asc;
 
-
-
-
-
+-- 서브쿼리 답
+-- where 절 없이 상관쿼리, 마치 outer join 한것과 같은 효과. 다붙어 나온다.
+select
+  c.cus_no     "고객번호"
+  ,c.cus_name  "고객명"
+  ,c.tel_num   "고객전화번호"
+  ,(select e.emp_name from employee e where e.emp_no = c.emp_no ) "담당직원명"
+--  ,(select e.jikup from employee e where e.emp_no = c.emp_no ) "담당직원직급"
+--  ,(select e.dep_no from employee e where e.emp_no = c.emp_no )"부서번호"
+from customer c;
 
 
 
