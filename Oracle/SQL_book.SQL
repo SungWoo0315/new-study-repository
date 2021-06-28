@@ -33,6 +33,18 @@ select
 from
 	employee;
 
+-- 36p
+-- 3.6 컬럼에 별칭 지정
+-- 공백추가, as추가, ""사용.
+
+select ename, salary*12+nvl(commission,0) 연봉 from employee;
+
+select ename, salary*12+nvl(commission,0) "연봉" from employee;
+
+select ename, salary*12+nvl(commission,0) as 연봉 from employee;
+
+select ename, salary*12+nvl(commission,0) as "연봉" from employee;
+
 
 
 
