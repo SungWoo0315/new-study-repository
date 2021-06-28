@@ -1,4 +1,7 @@
-﻿DESC employee;
+﻿--모든 계정 조회.
+select * from all_users;
+
+DESC employee;
 
 
 DESC dual;
