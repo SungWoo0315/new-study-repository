@@ -495,12 +495,32 @@ from customer c;
 
 
 
+-- <137>
+--join 형식
+select
+	d.dep_no                    "부서번호"
+	,d.dep_name                 "부서명"
+	,count(distinct(e.emp_no))  "직원수" -- 혹시 중복된 데이터 있으면 중복 제거.
+	--count(*)은 모든 행을 계산해버림. 그래서 쓸수 없다.
+	,count(c.emp_no)            "관리고객수" -- 한명의 직원이 여러고객을 담당할수 있으므로 중복제거를 하면 안된다.
+from
+	dept d, employee e, customer c
+where
+	d.dep_no = e.dep_no(+)
+	and
+	e.emp_no = c.emp_no(+)
+group by
+	d.dep_no
+	,d.dep_name
 
-
-
-
-
-
+-- 서브쿼리 - 상관쿼리 - 서브쿼리안에 join이 들어간 형태.
+select
+	d.dep_no as "부서번호"
+	,d.dep_name "부서명"
+	,(select count(*)||'명' from employee e where e.dep_no = d.dep_no) "부서직원수"
+	,(select count(*)||'명' from employee e, customer c where e.dep_no = d.dep_no and e.emp_no = c.emp_no) "담당 고객 수"
+from
+	dept d;
 
 
 
