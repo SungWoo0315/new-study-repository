@@ -363,6 +363,75 @@ select
   	customer;
 
 
+-- <104>
+-- 20210628.md 참고하기.
+select
+	c.cus_no	"고객번호"
+	,c.cus_name "고객명"
+	,nvl(to_char(e1.emp_no),'없음')	"담당직원번호"
+	,nvl(e1.emp_name,'없음') "담당직원명"
+	,nvl(d.dep_name,'없음') "담당직원소속부서명"
+	,nvl(to_char(s1.sal_grade_no),'없음') "담당직원연봉등급"
+	,nvl(e1.mgr_emp_no||'', '없음') "담당직원번호"
+	,nvl(e2.emp_name,'없음') "담당직원직속상관명"
+	,nvl(e2.jikup,'없음') "담당직원직속상관직급"
+	,nvl(to_char(s2.sal_grade_no),'없음') "직속상관연봉등급"
+from
+	customer c, employee e1, dept d, salary_grade s1, employee e2, salary_grade s2
+
+where
+	c.emp_no = e1.emp_no(+)
+	and
+	e1.dep_no = d.dep_no(+)
+	and
+	e1.salary between s1.min_salary(+) and s1.max_salary(+)
+	and
+	e1.mgr_emp_no = e2.emp_no(+)
+	and
+	e2.salary between s2.min_salary(+) and s2.max_salary(+)
+
+
+--<112>
+select
+	cus_no "고객번호"
+	,cus_name "고객명"
+	,emp_no
+from
+	customer
+where
+	emp_no in(1,9,12,13,15,20); --10번 부서의 번호를 나열한 것이다.
+
+-- 서브쿼리(비상관쿼리)로 작성.
+select
+	cus_no "고객번호"
+	,cus_name "고객명"
+	,emp_no
+from
+	customer
+where
+	emp_no in(select emp_no from employee where dep_no=10) -- select문은 n행 1열 규칙을 지켜야 한다.
+--서브쿼리가 바깥과 전혀 상관성이 없다. 그래서 비상관 쿼리.
+
+
+-- 50번 부서 검색. 조건에 맞지 않아서 아무것도 안나온다. 에러는 아니다.
+select
+	cus_no "고객번호"
+	,cus_name "고객명"
+	,emp_no
+from
+	customer
+where
+	emp_no in(select emp_no from employee where dep_no=50)
+	-- emp_no=any (select emp_no from employee where dep_no=50)
+	-- in 대신 any도 쓸 수 있다. `=` 을 주의해서 써주어야 한다.
+
+--주의할것. 50번 부서는 존재하지 않기때문. 검색이 안될 뿐. 에러가 아니다.
+
+
+
+
+
+
 
 
 
