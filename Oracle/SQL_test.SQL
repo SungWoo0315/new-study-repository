@@ -14,7 +14,7 @@ select * from all_users;
 alter table customer rename column call_num to tel_num
 alter table employee rename column call_num to phone_num
 alter table employee rename column phone to phone_num
-alter view employee_vw1 rename column phone to phone_num -- view는 이렇게 변경이 안된다. 아래처럼 해주어야 한다.
+-- alter view employee_vw1 rename column phone to phone_num -- view는 이렇게 변경이 안된다. 아래처럼 해주어야 한다.
 alter table 변경대상테이블명 rename column 현재컬럼명 to 바꿀컬럼명
 commit;
 
