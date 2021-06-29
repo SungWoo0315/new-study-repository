@@ -104,17 +104,40 @@ SELECT * FROM employee_vw6;
 -- 5% 깍아도 3000 밑으로 내려가지 않으면 실행된다.
 
 
+-- <155>
+-- 생성한 뷰의 정보 검색 방법
+select view_name, text from user_views;
+
+
+-- <156>
 
 
 
 
 
 
+-- <161>
+
+select distinct emp_no from customer where emp_no is not null
 
 
 
 
 
+
+-- <162>
+
+
+select emp_no from employee order by salary desc, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc, hire_date asc, jumin_num asc;
+
+
+select * from ( select rownum RNUM, zxcvb.* from (
+
+		--select count(*)+1 from employee e2 where e2.salary>salary
+
+		select * from employee order by salary desc, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc, hire_date asc, jumin_num asc
+
+	) zxcvb where rownum<=5 ) where RNUM>=2;
 
 
 
