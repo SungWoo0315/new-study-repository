@@ -84,9 +84,8 @@ SELECT
 --테스트
 to_char(sysdate, 'YYYY-MM-DD(DY) YY"년" MON HH24:MI : SS <Q"분기">')
 ,to_char(sysdate, 'CC"세기" DL')
-
 FROM
-dual;
+	dual;
 
 
 select
@@ -94,7 +93,6 @@ max(hire_date) "최근입사일"
 ,min(hire_date) "오래전입사"
 FROM
 employee;
-
 
 
 select
