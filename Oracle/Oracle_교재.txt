@@ -3805,13 +3805,74 @@ update
 set
 	salary = salary * 0.9
 where
-	select * from ( select rownum RNUM, zxcvb.* from (
+	emp_no in(
+		select emp_no from ( select rownum RNUM, zxcvb.* from (
 
-		--select count(*)+1 from employee e2 where e2.salary>salary
+			select emp_no from employee
+			order by
+			salary desc
+			, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc
+			, hire_date asc
+			, decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,6) asc
 
-		select * from employee order by salary desc, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc, hire_date asc, jumin_num asc;
+		) zxcvb where rownum<=5 ) where RNUM>=2;
+	)
+-----------------------------------------------------------------------------------------------------
+update
+	employee
+set
+	salary = salary * 0.9
+where
+	emp_no in(
+		select emp_no from ( select rownum RNUM, zxcvb.* from (
 
-	) zxcvb where rownum<=5 ) where RNUM>=2;
+			select emp_no from employee
+			order by
+			salary desc
+			, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc
+			, hire_date asc
+			, decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,6) asc
+
+		) zxcvb ) where RNUM>=2 and RNUM<=5;
+	)
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<163> employee 과 똑같은 구조와 똑같은 데이터를 가진 쌍둥이 테이블 employee2 만들면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	create table employee2 (
+		컬럼명 자료형 제약조건...
+		,컬럼명 자료형 제약조건...
+		,컬럼명 자료형 제약조건...
+	)
+------------------------------------------------------------
+	create table employee2 as select * from employee;
+------------------------------------------------------------
+위 SQL 구문은 select 결과물을 실존 테이블로 만드는 SQL 구문이다.
+위 SQL 구문으로 테이블 복사하면 데이터, 컬럼명, 자료형, 자료형크기, not null 제약 조건만 그대로 복사된다.
+<주의>
+not null 제약조건 이외의 제약조건은 따라오지 않는다.
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<164> employee 과 똑같은 구조를 가진 쌍둥이 테이블 employee3 만들되 데이터는 복사해 오지 않으려면?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+------------------------------------------------------------
+	create table employee3 as select * from employee where 1=2;
+------------------------------------------------------------
+where 조건절에 계속 false 가 되는 조건을 걸면 컬럼명, 자료형, 자료형크기, not null 제약 조건만 그대로 복사되고
+데이터는 복사되지 않는다.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
