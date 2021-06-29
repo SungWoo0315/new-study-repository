@@ -141,6 +141,62 @@ select * from ( select rownum RNUM, zxcvb.* from (
 
 
 
+-- 정답
+
+update
+	employee
+set
+	salary = salary * 0.9
+where
+	emp_no in(
+		select emp_no from ( select rownum RNUM, zxcvb.* from (
+
+			select emp_no from employee
+			order by
+			salary desc
+			, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc
+			, hire_date asc
+			, decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,6) asc
+
+		) zxcvb where rownum<=5 ) where RNUM>=2;
+	)
+
+-- 정답 2
+
+update
+	employee
+set
+	salary = salary * 0.9
+where
+	emp_no in(
+		select emp_no from ( select rownum RNUM, zxcvb.* from (
+
+			select emp_no from employee
+			order by
+			salary desc
+			, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc
+			, hire_date asc
+			, decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,6) asc
+
+		) zxcvb ) where RNUM>=2 and RNUM<=5;
+	)
+
+
+
+
+
+-- <163>
+
+create table employee2 as select * from employee;
+
+SELECT * FROM employee2;
+
+
+
+-- <164>
+create table employee3 as select * from employee where 1=2;
+
+SELECT * FROM employee3;
 
 
 
