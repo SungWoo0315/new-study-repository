@@ -7,7 +7,6 @@
 
 SELECT * FROM EMPLOYEE;
 
-
 -- view 생성
 create view employee_vw1 as
 	select
