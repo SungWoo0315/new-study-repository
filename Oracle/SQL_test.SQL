@@ -13,8 +13,21 @@ select * from all_users;
 -- 테이블 컬럼명 변경.
 alter table customer rename column call_num to tel_num
 alter table employee rename column call_num to phone_num
+alter table employee rename column phone to phone_num
+alter view employee_vw1 rename column phone to phone_num -- view는 이렇게 변경이 안된다. 아래처럼 해주어야 한다.
 alter table 변경대상테이블명 rename column 현재컬럼명 to 바꿀컬럼명
 commit;
+
+-- view 변경사항은 이렇게 해주어야 한다.
+CREATE OR REPLACE VIEW KING.EMPLOYEE_VW1
+(EMP_NO, EMP_NAME, DEP_NO, JIKUP, HIRE_DATE, JUMIN_NUM, PHONE_NUM, MGR_EMP_NO)
+AS
+select
+		emp_no, emp_name, dep_no, jikup, hire_date, jumin_num, phone_num, mgr_emp_no
+	from
+		employee;
+
+
 
 select * from employee;
 
