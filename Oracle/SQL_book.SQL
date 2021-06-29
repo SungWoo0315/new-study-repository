@@ -48,3 +48,4 @@ select ename, salary*12+nvl(commission,0) as "연봉" from employee;
 
 
 
+
