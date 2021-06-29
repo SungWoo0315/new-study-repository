@@ -127,6 +127,20 @@ from
 where
 	RNUM>=1 and RNUM<=10;
 
+-- between 으로 해도 값은 같다.
+select
+	*
+from
+(
+select
+	rownum RNUM, e.*
+from
+	(select * from employee order by salary desc) e
+)
+where
+	RNUM between 1 and 10;
+
+
 
 
 -- 고객을 나이대로 서열 정리. 6행부터 10행까지.
@@ -137,13 +151,24 @@ select * from ( select rownum RNUM, zxcvb.* from (
 		decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,6) asc
 ) zxcvb where rownum<=10 ) where RNUM>=6;
 
--- <새끼문제> 직원 직급 서열중 2행~5행 까지 검색하면?
+-- <새끼문제> 직원 직급 서열중 2행~5행 까지 검색하면? -- 위의 식과 같은 형식
 
-select * from ( select rownum RNUM, zxcvb.* from (
+select
+*
+from
+(
+	select
+	 rownum RNUM
+	 , zxcvb.*
+	from
+	(
 	select * from employee
 	order by
-		decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4, '주임', 5, '사원', 6) asc
-) zxcvb where rownum<=5 ) where RNUM>=2;
+		decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4, '주임', 5, '사원', 6) asc) zxcvb
+	where
+		rownum<=5 )
+where
+	RNUM>=2;
 
 
 
