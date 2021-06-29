@@ -3405,12 +3405,18 @@ rownum 컬럼이 where 절에 들어갈 때 주의사항
 select * from ( select rownum RNUM, zxcvb.* from (
 	원하는 정렬 select 문
 ) zxcvb where rownum<=마지막행번호 ) where RNUM>=시작행번호;
+
 *************************************************************
 <패턴> n행~m행 까지 검색하는 select 패턴 정리2
 *************************************************************
 select * from ( select rownum RNUM, zxcvb.* from (
 	원하는 정렬 select 문
 ) zxcvb) where RNUM>=시작행번호 and RNUM<=마지막행번호 ;
+
+
+
+
+
 *************************************************************
 <새끼문제> 고객을 나이 서열중 6행~10행 까지 검색하면?
 *************************************************************
@@ -3466,7 +3472,7 @@ from
 			from
 			(
 				select rownum RNUM from employee union select rownum+20 from employee)
-				where RNUM<=to_number(to_char(last_day(sysdate), 'dd')
+				where RNUM<=to_number(to_char(last_day(sysdate), 'dd') --이번달 말일 숫자로 변경
 			)
 	) d
 where
@@ -3475,9 +3481,10 @@ where
 	and XDAY <= last_day(sysdate)
 
 
-
-
-
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<143> VIEW(뷰) 가 뭡니까? (기. 입. 실)
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	●실시간으로 select 결과물을 테이블 처럼 가장해서 보여주는 [테이블]이다. [가상 테이블]이라고도 한다.
 
 
 
