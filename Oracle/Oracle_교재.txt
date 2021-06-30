@@ -3916,48 +3916,83 @@ select * from board;
 	이메일   => hwon@naver.com
 	비밀번호 => 1234
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
+/*
 create sequence boar_sq
-  start with 1
+  start with 0
   increment by 1
-  minvalue 1
+  minvalue 0
   maxvalue 999999999;
+*/
 
-insert into board
-(
+insert into board(
 	b_no
 	, subject
 	, writer
 	, content
 	, pwd
 	, email
-	, reg_date
-	, readcount
+--	, reg_date  -- default 값이 있으므로 등록하지 않아도 된다.
+--	, readcount -- default 값이 있으므로 등록하지 않아도 된다.
 	, group_no
 	, print_no
 	, print_level
 )
 
-values
-(
-board_sq.nextval
-, '11월 모두 취업합시다'
-, '희원'
-, '어쩌구 저쩌구'
-, 1234
-, 'hwon@naver.com'
-, select b_no from board
-
-
-
-
+values(
+--board_sq.nextval
+	(select nvl(max(b_no),0)+1 from board) -- PK넘버.
+	, '11월 모두 취업합시다'
+	, '희원'
+	, '어쩌구 저쩌구'
+	, '1234'
+	, 'hwon@naver.com'
+	--, sysdate -- default 값이 있으므로 등록하지 않아도 된다.
+	--, 0       -- default 값이 있으므로 등록하지 않아도 된다.
+	, (select nvl(max(b_no),0)+1 from board)
+	, 0
+	, 0
 );
 
-
-
-
-
-
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<167> 누군가 게시판 번호 1번 에 아래처럼 댓글을 올렸다. 이때 댓글 올리는 과정 중에 발생되는 SQL 모두 써라.
+	글제목   => 맞습니다. 열공합시다.
+	글내용   => 어쩌구 저쩌구
+	글쓴이   => 영민
+	이메일   => min@naver.com
+	비밀번호 => 2345
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	-----------------------------------------------------
+	-- 부모글의 조회수를 1 업데이트하기
+	update board set readcount = readcount + 1 where b_no=1;
+	-----------------------------------------------------
+	-- 밑으로 내리는 글의 출력 순서번호를 1 업데이트하기
+	update board set print_no = print_no + 1
+	where group_no = (select group_no from board where b_no = 1) -- b_no가 1번인 글의 그룹번호
+		print_no > (select print_no from board where b_no = 1) -- b_no 가 1번인 글의 출력순서번호
+	-----------------------------------------------------
+	-- 댓글 입력하기
+	insert into board (
+	  b_no
+		, subject
+		, writer
+		, content
+		, pwd
+		, email
+	  , group_no
+	  , print_no
+	  , print_level
+	)
+	values (
+	  (select nvl(max(b_no),0)+1 from board)
+	  , '맞습니다. 열공합시다.'
+		, '영민'
+		, '어쩌구 저쩌구'
+		, '2345'
+		, 'min@naver.com'
+	  , (select group_no from board where b_no=1) -- b_no가 1번인글의 그룹번호
+	  , (select print_no + 1 from board where b_no=1) -- b_no가 1번인글의 출력순서번호에 1더한거
+	  , (select print_level + 1 from board where b_no=1) -- b_no가 1번인글의 들여쓰기번호에 1더한거
+	)
 
 
 
