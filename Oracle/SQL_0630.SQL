@@ -26,8 +26,21 @@ select * from board;
 
 
 
-
-
+--<168>
+--단순역순번호
+select
+	rownum  as "역순번호"
+	,b.*
+from
+(
+select
+	rownum  as "원래번호"
+	,e.*
+from
+employee e
+order by emp_no desc, "원래번호" asc
+) b
+order by "역순번호" desc
 
 
 
