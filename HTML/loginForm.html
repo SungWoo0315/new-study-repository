@@ -1,20 +1,27 @@
 <html>
-<meta charset="UTF-8">
+<meta charset="UTF-8">  <!-- 주석 입니다 -->
 <head>
 	<title></title>
 
 </head>
 
-
 <body>
-<center>
+<center><br><br><br> <!-- 엔터 여러번 친 효과 -->
 	[로그인] <br>
-	아이디 : <input type="text" name="uid"><br>  <!--문자열 입력상자-->
-	암 호 : <input type="password" name="pwd"><br><br>  <!--암호 입력상자// br 두개면 엔터 두번 효과.-->
-
+	<table border=1 style="border-collapse:collapse" cellpadding=5 bordercolor="#A8A8A8">   <!-- 테이블 형식 설정 -->
+	
+		<tr>
+			<td align="right" bgcolor="lightyellow">아이디</td><td><input type="text" name="uid"></td>  <!--문자열 입력상자-->
+		</tr>
+		<tr>
+			<td align="right" bgcolor="lightyellow">암 호</td><td><input type="password" name="pwd"></td>  <!--암호 입력상자// br 두개면 엔터 두번 효과.-->
+		</tr>
+	</table><br> <!-- 테이블 태그는 한행을 독차지(block 형식태그) 하기 때문에 그다음 컨텐츠는 br태그 써주지 않아도 내려간다. -->
+	<!-- 한행 독차지 안하는 태그(inline 형식태그 -->
 	<input type="button" value="로그인"> <!-- 버튼 -->
+
+
 </center>
 </body>
-
 
 </html>
