@@ -3905,7 +3905,59 @@ select * from board;
 	----------------------------------
 		print_level
 		----------------------------------
-		자식은 부모보다 1단계 오른쪽으로 밀려들어가게 만든다. 
+		자식은 부모보다 1단계 오른쪽으로 밀려들어가게 만든다.
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<166> 게시판이 오픈 된 후 처음으로 누군가 아래처럼 글을 올렸다. insert 구문을 쓰면?
+	글제목   => 11월 모두 취업합시다.
+	글내용   => 어쩌구 저쩌구
+	글쓴이   => 희원
+	이메일   => hwon@naver.com
+	비밀번호 => 1234
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+create sequence boar_sq
+  start with 1
+  increment by 1
+  minvalue 1
+  maxvalue 999999999;
+
+insert into board
+(
+	b_no
+	, subject
+	, writer
+	, content
+	, pwd
+	, email
+	, reg_date
+	, readcount
+	, group_no
+	, print_no
+	, print_level
+)
+
+values
+(
+board_sq.nextval
+, '11월 모두 취업합시다'
+, '희원'
+, '어쩌구 저쩌구'
+, 1234
+, 'hwon@naver.com'
+, select b_no from board
+
+
+
+
+);
+
+
+
+
+
+
 
 
 
