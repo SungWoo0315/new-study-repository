@@ -116,6 +116,24 @@ select lpad( 'abc', 7, ' ' ) from dual;
 
 
 
+---- 내가 해본것.
+select
+  rownum RNUM
+  ,b.*
+from
+(
+	select
+	lpad( ' ', print_level*5, ' ' )||decode(print_no, 0, '', 'ㄴ')||subject "글제목"
+	,writer                                  "글쓴이명"
+	,to_char(reg_date, 'YYYY-MM-DD')         "등록일"
+	,readcount                               "조회수"
+from
+  board
+order by
+  group_no asc
+  ,print_no desc
+) b
+order by RNUM desc;
 
 
 
