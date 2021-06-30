@@ -27,36 +27,92 @@ select * from board;
 
 
 --<168>
---단순역순번호
+--단순역순, 정순번호
+--내가 해본것.
 select
 	rownum  as "역순번호"
 	,b.*
 from
 (
 select
-	rownum  as "원래번호"
+	rownum  as "정순번호"
 	,e.*
 from
 employee e
-order by emp_no desc, "원래번호" asc
+order by emp_no desc, "정순번호" asc
 ) b
 order by "역순번호" desc
 
 
+-- 강사님 정순, 역순번호. 설명
+--정순번호
+select
+	rownum
+	,e.*
+from
+	employee e
 
 
+--역순번호 --서브쿼리 : 매번 서브쿼리가 실행되어 부하가 걸린다.
+select
+	(select count(*) from employee) - rownum + 1 no_desc --역순번호(서브쿼리)
+	,rownum                                       no_asc
+	,e.*
+from
+	employee e
+------------------------------------------------------------------------------
+--역순번호 -- 인라인뷰 : 부하를 덜 주게 작성.
+
+select
+	 x.cnt - rownum + 1 no_desc --역순번호(서브쿼리)
+	,rownum                                       no_asc
+	,e.*
+from
+	employee e, (select count(*) CNT from employee) x
 
 
+-- 정답.
+select
+  x.cnt - rownum+1 "번호", b.*
+from
+(
+select
+  lpad( ' ', print_level*5, ' ' )||decode(print_no, 0, '', 'ㄴ')||subject "글제목"
+  ,writer                                  "글쓴이명"
+  ,to_char(reg_date, 'YYYY-MM-DD')         "등록일"
+  ,readcount                               "조회수"
+from
+  board
+order by
+  group_no desc
+  ,print_no asc
+) b, (select count(*) CNT from board) x
+
+--------------------------------------------------
+select
+  x.cnt - rownum+1 "번호", b.*
+from
+(
+select
+  lpad( ' ', print_level*10, ' ' )||decode(print_no, 0, '', 'ㄴ')||subject "글제목"
+  ,writer                                  "글쓴이명"
+  ,to_char(reg_date, 'YYYY-MM-DD')         "등록일"
+  ,readcount                               "조회수"
+from
+  board
+order by
+  group_no desc
+  ,print_no asc
+) b, (select count(*) CNT from board) x
 
 
+	-------------
+	lpad( s1, n, s2 )
+	-------------
+		▶n 자리 만큼 확보하고 s1을 오른쪽 정렬 후 왼쪽에 생긴 빈 공백에
+		  문자열 s2를 채워 리턴한다.
 
-
-
-
-
-
-
-
+select lpad( 'abc', 7, ' ' ) from dual;
 
 
 
