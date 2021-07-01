@@ -8,21 +8,51 @@
 
 <body>
 	<center>
+	[글내용]<br>
+	<table border=1 style="border-collapse:collapse" cellpadding=5>
+	<tr>
+		<th bgcolor="lightgray">이름</th>
+		<td>설현</td>
+		<th bgcolor="lightgray">조회수</th>
+		<td>0</td>
+	</tr>
+	<tr>
+		<th bgcolor="lightgray">제목</th>
+		<td>청년 실직 문제는 대기업 문제</td>
+		<th bgcolor="lightgray">작성일</th>
+		<td>2011.12.06</td>
+	</tr>
+	<tr>
+		<th bgcolor="lightgray">내용</th>
+		<td colspan="3">어쩌구 저쩌구</td>
+		
+	</tr>
+	</table>
 
+	<table height=10><tr><td></td></tr></table> <!-- 줄 띄우는 편법 -->
+
+	<input type="button" value="수정/삭제" onClick="location.replace('boardUpDelForm1.html')">&nbsp;
+	<input type="button" value="답글쓰기">&nbsp;
+	<input type="button" value="전체 글 보기" onClick="location.replace('boardList.html')">
+
+<hr>
+
+
+<!-- 내가 한것 -->
 [글내용]
 
 <table border=1 style="border-collapse:collapse" cellpadding=5>
 <tr>
 	<td align=center bgcolor="lightgray" width=100>이름</td>
-	<td width=300>전지현</td>
+	<td width=300>설현</td>
 	<td align=center bgcolor="lightgray" width=100>조회수</td>
-	<td width=200>1</td>
+	<td width=200>0</td>
 </tr>
 <tr>
 	<td align=center bgcolor="lightgray">제목</td>
-	<td>북한 핵 문제</td>
+	<td>청년 실직 문제는 대기업 문제</td>
 	<td align=center bgcolor="lightgray">작성일</td>
-	<td>2011.12.05 17:32:44</td>
+	<td>2011.12.06</td>
 </tr>
 <tr>
 	<td align=center bgcolor="lightgray" height=70 >내용</td>
@@ -30,12 +60,21 @@
 	
 	
 </tr>
-</table><br>
+	</table> <!-- <br> 로 띄우면 너무 띄워짐 -->
+	<table height=10><tr><td></td></tr></table> <!-- 줄 띄우는 편법 -->
+
 <input type="button" value="수정/삭제">&nbsp;
 <input type="button" value="답글쓰기">&nbsp;
-<input type="button" value="전체 글 보기">
+<input type="button" value="전체 글 보기" onClick="location.replace('boardList.html')"> 
+
 
 	</center>
 </body>
 
 </html>
+
+
+
+
+
+
