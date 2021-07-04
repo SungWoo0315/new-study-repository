@@ -438,18 +438,35 @@ from
  employee
 
 
+--<51> employee 테이블에서 직원번호, 직원명, 근무년차를 검색해서 출력하면?
+select
+	emp_no                                       "직원번호"
+	, emp_name                                   "직원명"
+	, ceil((sysdate - hire_date)/365)||'년차'     "근무년차"  -- 현재년월 기준으로
+	,to_number(to_char(sysdate, 'YYYY'))
+   -
+ 	 to_number(to_char(hire_date, 'YYYY'))+1||'년차' as "근무년차2"  -- 그냥 년도만 계산
+from
+	employee
+order by 3 desc;
+--
+--강사님정답에서 결과값이 17번 이성계랑 9번 무궁화 결과값이 다른이유는?
+--현재 월 기준인 7월으로. 이성계는 5월이였기 때문에 이미 지나서 무궁화 보다 1년이 더 많고,
+--무궁화는 8월이기 때문에 현재 7월이므로 1년을 채우지 못하여 근무년차가 1년 적다.
+--그럼 8월 1일이 넘은 시점에서 이 문제를 다시 푼다면 이성계와 무궁화는 같은 연차가 될것이다.
+
+-- 내가 푼것은 단순 년도 계산이라서 같은 연차로 계산된것이다.
 
 
-
-
-
-
-
-
-
-
-
-
+--<52> employee 테이블에서 직원번호, 직원명, 연령대를 검색해서 출력하면?
+select
+	emp_no
+	,emp_name
+	,floor((to_number(to_char(sysdate, 'YYYY'))
+	 -
+	 to_number(decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,2))+1)*0.1)||'0 대' "연령대"
+from
+ employee
 
 
 
