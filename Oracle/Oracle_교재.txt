@@ -473,7 +473,7 @@ OX문제 20210611.md 참고.
 	-----------------------------------------------------------------
 	select * from employee;
 	-----------------------------------------------------------------
-	select emp_no, emp_name, dep_no, jikup, salary, hire_date, jumin_num, phone_num mgr_emp_no from employee;
+	select emp_no, emp_name, dep_no, jikup, salary, hire_date, jumin_num, phone_num, mgr_emp_no from employee;
 	-----------------------------------------------------------------
 	select
 		emp_no
