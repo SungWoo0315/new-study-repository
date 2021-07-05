@@ -16,11 +16,22 @@
 			// 유저가 입력한 암호를 가져와서 변수 "pwd"에 저장하기
 			var pwd = document.loginForm.pwd.value;
 			
-			// 만약에 유저가 입력한 아이디가 비어있으면
-			if( uid=="" || uid==" " ) {
-				alert("아이디가 비어있음. 입력바람.")
+			// 만약에 유저가 입력한 아이디가 비어있거나 공백으로 이루어져있으면
+			if( uid.split(" ").join("")=="" ) {
+				// 경고 상자 띄우기
+				alert("아이디가 비어있음. 입력바람.");
+				// 함수 중단하기
+				return;
 			}
-			alert(uid +"/"+ pwd)
+			// 만약에 유저가 입력한 암호가 비어있으면 
+			if( pwd=="" ){
+				// 경고 상자 띄우기
+				alert("암호가 비어있음. 입력바람.");
+				// 함수 중단하기
+				return;
+			}
+			// form 태그의 설정한 서버쪽 URL 주소로 서버로 접근하기.
+			document.loginForm.submit();
 		}
 	</script>
 
