@@ -1,0 +1,54 @@
+<html>
+<meta charset="UTF-8">
+<head>
+	<title></title>
+
+</head>
+
+
+<body>
+	<center>
+		
+		<form>
+		[글 수정/삭제]<br>
+
+		<table height=10><tr><td></td></tr></table>
+
+		<table border=1 style="border-collapse:collapse" cellpadding=5>
+		<tr>
+			<th bgcolor="lightgray" width=80>이름</th>
+			<td><input type="text" name="writer" size=20 maxlength=7 value="사오정"></td>
+		</tr>
+		<tr>
+			<th bgcolor="lightgray">제목</th>
+			<td><input type="text" name="subject" size=70 maxlength=20 value="경제 침체의 원인"></td>
+		</tr>
+		<tr>
+			<th bgcolor="lightgray">Email</th>
+			<td><input type="text" name="email" size=70 maxlength=30 value="a@naver.com"></td>
+		</tr>
+		<tr>
+			<th bgcolor="lightgray" height=20>내용</th>
+			<td><textarea name="content" cols=73 rows=5 >어쩌구 저쩌구</textarea></td>
+		</tr>
+		<tr>
+			<th bgcolor="lightgray">비밀번호</th>
+			<td><input type="password" name="pwd" size=10 maxlength=4></td>
+		</tr>
+		</table>
+
+
+		<table height=10><tr><td></td></tr></table>
+
+		<input type="button" value="수정">&nbsp;
+		<input type="button" value="삭제">&nbsp;
+		<input type="reset" value="초기화">&nbsp;
+		<input type="button" value="전체 글 보기" onClick="location.replace('boardList.html');">&nbsp;
+		<input type="button" value="로그아웃" onClick="location.replace('loginForm.html');">
+		</form>
+	
+	</center>
+
+</body>
+
+</html>

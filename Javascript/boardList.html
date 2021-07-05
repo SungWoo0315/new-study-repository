@@ -1,0 +1,176 @@
+<html>
+<meta charset="UTF-8">
+<head>
+	<title></title>
+
+</head>
+
+
+<body>
+	<center>
+
+	[게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="boardRegForm.html">[새 글쓰기]</a><br><br>
+
+
+	<table border=0 style="border-collapse:collapse" cellpadding=5 >
+	<tr bgcolor="lightgray" style="cursor:pointer" >
+		<th>번호</th>
+		<th width=300>제목</th>
+		<th>성명</th>
+		<th>작성일</th>
+		<th>조회수</th>
+	</tr>
+	<tr style="cursor:pointer" onClick="location.replace('boardContentForm1.html');">
+		<td>6</td>
+		<td>청년실직문제는 대기업문제</td>
+		<td>설현</td>
+		<td>2011.12.06</td>
+		<td>0</td>
+	</tr>
+	<tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm2.html');">
+		<td>5</td>
+		<td>경제 침체의 원인</td>
+		<td>사오정</td>
+		<td>2011.12.01</td>
+		<td>2</td>
+	</tr>
+	<tr style="cursor:pointer" onClick="location.replace('boardContentForm3.html');">
+		<td>4</td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td>
+		<td>하하</td>
+		<td>2011.12.03</td>
+		<td>1</td>
+	</tr>
+	<tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm4.html');">
+		<td>3</td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td>
+		<td>전지현</td>
+		<td>2011.12.05</td>
+		<td>0</td>
+	</tr>
+	<tr style="cursor:pointer" onClick="location.replace('boardContentForm5.html');">
+		<td>2</td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td>
+		<td>저팔계</td>
+		<td>2011.12.02</td>
+		<td>1</td>
+	</tr>
+	<tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm6.html');">
+		<td>1</td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td>
+		<td>김태희</td>
+		<td>2011.12.04</td>
+		<td>0</td>
+	</tr>
+	</table><br>
+
+	[처음] [이전] 1 [2] [3] [4] [5] [6] [7] [8] [9] [10] [다음] [마지막]<br><br>
+	<input type="text" name="keyword" size=20>
+	<input type="button" value="검색">
+	<input type="button" value="모두검색">
+
+
+<hr>
+
+<!--내가한것
+<table> 
+<tr>
+	<td align=right>[게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[6개 검색]&nbsp;&nbsp;&nbsp;[새 글쓰기]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+	<td>
+
+	<table border=1 style="border-collapse:collapse" cellpadding=5 >
+	<tr bgcolor="lightgray">
+		<th>번호</th>
+		<th width=300>제목</th>
+		<th width=80>성명</th>
+		<th width=100>작성일</th>
+		<th>조회수</th>
+	</tr>
+	<tr>
+		<td align=center>6</td>
+		<td>청년실직문제는 대기업문제</td>
+		<td align=center>설현</td>
+		<td align=center>2011.12.06</td>
+		<td align=center>0</td>
+	</tr>
+	<tr bgcolor="#F2F2F2">
+		<td align=center>5</td>
+		<td>경제 침체의 원인</td>
+		<td align=center>사오정</td>
+		<td align=center>2011.12.01</td>
+		<td align=center>2</td>
+	</tr>
+	<tr>
+		<td align=center>4</td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td>
+		<td align=center>하하</td>
+		<td align=center>2011.12.03</td>
+		<td align=center>1</td>
+	</tr>
+	<tr bgcolor="#F2F2F2">
+		<td align=center>3</td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td>
+		<td align=center>전지현</td>
+		<td align=center>2011.12.05</td>
+		<td align=center>0</td>
+	</tr>
+	<tr>
+		<td align=center>2</td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td>
+		<td align=center>저팔계</td>
+		<td align=center>2011.12.02</td>
+		<td align=center>1</td>
+	</tr>
+	<tr bgcolor="#F2F2F2">
+		<td align=center>1</td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td>
+		<td align=center>김태희</td>
+		<td align=center>2011.12.04</td>
+		<td align=center>0</td>
+	</tr>
+	</table></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td align=center>[처음][이전]&nbsp;&nbsp;[1]&nbsp;2&nbsp;[3]&nbsp;&nbsp;[다음][마지막]</td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+</tr>
+<tr align=center>
+	<td><input type="text" name="uid" size=20>&nbsp;&nbsp;<input type="button" value="검색">&nbsp;&nbsp;<input type="button" value="모두 검색"></td>
+</tr>
+</table>
+
+
+
+	
+
+	
+
+<hr>
+	
+	[게시판 글 목록]-내가 해본것 
+
+	<table border=0 style="border-collapse:collapse" cellpadding=5 bordercolor="#A8A8A8">
+	<tr bgcolor="lightyellow" ><th>번호</th><th>제목</th><th>성명</th><th>작성일</th><th>조회수</th></tr>
+	<tr><td align=center>6</td><td>청년실직문제는 대기업문제</td><td>설현</td><td>2011.12.06</td><td>0</td></tr>
+	<tr bgcolor="#F2F2F2"><td align=center>5</td><td>경제 침체의 원인</td><td>사오정</td><td>2011.12.01</td><td>2</td></tr>
+	<tr><td align=center>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td><td>하하</td><td>2011.12.03</td><td>1</td></tr>
+	<tr bgcolor="#F2F2F2"><td align=center>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td><td>전지현</td><td>2011.12.05</td><td>0</td></tr>
+	<tr><td align=center>2</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td><td>저팔계</td><td>2011.12.02</td><td>1</td></tr>
+	<tr bgcolor="#F2F2F2"><td align=center>1</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td><td>김태희</td><td>2011.12.04</td><td>0</td></tr>
+	</table>
+-->
+
+
+	</center>
+</body>
+
+
+</html>

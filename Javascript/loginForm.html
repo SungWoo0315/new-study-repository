@@ -1,0 +1,57 @@
+<html>
+<meta charset="UTF-8">  <!-- 주석 -->
+<head>
+	<title>로그인화면</title>
+</head>
+
+<body>
+<center><br><br><br> <!-- 엔터 세번 친 효과 -->
+
+
+	<!--2행 1열 테이블--><!--테이블을 두번 겹쳐 표현-->
+	<form action="boardList.html">
+		<!----------------------------------------------------------------------------------->
+		<table border=0 cellpadding=4> 
+		<!----------------------------------------------------------------------------------->
+			<tr>
+				<th>
+					[로그인]
+				</th>
+			</tr>
+			<tr>
+				<td align=center>
+					<!------------------------------------------------------------------------>
+					<table border=1 style="border-collapse:collapse"
+					cellpadding=5 bordercolor="#A8A8A8">   
+					<tr>
+						<td align="right" bgcolor="lightyellow">아이디</td>
+						<td><input type="text" name="uid" size=10></td>  
+					</tr>
+					<tr>
+						<td align="right" bgcolor="lightyellow"><center>암 호</center></td>
+						<td><input type="password" name="pwd" size=10></td>  
+					</tr>
+					</table>
+					<!------------------------------------------------------------------------>
+
+				</td>
+			</tr>
+			<tr>
+				<td align=center>
+					<!------------------------------------------------------------------------>
+					<!-- 버튼을 클릭하면 자바스크립트 영역의 checkForm 함수 호출하기 -->
+					<!------------------------------------------------------------------------>
+					<input type="button" value="로그인" onClick="checkForm();">
+					<input type="reset" value="초기화">
+				</td>
+			</tr>
+		<!----------------------------------------------------------------------------------->
+		</table>
+		<!----------------------------------------------------------------------------------->
+
+	</form>
+
+</center>
+</body>
+
+</html>
