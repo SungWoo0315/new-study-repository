@@ -593,40 +593,60 @@ Date 객체
         -----------------------------------------------------------------------
         현재 날짜의 년월일을 구해 변수 year, month, date 에 저장하기 
         -----------------------------------------------------------------------
-        var today = new Date( );
-        var year = today.getFullYear();
-        var month = today.getMonth()+1;
-        var date = today.getDate();
+            var today = new Date( );
+            var year = today.getFullYear();
+            var month = today.getMonth()+1;
+            var date = today.getDate();
         -----------------------------------------------------------------------
         현재 지금 날짜에서 올해 크리스마스 날까지 며칠 남았는지 구해서 변수 interval 저장하기.
         -----------------------------------------------------------------------
-        var today = new Date( );
-
-        var christmas_day = new Date( today.getFullYear(), 11, 25 );
-
-        var interval = ( christmas_day.getTime() - today.getTime() )/(60*60*24*1000);
+            var today = new Date( );
+            var christmas_day = new Date( today.getFullYear(), 11, 25 );
+            var interval = ( christmas_day.getTime() - today.getTime() )/(60*60*24*1000);
         -----------------------------------------------------------------------
         2031년 2월 달의 마지막 일을 구해 변수 xxx 에 저장하기. 
         -----------------------------------------------------------------------
-        var xxx_day = new Date( 2031, 2, 0 );
-        var xxx = xxx_day.getDate( );
-
-       
+            var xxx_day = new Date( 2031, 2, 1-1 );
+            var xxx = xxx_day.getDate( );
         -----------------------------------------------------------------------
         오세황씨가 오늘 이상형을 만났다. 그래서 사귀기로 했다. 1000일 후 기념일을 챙기고 싶었다.
         오늘부터 1000일 후의 년월일을 구해 변수 year, month, date 에 저장하기
         -----------------------------------------------------------------------
-        var today = new Date( );
-
-        var dday = today.getTime() /1000* 60*60*24* 1000
-
-        var year = today.getFullYear();
-        var month = today.getMonth()+1;
-        var date = today.getDate();
-
-
-
-
+            var xxx_day = new Date( );
+            xxx_day.setDate( xxx_day.getDate() + 1000 );
+            var year = xxx_day.getFullYear();
+            var month = xxx_day.getMonth()+1;
+            var date = xxx_day.getDate();
+        -----------------------------------------------------------------------
+        현재 지금 날짜에서 요일을 얻어서 변수 week 저장기. 단, 요일은 한글로 저장하기 
+        -----------------------------------------------------------------------
+            var today = new Date( );
+            var week = today.getDay();
+            if( week==0 ) {
+                week = "일요일";
+            }
+            else if( week==1 ) {
+                week = "월요일";
+            }
+              else if( week==2 ) {
+                week = "화요일";
+            }
+              else if( week==3 ) {
+                week = "수요일";
+            }
+              else if( week==4 ) {
+                week = "목요일";
+            }
+              else if( week==5 ) {
+                week = "금요일";
+            }
+            else if( week==6 ) {
+                week = "토요일";
+            }
+        -----------------------------------------------------------------------
+**********************************
+String 객체
+**********************************
 
 
 
