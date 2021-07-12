@@ -52,8 +52,7 @@
 			var pwd = document.boardRegForm.pwd.value;			//<5>
 			var pic = document.boardRegForm.pic.value;			//<6>
 
-			alert( pic );
-			return;
+		
 			/* 공용함수로 처리전. 
 			// ------------------------------------------------------
 			// 유저가 입력한 이름의 유효성 체크하기 // 공용함수 이용 전.
@@ -184,10 +183,23 @@
 				return; 
 			}
 
-
-
-
-
+			// ------------------------------------------------------
+			// 유저가 업로드한 이미지(사진파일)의 확장자 유효성 체크하기
+			// ------------------------------------------------------
+			// 만약 이미지가 선택되었으면
+			if( isEmpty(pic)==false ){
+				// 선택된 이미지 파일의 확장자가 jpg 도 아니고 png 도 아니면
+				// if( pic.lastIndexOf(".jpg")<0 || pic.lastIndexOf(".png")<0 ) 아래와 같은식이다.
+				// if( !(pic.lastIndexOf(".jpg")>=0 || pic.lastIndexOf(".png")>=0) )
+				// 이런식은 중간에 jpg 와 png가 섞이면 올바른 방법이 되지 않는다. 그래서 아래와 같이 해준다.
+				if( isValidPattern(/((\.jpg)|(\.png))$/,pic)==false ){
+					alert("선택하신 파일의 확장자는 jpg 또는 png 파일만 가능합니다.")
+					document.boardRegForm.pic.value = "";
+				} 
+				// 경고하고 함수 중단.
+				return; 
+			}
+		
 
 			// ------------------------------------------------------
 			// 유저가 입력한 암호 유효성 체크하기
