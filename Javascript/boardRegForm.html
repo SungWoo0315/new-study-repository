@@ -192,7 +192,7 @@
 				// if( pic.lastIndexOf(".jpg")<0 || pic.lastIndexOf(".png")<0 ) 아래와 같은식이다.
 				// if( !(pic.lastIndexOf(".jpg")>=0 || pic.lastIndexOf(".png")>=0) )
 				// 이런식은 중간에 jpg 와 png가 섞이면 올바른 방법이 되지 않는다. 그래서 아래와 같이 해준다.
-				if( isValidPattern(/((\.jpg)|(\.png))$/,pic)==false ){
+				if( isValidPattern( /\.(jpg|png)$/, pic.toLowerCase() )==false ){
 					alert("선택하신 파일의 확장자는 jpg 또는 png 파일만 가능합니다.")
 					document.boardRegForm.pic.value = "";
 					// 경고하고 함수 중단.
@@ -221,10 +221,28 @@
 				return;
 			}
 
-
+			// ------------------------------------------------------
+			// confirm 함수 호출로 confirm 상자를 열고 확인 버튼을 누르면 
+			// ------------------------------------------------------
+			if( confirm("새글쓰기를 정말 할까요?") ){
+				// ------------------------------------------------------
+				// <form name = boardRegForm action="boardRegProc.html"> 
+				// 태그의 action 값에 설정된 서버쪽 페이지 호출하여 열기.
+				// ------------------------------------------------------
+				document.boardRegForm.submit();
+			}
 			
 			alert( writer + " / " + subject + " / " + email + " / " + content + " / " + pwd + " / " + pic);
 
+		}
+
+
+		function setting(){
+			document.boardRegForm.writer.value = "기기"
+			document.boardRegForm.subject.value = "섬광의 하사웨이"
+			document.boardRegForm.email.value	= "abc123@naver.com"
+			document.boardRegForm.content.value = "섬광의 하사웨이 재미있다~~~!!"
+			document.boardRegForm.pwd.value		= "1234"
 		}
 
 	</script>
@@ -232,10 +250,10 @@
 </head>
 
 
-<body>
+<body onload="setting();">
 	<center>
 		
-		<form name="boardRegForm">
+		<form name="boardRegForm" action="boardRegProc.html" enctype="multipart/form-data">
 		[새 글쓰기]<br>
 
 		<table height=10><tr><td></td></tr></table>
@@ -243,19 +261,19 @@
 		<table border=1 style="border-collapse:collapse" cellpadding=5>
 		<tr>
 			<th bgcolor="lightgray" width=80>이름</th>
-			<td><input type="text" name="writer" size=20 maxlength=7></td>
+			<td><input type="text" name="writer" size=20 maxlength=7 ></td>
 		</tr>
 		<tr>
 			<th bgcolor="lightgray">제목</th>
-			<td><input type="text" name="subject" size=70 maxlength=20></td>
+			<td><input type="text" name="subject" size=70 maxlength=20 ></td>
 		</tr>
 		<tr>
 			<th bgcolor="lightgray">Email</th>
-			<td><input type="text" name="email" size=70 maxlength=30></td>
+			<td><input type="text" name="email" size=70 maxlength=30 ></td>
 		</tr>
 		<tr>
 			<th bgcolor="lightgray" height=70>내용</th>
-			<td><textarea name="content" cols=73 rows=20   ></textarea></td>
+			<td><textarea name="content" cols=73 rows=20 ></textarea></td>
 		</tr>
 
 		<tr>
@@ -265,7 +283,7 @@
 
 		<tr>
 			<th bgcolor="lightgray">비밀번호</th>
-			<td><input type="password" name="pwd" size=10 maxlength=4></td>
+			<td><input type="password" name="pwd" size=10 maxlength=4 ></td>
 		</tr>
 		</table>
 
