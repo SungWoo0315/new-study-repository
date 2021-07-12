@@ -195,9 +195,10 @@
 				if( isValidPattern(/((\.jpg)|(\.png))$/,pic)==false ){
 					alert("선택하신 파일의 확장자는 jpg 또는 png 파일만 가능합니다.")
 					document.boardRegForm.pic.value = "";
+					// 경고하고 함수 중단.
+					return; 
 				} 
-				// 경고하고 함수 중단.
-				return; 
+				
 			}
 		
 
@@ -222,7 +223,7 @@
 
 
 			
-			alert( writer + " / " + subject + " / " + email + " / " + content + " / " + pwd);
+			alert( writer + " / " + subject + " / " + email + " / " + content + " / " + pwd + " / " + pic);
 
 		}
 
