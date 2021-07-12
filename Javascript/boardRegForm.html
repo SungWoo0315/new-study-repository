@@ -2,6 +2,132 @@
 <meta charset="UTF-8">
 <head>
 	<title></title>
+	<!--------------------------------------------------------->	
+	<!-- common_func.js 파일안의 자스코딩 import-->
+	<!--------------------------------------------------------->
+	<script src="common_func.js"></script>
+
+	<script>
+		// **************************************************
+		// 게시판 새글쓰기 화면에 입력한 데이터의 유효성 체크를 해주는
+		// checkRegForm 함수 선언.
+		// **************************************************
+		function checkRegForm(){
+			// // ------------------------------------------------------
+			// // 유저가 입력한 이름 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var writer = document.boardRegForm.writer.value;
+			// // ------------------------------------------------------
+			// // 유저가 입력한 제목 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var subject = document.boardRegForm.subject.value;
+			// // ------------------------------------------------------
+			// // 유저가 입력한 Email 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var email = document.boardRegForm.email.value;
+			// // ------------------------------------------------------
+			// // 유저가 입력한 내용 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var content = document.boardRegForm.content.value;
+			// // ------------------------------------------------------
+			// // 유저가 입력한 비밀번호 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var pwd = document.boardRegForm.pwd.value;
+			
+
+			// -----------------주석처리 방법 2 ----------------------
+			// ------------------------------------------------------
+			// <1>유저가 입력한 이름 가져와서 변수 writer 에 저장하기.
+			// <2>유저가 입력한 제목 가져와서 변수 writer 에 저장하기.
+			// <3>유저가 입력한 Email 가져와서 변수 writer 에 저장하기.
+			// <4>유저가 입력한 내용 가져와서 변수 writer 에 저장하기.
+			// <5>유저가 입력한 비밀번호 가져와서 변수 writer 에 저장하기.
+			// ------------------------------------------------------
+			var writer = document.boardRegForm.writer.value;	//<1>
+			var subject = document.boardRegForm.subject.value;	//<2>
+			var email = document.boardRegForm.email.value;		//<3>
+			var content = document.boardRegForm.content.value;	//<4>
+			var pwd = document.boardRegForm.pwd.value;			//<5>
+			
+			
+			// ------------------------------------------------------
+			// 유저가 입력한 이름의 유효성 체크하기
+			// ------------------------------------------------------
+			// 한글 2~10자 사이의 문자열을 체크하는 RegExp 객체 생성하기
+			var regExp = new RegExp(/^[가-힣]{2,10}$/);
+			// 만약에 이름이 한글 2~10 자 사이가 아니면
+			if( regExp.test(writer)==false ){
+				alert("이름은 한글 2~10 자 사이어야 합니다.")
+				// 함수 중단.
+				return; 
+			}
+
+			// ------------------------------------------------------
+			// 유저가 입력한 제목의 유효성 체크하기
+			// ------------------------------------------------------
+			// 만약 제목이 비어있거나 공백으로 이루어져 있으면
+			if( isEmpty(subject) ){
+				alert("제목이 비어있거나 공백으로 구성되면 안됩니다.")
+				// 제목 입력란 비우기
+				document.boardRegForm.subject.value = "";
+				// 함수 중단.
+				return; 
+			}
+			// 만약 제목이 2~30 사이가 아니면
+			// if( subject.length<2 || subject.length>30 ){ 아래와 똑같은 조건이다.
+			if( !(subject.length>=2 && subject.length<=30) ){
+				alert("제목은 2~30이하 입력해야 합니다.");
+				// 함수 중단.
+				return; 
+			}
+			// ------------------------------------------------------
+			// 유저가 입력한 이메일의 유효성 체크하기
+			// ------------------------------------------------------
+			// 이메일 문자열을 체크하는 RegExp 객체 생성하기.
+			var regExp = new RegExp(/^([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/);
+			// 만약에 이메일이 이메일 문자열 패턴이 아니면 
+			if( regExp.test(email)==false ){
+				alert("이메일 형식이 아닙니다.")
+				// 함수 중단.
+				return;
+			}
+
+			// ------------------------------------------------------
+			// 유저가 입력한 내용의 유효성 체크하기
+			// ------------------------------------------------------
+			// 만약 내용이 비어있거나 공백으로 이루어져 있으면
+			if( isEmpty(content) ){
+				alert("내용이 비어있거나 공백으로 구성되면 안됩니다.")
+				// 내용 입력란 비우기
+				document.boardRegForm.content.value = "";
+				// 함수 중단.
+				return; 
+			}
+			// 만약 내용이 900자 보다 크면
+			if( content.length>900 ){
+				alert("내용은 900자 까지 입력가능 합니다.");
+				// 함수 중단.
+				return; 
+			}
+			// ------------------------------------------------------
+			// 유저가 입력한 암호 유효성 체크하기
+			// ------------------------------------------------------
+			// 암호 문자열을 숫자 4개 체크하는 RegExp 객체 생성하기.
+			var regExp = new RegExp( /^[0-9]{4}$/ );
+			// 만약에 암호 문자열 패턴이 아니면 
+			if( regExp.test(pwd)==false ){
+				alert("암호 형식이 아닙니다. 4자리 숫자만 가능합니다.")
+				// 함수 중단.
+				return;
+			}
+
+
+			
+			alert( writer + " / " + subject + " / " + email + " / " + content + " / " + pwd);
+
+		}
+
+	</script>
 
 </head>
 
@@ -9,7 +135,7 @@
 <body>
 	<center>
 		
-		<form>
+		<form name="boardRegForm">
 		[새 글쓰기]<br>
 
 		<table height=10><tr><td></td></tr></table>
@@ -40,7 +166,7 @@
 
 		<table height=10><tr><td></td></tr></table>
 
-		<input type="button" value="저장">&nbsp;
+		<input type="button" value="저장" onClick="checkRegForm();">&nbsp;
 		<input type="reset" value="초기화">&nbsp;
 		<input type="button" value="전체 글 보기" onClick="location.replace('boardList.html');">&nbsp;
 		<input type="button" value="로그아웃" onClick="location.replace('loginForm.html');">
