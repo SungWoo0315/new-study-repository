@@ -33,9 +33,18 @@
 		return regExpObj.test(targetStr);
 	}
 
-
-	
-
+	//------------------------------------------------------------------------
+	// checkbox 또는 radio 의 체크 개수구해서 리턴하는 함수 선언
+	//------------------------------------------------------------------------
+	function getCheckedCnt( arrObj ){
+		// len 변수 선언하고 매개변수로 들어온 Array 객체의 배열변수 개수를 구해 저장하기.
+		var len = arrObj.length
+		var checkedCnt = 0;
+		for( var i=0; i<len; i++){
+			if( arrObj[i].checked ) { checkedCnt++; }
+		}
+		return checkedCnt;
+	}
 
 
 	
