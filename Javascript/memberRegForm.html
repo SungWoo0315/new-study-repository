@@ -112,15 +112,50 @@
 			return; 
 		}
 
+		// ------------------------------------------------------
+		// 성별이 하나라도 체크가 안되어있으면 경고하고 함수중단
+		// ------------------------------------------------------
+		// 성별의 개수 얻어서 변수 genderCnt 에 저장하기
+		var genderCnt = formObj.gender.length;
+		// 성별의 체크 개수 저장하는 변수 checkedCnt 선언하고 0 저장.
+		var checkedCnt = 0;
+		// 반복문을 사용하여 성별의 체크 여부 확인하고 체크되어 있으면 checkedCnt 변수에 1업데이트 하기
+		for(var i=0; i<genderCnt; i++){
+			if( formObj.gender[i].checked==true ) { checkedCnt++; }
+		}
+		// 만약 checkedCnt 변수에 0이 저장되어 있으면, 즉, 체크가 하나라도 안되어 있으면 경고하고 함수중단.
+		if( checkedCnt==0){
+			alert("남여중 하나는 선택해야합니다. 성별선택을 하세요!!");
+			return;
+		}
 
-		
+		/* 단순 2개 인경우. radio 유효성 검사.
 		var isMen = formObj.gender[0].checked;
 		var isWomen = formObj.gender[1].checked;
 		if( isMen==false && isWomen==false){
 			alert("남여중 하나는 선택해야합니다. 성별선택을 하세요!!");
 			return;
 		}
+		*/
 
+
+
+		// ------------------------------------------------------
+		// 취미가 하나라도 체크가 안되어있으면 경고하고 함수중단
+		// ------------------------------------------------------
+		// 취미의 개수 얻어서 변수 genderCnt 에 저장하기
+		var hobbyCnt = formObj.hobby.length;
+		// 취미 체크 개수 저장하는 변수 checkedCnt 선언하고 0 저장.
+		var checkedCnt = 0;
+		// 반복문을 사용하여 취미 체크 여부 확인하고 체크되어 있으면 checkedCnt 변수에 1업데이트 하기
+		for(var i=0; i<hobbyCnt; i++){
+			if( formObj.hobby[i].checked==true ) { checkedCnt++; }
+		}
+		// 만약 checkedCnt 변수에 0이 저장되어 있으면, 즉, 체크가 하나라도 안되어 있으면 경고하고 함수중단.
+		if( checkedCnt==0){
+			alert("취미중 하나는 선택해야합니다. 취미선택을 하세요!!");
+			return;
+		}
 
 
 
