@@ -22,13 +22,15 @@
 			// <3>유저가 입력한 Email 가져와서 변수 email 에 저장하기.
 			// <4>유저가 입력한 내용 가져와서 변수 content 에 저장하기.
 			// <5>유저가 입력한 비밀번호 가져와서 변수 pwd 에 저장하기.
+			// <6>유저가 입력한 이미지명 가져와서 변수 pic 에 저장하기.
 			// ------------------------------------------------------
 			var writer = formObj.writer.value;		//<1>
 			var subject = formObj.subject.value;	//<2>
 			var email = formObj.email.value;		//<3>
 			var content = formObj.content.value;	//<4>
 			var pwd = formObj.pwd.value;			//<5>
-
+			var pic = formObj.pic.value;			//<6>
+			
 
 
 			// -------------------------------------------
@@ -188,7 +190,7 @@
 					formObj.pic.value = "";
 					// 경고하고 함수 중단.
 					return; 
-				} 
+				}
 				
 			}
 
