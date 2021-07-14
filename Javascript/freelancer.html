@@ -16,16 +16,39 @@
 			// Form 객체의 메위주 저장하기.
 			// ------------------------------------------------------
 			var formObj = document.freelancer;
+			// ------------------------------------------------------
 
-
-			var is_developer = formObj.is_developer.value;
-			var name = formObj.name.value;
-			var email = formObj.email.value;
-			var phone_num = formObj.phone_num.value;
 			var resume_reg_year = formObj.resume_reg_year.value;
 			var resume_reg_mon = formObj.resume_reg_mon.value;
 			var resume_reg_day = formObj.resume_reg_day.value;
 
+			var name = formObj.name.value;
+
+			var birth_year = formObj.birth_year.value;
+			var phone_num = formObj.phone_num.value;
+			var email = formObj.email.value;
+
+			var addr_si = formObj.addr_si.value;
+			var addr_gu = formObj.addr_gu.value;
+
+			// var last_graduated = formObj.last_graduated.value;
+
+			var dev_career_year = formObj.dev_career_year.value;
+			var dev_career_mon = formObj.dev_career_mon.value;
+
+			var hope_salary_min = formObj.hope_salary_min.value;
+			var hope_salary_max = formObj.hope_salary_max.value;
+
+			var pj_end_year = formObj.pj_end_year.value;
+			var pj_end_mon = formObj.pj_end_mon.value;
+			var pj_end_day = formObj.pj_end_day.value;
+
+			// var dev_skill = formObj.dev_skill.value;
+			// var dev_experience = formObj.dev_experience.value;
+
+			var reference = formObj.reference.value;
+
+			var is_developer = formObj.is_developer.value;
 
 
 			// ------------------------------------------------------
@@ -83,6 +106,11 @@
 			// ------------------------------------------------------
 			// [출생년도] 선택이 안되어있으면 경고하고 함수중단
 			// ------------------------------------------------------
+			if( isEmpty(birth_year) ){
+			alert("출생년도를 선택하세요.");
+			return; 
+			}
+
 
 
 			// ------------------------------------------------------
@@ -90,6 +118,7 @@
 			// ------------------------------------------------------
 			if( isValidPhone(phone_num)==false){
 				alert("올바른 휴대폰 번호형식이 아닙니다.");
+				formObj.phone_num.value = "";
 				formObj.phone_num.focus();
 				return;
 			}
@@ -104,6 +133,7 @@
 				// <form name = boardRegForm ~> 태그 안의 
 				// <input type="text" name="email" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
 				// ------------------------------------------------------
+				formObj.email.value = "";
 				formObj.email.focus();
 				// ------------------------------------------------------
 				// 함수 중단.
@@ -113,36 +143,109 @@
 			// ------------------------------------------------------
 			// [거주지]의 유효성 체크하기
 			// ------------------------------------------------------
-
+			if( isEmpty(addr_si) ){
+				alert("거주지 시를 적어주세요.")
+				// 내용 입력란 비우기
+				formObj.addr_si.value = "";
+				// ------------------------------------------------------
+				// <form name = boardRegForm ~> 태그 안의 
+				// <input type="text" name="content" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.addr_si.focus();
+				// ------------------------------------------------------
+				// 함수 중단.
+				return; 
+			}
+			
+			if( isEmpty(addr_gu) ){
+				alert("거주지 구를 적어주세요.")
+				// 내용 입력란 비우기
+				formObj.addr_gu.value = "";
+				// ------------------------------------------------------
+				// <form name = boardRegForm ~> 태그 안의 
+				// <input type="text" name="content" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.addr_gu.focus();
+				// ------------------------------------------------------
+				// 함수 중단.
+				return; 
+			}
 
 			// ------------------------------------------------------
 			// [최종학력]의 유효성 체크하기
 			// ------------------------------------------------------
+			if( getCheckedCnt( formObj.last_graduated )==0 ){
+				alert("학력 중 하나는 선택해야합니다. 학력선택을 하세요!!");
+				return;
+			}
+
+
 
 			// ------------------------------------------------------
 			// [개발경력]의 유효성 체크하기
 			// ------------------------------------------------------
+			if( isEmpty(dev_career_year) ){
+			alert("개발경력 년선택하세요.");
+			return; 
+			}
+			if( isEmpty(dev_career_mon) ){
+			alert("개발경력 월선택하세요.");
+			return; 
+			}
 
 			// ------------------------------------------------------
 			// [희망연봉]의 유효성 체크하기
 			// ------------------------------------------------------
+			if( isEmpty(hope_salary_min) ){
+			alert("최소희망 연봉을 선택하세요.");
+			return; 
+			}
+			if( isEmpty(hope_salary_max) ){
+			alert("최대희망 연봉을 선택하세요.");
+			return; 
+			}
 			
 			// ------------------------------------------------------
 			// [프로젝트 종요일]의 유효성 체크하기
 			// ------------------------------------------------------
-
+			if( isEmpty(pj_end_year) ){
+			alert("프로젝트 종료 년을 선택하세요.");
+			return; 
+			}
+			if( isEmpty(pj_end_mon) ){
+			alert("프로젝트 종료 월을 선택하세요.");
+			return; 
+			}
+			if( isEmpty(pj_end_day) ){
+			alert("프로젝트 종료 일을 선택하세요.");
+			return; 
+			}
 			// ------------------------------------------------------
 			// [소유스킬 및 경험분야]의 유효성 체크하기
 			// ------------------------------------------------------
+			if( getCheckedCnt( formObj.dev_skill )<1 ){
+			alert("소유스킬은 1개이상 선택해야합니다. \n 소유스킬을 선택 하세요!!");
+			return;
+			}
 
+			if( getCheckedCnt( formObj.dev_experience )<1 ){
+			alert("경험분야는 1개이상 선택해야합니다. \n 경험분야를 선택 하세요!!");
+			return;
+			}
 
 			// ------------------------------------------------------
-			// [동의]가 0개 체크되었으면 경고하고 함수중단
-			// getCheckedCnt 함수 호출하여 [동의]의 체크 개수를 얻어 0개면 경고하고 함수중단.
-			// ------------------------------------------------------		
-			if( getCheckedCnt(formObj.is_developer)==0 ){
-				alert("동의는 반드시 하셔야 합니다. 동의 하세요!!");
-				return;
+			// [참고사항]의 글자 제한하기.
+			// ------------------------------------------------------
+			if( reference.length>5 ){
+				alert("참고사항은 5자 까지 입력가능 합니다.");
+
+				formObj.reference.value = "";
+
+				formObj.reference.focus();
+
+
+				// 함수 중단.
+				return; 
 			}
 
 			// ------------------------------------------------------
