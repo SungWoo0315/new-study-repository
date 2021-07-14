@@ -1,0 +1,377 @@
+<html>
+<meta charset="UTF-8">
+<head>
+	<title></title>
+	<!--------------------------------------------------------->	
+	<!-- common_func.js 파일안의 자스코딩 import-->
+	<!--------------------------------------------------------->
+	<script src="common_func.js"></script>
+
+	<script>
+		// **************************************************
+		// 게시판 새글쓰기 화면에 입력한 데이터의 유효성 체크를 해주는
+		// checkRegForm 함수 선언.
+		// **************************************************
+		function checkRegForm(){
+			
+			// ------------------------------------------------------
+			// 변수 fromObj 선언하고 <form name="boardReplyRegForm1"> 태그를 관리하는
+			// Form 객체의 메위주 저장하기.
+			// ------------------------------------------------------
+			var formObj = document.boardReplyRegForm1;
+
+
+			// -----------------주석처리 방법 1 -------------------------
+			// // ------------------------------------------------------
+			// // 유저가 입력한 이름 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var writer = document.boardReplyRegForm1.writer.value;
+			// // ------------------------------------------------------
+			// // 유저가 입력한 제목 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var subject = document.boardReplyRegForm1.subject.value;
+			// // ------------------------------------------------------
+			// // 유저가 입력한 Email 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var email = document.boardReplyRegForm1.email.value;
+			// // ------------------------------------------------------
+			// // 유저가 입력한 내용 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var content = document.boardReplyRegForm1.content.value;
+			// // ------------------------------------------------------
+			// // 유저가 입력한 비밀번호 가져와서 변수 writer 에 저장하기.
+			// // ------------------------------------------------------
+			// var pwd = document.boardReplyRegForm1.pwd.value;
+			
+
+			// -----------------주석처리 방법 2 ----------------------
+			// ------------------------------------------------------
+			// <1>유저가 입력한 이름 가져와서 변수 writer 에 저장하기.
+			// <2>유저가 입력한 제목 가져와서 변수 subject 에 저장하기.
+			// <3>유저가 입력한 Email 가져와서 변수 email 에 저장하기.
+			// <4>유저가 입력한 내용 가져와서 변수 content 에 저장하기.
+			// <5>유저가 입력한 비밀번호 가져와서 변수 pwd 에 저장하기.
+			// <6>유저가 입력한 이미지명 가져와서 변수 pic 에 저장하기.
+
+			// ------------------------------------------------------
+			var writer = formObj.writer.value;		//<1>
+			var subject = formObj.subject.value;	//<2>
+			var email = formObj.email.value;		//<3>
+			var content = formObj.content.value;	//<4>
+			var pwd = formObj.pwd.value;			//<5>
+			var pic = formObj.pic.value;			//<6>
+
+		
+			/* 공용함수로 처리전. 
+			// ------------------------------------------------------
+			// 유저가 입력한 이름의 유효성 체크하기 // 공용함수 이용 전.
+			// ------------------------------------------------------
+			// 한글 2~10자 사이의 문자열을 체크하는 RegExp 객체 생성하기
+			var regExp = new RegExp(/^[가-힣]{2,10}$/);
+			// 만약에 이름이 한글 2~10 자 사이가 아니면
+			if( regExp.test(writer)==false ){
+				alert("이름은 한글 2~10 자 사이어야 합니다.")
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="writer" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				document.boardReplyRegForm1.writer.focus();
+				// ------------------------------------------------------
+
+				// 함수 중단.
+				return; 
+			}
+			*/
+
+
+			// ------------------------------------------------------
+			// 유저가 입력한 이름의 유효성 체크하기 // 공용함수 이용.
+			// ------------------------------------------------------
+			// isValidPattern 함수를 호출하여 이름 문자열이 합당한 이름이면
+			// 즉, isValidPattern(/^[가-힣]{2,10}$/, writer) 호출하여 리턴값이 false면 
+			// ------------------------------------------------------
+			if( isValidPattern(/^[가-힣]{2,10}$/, writer)==false ){
+				alert("이름은 한글 2~10 자 사이어야 합니다.")
+
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="writer" ~> 태그가 실행되어 출력되는 입력양식에 값을 비우기.
+				// ------------------------------------------------------
+				formObj.writer.value = "";
+
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="writer" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.writer.focus();
+				// ------------------------------------------------------
+
+				// 함수 중단.
+				return; 
+			}
+
+			
+
+
+			// ------------------------------------------------------
+			// 유저가 입력한 제목의 유효성 체크하기
+			// ------------------------------------------------------
+			// 만약 제목이 비어있거나 공백으로 이루어져 있으면
+			// ------------------------------------------------------
+			if( isEmpty(subject) ){
+				alert("제목이 비어있거나 공백으로 구성되면 안됩니다.")
+				// 제목 입력란 비우기
+				formObj.subject.value = "";
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="subject" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.subject.focus();
+				// ------------------------------------------------------
+				// 함수 중단.
+				return; 
+			}
+			// ------------------------------------------------------
+			// 만약 제목이 2~30 사이가 아니면
+			// ------------------------------------------------------
+			// if( subject.length<2 || subject.length>30 ){ 아래와 똑같은 조건이다.
+			if( !(subject.length>=2 && subject.length<=30) ){
+				alert("제목은 2~30이하 입력해야 합니다.");
+				// 제목 입력란 비우기
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="writer" ~> 태그가 실행되어 출력되는 입력양식에 값을 비우기.
+				// ------------------------------------------------------
+				formObj.subject.value = "";
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="subject" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.subject.focus();
+				// ------------------------------------------------------
+				// 함수 중단.
+				return; 
+			}
+
+
+			// ------------------------------------------------------
+			// 유저가 입력한 이메일의 유효성 체크하기
+			// ------------------------------------------------------
+			
+			// 공용 함수 변경때문에 주석처리.
+			// // 이메일 문자열을 체크하는 RegExp 객체 생성하기.
+			// var regExp = new RegExp(/^([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/);
+			// // 만약에 이메일이 이메일 문자열 패턴이 아니면 
+			// if( regExp.test(email)==false ){
+			// 	alert("이메일 형식이 아닙니다.")
+			// 	// 함수 중단.
+			// 	return;
+			// }
+
+			// 공용함수 사용한, 이메일 유효성 체크
+			// isValidEmail 함수를 호출하여 이메일 문자열이 합당한 이메일이면
+			// 즉, isValidEmail(email) 호출하여 리턴값이 true 면
+			if( isValidEmail(email)==false ){
+				alert("이메일 형식이 아닙니다.");
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="email" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.email.focus();
+				// ------------------------------------------------------
+				// 함수 중단.
+				return;
+			}
+
+
+			// ------------------------------------------------------
+			// 유저가 입력한 내용의 유효성 체크하기
+			// ------------------------------------------------------
+			// isEmpty 함수를 호출하여 내용이 비어 있으면
+			// isEmpty(content) 호출하여 리턴값이 true면
+			// 만약 내용이 비어있거나 공백으로 이루어져 있으면
+			if( isEmpty(content) ){
+				alert("내용이 비어있거나 공백으로 구성되면 안됩니다.")
+				// 내용 입력란 비우기
+				formObj.content.value = "";
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="content" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.content.focus();
+				// ------------------------------------------------------
+				// 함수 중단.
+				return; 
+			}
+			// 만약 내용이 900자 보다 크면
+			if( content.length>900 ){
+				alert("내용은 900자 까지 입력가능 합니다.");
+				// 함수 중단.
+				return; 
+			}
+
+			// ------------------------------------------------------
+			// 유저가 업로드한 이미지(사진파일)의 확장자 유효성 체크하기
+			// ------------------------------------------------------
+			// 만약 이미지가 선택되었으면
+			if( isEmpty(pic)==false ){
+				// 선택된 이미지 파일의 확장자가 jpg 도 아니고 png 도 아니면
+				// if( pic.lastIndexOf(".jpg")<0 || pic.lastIndexOf(".png")<0 ) 아래와 같은식이다.
+				// if( !(pic.lastIndexOf(".jpg")>=0 || pic.lastIndexOf(".png")>=0) )
+				// 이런식은 중간에 jpg 와 png가 섞이면 올바른 방법이 되지 않는다. 그래서 아래와 같이 해준다.
+				if( isValidPattern( /\.(jpg|png)$/, pic.toLowerCase() )==false ){
+					alert("선택하신 파일의 확장자는 jpg 또는 png 파일만 가능합니다.")
+					formObj.pic.value = "";
+					// 경고하고 함수 중단.
+					return; 
+				} 
+				
+			}
+		
+			/* 공용함수로 빼기전.
+			// ------------------------------------------------------
+			// 유저가 입력한 암호 유효성 체크하기
+			// ------------------------------------------------------
+			// 암호 문자열을 숫자 4개 체크하는 RegExp 객체 생성하기.
+			var regExp = new RegExp( /^[0-9]{4}$/ );
+			// 만약에 암호 문자열 패턴이 아니면 
+			if( regExp.test(pwd)==false ){
+				alert("암호 형식이 아닙니다. 4자리 숫자만 가능합니다.")
+				document.boardReplyRegForm1.pwd.value = "";
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="pwd" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				document.boardReplyRegForm1.pwd.focus();
+				// ------------------------------------------------------
+				// 함수 중단.
+				return;
+			}
+			*/
+
+			// 암호 공용함수처리.
+			if( isValidPattern(/^[0-9]{4}$/, pwd)==false ){
+				alert("암호 형식이 아닙니다. 4자리 숫자만 가능합니다.")
+
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="pwd" ~> 태그가 실행되어 출력되는 입력양식에 값을 비우기.
+				// ------------------------------------------------------
+				formObj.pwd.value = "";
+
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 ~> 태그 안의 
+				// <input type="text" name="pwd" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.pwd.focus();
+				// ------------------------------------------------------
+
+				// 함수 중단.
+				return; 
+				}
+
+
+			// ------------------------------------------------------
+			// confirm 함수 호출로 confirm 상자를 열고 확인 버튼을 누르면 
+			// ------------------------------------------------------
+			if( confirm("새글쓰기를 정말 할까요?") ){
+				// ------------------------------------------------------
+				// <form name = boardReplyRegForm1 action="boardRegProc.html"> 
+				// 태그의 action 값에 설정된 서버쪽 페이지 호출하여 열기.
+				// ------------------------------------------------------
+				formObj.submit();
+			}
+			
+			alert( writer + " / " + subject + " / " + email + " / " + content + " / " + pwd + " / " + pic);
+
+		}
+
+		
+		// ******************************************************
+		// body 태그를 다 읽고 난 후 실행할 함수 선언
+		// ******************************************************
+		function setting(){
+			return; // return해주면 밑의 값들이 입력되지 않는다. 개발과정 중 써먹으면 됨.
+			// 개발과정 편리성을 위해 입력 양식에 데이터 삽입하기.
+			document.boardReplyRegForm1.writer.value = "기기"
+			document.boardReplyRegForm1.subject.value = "섬광"
+			document.boardReplyRegForm1.email.value	= "abc123@naver.com"
+			document.boardReplyRegForm1.content.value = "내용~~~!!"
+			document.boardReplyRegForm1.pwd.value		= "1234"
+		}
+	
+	</script>
+
+</head>
+
+
+<body onload="setting();">
+	<center>
+		
+		<form name="boardReplyRegForm1" action="boardRegProc.html" enctype="multipart/form-data">
+			[댓글 글쓰기]<br>
+
+			<table height=10><tr><td></td></tr></table>
+
+				<table border=1 style="border-collapse:collapse" cellpadding=5>
+				<tr>
+					<th bgcolor="lightgray" width=80>이름</th>
+					<td><input type="text" name="writer" size=20 maxlength=7 ></td>
+				</tr>
+				<tr>
+					<th bgcolor="lightgray">제목</th>
+					<td><input type="text" name="subject" size=70 maxlength=20 ></td>
+				</tr>
+				<tr>
+					<th bgcolor="lightgray">Email</th>
+					<td><input type="text" name="email" size=70 maxlength=30 ></td>
+				</tr>
+				<tr>
+					<th bgcolor="lightgray" height=70>내용</th>
+					<td><textarea name="content" cols=73 rows=20 ></textarea></td>
+				</tr>
+
+				<tr>
+					<th bgcolor="lightgray">사진</th>
+					<td><input type="file" name="pic"></td>
+				</tr>
+
+				<tr>
+					<th bgcolor="lightgray">비밀번호</th>
+					<td><input type="password" name="pwd" size=10 maxlength=4 ></td>
+				</tr>
+			
+			</table>
+
+
+		<table height=10><tr><td></td></tr></table>
+
+		<input type="button" value="저장" onClick="checkRegForm();">&nbsp;
+		<input type="reset" value="초기화">&nbsp;
+		<input type="button" value="전체 글 보기" onClick="location.replace('boardList.html');">&nbsp;
+		<input type="button" value="로그아웃" onClick="location.replace('loginForm.html');">
+		</form>
+	
+	</center>
+
+</body>
+
+</html>
+
+
+<!--
+<tr>
+
+			<td colspan="2">
+		<center>
+			<input type="button" value="저장">&nbsp;
+			<input type="reset" value="초기화">&nbsp;
+			<input type="button" value="전체 글 보기" onClick="location.replace('boardList.html')">
+		</center>
+			</td>
+
+		</tr>
+
+size=70
+style="width:530px;height:100"
+-->
