@@ -9,11 +9,11 @@
 	<script src="common_func.js"></script>
 
 	<script>
-		function checkUpDelForm(){
+		function checkUpForm(){
 			// -------------------------------------------
 			// form 태그를 관리하는 Form 객체의 메위주 구해서 변수 formObj 에 저장하기.
 			// -------------------------------------------
-			var formObj = document.boardUpDelForm;
+			var formObj = document.boardUpForm;
 			// -------------------------------------------
 			// 입력된 암호 구해서 변수 pwd에 저장하기
 			// -------------------------------------------
@@ -218,6 +218,35 @@
 
 
 		}
+
+		function checkDelForm(){
+			// -------------------------------------------
+			// form 태그를 관리하는 Form 객체의 메위주 구해서 변수 formObj 에 저장하기.
+			// 입력된 암호 구해서 변수 pwd에 저장하기
+			// 입력된 암호가 틀리면 경고하고 함수 중단하기
+			// -------------------------------------------
+			var formObj = document.boardUpForm;
+			var pwd = formObj.pwd.value;			
+
+			if( pwd != 1234 ){
+				alert("암호를 입력하지 않았거나 틀려서 수정, 삭제가 불가능 합니다.")
+				return;
+			}
+
+			// ------------------------------------------------------
+			// confirm 함수 호출로 confirm 상자를 열고 확인 버튼을 누르면 
+			// ------------------------------------------------------
+			if( confirm("정말 삭제 할까요?") ){
+				// ------------------------------------------------------
+				// <form name = boardUpDelForm action="boardUpDelProc.html"> 
+				// 태그의 action 값에 설정된 서버쪽 페이지 호출하여 열기.
+				// ------------------------------------------------------
+				document.boardDelForm.submit();
+			}
+
+		}
+
+
 	</script>
 
 </head>
@@ -226,7 +255,7 @@
 <body>
 	<center>
 		
-		<form name="boardUpDelForm" action="boardUpDelProc.html" enctype="multipart/form-data">
+		<form name="boardUpForm" action="boardUpProc.html" enctype="multipart/form-data">
 		[글 수정/삭제]<br>
 
 		<table height=10><tr><td></td></tr></table>
@@ -270,13 +299,18 @@
 
 		<table height=10><tr><td></td></tr></table>
 
-		<input type="button" value="수정" onclick="checkUpDelForm();">&nbsp;
-		<input type="button" value="삭제">&nbsp;
+		<input type="button" value="수정" onclick="checkUpForm();">&nbsp;
+		<input type="button" value="삭제" onclick="checkDelForm();">&nbsp;
 		<input type="reset" value="초기화">&nbsp;
 		<input type="button" value="전체 글 보기" onClick="location.replace('boardList.html');">&nbsp;
 		<input type="button" value="로그아웃" onClick="location.replace('loginForm.html');">
 		</form>
 	
+		<!-- ----------------------------------------------------------- -->
+		<form name="boardDelForm" action="boardDelProc.html">
+
+
+		</form>
 	</center>
 
 </body>
