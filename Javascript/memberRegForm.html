@@ -28,10 +28,12 @@
 		// <1> 유저가 입력한 [회원명] 가져와서 변수 mem_name 에 저장하기
 		// <2> 유저가 입력한 [아이디] 가져와서 변수 uid 에 저장하기
 		// <3> 유저가 입력한 [암호] 가져와서 변수 pwd 에 저장하기
+		// <4> 유저가 입력한 [주소] 가져와서 변수 addr 에 저장하기
 		// ------------------------------------------------------
 		var mem_name = formObj.mem_name.value;
 		var uid = formObj.uid.value;
 		var pwd = formObj.pwd.value;
+		var addr = formObj.addr.value;
 
 		// ------------------------------------------------------
 		// 유저가 입력한 [회원명]의 유효성 체크하기 // 공용함수 이용.
@@ -112,11 +114,24 @@
 			return; 
 		}
 
+		// ------------------------------------------------------
+		// 주소가 선택되지 않으면 경고하고 함수중단.
+		// ------------------------------------------------------
+		if( getCheckedCnt( formObj.addr.value )==0 ){
+			alert("주소가 선택되지 않았습니다! 주소를 선택해주세요.");
+			return;
+
+
+
+
+
+
 		/* 공용함수 처리 전.
 		// ------------------------------------------------------
 		// 성별이 하나라도 체크가 안되어있으면 경고하고 함수중단
 		// ------------------------------------------------------
 		// 성별의 개수 얻어서 변수 genderCnt 에 저장하기
+		// ------------------------------------------------------
 		var genderCnt = formObj.gender.length;
 		// 성별의 체크 개수 저장하는 변수 checkedCnt 선언하고 0 저장.
 		var checkedCnt = 0;
@@ -436,6 +451,22 @@
 				<th bgcolor="lightyellow">암호</th>
 				<td><input type="password" name="pwd"></td>	
 			</tr>
+			
+			
+			<tr>
+				<th bgcolor="lightyellow">거주지</th>
+				<td>
+					<select name="addr">
+						<option value="">--선택요망--</option>
+						<option value="서울">서울</option>
+						<option value="경기">경기</option>
+						<option value="인천">인천</option>
+						<option value="기타">기타</option>
+					</select>
+				</td>
+			</tr>
+
+
 			<tr>
 				<th bgcolor="lightyellow">성별</th>
 				<td>
