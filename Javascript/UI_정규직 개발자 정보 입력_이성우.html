@@ -1,0 +1,1031 @@
+<html>
+<meta charset="UTF-8">
+<head>
+	<title></title>
+
+</head>
+
+
+<body>
+
+	<center>
+	<table border=4 align="left" bgcolor="lightyellow" style="border-collapse:collapse;" cellpadding=5 >
+		<tr>
+			<th width=1300>[정규직 입력]</th>
+		</tr>
+	</table>
+	</center>
+
+	<table>
+		<tr>
+			<td>
+				<br> 
+				1. 개인정보
+				<br>
+
+				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+					<tr>
+						<th bgcolor="lightyellow" >아이디</th>
+						<td width=200 ><input type="text" name="dev_id" size="20"></td>
+						<th bgcolor="lightyellow" >암호</th>
+						<td width=200 ><input type="text" name="dev_password" size="20"></td>
+						<th bgcolor="lightyellow" >암호확인</th>
+						<td width=200 ><input type="text" name="password_confirm" size="20"></td>
+					</tr>
+					<tr>
+						<th bgcolor="lightyellow" >이름</th>
+						<td><input type="text" name="dev_name" size="20"></td>
+						<th bgcolor="lightyellow" >주민번호</th>
+						<td><input type="text" name="dev_jumin_num" size="20"></td>
+						<th bgcolor="lightyellow" >핸드폰</th>
+						<td><input type="text" name="dev_phone_num" size="20"></td>
+					</tr>
+					<tr>
+						<th bgcolor="lightyellow" >이메일</th>
+						<td><input type="text" name="dev_email" size="20"></td>
+						<th bgcolor="lightyellow" >종교</th>
+						<td>
+							<select name="religion">
+								<option value="">----</option>
+								<option value="불교">불교</option>
+								<option value="기독교">기독교</option>
+								<option value="천주교">천주교</option>
+								<option value="이슬람교">이슬람교</option>
+								<option value="흰두교">흰두교</option>
+
+							</select>
+						</td>
+						<th bgcolor="lightyellow" >병역</th>
+						<td>
+							<select name="military service">
+								<option value="">----</option>
+								<option value="군필">군필</option>
+								<option value="미필">미필</option>
+								<option value="기타">기타</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th bgcolor="lightyellow" >주소</th>
+						<td colspan="5">
+							[우편번호] : <input type="text" name="zip_code" size="20">
+							[주소] : <input type="text" name="dev_addr" size="50">
+						</td>
+						<!-- <td></td>
+						<td></td>
+						<td></td>
+						<td></td> -->
+					</tr>
+					<tr>
+						<th bgcolor="lightyellow" >긴급연락처</th>
+						<td colspan="5">
+							[연락 받을 사람 이름] : <input type="text" name="emergency_name" size="20">
+							[관계] : <select name="emergency_relation">
+									<option value="">----</option>
+									<option value="아버지">아버지</option>
+									<option value="어머니">어머니</option>
+									<option value="형제">형제</option>
+									<option value="친척">친척</option>
+									<option value="지인">지인</option>
+									<option value="기타">기타</option>
+									</select>
+							(부모.형제.친척.지인)	
+							[전화번호]:	<input type="text" name="emergency_phone_num" size="20">
+						</td>
+						<!-- <td></td>
+						<td></td>
+						<td></td>
+						<td></td> -->
+					</tr>
+					<tr>
+						<th bgcolor="lightyellow" >월급통장번호</th>
+						<td colspan="5">
+							<select name="salary_bank_name">
+								<option value="">--은행선택--</option>
+								<option value="국민은행">국민은행</option>
+								<option value="대구은행">대구은행</option>
+								<option value="신한은행">신한은행</option>
+								<option value="기타">기타</option>
+							</select>
+							<input type="text" name="salary_bank_num" size="20">
+							(-없이 입력)
+						</td>
+						<!-- <td></td>
+						<td></td>
+						<td></td>
+						<td></td> -->
+					</tr>
+				</table>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				2. 학력 
+				<br>
+				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+					<tr>
+						<th bgcolor="lightyellow" width=350>학교명</th>
+						<th bgcolor="lightyellow" width=100>학부</th>
+						<th bgcolor="lightyellow" width=150>전공과목</th>
+						<th bgcolor="lightyellow" width=150>부전공과목</th>
+						<th bgcolor="lightyellow" width=200>졸업일</th>
+					</tr>
+					<tr>
+						<td height=30>
+							<input type="text" name="high_school_graduated" size="20">
+							고등학교 졸
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
+						<th>
+							<select name="high_school_graduated_y">
+								<option value="">----</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+							년
+							<select name="high_school_graduated_m">
+								<option value="">----</option>
+								<option value="1월">1월</option>
+								<option value="2월">2월</option>
+								<option value="3월">3월</option>
+								<option value="4월">4월</option>
+								<option value="5월">5월</option>
+								<option value="6월">6월</option>
+								<option value="7월">7월</option>
+								<option value="8월">8월</option>
+								<option value="9월">9월</option>
+								<option value="10월">10월</option>
+								<option value="11월">11월</option>
+								<option value="12월">12월</option>
+							</select>
+							월
+						</th>
+					</tr>
+					<tr>
+						<td height=30>
+							<input type="text" name="junior_college_graduated" size="20">
+							전문대 졸 (대학 졸)
+						</td>
+						<td>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="reference" size="20">
+						</td>
+						<td>
+							<input type="text" name="reference" size="20">
+						</td>
+						<th>
+							<select name="junior_college_graduated_y">
+								<option value="">----</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+							년
+							<select name="junior_college_graduated_m">
+								<option value="">----</option>
+								<option value="1월">1월</option>
+								<option value="2월">2월</option>
+								<option value="3월">3월</option>
+								<option value="4월">4월</option>
+								<option value="5월">5월</option>
+								<option value="6월">6월</option>
+								<option value="7월">7월</option>
+								<option value="8월">8월</option>
+								<option value="9월">9월</option>
+								<option value="10월">10월</option>
+								<option value="11월">11월</option>
+								<option value="12월">12월</option>
+							</select>
+							월
+						</th>
+					</tr>
+					<tr>
+						<td height=30>
+							<input type="text" name="university_graduated" size="20">
+							대학교 학사 졸
+						</td>
+						<td>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="reference" size="20">
+						</td>
+						<td>
+							<input type="text" name="reference" size="20">
+						</td>
+						<th>
+							<select name="university_graduated_y">
+								<option value="">----</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+							년
+							<select name="university_graduated_m">
+								<option value="">----</option>
+								<option value="1월">1월</option>
+								<option value="2월">2월</option>
+								<option value="3월">3월</option>
+								<option value="4월">4월</option>
+								<option value="5월">5월</option>
+								<option value="6월">6월</option>
+								<option value="7월">7월</option>
+								<option value="8월">8월</option>
+								<option value="9월">9월</option>
+								<option value="10월">10월</option>
+								<option value="11월">11월</option>
+								<option value="12월">12월</option>
+							</select>
+							월
+						</th>
+					</tr>
+					<tr>
+						<td height=30>
+							<input type="text" name="university_master_graduated" size="20">
+							대학교 석사 졸
+						</td>
+						<td>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="reference" size="20">
+						</td>
+						<td>
+							<input type="text" name="reference" size="20">
+						</td>
+						<th>
+							<select name="university_master_graduated_y">
+								<option value="">----</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+							년
+							<select name="university_master_graduated_m">
+								<option value="">----</option>
+								<option value="1월">1월</option>
+								<option value="2월">2월</option>
+								<option value="3월">3월</option>
+								<option value="4월">4월</option>
+								<option value="5월">5월</option>
+								<option value="6월">6월</option>
+								<option value="7월">7월</option>
+								<option value="8월">8월</option>
+								<option value="9월">9월</option>
+								<option value="10월">10월</option>
+								<option value="11월">11월</option>
+								<option value="12월">12월</option>
+							</select>
+							월
+						</th>
+					</tr>
+					<tr>
+						<td height=30>
+							<input type="text" name="university_doctor_graduated" size="20">
+							대학교 박사 졸
+						</td>
+						<td>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="reference" size="20">
+						</td>
+						<td>
+							<input type="text" name="reference" size="20">
+						</td>
+						<th>
+							<select name="university_doctor_graduated_y">
+								<option value="">----</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+							년
+							<select name="university_doctor_graduated_m">
+								<option value="">----</option>
+								<option value="1월">1월</option>
+								<option value="2월">2월</option>
+								<option value="3월">3월</option>
+								<option value="4월">4월</option>
+								<option value="5월">5월</option>
+								<option value="6월">6월</option>
+								<option value="7월">7월</option>
+								<option value="8월">8월</option>
+								<option value="9월">9월</option>
+								<option value="10월">10월</option>
+								<option value="11월">11월</option>
+								<option value="12월">12월</option>
+							</select>
+							월
+						</th>
+					</tr>
+				</table>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				*검정고시 출신은 고등학교명에 [검정고시] 라고 입력하십시오...
+				<br>
+				<br>
+				<br>
+				<br>
+				
+				3. 가족
+				<br>
+				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+					<tr>
+						<th bgcolor="lightyellow" width=200>관계</th>
+						<th bgcolor="lightyellow" width=200>이름</th>
+						<th bgcolor="lightyellow" width=200>직업</th>
+						<th bgcolor="lightyellow" width=200>출생년도</th>
+						<th bgcolor="lightyellow" width=200>동거여부</th>
+					</tr>
+					<tr>
+						<th height=40>
+							<select name="family_relation">
+								<option value="">----</option>
+								<option value="부">부</option>
+								<option value="모">모</option>
+								<option value="자">자</option>
+								<option value="기타">기타</option>
+							</select>
+						</th>
+						<th>
+							<input type="text" name="family_name" size="20">
+						</th>
+						<th>
+							<input type="text" name="family_jop" size="20">
+						</th>
+						<th>
+							<select name="birth_year">
+								<option value="">----</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+						</th>
+						<th>
+							<input type="checkbox" name="cohabitation"  value="동거">동거
+						</th>
+					</tr>
+				</table>
+				<br>
+				<br>
+				<br>
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				[행삭제]&nbsp;[행추가]
+				<br>
+				<br>
+				<br>
+				<br>
+				4. 회사경력
+				<br>
+				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+					<tr>
+						<th bgcolor="lightyellow" width=300>회사명/업무</th>
+						<th bgcolor="lightyellow" width=100>분야</th>
+						<th bgcolor="lightyellow" width=100>부서</th>
+						<th bgcolor="lightyellow" width=100>직위</th>
+						<th bgcolor="lightyellow" width=100>고용형태</th>
+						<th bgcolor="lightyellow" width=100>연봉</th>
+						<th bgcolor="lightyellow" width=300>입사일/퇴사일</th>
+					</tr>
+					<tr>
+						<td height=60>
+							회사명 : <input type="text" name="company_name" size="20">
+							<br>&nbsp;&nbsp;
+							업무 : <input type="text" name="reference" size="20">
+						</td>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</th>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</th>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</th>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</th>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+						</th>
+						<th>
+							입사일 : 
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							년
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							월
+							
+							<br>
+
+							퇴사일 : 
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							년
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							월
+
+						</th>
+					</tr>
+				</table>
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				[행삭제]&nbsp;[행추가]
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				5. 자격증
+				<br>
+				<table>
+					<tr>
+						<td>
+							<input type="checkbox" name="dev_skill"  value="운동">정보처리기사
+							<input type="checkbox" name="dev_skill"  value="여행">정보처리산업기사
+							<input type="checkbox" name="dev_skill"  value="독서">OCP
+							<input type="checkbox" name="dev_skill"  value="독서">SCJP
+							<input type="checkbox" name="dev_skill"  value="독서">OCJP
+							<input type="checkbox" name="dev_skill"  value="독서">CCNA
+							<input type="checkbox" name="dev_skill"  value="독서">MCSE
+							<input type="checkbox" name="dev_skill"  value="독서">MCDBA
+						</td>
+					</tr>
+				</table>
+				<br>
+				<br>
+				6. 외국어 (중급이상만 입력)
+				<br>
+				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+					<tr>
+						<th bgcolor="lightyellow">독해 가능 외국어</th>
+						<td>
+							<input type="checkbox" name="dev_skill"  value="운동">영어
+							<input type="checkbox" name="dev_skill"  value="여행">일어
+							<input type="checkbox" name="dev_skill"  value="독서">중국어
+							<input type="checkbox" name="dev_skill"  value="독서">불어
+							<input type="checkbox" name="dev_skill"  value="독서">독일어
+
+						</td>
+					</tr>
+					<tr>
+						<th bgcolor="lightyellow">회화 가능 외국어</th>
+						<td>
+							<input type="checkbox" name="dev_skill"  value="운동">영어
+							<input type="checkbox" name="dev_skill"  value="여행">일어
+							<input type="checkbox" name="dev_skill"  value="독서">중국어
+							<input type="checkbox" name="dev_skill"  value="독서">독일어
+						</td>
+					</tr>
+				</table>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				7. IT 교육센터
+				<br>
+				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+					<tr>
+						<th bgcolor="lightyellow" width=200>교육센터명</th>
+						<th bgcolor="lightyellow" width=200>교육기간</th>
+						<th bgcolor="lightyellow" width=400>교육수료일</th>
+						<th bgcolor="lightyellow" width=300>수료과목</th>
+					</tr>
+					<tr>
+						<th><input type="text" name="reference" size="20"></th>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							개월
+						</th>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							년
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							월
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							일
+						</th>
+						<td>
+							<input type="checkbox" name="hobby"  value="HTML">HTML
+							<input type="checkbox" name="hobby"  value="Javascript">Javascript
+							<input type="checkbox" name="hobby"  value="JQuery">JQuery
+							<br> 
+							<input type="checkbox" name="hobby"  value="Java">Java
+							<input type="checkbox" name="hobby"  value="JSP">JSP
+							<input type="checkbox" name="hobby"  value="Spring">Spring
+							<br> 
+							<input type="checkbox" name="hobby"  value="Oracle">Oracle
+							<input type="checkbox" name="hobby"  value="MSSQL">MSSQL
+							<input type="checkbox" name="hobby"  value="MYSQL">MYSQL
+
+						</td>
+					</tr>
+				</table>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				8. 기호
+				<br>
+				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+					<tr>
+						<th bgcolor="lightyellow" width=150>하루흡연량</th>
+						<th bgcolor="lightyellow" width=150>소주주량</th>
+						<th bgcolor="lightyellow" width=150>맥주주량</th>
+						<th bgcolor="lightyellow" width=350>관심분야</th>
+					</tr>
+					<tr>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							갑
+						</th>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							병
+						</th>
+						<th>
+							<select name="addr">
+								<option value="">----</option>
+								<option value="서울">서울</option>
+								<option value="경기">경기</option>
+								<option value="인천">인천</option>
+								<option value="기타">기타</option>
+							</select>
+							잔
+						</th>
+						<th>
+							<input type="checkbox" name="dev_skill"  value="운동">정치
+							<input type="checkbox" name="dev_skill"  value="여행">경제
+							<input type="checkbox" name="dev_skill"  value="독서">사회
+							<input type="checkbox" name="dev_skill"  value="독서">문화
+						</th>
+					</tr>
+				</table>
+				<br>
+				<br>
+				<br>
+				<br>
+				9. 취미 
+				<br>
+				<table align="left">
+					<tr>
+						<td><input type="text" name="reference" size="20"></td>
+						<td><input type="text" name="reference" size="20"></td>
+						<td><input type="text" name="reference" size="20"></td>
+					</tr>
+				</table>
+				<br>
+				<br>
+				10. 개발 경력
+				<br>
+				<table  border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+					<tr>
+						<th rowspan="2" bgcolor="lightyellow" width=300>프로젝트명 / 기간</th>
+						<th rowspan="2" bgcolor="lightyellow" width=300>고객사 / 근무사 / 역할</th>
+						<th bgcolor="lightyellow" width=600>개 발 환 경</th>
+					</tr>
+					<tr>
+						<!-- <td></td> -->
+						<!-- <td></td> -->
+						<th bgcolor="lightyellow">기종/OS/언어/DBMS/TOOL/기타</th>
+					</tr>
+					<tr>
+						<td height=300>
+
+							<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+								<tr>
+									<th bgcolor="lightyellow" width=100>프로젝트명</th>
+								</tr>
+							</table>
+							
+							<table >
+								<tr>
+									<th width=100><input type="text" name="reference" size="20"></th>
+								</tr>
+							</table>
+							<br>
+							
+							<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+								<tr>
+									<th bgcolor="lightyellow" width=100>시작일</th>
+								</tr>
+							</table><br><br>
+
+							<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+								<tr>
+									<th bgcolor="lightyellow" width=100>종료일</th>
+								</tr>
+							</table>
+
+						</td>
+						<td>
+
+							<table>
+								<tr>
+									<td>
+										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+											<tr>
+												<td bgcolor="lightyellow">고객사</td>
+											</tr>
+										</table>
+									</td>
+									<td>
+										<input type="text" name="reference" size="20">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+											<tr>
+												<td bgcolor="lightyellow">근무사</td>
+											</tr>
+										</table>
+									</td>
+									<td>
+										<input type="text" name="reference" size="20">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+											<tr>
+												<td bgcolor="lightyellow">역할</td>
+											</tr>
+										</table>
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="checkbox" name="hobby"  value="운동">개발
+										<input type="checkbox" name="hobby"  value="운동">운영
+										<input type="checkbox" name="hobby"  value="운동">유지보수
+										<br>
+										<input type="checkbox" name="hobby"  value="운동">분석설계
+										<br>
+										<input type="checkbox" name="hobby"  value="운동">PM
+										<input type="checkbox" name="hobby"  value="운동">웹디
+									</td>
+									<!-- <td></td> -->
+								</tr>
+							</table>
+
+						</td>
+						<td>
+							<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+								<tr>
+									<th bgcolor="lightyellow">서버기종(H/W)</th>
+									<td width=450>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th bgcolor="lightyellow">OS</th>
+									<td>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th bgcolor="lightyellow">언어</th>
+									<td>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th bgcolor="lightyellow">프레임워크</th>
+									<td>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th bgcolor="lightyellow">DBMS</th>
+									<td>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th bgcolor="lightyellow">개발 툴</th>
+									<td>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th bgcolor="lightyellow">기타</th>
+									<td>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</td>
+		</tr>
+	</table>
+	<br>
+	<center>
+	<input type="button" value="저장" onclick="checkfreelancer();" style="background-color:lightyellow; border:1px solid rgb(87, 86, 85); width:160pt; " >
+	</center>
+
+	
+
+
+</body>
+
+
+</html>
