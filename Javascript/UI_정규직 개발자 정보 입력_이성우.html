@@ -11,16 +11,20 @@
 	<center>
 	<table border=4 align="left" bgcolor="lightyellow" style="border-collapse:collapse;" cellpadding=5 >
 		<tr>
-			<th width=1300>[정규직 입력]</th>
+			<th width=1300><span style = " font-size:25;  color: rgb(0, 0, 0);">[정규직 입력]</span></th>
 		</tr>
 	</table>
 	</center>
+	
+	<br>
+	<br>
+	<br>
 
-	<table>
+	<table  border=0 align="left" style="border-collapse:collapse;" cellpadding=5 width=1280>
 		<tr>
 			<td>
 				<br> 
-				1. 개인정보
+				<b>1. 개인정보</b>
 				<br>
 
 				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
@@ -126,7 +130,7 @@
 				<br>
 				<br>
 				<br>
-				2. 학력 
+				<b>2. 학력</b> 
 				<br>
 				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 					<tr>
@@ -183,19 +187,19 @@
 							전문대 졸 (대학 졸)
 						</td>
 						<td>
-							<select name="addr">
+							<select name="junior_dep">
 								<option value="">----</option>
-								<option value="서울">서울</option>
-								<option value="경기">경기</option>
-								<option value="인천">인천</option>
+								<option value="행정">행정</option>
+								<option value="정치">정치</option>
+								<option value="경제">경제</option>
 								<option value="기타">기타</option>
 							</select>
 						</td>
 						<td>
-							<input type="text" name="reference" size="20">
+							<input type="text" name="junior_major_subj" size="20">
 						</td>
 						<td>
-							<input type="text" name="reference" size="20">
+							<input type="text" name="junior_minor_subj" size="20">
 						</td>
 						<th>
 							<select name="junior_college_graduated_y">
@@ -230,19 +234,19 @@
 							대학교 학사 졸
 						</td>
 						<td>
-							<select name="addr">
+							<select name="university_dep">
 								<option value="">----</option>
-								<option value="서울">서울</option>
-								<option value="경기">경기</option>
-								<option value="인천">인천</option>
+								<option value="행정">행정</option>
+								<option value="정치">정치</option>
+								<option value="경제">경제</option>
 								<option value="기타">기타</option>
 							</select>
 						</td>
 						<td>
-							<input type="text" name="reference" size="20">
+							<input type="text" name="university_major_subj" size="20">
 						</td>
 						<td>
-							<input type="text" name="reference" size="20">
+							<input type="text" name="university_minor_subj" size="20">
 						</td>
 						<th>
 							<select name="university_graduated_y">
@@ -279,9 +283,9 @@
 						<td>
 							<select name="addr">
 								<option value="">----</option>
-								<option value="서울">서울</option>
-								<option value="경기">경기</option>
-								<option value="인천">인천</option>
+								<option value="행정">행정</option>
+								<option value="정치">정치</option>
+								<option value="경제">경제</option>
 								<option value="기타">기타</option>
 							</select>
 						</td>
@@ -376,14 +380,21 @@
 				<br>
 				<br>
 				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				*검정고시 출신은 고등학교명에 [검정고시] 라고 입력하십시오...
-				<br>
-				<br>
+				
+				<table border=0 align="left" style="border-collapse:collapse;" cellpadding=1>
+					<center>
+					<tr>
+						<td colspan="3" align="right" width=650>
+							*검정고시 출신은 고등학교명에 [검정고시] 라고 입력하십시오...
+						</td>
+					</tr>
+					</center>
+				</table>
+				
 				<br>
 				<br>
 				
-				3. 가족
+				<b>3. 가족</b>
 				<br>
 				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 					<tr>
@@ -427,17 +438,17 @@
 				<br>
 				<br>
 				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				[행삭제]&nbsp;[행추가]
+				<table border=0 align="center" style="border-collapse:collapse;" cellpadding=0>
+					<center>
+					<tr>
+						<td colspan="3" width=200>
+							[행삭제] [행추가]
+						</td>
+					</tr>
+					</center>
+				</table>
 				<br>
-				<br>
-				<br>
-				<br>
-				4. 회사경력
+				<b>4. 회사경력</b>
 				<br>
 				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 					<tr>
@@ -450,10 +461,11 @@
 						<th bgcolor="lightyellow" width=300>입사일/퇴사일</th>
 					</tr>
 					<tr>
-						<td height=60>
-							회사명 : <input type="text" name="company_name" size="20">
+						<td align="right" height=60>
+							회사명 : <input type="text" name="company_name" size="20">&nbsp;&nbsp;&nbsp;
 							<br>&nbsp;&nbsp;
 							업무 : <input type="text" name="reference" size="20">
+							&nbsp;&nbsp;
 						</td>
 						<th>
 							<select name="addr">
@@ -543,56 +555,62 @@
 					</tr>
 				</table>
 				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				[행삭제]&nbsp;[행추가]
 				<br>
 				<br>
 				<br>
 				<br>
-				<br>
-				5. 자격증
+
+				<table border=0 align="center" style="border-collapse:collapse;" cellpadding=0>
+					<center>
+					<tr>
+						<td colspan="3" width=200>
+							[행삭제] [행추가]
+						</td>
+					</tr>
+					</center>
+				</table>
+
+				
+				<b>5. 자격증</b>
 				<br>
 				<table>
 					<tr>
 						<td>
-							<input type="checkbox" name="dev_skill"  value="운동">정보처리기사
-							<input type="checkbox" name="dev_skill"  value="여행">정보처리산업기사
-							<input type="checkbox" name="dev_skill"  value="독서">OCP
-							<input type="checkbox" name="dev_skill"  value="독서">SCJP
-							<input type="checkbox" name="dev_skill"  value="독서">OCJP
-							<input type="checkbox" name="dev_skill"  value="독서">CCNA
-							<input type="checkbox" name="dev_skill"  value="독서">MCSE
-							<input type="checkbox" name="dev_skill"  value="독서">MCDBA
+							<input type="checkbox" name="dev_skill"  value="정보처리기사">정보처리기사&nbsp;&nbsp;
+							<input type="checkbox" name="dev_skill"  value="정보처리산업기사">정보처리산업기사&nbsp;&nbsp;
+							<input type="checkbox" name="dev_skill"  value="OCP">OCP&nbsp;&nbsp;
+							<input type="checkbox" name="dev_skill"  value="SCJP">SCJP&nbsp;&nbsp;
+							<input type="checkbox" name="dev_skill"  value="OCJP">OCJP&nbsp;&nbsp;
+							<input type="checkbox" name="dev_skill"  value="CCNA">CCNA&nbsp;&nbsp;
+							<input type="checkbox" name="dev_skill"  value="MCSE">MCSE&nbsp;&nbsp;
+							<input type="checkbox" name="dev_skill"  value="MCDBA">MCDBA&nbsp;&nbsp;
 						</td>
 					</tr>
 				</table>
 				<br>
 				<br>
-				6. 외국어 (중급이상만 입력)
+				<b>6. 외국어 (중급이상만 입력)</b>
 				<br>
 				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 					<tr>
-						<th bgcolor="lightyellow">독해 가능 외국어</th>
-						<td>
-							<input type="checkbox" name="dev_skill"  value="운동">영어
-							<input type="checkbox" name="dev_skill"  value="여행">일어
-							<input type="checkbox" name="dev_skill"  value="독서">중국어
-							<input type="checkbox" name="dev_skill"  value="독서">불어
-							<input type="checkbox" name="dev_skill"  value="독서">독일어
+						<th bgcolor="lightyellow" width=200 height=50>독해 가능 외국어</th>
+						<td width=350>
+							<input type="checkbox" name="dev_skill"  value="영어">영어
+							<input type="checkbox" name="dev_skill"  value="일어">일어
+							<input type="checkbox" name="dev_skill"  value="중국어">중국어
+							<input type="checkbox" name="dev_skill"  value="불어">불어
+							<input type="checkbox" name="dev_skill"  value="독일어">독일어
 
 						</td>
 					</tr>
 					<tr>
-						<th bgcolor="lightyellow">회화 가능 외국어</th>
+						<th bgcolor="lightyellow" width=200 height=50>회화 가능 외국어</th>
 						<td>
-							<input type="checkbox" name="dev_skill"  value="운동">영어
-							<input type="checkbox" name="dev_skill"  value="여행">일어
-							<input type="checkbox" name="dev_skill"  value="독서">중국어
-							<input type="checkbox" name="dev_skill"  value="독서">독일어
+							<input type="checkbox" name="dev_skill"  value="영어">영어
+							<input type="checkbox" name="dev_skill"  value="일어">일어
+							<input type="checkbox" name="dev_skill"  value="중국어">중국어
+							<input type="checkbox" name="dev_skill"  value="불어">불어
+							<input type="checkbox" name="dev_skill"  value="독일어">독일어
 						</td>
 					</tr>
 				</table>
@@ -601,7 +619,9 @@
 				<br>
 				<br>
 				<br>
-				7. IT 교육센터
+				<br>
+
+				<b>7. IT 교육센터</b>
 				<br>
 				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 					<tr>
@@ -611,7 +631,7 @@
 						<th bgcolor="lightyellow" width=300>수료과목</th>
 					</tr>
 					<tr>
-						<th><input type="text" name="reference" size="20"></th>
+						<th><input type="text" name="reference" size="20" style="height: 30px;"></th>
 						<th>
 							<select name="addr">
 								<option value="">----</option>
@@ -670,7 +690,7 @@
 				<br>
 				<br>
 				<br>
-				8. 기호
+				<b>8. 기호</b>
 				<br>
 				<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 					<tr>
@@ -722,7 +742,7 @@
 				<br>
 				<br>
 				<br>
-				9. 취미 
+				<b>9. 취미</b> 
 				<br>
 				<table align="left">
 					<tr>
@@ -733,9 +753,9 @@
 				</table>
 				<br>
 				<br>
-				10. 개발 경력
+				<b>10. 개발 경력</b>
 				<br>
-				<table  border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+				<table  border=1 align="left" style="border-collapse:collapse;" cellpadding=5 width=1280>
 					<tr>
 						<th rowspan="2" bgcolor="lightyellow" width=300>프로젝트명 / 기간</th>
 						<th rowspan="2" bgcolor="lightyellow" width=300>고객사 / 근무사 / 역할</th>
@@ -749,64 +769,112 @@
 					<tr>
 						<td height=300>
 
-							<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+							<table border=0 align="left" style="border-collapse:collapse;" cellpadding=5>
 								<tr>
-									<th bgcolor="lightyellow" width=100>프로젝트명</th>
+									<td>
+										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+											<tr>
+												<th bgcolor="lightyellow" width=100>프로젝트명</th>
+											</tr>
+										</table>
+									</td>
+									<td>
+										<table >
+											<tr>
+												<th width=100><input type="text" name="reference" size="20" style="height: 32px;"></th>
+											</tr>
+										</table>
+									</td>
 								</tr>
-							</table>
-							
-							<table >
 								<tr>
-									<th width=100><input type="text" name="reference" size="20"></th>
+									<td>
+										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+											<tr>
+												<th bgcolor="lightyellow" width=100>시작일</th>
+											</tr>
+										</table>
+									</td>
+									<td>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										년
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										월
+									</td>
 								</tr>
-							</table>
-							<br>
-							
-							<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 								<tr>
-									<th bgcolor="lightyellow" width=100>시작일</th>
-								</tr>
-							</table><br><br>
-
-							<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
-								<tr>
-									<th bgcolor="lightyellow" width=100>종료일</th>
+									<td>
+										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
+											<tr>
+												<th bgcolor="lightyellow" width=100>종료일</th>
+											</tr>
+										</table>
+									</td>
+									<td>
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										년
+										<select name="addr">
+											<option value="">----</option>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="기타">기타</option>
+										</select>
+										월
+									</td>
 								</tr>
 							</table>
 
 						</td>
 						<td>
 
-							<table>
+							<table border=0 align="left" style="border-collapse:collapse;" cellpadding=5>
 								<tr>
 									<td>
 										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 											<tr>
-												<td bgcolor="lightyellow">고객사</td>
+												<th bgcolor="lightyellow" width=80>고객사</th>
 											</tr>
 										</table>
 									</td>
 									<td>
-										<input type="text" name="reference" size="20">
+										<input type="text" name="reference" size="20" style="height: 32px;">
 									</td>
 								</tr>
 								<tr>
 									<td>
 										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 											<tr>
-												<td bgcolor="lightyellow">근무사</td>
+												<th bgcolor="lightyellow" width=80>근무사</th>
 											</tr>
 										</table>
 									</td>
 									<td>
-										<input type="text" name="reference" size="20">
+										<input type="text" name="reference" size="20" style="height: 32px;">
 									</td>
 								</tr>
 								<tr>
 									<td>
 										<table border=1 align="left" style="border-collapse:collapse;" cellpadding=5>
 											<tr>
-												<td bgcolor="lightyellow">역할</td>
+												<th bgcolor="lightyellow" width=80>역할</th>
 											</tr>
 										</table>
 									</td>
@@ -995,6 +1063,28 @@
 						</td>
 					</tr>
 				</table>
+				<br>
+				
+				<table border=0 align="center"  style="border-collapse:collapse;" cellpadding=1>
+					<center>
+					<tr>
+						<td colspan="3" width=200>
+							[행삭제] [행추가]
+						</td>
+					</tr>
+					</center>
+				</table>
+
+				<table border=0 align="center" style="border-collapse:collapse;" cellpadding=5>
+					<center>
+					<tr>
+						<th colspan="3" height=80>
+							<input type="button" value="저장" onclick="checkfreelancer();" style="background-color:lightyellow; border:1px solid rgb(87, 86, 85); width:160pt; " >
+						</th>
+					</tr>
+					</center>
+				</table>
+
 
 
 
@@ -1017,13 +1107,6 @@
 			</td>
 		</tr>
 	</table>
-	<br>
-	<center>
-	<input type="button" value="저장" onclick="checkfreelancer();" style="background-color:lightyellow; border:1px solid rgb(87, 86, 85); width:160pt; " >
-	</center>
-
-	
-
 
 </body>
 
