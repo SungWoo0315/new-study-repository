@@ -3,10 +3,69 @@
 <head>
 	<title></title>
 
+	<!--------------------------------------------------------->	
+	<!-- common_func.js 파일안의 자스코딩 수입하기 import-->
+	<!--------------------------------------------------------->
+	<script src="common_func.js"></script>
+
+	<script>
+		function checkDevRegForm(){
+
+			// var xxx = isEmpty(3);
+
+			// return;
+
+			var formObj = document.devRegForm;
+			
+			var dev_id = formObj.dev_id.value;
+			
+			
+			// ------------------------------------------------------
+			// 아이디 유효성 체크
+			// ------------------------------------------------------
+			if( isValidPattern(/^[a-z][a-z0-9_]{4,9}$/, dev_id)==false ){
+				alert("아이디는 영소문자로 시작하고 영소문자 또는 숫자 또는 _ 로 5~10자로 구성되야합니다.");
+				// ------------------------------------------------------
+				// <form name = memberRegForm ~> 태그 안의 
+				// <input type="text" name="dev_id" ~> 태그가 실행되어 출력되는 입력양식에 값을 비우기.
+				// ------------------------------------------------------
+				formObj.dev_id.value = "";
+				// ------------------------------------------------------
+				// <form name = memberRegForm ~> 태그 안의 
+				// <input type="text" name="dev_id" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
+				// ------------------------------------------------------
+				formObj.dev_id.focus();
+				// ------------------------------------------------------
+
+				// 함수 중단.
+				return; 
+			}
+
+
+
+
+
+			// ------------------------------------------------------
+			// confirm 함수 호출로 confirm 상자를 열고 확인 버튼을 누르면
+			// ------------------------------------------------------
+			if( confirm("정말 저장하시겠습니까?") ){
+				alert("저장 성공!");
+				return;
+			}
+
+
+
+
+
+		}
+	</script>
+
 </head>
 
 
 <body>
+
+	<form name="devRegForm">
 
 	<center>
 	<table border=4 align="left" bgcolor="lightyellow" style="border-collapse:collapse;" cellpadding=5 >
@@ -1278,7 +1337,7 @@
 					<center>
 					<tr>
 						<th colspan="3" height=80>
-							<input type="button" value="저장" onclick="checkfreelancer();" style="background-color:lightyellow; border:1px solid rgb(87, 86, 85); width:160pt; " >
+							<input type="button" value="저장" onclick="checkDevRegForm();" style="background-color:lightyellow; border:1px solid rgb(87, 86, 85); width:160pt; " >
 						</th>
 					</tr>
 					</center>
@@ -1306,7 +1365,7 @@
 			</td>
 		</tr>
 	</table>
-
+</form>
 </body>
 
 
