@@ -49,11 +49,6 @@ class Student {
     public String getjumin_num( ){
         return this.jumin_num;
     }
-
-
-
-
-
 }
 /*
 **************************************
@@ -78,8 +73,5 @@ class Student {
         <주의> 생성자가 없다.  
         객체 생성 목적으로 만들어지지 않았다.  
         클래스의 설계도 역할을 한다.  
-
-
-
 
 */
