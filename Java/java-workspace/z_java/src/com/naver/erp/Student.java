@@ -17,8 +17,8 @@ class Student {
     private int stu_no;
     private String stu_name;
     private String jumin_num;
-    private double weight;
-    private double tall;
+    // private double weight;
+    // private double tall;
     
     // --------------------------
     // 생성자 선언하기
