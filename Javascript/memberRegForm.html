@@ -19,9 +19,9 @@
 	// *********************************************************
 	function checkMemRegForm(){
 
-		var xxx = isEmpty(3);
+		// var xxx = isEmpty(3);	// 예외처리 확인할때 사용.
 
-		return;
+		// return;					// 예외처리 확인할때 사용.
 
 		// ------------------------------------------------------
 		// 변수 fromObj 선언하고 <form name="memberRegForm"> 태그를 관리하는
@@ -472,7 +472,7 @@
 			<tr>
 				<th bgcolor="lightyellow">거주지</th>
 				<td>
-					<select name="addr">
+					<select name="addr" size=5 multiple>
 						<option value="">--선택요망--</option>
 						<option value="서울">서울</option>
 						<option value="경기">경기</option>
