@@ -202,3 +202,37 @@
 */
 
 
+
+	//------------------------------------------------------------------------
+	// 현재시점 날짜의 요일
+	//------------------------------------------------------------------------
+	
+	function getTodayWeek(){
+		var today = new Date();
+		var weekNo = today.getDay();
+		var week = "일요일";
+		if( weekNo==1 ){
+			week = "월요일";
+		}
+		else if( weekNo==2 ){
+			week = "화요일";
+		}
+		else if( weekNo==3 ){
+			week = "수요일";
+		}
+		else if( weekNo==4 ){
+			week = "목요일";
+		}
+		else if( weekNo==5 ){
+			week = "금요일";
+		}
+		else if( weekNo==6 ){
+			week = "토요일";
+		}
+		return week;
+	}
+
+
+
+
+
