@@ -3,10 +3,23 @@
 <head>
 	<title></title>
 
+	<!--------------------------------------------------------->
+	<!-- common_func.js import-->
+	<!--------------------------------------------------------->
+	<script src="common_func.js"></script>
+
+	<script>
+
+		function openMessage(){
+			var week = getTodayWeek();
+			alert(week);
+		}
+
+	</script>
 </head>
 
 
-<body>
+<body onload="openMessage()">
 	<center>
 
 	[게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
