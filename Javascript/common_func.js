@@ -324,6 +324,7 @@
 	//------------------------------------------------------------------------
 	function deleteBlank( str ){
 		try{	
+				// str =undefined; 예외처리 작동하는지 테스트 하는 코드.
 				var result = "";
 
 				for (var i=0; i<str.length; i++){
