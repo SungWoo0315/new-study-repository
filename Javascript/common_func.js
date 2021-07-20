@@ -274,15 +274,15 @@
 
 
 	//------------------------------------------------------------------------
-	// 
+	// 매개변수로 들어온 날짜문자가 오늘날짜와 동일하면, true 리턴하는 함수. 아니면 false 리턴.
 	//------------------------------------------------------------------------
 	function isToday( dateStr ){
 		try{
 			var arr = dateStr.split("-");
 			// ----------------------------------
-			var year = arr[0];
-			var month = arr[1];
-			var date = arr[2];
+			var year = arr[0];		year = year.trim();		// trim() 앞뒤 공백 제거.
+			var month = arr[1];		month = month.trim();
+			var date = arr[2];		date = date.trim();
 			// ----------------------------------
 			year = parseInt(year, 10);
 			month = parseInt(month, 10);
