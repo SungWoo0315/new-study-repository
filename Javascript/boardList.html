@@ -1,285 +1,285 @@
 <html>
 <meta charset="UTF-8">
 <head>
-	<title></title>
+    <title></title>
 
-	<!--------------------------------------------------------->
-	<!-- common_func.js import-->
-	<!--------------------------------------------------------->
-	<script src="common_func.js"></script>
-	<script src="common_data.js"></script>
+    <!--------------------------------------------------------->
+    <!-- common_func.js import-->
+    <!--------------------------------------------------------->
+    <script src="common_func.js"></script>
+    <script src="common_data.js"></script>
 
 
-	<script>
-		// -------------------------------------------------
-		// 요일별 메시지를 보여주는 openMessage 함수 선언하기
-		// -------------------------------------------------
-		function openWeekMessage(){
-			// ---------------------------
-			// week 변수 선언. getTodayWeek() 함수 호출로 현재요일 얻어 week 변수에 저장하기
-			// ---------------------------
-			var week = getTodayWeek(); 
-			// week = "금요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
-			// week = "수요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
-			// week = "목요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
+    <script>
+        // -------------------------------------------------
+        // 요일별 메시지를 보여주는 openMessage 함수 선언하기
+        // -------------------------------------------------
+        function openWeekMessage(){
+            // ---------------------------
+            // week 변수 선언. getTodayWeek() 함수 호출로 현재요일 얻어 week 변수에 저장하기
+            // ---------------------------
+            var week = getTodayWeek(); 
+            // week = "금요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
+            // week = "수요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
+            // week = "목요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
 
-			// ---------------------------
-			// msg 변수 선언. 공용 함수 안의 weekMsg 라는 변수에 저장된
-			// JSON 객체 안에서 week 변수안의 문자를 키값으로 가지고 있는 놈의 대응 문자 얻어
-			// 변수 msg 에 저장하기.  
-			// ---------------------------
-			var msg = weekMsg[week];
-			// ---------------------------
-			// 경고창 띄우기
-			// ---------------------------
-			// alert(msg);  //요일별 메세지 잠시 주석처리.  
-		}
-		
-		// 주석처리. 밑의 함수와 같은것. 지우지 말고 비교 참고하기.  
-		// function getScheduleMsg(){
-		// 	// common_data.js 파일 안의 scheduleMsg 변수의 2차원 Array 객체 안을 검색  
-			
-		// 	/* 모든 날짜와 메세지 순서대로 출력. 주석처리.
-		// 	for( var i=0; i<scheduleMsg.length; i++){
-		// 		for( var j=0; j<scheduleMsg[i].length; j++ ){
-		// 			var data = scheduleMsg[i][j];
-		// 			alert(data)
-		// 		}
-		// 	}
-		// 	*/
-		// 	// return "아휴 덥다.";
+            // ---------------------------
+            // msg 변수 선언. 공용 함수 안의 weekMsg 라는 변수에 저장된
+            // JSON 객체 안에서 week 변수안의 문자를 키값으로 가지고 있는 놈의 대응 문자 얻어
+            // 변수 msg 에 저장하기.  
+            // ---------------------------
+            var msg = weekMsg[week];
+            // ---------------------------
+            // 경고창 띄우기
+            // ---------------------------
+            // alert(msg);  //요일별 메세지 잠시 주석처리.  
+        }
+        
+        // 주석처리. 밑의 함수와 같은것. 지우지 말고 비교 참고하기.  
+        // function getScheduleMsg(){
+        // 	// common_data.js 파일 안의 scheduleMsg 변수의 2차원 Array 객체 안을 검색  
+            
+        // 	/* 모든 날짜와 메세지 순서대로 출력. 주석처리.
+        // 	for( var i=0; i<scheduleMsg.length; i++){
+        // 		for( var j=0; j<scheduleMsg[i].length; j++ ){
+        // 			var data = scheduleMsg[i][j];
+        // 			alert(data)
+        // 		}
+        // 	}
+        // 	*/
+        // 	// return "아휴 덥다.";
 
-		// 	// 누적시켜서 출력하는 방법.
-		// 	var tot_msg = "";
-		// 	for( var i=0; i<scheduleMsg.length; i++){
-		// 		var date = scheduleMsg[i][0];
-		// 		var msg = scheduleMsg[i][1];
-		// 		if( isToday(date) ){
-		// 		// if( date == "2021-11-03" ){		// 테스트. 특정 날짜만 보고싶을때 이런식으로 한다. 주석처리.
+        // 	// 누적시켜서 출력하는 방법.
+        // 	var tot_msg = "";
+        // 	for( var i=0; i<scheduleMsg.length; i++){
+        // 		var date = scheduleMsg[i][0];
+        // 		var msg = scheduleMsg[i][1];
+        // 		if( isToday(date) ){
+        // 		// if( date == "2021-11-03" ){		// 테스트. 특정 날짜만 보고싶을때 이런식으로 한다. 주석처리.
 
-		// 			// alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
-		// 			tot_msg = tot_msg + msg; // tot_msg 안에 누적시키기. 
-		// 									 // 메모리 낭비가 심한 방법. 
-		// 									 // 특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
-		// 		}
-		// 	}
-		// 	return tot_msg;
-		// }	
+        // 			// alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
+        // 			tot_msg = tot_msg + msg; // tot_msg 안에 누적시키기. 
+        // 									 // 메모리 낭비가 심한 방법. 
+        // 									 // 특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
+        // 		}
+        // 	}
+        // 	return tot_msg;
+        // }	
 
-		// 누적시켜서 출력하는 다른 방법. Array 사용해서 배열안에 누적시켜서 출력하기.  
-		function getScheduleMsg(){
-			var arr = [];
-			for( var i=0; i<scheduleMsg.length; i++){
-				var date = scheduleMsg[i][0];
-				var msg = scheduleMsg[i][1];
-				if( isToday(date) ){
-					// alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
-					arr.push(msg); // arr 안에 누적시키기. 
-									//특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
-				}
-			}	
-			return arr.join(" <br><br> ");	// arr 에 join 사용해서 배열 붙여서 출력하기
-											// 중간에 <br>을 넣어주어 이어 붙인 사이에 줄바꿈을 해준다.
-		}
+        // 누적시켜서 출력하는 다른 방법. Array 사용해서 배열안에 누적시켜서 출력하기.  
+        function getScheduleMsg(){
+            var arr = [];
+            for( var i=0; i<scheduleMsg.length; i++){
+                var date = scheduleMsg[i][0];
+                var msg = scheduleMsg[i][1];
+                if( isToday(date) ){
+                    // alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
+                    arr.push(msg); // arr 안에 누적시키기. 
+                                    //특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
+                }
+            }	
+            return arr.join(" <br><br> ");	// arr 에 join 사용해서 배열 붙여서 출력하기
+                                            // 중간에 <br>을 넣어주어 이어 붙인 사이에 줄바꿈을 해준다.
+        }
 
-	</script>
+    </script>
 </head>
 
 
 <body onload="openWeekMessage();getScheduleMsg();">
-	<center>
+    <center>
 
-	[게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	
-	<!-- ------------------------------------------------------------------- -->
-	<!-- a 태그로 [새글쓰기] 를 끌어안아서 클릭하면 boardRegForm.html 문서 열기  -->
-	<!-- ------------------------------------------------------------------- -->
-	<!-- <a href="boardRegForm.html">[새 글쓰기]</a><br><br> -->
-	<!-- ------------------------------------------------------------------- -->
+    [게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    <!-- ------------------------------------------------------------------- -->
+    <!-- a 태그로 [새글쓰기] 를 끌어안아서 클릭하면 boardRegForm.html 문서 열기  -->
+    <!-- ------------------------------------------------------------------- -->
+    <!-- <a href="boardRegForm.html">[새 글쓰기]</a><br><br> -->
+    <!-- ------------------------------------------------------------------- -->
 
-	<!-- ------------------------------------------------------------------- -->
-	<!-- span 태그로 [새글쓰기] 를 끌어안아서 클릭하면 boardRegForm.html 문서 열기  -->
-	<!-- <태그명 on이벤트명="자스코딩"> -->
-	<!-- ------------------------------------------------------------------- -->
-	<span style="cursor: pointer;" onClick="location.replace('boardRegForm.html')">[새글쓰기]</span>
-	
-	<!-- ------------------------------------------------------------------- -->
-	<!-- span 태그로 [로그아웃] 를 끌어안아서 클릭하면 loginForm.html 문서 열기  -->
-	<!-- <태그명 on이벤트명="자스코딩"> -->
-	<!-- ------------------------------------------------------------------- -->
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<span style="cursor: pointer;" onClick="location.replace('loginForm.html')">[로그아웃]</span>
+    <!-- ------------------------------------------------------------------- -->
+    <!-- span 태그로 [새글쓰기] 를 끌어안아서 클릭하면 boardRegForm.html 문서 열기  -->
+    <!-- <태그명 on이벤트명="자스코딩"> -->
+    <!-- ------------------------------------------------------------------- -->
+    <span style="cursor: pointer;" onClick="location.replace('boardRegForm.html')">[새글쓰기]</span>
+    
+    <!-- ------------------------------------------------------------------- -->
+    <!-- span 태그로 [로그아웃] 를 끌어안아서 클릭하면 loginForm.html 문서 열기  -->
+    <!-- <태그명 on이벤트명="자스코딩"> -->
+    <!-- ------------------------------------------------------------------- -->
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="cursor: pointer;" onClick="location.replace('loginForm.html')">[로그아웃]</span>
 
 
-	<table border=0 style="border-collapse:collapse" cellpadding=5 >
-	<tr bgcolor="lightgray" style="cursor:pointer" >
-		<th>번호</th>
-		<th width=300>제목</th>
-		<th>성명</th>
-		<th>작성일</th>
-		<th>조회수</th>
-	</tr>
-	<tr style="cursor:pointer" onClick="location.replace('boardContentForm1.html');">
-		<td>6</td>
-		<td>청년실직문제는 대기업문제</td>
-		<td>설현</td>
-		<td>2011.12.06</td>
-		<td>0</td>
-	</tr>
-	<tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm2.html');">
-		<td>5</td>
-		<td>경제 침체의 원인</td>
-		<td>사오정</td>
-		<td>2011.12.01</td>
-		<td>2</td>
-	</tr>
-	<tr style="cursor:pointer" onClick="location.replace('boardContentForm3.html');">
-		<td>4</td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td>
-		<td>하하</td>
-		<td>2011.12.03</td>
-		<td>1</td>
-	</tr>
-	<tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm4.html');">
-		<td>3</td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td>
-		<td>전지현</td>
-		<td>2011.12.05</td>
-		<td>0</td>
-	</tr>
-	<tr style="cursor:pointer" onClick="location.replace('boardContentForm5.html');">
-		<td>2</td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td>
-		<td>저팔계</td>
-		<td>2011.12.02</td>
-		<td>1</td>
-	</tr>
-	<tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm6.html');">
-		<td>1</td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td>
-		<td>김태희</td>
-		<td>2011.12.04</td>
-		<td>0</td>
-	</tr>
-	</table><br>
+    <table border=0 style="border-collapse:collapse" cellpadding=5 >
+    <tr bgcolor="lightgray" style="cursor:pointer" >
+        <th>번호</th>
+        <th width=300>제목</th>
+        <th>성명</th>
+        <th>작성일</th>
+        <th>조회수</th>
+    </tr>
+    <tr style="cursor:pointer" onClick="location.replace('boardContentForm1.html');">
+        <td>6</td>
+        <td>청년실직문제는 대기업문제</td>
+        <td>설현</td>
+        <td>2011.12.06</td>
+        <td>0</td>
+    </tr>
+    <tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm2.html');">
+        <td>5</td>
+        <td>경제 침체의 원인</td>
+        <td>사오정</td>
+        <td>2011.12.01</td>
+        <td>2</td>
+    </tr>
+    <tr style="cursor:pointer" onClick="location.replace('boardContentForm3.html');">
+        <td>4</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td>
+        <td>하하</td>
+        <td>2011.12.03</td>
+        <td>1</td>
+    </tr>
+    <tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm4.html');">
+        <td>3</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td>
+        <td>전지현</td>
+        <td>2011.12.05</td>
+        <td>0</td>
+    </tr>
+    <tr style="cursor:pointer" onClick="location.replace('boardContentForm5.html');">
+        <td>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td>
+        <td>저팔계</td>
+        <td>2011.12.02</td>
+        <td>1</td>
+    </tr>
+    <tr bgcolor="#F2F2F2" style="cursor:pointer" onClick="location.replace('boardContentForm6.html');">
+        <td>1</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td>
+        <td>김태희</td>
+        <td>2011.12.04</td>
+        <td>0</td>
+    </tr>
+    </table><br>
 
-	[처음] [이전] 1 [2] [3] [4] [5] [6] [7] [8] [9] [10] [다음] [마지막]<br><br>
-	<input type="text" name="keyword" size=20>
-	<input type="button" value="검색">
-	<input type="button" value="모두검색">
+    [처음] [이전] 1 [2] [3] [4] [5] [6] [7] [8] [9] [10] [다음] [마지막]<br><br>
+    <input type="text" name="keyword" size=20>
+    <input type="button" value="검색">
+    <input type="button" value="모두검색">
 
-	<br><br><br>
+    <br><br><br>
 
-	<script>
-		document.write(getTodayYMDW());
-		document.write("<br>");
-	</script>
+    <script>
+        document.write(getTodayYMDW());
+        document.write("<br>");
+    </script>
 
  <hr> <!-- 줄긋기. -->
 
-	<script>
-		document.write(getScheduleMsg());
-	</script>
+    <script>
+        document.write(getScheduleMsg());
+    </script>
 
  <hr>	
 
 <!--내가한것
 <table> 
 <tr>
-	<td align=right>[게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[6개 검색]&nbsp;&nbsp;&nbsp;[새 글쓰기]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td align=right>[게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[6개 검색]&nbsp;&nbsp;&nbsp;[새 글쓰기]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <tr>
-	<td>
+    <td>
 
-	<table border=1 style="border-collapse:collapse" cellpadding=5 >
-	<tr bgcolor="lightgray">
-		<th>번호</th>
-		<th width=300>제목</th>
-		<th width=80>성명</th>
-		<th width=100>작성일</th>
-		<th>조회수</th>
-	</tr>
-	<tr>
-		<td align=center>6</td>
-		<td>청년실직문제는 대기업문제</td>
-		<td align=center>설현</td>
-		<td align=center>2011.12.06</td>
-		<td align=center>0</td>
-	</tr>
-	<tr bgcolor="#F2F2F2">
-		<td align=center>5</td>
-		<td>경제 침체의 원인</td>
-		<td align=center>사오정</td>
-		<td align=center>2011.12.01</td>
-		<td align=center>2</td>
-	</tr>
-	<tr>
-		<td align=center>4</td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td>
-		<td align=center>하하</td>
-		<td align=center>2011.12.03</td>
-		<td align=center>1</td>
-	</tr>
-	<tr bgcolor="#F2F2F2">
-		<td align=center>3</td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td>
-		<td align=center>전지현</td>
-		<td align=center>2011.12.05</td>
-		<td align=center>0</td>
-	</tr>
-	<tr>
-		<td align=center>2</td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td>
-		<td align=center>저팔계</td>
-		<td align=center>2011.12.02</td>
-		<td align=center>1</td>
-	</tr>
-	<tr bgcolor="#F2F2F2">
-		<td align=center>1</td>
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td>
-		<td align=center>김태희</td>
-		<td align=center>2011.12.04</td>
-		<td align=center>0</td>
-	</tr>
-	</table></td>
+    <table border=1 style="border-collapse:collapse" cellpadding=5 >
+    <tr bgcolor="lightgray">
+        <th>번호</th>
+        <th width=300>제목</th>
+        <th width=80>성명</th>
+        <th width=100>작성일</th>
+        <th>조회수</th>
+    </tr>
+    <tr>
+        <td align=center>6</td>
+        <td>청년실직문제는 대기업문제</td>
+        <td align=center>설현</td>
+        <td align=center>2011.12.06</td>
+        <td align=center>0</td>
+    </tr>
+    <tr bgcolor="#F2F2F2">
+        <td align=center>5</td>
+        <td>경제 침체의 원인</td>
+        <td align=center>사오정</td>
+        <td align=center>2011.12.01</td>
+        <td align=center>2</td>
+    </tr>
+    <tr>
+        <td align=center>4</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td>
+        <td align=center>하하</td>
+        <td align=center>2011.12.03</td>
+        <td align=center>1</td>
+    </tr>
+    <tr bgcolor="#F2F2F2">
+        <td align=center>3</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td>
+        <td align=center>전지현</td>
+        <td align=center>2011.12.05</td>
+        <td align=center>0</td>
+    </tr>
+    <tr>
+        <td align=center>2</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td>
+        <td align=center>저팔계</td>
+        <td align=center>2011.12.02</td>
+        <td align=center>1</td>
+    </tr>
+    <tr bgcolor="#F2F2F2">
+        <td align=center>1</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td>
+        <td align=center>김태희</td>
+        <td align=center>2011.12.04</td>
+        <td align=center>0</td>
+    </tr>
+    </table></td>
 </tr>
 <tr>
-	<td>&nbsp;</td>
+    <td>&nbsp;</td>
 </tr>
 <tr>
-	<td align=center>[처음][이전]&nbsp;&nbsp;[1]&nbsp;2&nbsp;[3]&nbsp;&nbsp;[다음][마지막]</td>
+    <td align=center>[처음][이전]&nbsp;&nbsp;[1]&nbsp;2&nbsp;[3]&nbsp;&nbsp;[다음][마지막]</td>
 </tr>
 <tr>
-	<td>&nbsp;</td>
+    <td>&nbsp;</td>
 </tr>
 <tr align=center>
-	<td><input type="text" name="uid" size=20>&nbsp;&nbsp;<input type="button" value="검색">&nbsp;&nbsp;<input type="button" value="모두 검색"></td>
+    <td><input type="text" name="uid" size=20>&nbsp;&nbsp;<input type="button" value="검색">&nbsp;&nbsp;<input type="button" value="모두 검색"></td>
 </tr>
 </table>
 
 
 
-	
+    
 
-	
+    
 
 <hr>
-	
-	[게시판 글 목록]-내가 해본것 
+    
+    [게시판 글 목록]-내가 해본것 
 
-	<table border=0 style="border-collapse:collapse" cellpadding=5 bordercolor="#A8A8A8">
-	<tr bgcolor="lightyellow" ><th>번호</th><th>제목</th><th>성명</th><th>작성일</th><th>조회수</th></tr>
-	<tr><td align=center>6</td><td>청년실직문제는 대기업문제</td><td>설현</td><td>2011.12.06</td><td>0</td></tr>
-	<tr bgcolor="#F2F2F2"><td align=center>5</td><td>경제 침체의 원인</td><td>사오정</td><td>2011.12.01</td><td>2</td></tr>
-	<tr><td align=center>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td><td>하하</td><td>2011.12.03</td><td>1</td></tr>
-	<tr bgcolor="#F2F2F2"><td align=center>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td><td>전지현</td><td>2011.12.05</td><td>0</td></tr>
-	<tr><td align=center>2</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td><td>저팔계</td><td>2011.12.02</td><td>1</td></tr>
-	<tr bgcolor="#F2F2F2"><td align=center>1</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td><td>김태희</td><td>2011.12.04</td><td>0</td></tr>
-	</table>
+    <table border=0 style="border-collapse:collapse" cellpadding=5 bordercolor="#A8A8A8">
+    <tr bgcolor="lightyellow" ><th>번호</th><th>제목</th><th>성명</th><th>작성일</th><th>조회수</th></tr>
+    <tr><td align=center>6</td><td>청년실직문제는 대기업문제</td><td>설현</td><td>2011.12.06</td><td>0</td></tr>
+    <tr bgcolor="#F2F2F2"><td align=center>5</td><td>경제 침체의 원인</td><td>사오정</td><td>2011.12.01</td><td>2</td></tr>
+    <tr><td align=center>4</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ안보문제</td><td>하하</td><td>2011.12.03</td><td>1</td></tr>
+    <tr bgcolor="#F2F2F2"><td align=center>3</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ북한 핵 문제</td><td>전지현</td><td>2011.12.05</td><td>0</td></tr>
+    <tr><td align=center>2</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ나라 빚 관리 부실</td><td>저팔계</td><td>2011.12.02</td><td>1</td></tr>
+    <tr bgcolor="#F2F2F2"><td align=center>1</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ엔화 하락 문제</td><td>김태희</td><td>2011.12.04</td><td>0</td></tr>
+    </table>
 -->
 
 
-	</center>
+    </center>
 </body>
 
 
