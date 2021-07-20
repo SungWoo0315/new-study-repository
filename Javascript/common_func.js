@@ -265,11 +265,17 @@
 		// today 변수 선언. 현재 날짜를 관리하는 Date 객체 생성. Date 객체의 메위주를 today변수에 저장.
 		// ------------------------------
 		var today = new Date();
+		var year = today.getFullYear();
+		var month = today.getMonth()+1;
+			if(month<10) {month = "0"+month;}
+		var date = today.getDate();
+			if(date<10) {date = "0"+date;}
+		var week = getTodayWeek().replace("요일","");
 		// ------------------------------
 		// 현재 시각의 년-월-일(요일) 을 문자로 리턴하기.
 		// ------------------------------
 
-		return today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate() + "(" + getTodayWeek().replace("요일","") + ")";
+		return year + "-" + month + "-" + date + "(" + week + ")";
 	}
 
 
@@ -357,3 +363,15 @@
 		
 	// 	return str.split(" ").join("");
 	// }
+
+
+	//------------------------------------------------------------------------
+	// D-Day 나오게 하기.
+	//------------------------------------------------------------------------
+	function get_DDayMsg(){
+
+	var today = new Date( );
+	var christmas_day = new Date( today.getFullYear(), 11, 25 );
+	var interval = ( christmas_day.getTime() - today.getTime() )/(60*60*24*1000);
+	
+	}
