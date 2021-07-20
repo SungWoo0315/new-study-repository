@@ -14,11 +14,15 @@
 		// -------------------------------------------------
 		// 요일별 메시지를 보여주는 openMessage 함수 선언하기
 		// -------------------------------------------------
-		function openMessage(){
+		function openWeekMessage(){
 			// ---------------------------
 			// week 변수 선언. getTodayWeek() 함수 호출로 현재요일 얻어 week 변수에 저장하기
 			// ---------------------------
-			var week = getTodayWeek();
+			var week = getTodayWeek(); 
+			// week = "금요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
+			// week = "수요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
+			// week = "목요일";		// 개발 중 테스트 할땐 이렇게 강제로 값을 넣어준다.  
+
 			// ---------------------------
 			// msg 변수 선언. 공용 함수 안의 weekMsg 라는 변수에 저장된
 			// JSON 객체 안에서 week 변수안의 문자를 키값으로 가지고 있는 놈의 대응 문자 얻어
@@ -30,12 +34,22 @@
 			// ---------------------------
 			alert(msg);
 		}
+		
+		function getScheduleMsg(){
+			// common_data.js 파일 안의 scheduleMsg 변수의 2차원 Array 객체 안을 검색  
+
+			for( ){
+
+			}
+
+			return "아휴 덥다.";
+		}
 
 	</script>
 </head>
 
 
-<body onload="openMessage()">
+<body onload="openWeekMessage()">
 	<center>
 
 	[게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -121,9 +135,16 @@
 
 	<script>
 		document.write(getTodayYMDW());
+		document.write("<br>");
 	</script>
 
  <hr> <!-- 줄긋기. -->
+
+	<script>
+		document.write(getScheduleMsg());
+	</script>
+
+ <hr>	
 
 <!--내가한것
 <table> 
