@@ -278,20 +278,38 @@
 	//------------------------------------------------------------------------
 	function isToday( dateStr ){
 		try{
+			// ----------------------------------
+			// 변수 arr 선언. dateStr 매개변수 안의 날짜 문자를 
+			// "-" 기준으로 토막내어 Array 객체안에 담기.
+			// ----------------------------------
 			var arr = dateStr.split("-");
+			// ----------------------------------
+			// Array 객체 안의 배열변수 안의 데이터 꺼내어 year, month, date 변수에 저장하기.
+			// String 객체의 trim 메소드 호출로 앞뒤 공백 제거하기.
 			// ----------------------------------
 			var year = arr[0];		year = year.trim();		// trim() 앞뒤 공백 제거.
 			var month = arr[1];		month = month.trim();
 			var date = arr[2];		date = date.trim();
 			// ----------------------------------
+			// parseInt 내장함수 호출하여 
+			// year, month, date 변수 안의 숫자문자를 정수 숫자로 바꾸기
+			// ----------------------------------
 			year = parseInt(year, 10);
 			month = parseInt(month, 10);
 			date = parseInt(date, 10);
+			// ----------------------------------
+			// 변수 today 선언, 오늘 날짜를 관리하는 Date 객체 생성하고 메위주를 today에 저장하기
+			// Date 객체의 getFullYear 메소드 호출로 년도 얻어 변수 today_year 에 저장하기.
+			// Date 객체의 getMonth 메소드 호출로 월 얻어 변수 today_month 에 저장하기.
+			// Date 객체의 getDate 메소드 호출로 일 얻어 변수 today_date 에 저장하기.
 			// ----------------------------------
 			var today = new Date();
 			var today_year = today.getFullYear();
 			var today_month = today.getMonth()+1;
 			var today_date = today.getDate();
+			// ----------------------------------
+			// 매개변수로 들어온 년월일 이 오늘잘짜의 년월일과 동일하면 true 리턴하기.
+			// 아니면 false 리턴하기
 			// ----------------------------------
 			return year == today_year && month == today_month && date == today_date;
 		}
@@ -300,3 +318,30 @@
 			return false;
 		}
 	}
+
+	//------------------------------------------------------------------------
+	// 매개변수로 들어온 문자에서 모든 공백을 제거하고 그 후 문자를 리턴하기.
+	//------------------------------------------------------------------------
+	function deleteBlank( str ){
+		try{	
+				var result = "";
+
+				for (var i=0; i<str.length; i++){
+					
+					if(str.charAt(i) != " "){
+						result = result + str.charAt(i);
+					}
+				}
+				return result;
+		}	
+		catch(e){
+				alert("deleteBlank 함수에서 에러발생!")
+				return str;
+		}
+	}
+	
+	// // 방법2. 예외처리는 되어있지 않음.
+	// function deleteBlank( str ){
+		
+	// 	return str.split(" ").join("");
+	// }
