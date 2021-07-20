@@ -296,7 +296,7 @@
 			return year == today_year && month == today_month && date == today_date;
 		}
 		catch(e){
-			alert("isToday 에서 에러발생!")
+			alert("isToday 함수 에서 에러발생!")
 			return false;
 		}
 	}
