@@ -72,6 +72,7 @@
             for( var i=0; i<scheduleMsg.length; i++){
                 var date = scheduleMsg[i][0];
                 var msg = scheduleMsg[i][1];
+                var date = deleteBlank(date);  // 공백제거 공용함수.  
                 if( isToday(date) ){
                     // alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
                     arr.push(msg); // arr 안에 누적시키기. 
