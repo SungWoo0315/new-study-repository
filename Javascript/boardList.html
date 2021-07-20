@@ -71,8 +71,8 @@
             var arr = [];
             for( var i=0; i<scheduleMsg.length; i++){
                 var date = scheduleMsg[i][0];
+                date = deleteBlank(date);  // 공백제거 공용함수 사용.  
                 var msg = scheduleMsg[i][1];
-                var date = deleteBlank(date);  // 공백제거 공용함수.  
                 if( isToday(date) ){
                     // alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
                     arr.push(msg); // arr 안에 누적시키기. 
@@ -83,11 +83,20 @@
                                             // 중간에 <br>을 넣어주어 이어 붙인 사이에 줄바꿈을 해준다.
         }
 
+        // -------------------------------------------------
+        // 명언을 랜덤하게 나오게 하기.
+        // -------------------------------------------------
+        function get_goldenSaying(){
+            var random_index = Math.floor( Math.random()*19 );
+
+            return random_index;
+        }
+
     </script>
 </head>
 
 
-<body onload="openWeekMessage();getScheduleMsg();">
+<body onload="openWeekMessage()">
     <center>
 
     [게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -181,7 +190,10 @@
     <script>
         document.write(getScheduleMsg());
     </script>
-
+<hr>
+    <script>
+        document.write(get_goldenSaying());
+    </script>
  <hr>	
 
 <!--내가한것
