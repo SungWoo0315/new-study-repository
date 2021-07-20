@@ -87,9 +87,34 @@
         // 명언을 랜덤하게 나오게 하기.
         // -------------------------------------------------
         function get_goldenSaying(){
-            var random_index = Math.floor( Math.random()*19 );
+            var goldenSaying_cnt = goldenSaying.length;
+            var random_index = Math.floor( Math.random()*goldenSaying_cnt );
 
-            return random_index;
+            return goldenSaying[random_index];
+        }
+
+
+        // -------------------------------------------------
+        // D-Day 나오게 하기.
+        // -------------------------------------------------
+        function get_DDayMsg(){
+            var arr = [];
+            var interval_day = 0;
+            for( var i=0; i<dDayMsg.length; i++){
+
+                var date = dDayMsg[i][0];
+                date = deleteBlank(date);  // 공백제거 공용함수 사용.  
+                var msg = dDayMsg[i][1];
+                
+                if( isToday(date) ){
+                    // alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
+                    arr.push(msg); // arr 안에 누적시키기. 
+                                    //특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
+                }
+            }	
+            return arr.join(" <br><br> ") + " 는 " + interval_day + " 일 남았습니다." ;	
+                                            // arr 에 join 사용해서 배열 붙여서 출력하기
+                                            // 중간에 <br>을 넣어주어 이어 붙인 사이에 줄바꿈을 해준다.
         }
 
     </script>
@@ -180,6 +205,25 @@
 
     <br><br><br>
 
+    <!-- --------------------------------------------------- -->
+    <!-- 강사님이 한것. -->
+    <!-- --------------------------------------------------- -->
+    <script>
+        document.write( "<table border=1 style='border-collapse:collapse' cellpadding=5>");
+            
+        document.write("<tr><th>오늘날짜<td>"+getTodayYMDW());
+        document.write("<tr><th>일정메세지<td>"+getScheduleMsg());
+        document.write("<tr><th>오늘의 명언<td>"+get_goldenSaying());
+        // document.write("<tr><th>D-Day<td>"+get_DDayMsg());
+
+        document.write( "</table>" );
+    </script>
+    <!-- --------------------------------------------------- -->
+
+
+    <!-- --------------------------------------------------- -->
+    <!-- 내가 한것. -->
+    <!-- --------------------------------------------------- -->
     <script>
         document.write(getTodayYMDW());
         document.write("<br>");
@@ -190,11 +234,22 @@
     <script>
         document.write(getScheduleMsg());
     </script>
-<hr>
+
+<hr> <!-- 줄긋기. -->
+
+    <b><span style="color: orange;"><명언></span></b>
+    <br>
     <script>
         document.write(get_goldenSaying());
     </script>
- <hr>	
+    
+<hr> <!-- 줄긋기. -->	 
+     <!-- --------------------------------------------------- -->
+
+
+
+
+
 
 <!--내가한것
 <table> 
