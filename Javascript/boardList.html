@@ -112,7 +112,7 @@
                 }
             }
             if (arr.length>0){
-                return arr.join(" <br><br> ");	
+                return arr.join(" <br> ");	
             }else{
                 return "";
             }	
@@ -231,7 +231,7 @@
         document.write("<br>");
     </script>
 
- <hr> <!-- 줄긋기. -->
+<hr> <!-- 줄긋기. -->
 
     <script>
         document.write(getScheduleMsg());
@@ -246,6 +246,12 @@
     </script>
     
 <hr> <!-- 줄긋기. -->	 
+    
+    <b><span style="color: red;">D-Day</span></b>
+    <br>
+    <script>
+        document.write(get_DDayMsg());
+    </script>
      <!-- --------------------------------------------------- -->
 
 
