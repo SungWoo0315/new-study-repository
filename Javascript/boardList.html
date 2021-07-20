@@ -32,24 +32,40 @@
 			// ---------------------------
 			// 경고창 띄우기
 			// ---------------------------
-			alert(msg);
+			// alert(msg);  //요일별 메세지 잠시 주석처리.  
 		}
 		
 		function getScheduleMsg(){
 			// common_data.js 파일 안의 scheduleMsg 변수의 2차원 Array 객체 안을 검색  
-
-			for( ){
-
+			
+			/* 모든 날짜와 메세지 순서대로 출력. 주석처리.
+			for( var i=0; i<scheduleMsg.length; i++){
+				for( var j=0; j<scheduleMsg[i].length; j++ ){
+					var data = scheduleMsg[i][j];
+					alert(data)
+				}
 			}
+			*/
+			// return "아휴 덥다.";
 
-			return "아휴 덥다.";
+			var tot_msg = "";
+			for( var i=0; i<scheduleMsg.length; i++){
+				var date = scheduleMsg[i][0];
+				var msg = scheduleMsg[i][1];
+				if( isToday(date) ){
+					// alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
+					tot_msg = tot_msg + msg; // tot_msg 안에 누적시키기. 
+											 //특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
+				}
+			}
+			return tot_msg;
 		}
 
 	</script>
 </head>
 
 
-<body onload="openWeekMessage()">
+<body onload="openWeekMessage();getScheduleMsg();">
 	<center>
 
 	[게시판 글 목록]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
