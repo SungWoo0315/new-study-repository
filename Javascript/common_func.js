@@ -287,9 +287,9 @@
 			// Array 객체 안의 배열변수 안의 데이터 꺼내어 year, month, date 변수에 저장하기.
 			// String 객체의 trim 메소드 호출로 앞뒤 공백 제거하기.
 			// ----------------------------------
-			var year = arr[0];		year = year.trim();		// trim() 앞뒤 공백 제거.
-			var month = arr[1];		month = month.trim();
-			var date = arr[2];		date = date.trim();
+			var year = arr[0];		//year = year.trim();		// trim() 앞뒤 공백 제거.
+			var month = arr[1];		//month = month.trim();
+			var date = arr[2];		//date = date.trim();
 			// ----------------------------------
 			// parseInt 내장함수 호출하여 
 			// year, month, date 변수 안의 숫자문자를 정수 숫자로 바꾸기
@@ -324,16 +324,27 @@
 	//------------------------------------------------------------------------
 	function deleteBlank( str ){
 		try{	
-				// str =undefined; 예외처리 작동하는지 테스트 하는 코드.
-				var result = "";
+			// str =undefined; 예외처리 작동하는지 테스트 하는 코드.
 
-				for (var i=0; i<str.length; i++){
-					
-					if(str.charAt(i) != " "){
-						result = result + str.charAt(i);
-					}
+			// ----------------------------------------
+			// 공백제거한 문자 저장할 변수 result 선언.
+			// ----------------------------------------
+			var result = "";
+			// ----------------------------------------
+			// 반복문 돌리면서 매개변수로 들어온 문자열 중 한개씩 접근해서 
+			// 공백이 아닌 문자만 result 변수에 누적 시키기
+			// ----------------------------------------
+			for (var i=0; i<str.length; i++){
+				// 만약 i 번째 문자가 공백이 아니면,
+				// i번째 문자를 result 변수에 누적시키기.
+				if(str.charAt(i) != " "){
+					result = result + str.charAt(i);
 				}
-				return result;
+			}
+			// ----------------------------------------
+			// 변수 result 안의 데이터 리턴하기
+			// ----------------------------------------
+			return result;
 		}	
 		catch(e){
 				alert("deleteBlank 함수에서 에러발생!")
