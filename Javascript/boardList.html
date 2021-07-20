@@ -48,18 +48,35 @@
 			*/
 			// return "아휴 덥다.";
 
+			// 누적시켜서 출력하는 방법.
 			var tot_msg = "";
 			for( var i=0; i<scheduleMsg.length; i++){
 				var date = scheduleMsg[i][0];
 				var msg = scheduleMsg[i][1];
 				if( isToday(date) ){
 					// alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
-					tot_msg = tot_msg + msg; // tot_msg 안에 누적시키기. 
-											 //특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
+					tot_msg = tot_msg +"<br>"+ msg; // tot_msg 안에 누적시키기. 
+											 // 메모리 낭비가 심한 방법. 
+											 // 특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
 				}
 			}
 			return tot_msg;
 		}
+
+		// // 누적시켜서 출력하는 다른 방법. Array 사용해서 배열안에 누적시켜서 출력하기.  
+		// function getScheduleMsg(){
+		// 	var arr = [];
+		// 	for( var i=0; i<scheduleMsg.length; i++){
+		// 		var date = scheduleMsg[i][0];
+		// 		var msg = scheduleMsg[i][1];
+		// 		if( isToday(date) ){
+		// 			// alert( msg ) // 테스트 할때 보려고 alert 한것. 주석처리.
+		// 			arr.push(msg); // arr 안에 누적시키기. 
+		// 							//특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
+		// 		}
+		// 	}
+		// 	return arr.join(" ");	// arr 에 join 사용해서 배열 붙여서 출력하기
+		// }
 
 	</script>
 </head>
