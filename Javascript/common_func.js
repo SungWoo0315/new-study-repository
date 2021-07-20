@@ -368,10 +368,39 @@
 	//------------------------------------------------------------------------
 	// D-Day 나오게 하기.
 	//------------------------------------------------------------------------
-	function get_DDayMsg(){
+	function get_dDay( date ){
 
-	var today = new Date( );
-	var christmas_day = new Date( today.getFullYear(), 11, 25 );
-	var interval = ( christmas_day.getTime() - today.getTime() )/(60*60*24*1000);
-	
+		try{
+			var futureDay = date.split("-");
+			// ----------------------------------
+			// Array 객체 안의 배열변수 안의 데이터 꺼내어 year, month, date 변수에 저장하기.
+			// ----------------------------------
+			var year = futureDay[0];		
+			var month = futureDay[1];		
+			var date = futureDay[2];		
+			// ----------------------------------
+			// parseInt 내장함수 호출하여 
+			// year, month, date 변수 안의 숫자문자를 정수 숫자로 바꾸기
+			// ----------------------------------
+			year = parseInt(year, 10);
+			month = parseInt(month, 10);
+			date = parseInt(date, 10);
+			// ----------------------------------
+			// 변수 todayObj 선언, 오늘 날짜를 관리하는 Date 객체 생성하고 메위주를 todayObj 에 저장하기
+			// 변수 x_dateObj 선언, 정수 숫자로 바꾼 year,month,date 로 Date객체 생성하고 대입.
+			// 월 month 에 -1 하는것 잊지말기.
+			// 변수 interval 선언하고, x_dateObj 와 todayObj 를 getTime() 메소드를 이용해 차이를 구하고 대입.
+			// 소수점으로 나오는 남은날짜를 Math.ceil 로 올림하여 준다.
+			// ----------------------------------
+			
+			var todayObj = new Date( );
+			var x_dateObj = new Date(year,month-1,date);
+			var interval = Math.ceil(   ( x_dateObj.getTime() - todayObj.getTime() )/(60*60*24*1000)    );
+
+			return interval;
+		}
+		catch(e){
+			alert("get_dDay 함수에서 에러발생!")
+			return -1;
+		}
 	}
