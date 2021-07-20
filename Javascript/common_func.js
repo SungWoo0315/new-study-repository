@@ -273,3 +273,30 @@
 	}
 
 
+	//------------------------------------------------------------------------
+	// 
+	//------------------------------------------------------------------------
+	function isToday( dateStr ){
+		try{
+			var arr = dateStr.split("-");
+			// ----------------------------------
+			var year = arr[0];
+			var month = arr[1];
+			var date = arr[2];
+			// ----------------------------------
+			year = parseInt(year, 10);
+			month = parseInt(month, 10);
+			date = parseInt(date, 10);
+			// ----------------------------------
+			var today = new Date();
+			var today_year = today.getFullYear();
+			var today_month = today.getMonth()+1;
+			var today_date = today.getDate();
+			// ----------------------------------
+			return year == today_year && month == today_month && date == today_date;
+		}
+		catch(e){
+			alert("isToday 에서 에러발생!")
+			return false;
+		}
+	}
