@@ -64,7 +64,7 @@
 		// 		}
 		// 	}
 		// 	return tot_msg;
-		// }
+		// }	
 
 		// 누적시켜서 출력하는 다른 방법. Array 사용해서 배열안에 누적시켜서 출력하기.  
 		function getScheduleMsg(){
@@ -77,9 +77,9 @@
 					arr.push(msg); // arr 안에 누적시키기. 
 									//특정날짜에 메시지가 2개 이상 나올 경우 누석시켜 다 나오게 하기.
 				}
-			}
-			return arr.join(" <br> ");	// arr 에 join 사용해서 배열 붙여서 출력하기
-										// 중간에 <br>을 넣어주어 이어 붙인 사이에 줄바꿈을 해준다.
+			}	
+			return arr.join(" <br><br> ");	// arr 에 join 사용해서 배열 붙여서 출력하기
+											// 중간에 <br>을 넣어주어 이어 붙인 사이에 줄바꿈을 해준다.
 		}
 
 	</script>
