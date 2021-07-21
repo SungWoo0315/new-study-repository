@@ -368,10 +368,14 @@
 	//------------------------------------------------------------------------
 	// D-Day 나오게 하기.
 	//------------------------------------------------------------------------
-	function get_dDay( date ){
+	function get_dDay( dateStr ){
 
 		try{
-			var futureDay = date.split("-");
+			// ----------------------------------
+			// 변수 arr 선언. dateStr 매개변수 안의 날짜 문자를 
+			// "-" 기준으로 토막내어 Array 객체안에 담기.
+			// ----------------------------------
+			var futureDay = dateStr.split("-");
 			// ----------------------------------
 			// Array 객체 안의 배열변수 안의 데이터 꺼내어 year, month, date 변수에 저장하기.
 			// ----------------------------------
@@ -390,17 +394,20 @@
 			// 변수 x_dateObj 선언, 정수 숫자로 바꾼 year,month,date 로 Date객체 생성하고 대입.
 			// 월 month 에 -1 하는것 잊지말기.
 			// 변수 interval 선언하고, x_dateObj 와 todayObj 를 getTime() 메소드를 이용해 차이를 구하고 대입.
-			// 소수점으로 나오는 남은날짜를 Math.ceil 로 올림하여 준다.
+			// 소수점으로 나오는 남은날짜를 Math.ceil 로 올림하고 interval 변수에 대입해준다.
 			// ----------------------------------
 			
 			var todayObj = new Date( );
 			var x_dateObj = new Date(year,month-1,date);
-			var interval = Math.ceil(   ( x_dateObj.getTime() - todayObj.getTime() )/(60*60*24*1000)    );
+			var interval = Math.ceil(   ( x_dateObj.getTime() - todayObj.getTime() )/(60*60*24*1000)   );
 
+			// ----------------------------------
+			// interval 변수안의 데이터 리턴하기.  
+			// ----------------------------------
 			return interval;
 		}
 		catch(e){
-			alert("get_dDay 함수에서 에러발생!")
+			alert( "get_dDay 함수에서 에러발생!" + e.message )
 			return -1;
 		}
 	}
