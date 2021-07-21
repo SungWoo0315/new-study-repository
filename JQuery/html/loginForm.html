@@ -20,10 +20,23 @@
 		//--------------------------
 		function checkForm(){
 
+			// var uid = document.loginForm.uid.value; 아래와 같은 결과를 가진다 DOM 객체 사용.  
+			var uid = $(".uid").val();
+			var pwd = $(".pwd").val();
+
+			alert(uid + " / " + pwd);
 		}
 
 		function start(){
-			alert(1);
+			// ---------------------------------------------------
+			// 로그인 버튼을 클릭하면 checkForm 함수가 호출되도록 하기
+			// ---------------------------------------------------
+			var obj = $(".login_btn");
+			obj.click(
+				function(){
+					checkForm();
+				}
+			);
 		}
 
 
@@ -81,14 +94,16 @@
 					<!-------------------------------------------------------->
 					<!-- 버튼을 클릭하면 자바스크립트 영역의 checkForm 함수 호출하기->
 					<!-------------------------------------------------------->
-					<input type="button" value="로그인" class="login_btn">
+					<input type="button" value="로그인" class="login_btn" 
+					style="background-color:lightyellow; border:1px solid rgb(87, 86, 85);">
 
 
 
 
 
 
-					<input type="reset" value="초기화">
+					<input type="reset" value="초기화" 
+					style="background-color:lightyellow; border:1px solid rgb(87, 86, 85);">
 
 
 					<!-------------------------------------------------------->
