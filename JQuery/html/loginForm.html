@@ -1,0 +1,90 @@
+<html>
+<meta charset="UTF-8">
+<head>
+	<title>로그인화면</title>
+	<!-------------------------------------------------------->
+	<!-- common_func.js .-->
+	<!-------------------------------------------------------->
+	<script src="common_func.js"></script>
+
+	<!-------------------------------------------------------->
+	<!-- script 태그 선언. script 태그는 자바스크립트 세상이다.-->
+	<!-------------------------------------------------------->
+	<script>
+		//--------------------------
+		// 유저가 입력한 아이디와 암호의 유효성을 체크할 checkForm 함수 선언
+		//--------------------------
+		function checkForm(){
+
+		}
+	</script>
+
+</head>
+
+<body>
+<center><br><br><br>
+
+	<!--  주석  -->
+	
+	<form name="loginForm" action="boardList.html">
+		<!-------------------------------------------------------->
+		<table border=0 cellpadding=4>
+		<!-------------------------------------------------------->
+			<tr>
+				<th>
+					[로그인]
+				</th>
+			</tr>
+			<tr>
+				<td align=center>
+					<!-------------------------------------------------------->
+					<table border=1 style="border-collapse:collapse" cellpadding=5 bordercolor="lightgray">
+					<tr>
+						<td align="right" bgcolor="#E9E9E9">아이디</td>
+						<td><input type="text" name="uid" size=10></td>
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#E9E9E9">암 호</td>
+						<td><input type="password" name="pwd" size=10></td>
+					</tr>
+					</table>
+					<!-------------------------------------------------------->
+				</td>
+			</tr>
+			<tr>
+				<td align=center>
+
+
+
+
+					<!-------------------------------------------------------->
+					<!-- 버튼을 클릭하면 자바스크립트 영역의 checkForm 함수 호출하기->
+					<!-------------------------------------------------------->
+					<input type="button" value="로그인" onClick="checkForm();">
+
+
+
+
+
+
+					<input type="reset" value="초기화">
+
+
+					<!-------------------------------------------------------->
+					<!-- 회원가입 글씨를 클릭하면 memberRegForm.html 페이지 열어주기-->
+					<!-------------------------------------------------------->
+					<div style="cursor:pointer" onClick="location.replace('memberRegForm.html')">[회원가입]</div>
+
+
+				</td>
+			</tr>
+		<!-------------------------------------------------------->
+		</table>
+		<!-------------------------------------------------------->
+
+	</form>
+
+</center>
+</body>
+
+</html>
