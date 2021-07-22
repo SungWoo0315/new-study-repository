@@ -79,12 +79,15 @@
 		// ------------------------------------------------------------
 		// isHangeulName 회원명이 합당한 한글이름이 아니면
 		// ------------------------------------------------------------
-		if(  isHangeulName( mem_name )==false  ){
-		// if( isValidPattern(/^[가-힣]{2,20}$/, mem_name)==false ){	// 이런식으로 안하고 위에처럼 해줌.
-
+		if(  isHangeulName( mem_name )==false  ){	//if(  !isHangeulName( mem_name ) ) // 옆의 조건이랑 같음.
+		// if( isValidPattern(/^[가-힣]{2,20}$/, mem_name)==false )	// 이런식으로 안하고 위에처럼 해줌.
+			
+			alert(" 회원명은 한글 2~20자 사이입니다. ");
+			$(".mem_name").val("");
+			$(".mem_name").focus();
+			
 		}
 
-		alert(" 저장버튼 테스트 ")
 	}
 
 
