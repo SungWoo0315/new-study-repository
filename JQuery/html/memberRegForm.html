@@ -3,9 +3,11 @@
 <head>
 	<title></title>
 
-	<!--------------------------------------------------------->	
-	<!-- common_func.js 파일안의 자스코딩 수입하기 import-->
-	<!--------------------------------------------------------->
+	<!-------------------------------------------------------->
+	<!-- jquery-1.11.0.min.js 파일안의 자스코딩을 수입해서 script 태그안에 삽입하기.-->
+	<!-- common_func.js 파일안의 자스코딩을 수입해서 script 태그안에 삽입하기.-->
+	<!-------------------------------------------------------->
+	<script src="jquery-1.11.0.min.js"></script>
 	<script src="common_func.js"></script>
 
 	<script>
@@ -19,220 +21,7 @@
 	// *********************************************************
 	function checkMemRegForm(){
 
-		// var xxx = isEmpty(3);	// 예외처리 확인할때 사용.
-
-		// return;					// 예외처리 확인할때 사용.
-
-		// ------------------------------------------------------
-		// 변수 fromObj 선언하고 <form name="memberRegForm"> 태그를 관리하는
-		// Form 객체의 메위주 저장하기.
-		// ------------------------------------------------------
-		var formObj = document.memberRegForm;
-
-		// ------------------------------------------------------
-		// <1> 유저가 입력한 [회원명] 가져와서 변수 mem_name 에 저장하기
-		// <2> 유저가 입력한 [아이디] 가져와서 변수 uid 에 저장하기
-		// <3> 유저가 입력한 [암호] 가져와서 변수 pwd 에 저장하기
-		// <4> 유저가 입력한 [주소] 가져와서 변수 addr 에 저장하기
-		// ------------------------------------------------------
-		var mem_name = formObj.mem_name.value;
-		var uid = formObj.uid.value;
-		var pwd = formObj.pwd.value;
-		var addr = formObj.addr.value;
-
-		// ------------------------------------------------------
-		// 유저가 입력한 [회원명]의 유효성 체크하기 // 공용함수 이용.
-		// ------------------------------------------------------
-		// isValidPattern 함수를 호출하여 이름 문자열이 합당한 [회원명]이면
-		// 즉, isValidPattern(/^[가-힣]{2,20}$/, mem_name) 호출하여 리턴값이 false면 
-		// ------------------------------------------------------
-		if( isValidPattern(/^[가-힣]{2,20}$/, mem_name)==false ){
-			alert("회원명에는 한글 2~20자 까지 입력해야 합니다.");
-
-			// ------------------------------------------------------
-			// <form name = memberRegForm ~> 태그 안의 
-			// <input type="text" name="mem_name" ~> 태그가 실행되어 출력되는 입력양식에 값을 비우기.
-			// ------------------------------------------------------
-			formObj.mem_name.value = "";
-
-			// ------------------------------------------------------
-			// <form name = memberRegForm ~> 태그 안의 
-			// <input type="text" name="mem_name" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
-			// ------------------------------------------------------
-			formObj.mem_name.focus();
-			// ------------------------------------------------------
-
-			// 함수 중단.
-			return; 
-		}
-
-		// ------------------------------------------------------
-		// 유저가 입력한 [아이디]의 유효성 체크하기 // 공용함수 이용.
-		// ------------------------------------------------------
-		// isValidPattern 함수를 호출하여 이름 문자열이 합당한 [아이디]이면
-		// 즉, isValidPattern(/^[a-z][a-z0-9_]{4,9}$/, uid) 호출하여 리턴값이 false면 
-		// ------------------------------------------------------
-		if( isValidPattern(/^[a-z][a-z0-9_]{4,9}$/, uid)==false ){
-			alert("아이디는 영소문자로 시작하고 영소문자 또는 숫자 또는 _ 로 5~10자로 구성되야합니다.");
-
-			// ------------------------------------------------------
-			// <form name = memberRegForm ~> 태그 안의 
-			// <input type="text" name="uid" ~> 태그가 실행되어 출력되는 입력양식에 값을 비우기.
-			// ------------------------------------------------------
-			formObj.uid.value = "";
-
-			// ------------------------------------------------------
-			// <form name = memberRegForm ~> 태그 안의 
-			// <input type="text" name="uid" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
-			// ------------------------------------------------------
-			formObj.uid.focus();
-			// ------------------------------------------------------
-
-			// 함수 중단.
-			return; 
-		}
-
 		
-		// ------------------------------------------------------
-		// 유저가 입력한 [암호]의 유효성 체크하기 // 공용함수 이용.
-		// ------------------------------------------------------
-		// isValidPattern 함수를 호출하여 이름 문자열이 합당한 [암호]이면
-		// 즉, isValidPattern(/^[a-z0-9_]{5,8}$/, pwd) 호출하여 리턴값이 false면 
-		// ------------------------------------------------------
-		if( isValidPattern(/^[a-z0-9_]{5,8}$/, pwd)==false ){
-			alert("암호는 영소문자 또는 숫자로 5~8자로 구성되야합니다.");
-
-			// ------------------------------------------------------
-			// <form name = memberRegForm ~> 태그 안의 
-			// <input type="text" name="pwd" ~> 태그가 실행되어 출력되는 입력양식에 값을 비우기.
-			// ------------------------------------------------------
-			formObj.pwd.value = "";
-
-			// ------------------------------------------------------
-			// <form name = memberRegForm ~> 태그 안의 
-			// <input type="text" name="pwd" ~> 태그가 실행되어 출력되는 입력양식에 포커스 넣기.
-			// ------------------------------------------------------
-			formObj.pwd.focus();
-			// ------------------------------------------------------
-
-			// 함수 중단.
-			return; 
-		}
-
-
-		
-		// ------------------------------------------------------
-		// 주소가 선택되지 않으면 경고하고 함수중단.
-		// ------------------------------------------------------
-		//if( formObj.addr.value == "" ) 아래와 같은 형식이지만, 실수로 value값에 공백이 들어가버리면 걸러내지 못한다.
-		
-		if( isEmpty(addr) ){
-			alert("주소는 필수 선택해야합니다! 주소를 선택해주세요.");
-			return; 
-		}
-
-
-
-
-
-		/* 공용함수 처리 전.
-		// ------------------------------------------------------
-		// 성별이 하나라도 체크가 안되어있으면 경고하고 함수중단
-		// ------------------------------------------------------
-		// 성별의 개수 얻어서 변수 genderCnt 에 저장하기
-		// ------------------------------------------------------
-		var genderCnt = formObj.gender.length;
-		// 성별의 체크 개수 저장하는 변수 checkedCnt 선언하고 0 저장.
-		var checkedCnt = 0;
-		// 반복문을 사용하여 성별의 체크 여부 확인하고 체크되어 있으면 checkedCnt 변수에 1업데이트 하기
-		for(var i=0; i<genderCnt; i++){
-			if( formObj.gender[i].checked==true ) { checkedCnt++; }
-		}
-		// 만약 checkedCnt 변수에 0이 저장되어 있으면, 즉, 체크가 하나라도 안되어 있으면 경고하고 함수중단.
-		if( checkedCnt==0){
-			alert("남여중 하나는 선택해야합니다. 성별선택을 하세요!!");
-			return;
-		}
-		*/
-
-		/* 단순 2개 인경우. radio 유효성 검사.
-		var isMen = formObj.gender[0].checked;
-		var isWomen = formObj.gender[1].checked;
-		if( isMen==false && isWomen==false){
-			alert("남여중 하나는 선택해야합니다. 성별선택을 하세요!!");
-			return;
-		}
-		*/
-
-		/* 공용함수 처리 전.
-		// ------------------------------------------------------
-		// 취미가 하나라도 체크가 안되어있으면 경고하고 함수중단
-		// ------------------------------------------------------
-		// [취미]의 개수 얻어서 변수 hobbyCnt 에 저장하기
-		var hobbyCnt = formObj.hobby.length;
-		// [취미] 체크 개수 저장하는 변수 checkedCnt 선언하고 0 저장.
-		var checkedCnt = 0;
-		// 반복문을 사용하여 [취미] 체크 여부 확인하고 체크되어 있으면 checkedCnt 변수에 1업데이트 하기
-		for(var i=0; i<hobbyCnt; i++){
-			if( formObj.hobby[i].checked==true ) { checkedCnt++; }
-		}
-		// 만약 checkedCnt 변수에 1미만이 저장되어 있으면, 즉, 체크가 하나라도 안되어 있으면 경고하고 함수중단.
-		if( checkedCnt<1){
-			alert("취미는 1개이상 선택해야합니다. 취미선택을 하세요!!");
-			return;
-		}
-		*/
-
-		// 공용함수사용. getCheckedCnt() 사용하여 처리.  
-		// ------------------------------------------------------
-		// 성별이 하나라도 체크가 안되어있으면 경고하고 함수중단
-		// ------------------------------------------------------
-		if( getCheckedCnt( formObj.gender )==0 ){
-			alert("남여중 하나는 선택해야합니다. 성별선택을 하세요!!");
-			return;
-		}
-		// 공용함수 사용. getCheckedCnt() 사용하여 처리.  
-		// ------------------------------------------------------
-		// 취미가 하나라도 체크가 안되어있으면 경고하고 함수중단
-		// ------------------------------------------------------
-		if( getCheckedCnt( formObj.hobby )<1 ){
-			alert("취미는 1개이상 선택해야합니다. 취미선택을 하세요!!");
-			return;
-		}
-
-		/* 공용함수 사용 전.
-		// ------------------------------------------------------
-		// [동의]가 체크 안되어 있으면 경고하고 함수중단
-		// ------------------------------------------------------		
-		if( formObj.confirm.checked==false ){
-			alert("동의는 반드시 하셔야 합니다. 동의 하세요!!");
-			return;
-		}
-		*/
-
-		// 공용함수 사용.
-		// ------------------------------------------------------
-		// [동의]가 0개 체크되었으면 경고하고 함수중단
-		// getCheckedCnt 함수 호출하여 [동의]의 체크 개수를 얻어 0개면 경고하고 함수중단.
-		// ------------------------------------------------------		
-		if( getCheckedCnt(formObj.confirm)==0 ){
-			alert("동의는 반드시 하셔야 합니다. 동의 하세요!!");
-			return;
-		}
-
-		// ------------------------------------------------------
-		// confirm 함수 호출로 confirm 상자를 열고 확인 버튼을 누르면
-		// ------------------------------------------------------
-		if( confirm("정말 가입하시겠습니까?") ){
-			alert("회원가입 성공!");
-			location.replace("loginForm.html");
-		}
-
-		// alert( mem_name + " / " + uid + " / " + pwd) 입력 잘되는지 확인.
-		
-		// alert("회원가입 성공!!");
-		
-		// location.replace("loginForm.html")
 	}
 	</script>
 
@@ -457,22 +246,22 @@
 			<caption>회원가입</caption>
 			<tr>
 				<th bgcolor="lightyellow">회원명</th>
-				<td><input type="text" name="mem_name"></td>	
+				<td><input type="text" name="mem_name" class="mem_name"></td>	
 			</tr>
 			<tr>
 				<th bgcolor="lightyellow">아이디</th>
-				<td><input type="text" name="uid"></td>	
+				<td><input type="text" name="uid" class="uid"></td>	
 			</tr>
 			<tr>
 				<th bgcolor="lightyellow">암호</th>
-				<td><input type="password" name="pwd"></td>	
+				<td><input type="password" name="pwd" class="pwd"></td>	
 			</tr>
 			
 			
 			<tr>
 				<th bgcolor="lightyellow">거주지</th>
 				<td>
-					<select name="addr" size=5 multiple>
+					<select name="addr" class="addr" size=5 multiple>
 						<option value="">--선택요망--</option>
 						<option value="서울">서울</option>
 						<option value="경기">경기</option>
@@ -486,32 +275,32 @@
 			<tr>
 				<th bgcolor="lightyellow">성별</th>
 				<td>
-					<input type="radio" name="gender"  value="남">남
-					<input type="radio" name="gender"  value="여">여
+					<input type="radio" name="gender" class="gender" value="남">남
+					<input type="radio" name="gender" class="gender" value="여">여
 				</td>
 			</tr>
 			<tr>
 				<th bgcolor="lightyellow">취미</th>
 				<td>
-					<input type="checkbox" name="hobby"  value="운동">운동
-					<input type="checkbox" name="hobby"  value="여행">여행
-					<input type="checkbox" name="hobby"  value="독서">독서
-					<input type="checkbox" name="hobby"  value="기타">기타
+					<input type="checkbox" name="hobby" class="hobby" value="운동">운동
+					<input type="checkbox" name="hobby" class="hobby" value="여행">여행
+					<input type="checkbox" name="hobby" class="hobby" value="독서">독서
+					<input type="checkbox" name="hobby" class="hobby" value="기타">기타
 				</td>
 			</tr>
 			<tr>
 				<th bgcolor="lightyellow">기타</th>
 				<td>
-					<input type="checkbox" name="confirm"  value="동의">동의(가입하신 개인정보는 보관이 됩니다.)
+					<input type="checkbox" name="confirm" class="confirm" value="동의">동의(가입하신 개인정보는 보관이 됩니다.)
 				</td>
 			</tr>
 		</table><br>
 		<!--------------------------------------------------------------------->
-		<input type="button" value="저장" onclick="checkMemRegForm();">
-		<input type="reset" value="초기화"> <br><br>
+		<input type="button" class="save_btn" value="저장" >
+		<input type="reset"  value="초기화"> <br><br>
 		<!--------------------------------------------------------------------->
-		<input type="button" style="background-color:lightyellow; border:1px solid rgb(87, 86, 85);"
-			value="로그인 화면으로" onclick="location.replace('loginForm.html')">
+		<input type="button" class="to_loginFrom_btn" style="background-color:lightyellow; border:1px solid rgb(87, 86, 85);"
+			value="로그인 화면으로">
 		<!--------------------------------------------------------------------->
 		
 
