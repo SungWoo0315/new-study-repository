@@ -420,3 +420,18 @@
 function isHangeulName( hangeulName ){
 	return isValidPattern(/^[가-힣]{2,20}$/, hangeulName);
 }
+
+
+// *****************************************
+// 매개변수로 들어온 아이디 유효성검사
+// *****************************************
+function isMem_id( mem_id ){
+	return isValidPattern(/^[a-z][a-z0-9_]{4,9}$/, mem_id);
+}
+
+// *****************************************
+// 암호 유효성검사
+// *****************************************
+function isPwd( pwd ){
+	return isValidPattern(/^[a-z0-9_]{5,8}$/, pwd);
+}
