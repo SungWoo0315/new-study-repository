@@ -29,10 +29,23 @@
 					checkMemRegForm();
 				}
 			);
+			// ---------------------------------------------------
+			// [로그인 화면으로] 버튼을 클릭하면 로그인화면(=loginForm.html) 열기.
+			// ---------------------------------------------------
+			// class = to_loginFrom_btn 를 가진 태그를 관리하는 JQuery 객체를 생성해서 
+			// JQuery 객체의 click(~) 메소드를 호출하여
+			// JQuery 객체가 관리하는 태그를 클릭하면 매개변수로 던져준 익명함수 호출하기
+			// ---------------------------------------------------
+			$(".to_loginFrom_btn").click(
+				function(){
+					location.replace("loginForm.html")
+				}
+			);
+
 		}
 	);
-
-	// 위 코딩과 똑같음. 줄바꿈 차이.
+	// ※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+	// 위 [저장] 버튼 코딩과 똑같음. 줄바꿈 차이.
 	// $(document).ready( function(){
 	// 		// [저장] 버튼을 클릭하면 유효성 체크를 하는 checkMemRegForm() 함수 호출하도록 설정하기.
 	// 		$(".save_btn").click( function(){
@@ -40,6 +53,9 @@
 	// 				checkMemRegForm();
 	// 			});
 	// 	});
+	// ※※※※※※※※※※※※※※※※※※※※※※※※※※※※ 
+
+		
 
 
 	// *********************************************************
@@ -47,220 +63,16 @@
 	// checkMemRegForm 함수 선언
 	// *********************************************************
 	function checkMemRegForm(){
+		// <1> 유저가 입력한 [회원명] 가져와서 변수 mem_name 에 저장하기
+		// <2> 유저가 입력한 [아이디] 가져와서 변수 mem_id 에 저장하기
+		// <3> 유저가 입력한 [암호] 가져와서 변수 pwd 에 저장하기
+		// <4> 유저가 입력한 [주소] 가져와서 변수 addr 에 저장하기
 
-		alert(" 테스트 ")
+		alert(" 저장버튼 테스트 ")
 	}
 	</script>
 
-	<!-- CSS 테스트 -->
-	<!-- <script>
-		$('.fun-btn').on('click', function(event) {
-		$(this).toggleClass('start-fun');
-		var $page = $('.page');
-		$page.toggleClass('color-bg-start')
-		  .toggleClass('bg-animate-color');
-	  
-		//change text when when button is clicked
-	  
-		$(this).hasClass('start-fun') ?
-		  $(this).text('stop the fun') :
-		  $(this).text('start the fun');
-	  
-	  	});
-	  </script>
 
-	  <script>
-		  /* Demo purposes only */
-		$(".hover").mouseleave(
-		function() {
-		$(this).removeClass("hover");
-		}
-		);
-		</script>
-
-<style>
-	.page {
-		width: 50vw;
-		height: 50vh;
-		display: flex;
-		justify-content: center;
-	  }
-	  
-	  
-	  /* add default color for animation start  */
-	  
-	  
-	  /* toggle this class */
-	  
-	  .color-bg-start {
-		background-color: salmon;
-	  }
-	  
-	  
-	  /* toggle class bg-animate-color */
-	  
-	  .bg-animate-color {
-		animation: random-bg .5s linear infinite;
-	  }
-	  
-	  
-	  /* add animation to bg color  */
-	  
-	  @keyframes random-bg {
-		from {
-		  filter: hue-rotate(0);
-		}
-		to {
-		  filter: hue-rotate(360deg);
-		}
-	  }
-	  
-	  .fun-btn {
-		/* change bg color to get different hues    */
-		background-color: salmon;
-		color: rgb(3, 3, 3);
-		padding: 2em 3em;
-		border: none;
-		transition: all .3s ease;
-		border-radius: 10px;
-		letter-spacing: 2px;
-		text-transform: uppercase;
-		outline: none;
-		align-self: center;
-		cursor: pointer;
-		font-weight: bold;
-	  }
-	  
-	  .fun-btn:hover {
-		animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
-	  }
-	  
-	  .start-fun {
-		background-color: #fff !important;
-		/* change color of button text when fun is started   */
-		color: salmon !important;
-	  }
-	  
-	  /* pulsating effect on button */
-	  @keyframes grow {
-		0% {
-		  transform: scale(1);
-		}
-		14% {
-		  transform: scale(1.3);
-		}
-		28% {
-		  transform: scale(1);
-		}
-		42% {
-		  transform: scale(1.3);
-		}
-		70% {
-		  transform: scale(1);
-		}
-	  }
-</style> 
-
-<style>
-	@import url(https://fonts.googleapis.com/css?family=BenchNine:700);
-	.snip1535 {
-	  background-color: #c47135;
-	  border: none;
-	  color: #ffffff;
-	  cursor: pointer;
-	  display: inline-block;
-	  font-family: 'BenchNine', Arial, sans-serif;
-	  font-size: 1em;
-	  font-size: 22px;
-	  line-height: 1em;
-	  margin: 15px 40px;
-	  outline: none;
-	  padding: 12px 40px 10px;
-	  position: relative;
-	  text-transform: uppercase;
-	  font-weight: 700;
-	}
-	.snip1535:before,
-	.snip1535:after {
-	  border-color: transparent;
-	  -webkit-transition: all 0.25s;
-	  transition: all 0.25s;
-	  border-style: solid;
-	  border-width: 0;
-	  content: "";
-	  height: 24px;
-	  position: absolute;
-	  width: 24px;
-	}
-	.snip1535:before {
-	  border-color: #c47135;
-	  border-right-width: 2px;
-	  border-top-width: 2px;
-	  right: -5px;
-	  top: -5px;
-	}
-	.snip1535:after {
-	  border-bottom-width: 2px;
-	  border-color: #c47135;
-	  border-left-width: 2px;
-	  bottom: -5px;
-	  left: -5px;
-	}
-	.snip1535:hover,
-	.snip1535.hover {
-	  background-color: #c47135;
-	}
-	.snip1535:hover:before,
-	.snip1535.hover:before,
-	.snip1535:hover:after,
-	.snip1535.hover:after {
-	  height: 100%;
-	  width: 100%;
-	}
-</style> -->
-
-
-
-
-
-	<!-- <script> // common_func.js 로 옮김.  
-
-		function checkMemRegForm(){
-			// alert("내일 휴강입니다...")
-
-			var mem_name = document.memberRegForm.mem_name.value;
-			var uid = document.memberRegForm.uid.value;
-			var pwd = document.memberRegForm.pwd.value;
-
-			var regExp = new RegExp( /^[가-힣]{2,20}$/ );
-			if( regExp.test(mem_name)==false ){
-				alert("회원명에는 한글 2~20자 까지 입력해야 합니다.");
-				document.memberRegForm.mem_name.value="";
-				return;
-			}
-
-			var regExp = new RegExp( /^[a-z][a-z0-9_]{4,9}$/ );
-			if( regExp.test(uid)==false ){
-				alert("아이디는 영소문자로 시작하고 영소문자 또는 숫자 또는 _ 로 5~10자로 구성되야합니다.");
-				document.memberRegForm.uid.value="";
-				return;
-			}
-
-			var regExp = new RegExp( /^[a-z0-9_]{5,8}$/ );
-			if( regExp.test(pwd)==false ){
-				alert("암호는 영소문자 또는 숫자로 5~8자로 구성되야합니다.");
-				document.memberRegForm.pwd.value="";
-				return;
-			}
-
-			// alert( mem_name + " / " + uid + " / " + pwd) 입력 잘되는지 확인.
-			
-			alert("회원가입 성공!!");
-			
-			location.replace("loginForm.html")
-		}
-
-	</script> -->
 
 </head>
 
@@ -277,7 +89,7 @@
 			</tr>
 			<tr>
 				<th bgcolor="lightyellow">아이디</th>
-				<td><input type="text" name="uid" class="uid"></td>	
+				<td><input type="text" name="mem_id" class="mem_id"></td>	
 			</tr>
 			<tr>
 				<th bgcolor="lightyellow">암호</th>
@@ -331,34 +143,6 @@
 		<!--------------------------------------------------------------------->
 		
 
-
-
-
-
-
-		<!------CSS 버튼 테스트    ------------------------------------------------->
-		<!-- <input class="snip1535" 
-			value="로그인 화면으로" onclick="location.replace('loginForm.html')">
-		
-		<div class="snip1535" onclick="location.replace('loginForm.html')">
-		<input class="snip1535">로그인 화면으로</input>
-		</div> -->
-		<!--------------------------------------------------------------------->
-		
-		
-		
-		
-		<!-- CSS 테스트 -->
-		<!-- <div class="page">
-
-			<button class="fun-btn">press for fun</button>
-		  
-		  </div>
-
-		  <button class="snip1535">Submit</button>
-		  <button class="snip1535 hover">Read More</button>
-		  <button class="snip1535">Add to Cart</button>
-		  <button class="snip1535">Subscribe</button> -->
 
 
 
