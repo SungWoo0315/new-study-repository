@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    	
+	<script src="jquery-1.11.0.min.js"></script>
+	<script>
+    $(document).ready(function(){
+        
+        $(".movie div:contains('데드풀')").parent().append("<div>존윅3</div>");
+    });
+    </script>
+    <style>
+        .movie{
+            background-color: green;
+        }
+        .m1{
+            background-color: gold;
+        }
+        .m2{
+            background-color: hotpink;
+        }
+        .m1 div{
+            height: 20px;
+            background-color: red;
+            margin-top: 10px;
+        }
+        .m2 div{
+            height: 20px;
+            background-color: rebeccapurple;
+            margin-top: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="movie">
+        <div class="m1">
+            <div>컨저링</div>
+            <div>쏘우</div>
+        </div>
+        
+        <div class="m2">
+            <div>분노의질주</div>
+            <div>데드풀</div>
+        </div>
+    </div>
+</body>
+</html>
