@@ -8,7 +8,35 @@
 	<script>
     $(document).ready(function(){
         
-        $(".movie div:contains('데드풀')").parent().append("<div>존윅3</div>");
+        // $(".movie div:contains('데드풀')").parent().append("<div>존윅3</div>");
+
+        // ---------------------
+        //     정답
+        // ---------------------
+        // $(".movie div").eq(0).siblings().append( "<div>존윅3</div>" );  // 6개 인덱스 중에 0번째 골라서.
+        // $(".movie div:last").parent().append( "<div>존윅3</div>" );
+        // $(".movie :last").parent().append( "<div>존윅3</div>" );
+        // $(".movie>div").eq(1).append( "<div>존윅3</div>" );             // `>` 사이 공백넣지말기. 주의 하기. 
+        // $(".movie div").eq(3).append( "<div>존윅3</div>" );           
+    
+
+        // ---------------------
+        // 오답. 왜 틀렸는지 보기.  
+        // ---------------------
+        // $(".movie div:contains('데드풀')").parent().append( "<div>존윅3</div>" );
+        // '데드풀' 을 내포하고 있는 div 태그는 두개이기 때문.
+        // --------------------------------------------------------
+        // $(".movie div").eq(1).append( "<div>존윅3</div>" );
+        // $(".movie div:eq(1)").append( "<div>존윅3</div>" );
+        // $(".movie:eq(1)").append( "<div>존윅3</div>" );
+
+        // $(".movie div:last").append( "<div>존윅3</div>" );
+        // $(".movie :last").append( "<div>존윅3</div>" );
+        // --------------------------------------------------------
+
+
+
+
     });
     </script>
     <style>
