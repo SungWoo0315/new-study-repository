@@ -8,9 +8,11 @@
 	<script>
     $(document).ready(function(){
         
-        // $(".movie div:contains('데드풀')").parent().append("<div>존윅3</div>");
+        // $(".movie div:contains('데드풀')").parent().eq(1).append("<div>존윅3</div>");
 
         // $(".movie").find("div").eq(3).append("<div>존윅3</div>");
+
+        // $(".movie").children().eq(1).append("<div>존윅3</div>");
 
         // ---------------------
         //     정답
@@ -26,6 +28,8 @@
         // 오답. 왜 틀렸는지 보기.  
         // ---------------------
         // $(".movie div:contains('데드풀')").parent().append( "<div>존윅3</div>" );
+        $(".movie div:contains('데드풀')").append( "<div>존윅3</div>" );
+
         // '데드풀' 을 내포하고 있는 div 태그는 두개이기 때문.
         // --------------------------------------------------------
         // $(".movie div").eq(1).append( "<div>존윅3</div>" );
