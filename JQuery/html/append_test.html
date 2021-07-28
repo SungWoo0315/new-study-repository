@@ -10,9 +10,15 @@
         
         // $(".movie div:contains('데드풀')").parent().eq(1).append("<div>존윅3</div>");
 
+        // $(".movie div:contains('데드풀')").eq(0).append("<div>존윅3</div>");
+
         // $(".movie").find("div").eq(3).append("<div>존윅3</div>");
 
         // $(".movie").children().eq(1).append("<div>존윅3</div>");
+
+        // $(".movie div:eq(0)").next().append("<div>존윅3</div>");
+
+
 
         // ---------------------
         //     정답
@@ -23,12 +29,26 @@
         // $(".movie>div").eq(1).append( "<div>존윅3</div>" );             // `>` 사이 공백넣지말기. 주의 하기. 
         // $(".movie div").eq(3).append( "<div>존윅3</div>" );           
     
+        // ---------------------------------
+        // 정답- 강사님 정리 정답.
+        // ---------------------------------
+        // $(".movie div").eq(0).siblings().append( " <div>존윅3</div>" )
+        // $(".movie div:last").parent().append("<div>존윅3</div>")  
+        // $(".movie :last").parent().append("<div>존윅3</div>")  
+        // $(".movie>div").eq(1).append("<div>존윅</div>")
+        // $(".movie div").eq(3).append("<div>존윅</div>")
+        // $(".movie").children().eq(1).append("<div>존윅3</div>");
+        // $(".movie div:contains('데드풀')").parent().eq(1).append("<div>존윅3</div>");
+        // $(".movie div:contains('데드풀')").eq(0).append("<div>존윅3</div>");
+        // $(".movie div:eq(0)").next().append("<div>존윅3</div>")
+        // $(".movie div").eq(5).parent().append( "<div>존윅3</div>" ); 
+        // $(".movie div").eq(5).after("<div>존윅3</div>");        
 
         // ---------------------
         // 오답. 왜 틀렸는지 보기.  
         // ---------------------
         // $(".movie div:contains('데드풀')").parent().append( "<div>존윅3</div>" );
-        $(".movie div:contains('데드풀')").append( "<div>존윅3</div>" );
+        // $(".movie div:contains('데드풀')").append( "<div>존윅3</div>" );
 
         // '데드풀' 을 내포하고 있는 div 태그는 두개이기 때문.
         // --------------------------------------------------------
@@ -38,6 +58,8 @@
 
         // $(".movie div:last").append( "<div>존윅3</div>" );
         // $(".movie :last").append( "<div>존윅3</div>" );
+
+        // $(".movie div").next().append("<div>존윅3</div>");
         // --------------------------------------------------------
 
 
