@@ -45,22 +45,45 @@ jquery_test_01.html
 			// ---------------------------------------------------
 			tableObj.find("tbody tr:even").attr("bgcolor", "#FFFFFF")
 
-
 			// alert( tableObj.length );  // 태그가 잡혔는지 확인.
 
-
-			tableObj.find("tbody tr:eq(0)").mouseover(
+			/* 
+			tableObj.find("tbody tr").mouseover(
 				function(){
 					// alert("첫번째 tr 에 마우스 온! ");
-					$(this).attr("bgcolor", "lightyellow")
+					$(this).attr("bgcolor", "pink")
 				});
 
-				tableObj.find("tbody tr:eq(0)").mouseout(
+			tableObj.find("tbody tr:even").mouseout(
 				function(){
-					// alert("첫번째 tr 에 마우스 온! ");
-					$(this).attr("bgcolor", "white")
+					$(this).attr("bgcolor", "#FFFFFF")
 				});
+			
+			// 홀수 짝수 필요없이 모두 핑크로 변하기 때문에 위에서 통합.   
+			// tableObj.find("tbody tr:odd").mouseover(
+			// 	function(){
+			// 		// alert("첫번째 tr 에 마우스 온! ");
+			// 		$(this).attr("bgcolor", "pink")
+			// 	});
 
+			tableObj.find("tbody tr:odd").mouseout(
+				function(){
+					$(this).attr("bgcolor", "lightgray")
+				});
+			*/
+
+			
+			tableObj.find("tbody tr").hover(
+				function(){
+					// $(this).attr("bgcolor", "pink")
+					$(".msg").html("<div>마우스 댔니?</div>")
+				}
+				,function(){
+					// $(this).attr("bgcolor", "lightgray")
+					$(".msg").html("<div>마우스 뻈니?</div>")
+
+				}	
+			);
 
 
 		});
@@ -81,5 +104,8 @@ jquery_test_01.html
 			<tr><td>윤하린<td>B형<td>서울 용산구
 		</tbody>
 	</table>
+
+	<div class="msg"></div>
+
 </body>
 </html>
