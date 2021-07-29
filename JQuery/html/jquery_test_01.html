@@ -72,26 +72,45 @@ jquery_test_01.html
 				});
 			*/
 
-			var color = "";
+
+			// -----------------------------------------------
+			// id="staff" 가 있는 태그 후손의 thead 태그 후손의 각 tr 태그에 마우스를 대면
+			// 배경색을 "pink" 로 바꿔주고, 마우스를 빼면 원래 색상을 넣어주기.  
+			// -----------------------------------------------
+			// 마우스를 댄 tr 태그의 bgcolor 속성값을 임시로 저장하기 위한 변수 color 선언하기.
+			// -----------------------------------------------
+			var tr_bgcolor = "";
 			tableObj.find("tbody tr").hover(
 				function(){
 
-					color = $(this).attr("bgcolor");
+					// 테스트용 행번호 부여.
+					var no = $(this).index()+1;
+
+					// 현재 마우스를 댄 tr 태그의 bgcolor 속성값을 얻어내어 color 변수에 저장.
+					tr_bgcolor = $(this).attr("bgcolor");
+					// 현재 마우스를 댄 tr 태그의 bgcolor 속성값을 pink 색상으로 저장.
 					$(this).attr("bgcolor", "pink");
 
-
-					$(".msg").html("<div>개발용 테스트 마우스 올라갔음.</div>")
+					// 개발 테스트용 확인문구.
+					$(".msg").html("<div>개발용 테스트 마우스 올라감.</div>" + no + " 행")
 				}
 				,function(){
 
-					$(this).attr("bgcolor", color);
+					// 현재 마우스를 뺀 tr 태그의 bgcolor 속성값을 변수 color 안의 색상으로 재 지정.
+					$(this).attr("bgcolor", tr_bgcolor);
 
-
+					// 개발 테스트용 확인문구.
 					$(".msg").html("<div>개발용 테스트 마우스 빠졌음.</div>")
 
 				}	
 			);
 
+
+			// -----------------------------------------------
+			// id="staff" 가 있는 태그 후손의 thead 태그 후손의 각 th 에 마우스 대면,
+			// 그 밑의 tbody 태그 후손의 tr 태그 후손 td 의 배경색을 바꾸기.
+			// 즉, 마우스를 댄 th 태그의 밑 즉, 세로 방향의 td 의 배경색을 바꾸기.  
+			// -----------------------------------------------
 			tableObj.find("thead tr th").hover(
 				function(){
 					// ---------------------------------------
@@ -101,21 +120,23 @@ jquery_test_01.html
 					// ---------------------------------------
 					var no = $(this).index()+1;
 					// ---------------------------------------
-					// tbody 안의 각 tr 태그 안에서 위에서 구한 순서번호에 해당하는 td 태그의 배경색 바꾸기.
+					// tbody 안의 각 tr 태그 안에서 위에서 구한 순서번호에 해당하는 td 태그에 class=style1 을 삽입하기.
 					// ---------------------------------------
-					tableObj.find("tbody td:nth-child("+no+")").attr("bgcolor", "lightblue");
+					tableObj.find("tbody td:nth-child("+no+")").addClass("style1");
 
 
-
+					// 테스트용 열번호 부여.
 					$(".msg").text("개발용 열 순서번호 테스트 : " + no + " 열");
 				}
 				,function(){
+					// ---------------------------------------
 					// 마우스를 뺀 열의 배경색상을 원래대로 바꾸기
+					// tbody 안의 각 tr 태그 안에서 모든 td 태그에 class=style1 을 제거하기.
+					// ---------------------------------------
 
 					var no = $(this).index()+1;
 
-					tableObj.find("tbody td:nth-child("+no+")").attr("bgcolor", "lightyellow");
-
+					tableObj.find("tbody td").removeClass("style1");
 
 
 				}
