@@ -10,103 +10,99 @@
 			// body 태그 안의 요소들을 읽어들인 후 익명함수 내부의 자스코딩을 실행.
 		$(document).ready(function(){
 
+			// var obj1 = $("[name='hobby_all']");
+			// var obj2 = $("[name='hobby']");
+			// // --------------------------------------------------------
+			// obj1.change(
+			// 	function(){
+			// 		// var isChecked = $(this).prop("checked");
+			// 		// if( isChecked==true ){
+			// 		// 	obj2.prop("checked", true);
+			// 		// }
+			// 		// else{
+			// 		// 	obj2.prop("checked", false);
+			// 		// }
+
+
+
+			// 		// 위 코드를 줄여서 만든 식.
+			// 		obj2.prop( "checked", $(this).prop("checked") )
+
+
+			// 	}
+			// );
+			// // --------------------------------------------------------
+			// obj2.change(
+			// 	function(){
+
+			// 		obj1.prop( "checked", obj2.filter(":checked").length==obj2.length )
+		
+			// 	}
+			// );
+			// // --------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			// 내가 시도해본것.  
+
 			var obj1 = $("[name='hobby_all']");
 			var obj2 = $("[name='hobby']");
 
 			obj1.change(
 				function(){
-					// var isChecked = $(this).prop("checked");
-					// if( isChecked==true ){
-					// 	obj2.prop("checked", true);
-					// }
-					// else{
-					// 	obj2.prop("checked", false);
-					// }
-
-
-
-
-					obj2.prop( "checked", $(this).prop("checked") )
-
-
-				}
-			);
-
-
-			obj2.change(
-				function(){
-
-					obj1.prop( "checked", obj2.filter(":checked").length==obj2.length )
 					
-
-
-
-
-
-
-
-
-				}
-			);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			/* 내가 시도해본것.  
-			$("[name=hobby_all]").change(
-				function(){
-					
-					var thisObj = $(this);
-
-					var thisAll = $("[name=hobby_all]").prop("checked");
+					var thisAll = obj1.prop("checked");
 				
 				
 					if( thisAll==true ){
 						
-						$("[name=hobby]").prop("checked", true);
+						obj2.prop("checked", true);
 						
 					}
 					else{
-						$("[name=hobby]").prop("checked", false);
+						obj2.prop("checked", false);
 					}
 
 				}
 			);
 
-			$("[name=hobby]").change(
+
+
+			obj2.change(
 				function(){
 					
 					var thisObj = $(this);
 
-					var thisAll = $("[name=hobby_all]").prop("checked");
+					var thisAll = obj1.prop("checked");
 				
 					var isChecked = thisObj.prop("checked");
 
-					if( $(body:contains('독서')).prop("checked")==true ){
+					if( obj2.filter(":checked").length==obj2.length ){
 						
-						$("[name=hobby_all]").prop("checked", true);
+						obj1.prop("checked", true);
 						
 					}
 					else{
-						$("[name=hobby_all]").prop("checked", false);
+						obj1.prop("checked", false);
 					}
 					
 
 				}
 			);
-			*/
+			
 
 
 
