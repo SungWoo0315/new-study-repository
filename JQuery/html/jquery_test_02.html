@@ -35,17 +35,20 @@ jquery_test_02.html
 
 				function(){
 					// 마우스를 댄 tr 태그의 바로 밑동생 tr을 보여라.
-					$(this).next().show();
-				
-				
-					$(this).siblings().show();
-					
+					$("tr:odd").hide();
 
+					$(this).next().show();
+					
+					// $(this).prev("tr:even").hide();
+					
+					// $(this).prev().hide();
+					
+					
 				}
 				,function(){
 					// 마우스를 뺸 tr 태그의 바로 밑동생 tr을 감춰라.
 					// $(this).next().hide();
-
+					
 					
 				}
 			);
