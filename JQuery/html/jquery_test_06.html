@@ -5,7 +5,90 @@
 	<script src="jquery-1.11.0.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			$(".reverse").click(
+				function(){
 
+					
+
+					// var isChecked0 = $("[name=hobby]").eq(0).prop("checked");
+
+					// var isChecked1 = $("[name=hobby]").eq(1).prop("checked");
+
+					// var isChecked2 = $("[name=hobby]").eq(2).prop("checked");
+
+					// var isChecked3 = $("[name=hobby]").eq(3).prop("checked");
+
+					// // -------------------------------------------------------------
+					// if( isChecked0 == true){
+
+					// 	$("[name=hobby]").eq(0).prop("checked", false);
+					// }
+					// else{
+					// 	$("[name=hobby]").eq(0).prop("checked", true);
+					// }
+					// // -------------------------------------------------------------
+					// if( isChecked1 == true){
+
+					// $("[name=hobby]").eq(1).prop("checked", false);
+					// }
+					// else{
+					// $("[name=hobby]").eq(1).prop("checked", true);
+					// }
+					// // -------------------------------------------------------------
+					// if( isChecked2 == true){
+
+					// $("[name=hobby]").eq(2).prop("checked", false);
+					// }
+					// else{
+					// $("[name=hobby]").eq(2).prop("checked", true);
+					// }
+					// // -------------------------------------------------------------
+					// if( isChecked3 == true){
+
+					// $("[name=hobby]").eq(3).prop("checked", false);
+					// }
+					// else{
+					// $("[name=hobby]").eq(3).prop("checked", true);
+					// }
+					// // -------------------------------------------------------------
+
+					var len = $("[name=hobby]").length;
+					
+					// for(i=0; i<len; i++){
+						
+					// 	var isChecked0 = $("[name=hobby]").eq(i).prop("checked");
+
+					// 	if( isChecked0 == true){
+
+					// 	$("[name=hobby]").eq(i).prop("checked", false);
+					// 	}
+					// 	else{
+					// 	$("[name=hobby]").eq(i).prop("checked", true);
+					// 	}
+					// };
+
+
+					$("[name=hobby]").each(
+						function(i){
+
+							var isChecked0 = $("[name=hobby]").eq(i).prop("checked");
+							
+							if( isChecked0 == true){
+
+							$("[name=hobby]").eq(i).prop("checked", false);
+							}
+							else{
+							$("[name=hobby]").eq(i).prop("checked", true);
+							}
+						}
+					);
+
+
+
+					// alert(isChecked);
+
+				}
+			);
 		});
 	</script>
 	
