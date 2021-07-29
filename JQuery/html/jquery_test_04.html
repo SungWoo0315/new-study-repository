@@ -1,0 +1,133 @@
+
+<html>
+<meta charset="UTF-8">
+<head>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script>
+		//**********************************************
+		//$(document).ready(   function(){자스코딩}  );
+		//**********************************************
+			// body 태그 안의 요소들을 읽어들인 후 익명함수 내부의 자스코딩을 실행.
+		$(document).ready(function(){
+
+			var obj1 = $("[name='hobby_all']");
+			var obj2 = $("[name='hobby']");
+
+			obj1.change(
+				function(){
+					// var isChecked = $(this).prop("checked");
+					// if( isChecked==true ){
+					// 	obj2.prop("checked", true);
+					// }
+					// else{
+					// 	obj2.prop("checked", false);
+					// }
+
+
+
+
+					obj2.prop( "checked", $(this).prop("checked") )
+
+
+				}
+			);
+
+
+			obj2.change(
+				function(){
+
+					obj1.prop( "checked", obj2.filter(":checked").length==obj2.length )
+					
+
+
+
+
+
+
+
+
+				}
+			);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			/* 내가 시도해본것.  
+			$("[name=hobby_all]").change(
+				function(){
+					
+					var thisObj = $(this);
+
+					var thisAll = $("[name=hobby_all]").prop("checked");
+				
+				
+					if( thisAll==true ){
+						
+						$("[name=hobby]").prop("checked", true);
+						
+					}
+					else{
+						$("[name=hobby]").prop("checked", false);
+					}
+
+				}
+			);
+
+			$("[name=hobby]").change(
+				function(){
+					
+					var thisObj = $(this);
+
+					var thisAll = $("[name=hobby_all]").prop("checked");
+				
+					var isChecked = thisObj.prop("checked");
+
+					if( $(body:contains('독서')).prop("checked")==true ){
+						
+						$("[name=hobby_all]").prop("checked", true);
+						
+					}
+					else{
+						$("[name=hobby_all]").prop("checked", false);
+					}
+					
+
+				}
+			);
+			*/
+
+
+
+
+
+
+
+		});
+
+	</script>
+</head>
+<body><center>
+	<hr>
+	<input type="checkbox" name="hobby_all" >전체
+	<hr>
+	<input type="checkbox" name="hobby" value="독서">독서<br>
+	<input type="checkbox" name="hobby" value="운동">운동<br>
+	<input type="checkbox" name="hobby" value="여행">여행<br>
+	<input type="checkbox" name="hobby" value="수집">수집
+</body>
+
+</html>
+
+
