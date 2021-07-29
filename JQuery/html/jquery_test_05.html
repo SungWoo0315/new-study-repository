@@ -8,9 +8,27 @@
 
 
 			
-			
-			$(".dogList tr").eq(0).after("<th>ddd")
+			$(".dogList tr:eq(0)").prepend("<th>순서번호</th>");
 
+			// $(".dogList tr:eq(1)").prepend("<td>1</td>");
+			// $(".dogList tr:eq(2)").prepend("<td>2</td>");
+			// $(".dogList tr:eq(3)").prepend("<td>3</td>");
+			// $(".dogList tr:eq(4)").prepend("<td>4</td>");
+			// $(".dogList tr:eq(5)").prepend("<td>5</td>");
+			
+			// alert($(".dogList tr").length)
+
+
+			
+			var len = $(".dogList tr").length
+			
+			for( i=1; i<len; i++ ){
+
+			$(".dogList tr:eq("+i+")").prepend("<th>"+i+"</th>");
+
+			}
+
+		
 
 
 		});
@@ -26,6 +44,38 @@
 		<tr><td>비글
 		<tr><td>삽살개
 		<tr><td>풍산개
+		<tr><td>추가1
+		<tr><td>추가2
+		<tr><td>추가2
+		<tr><td>추가2
+
+
+
 	</table>
+
+	<hr>
+	<table class="test" border=1  cellpadding=4 style="border-collapse:collapse">
+		<tr>
+			<th>이렇게.</th>
+			<th bgcolor="gray">개이름
+				
+		<tr>
+			<td>이렇게1
+			<td>진도개
+		<tr>
+			<td>이렇게2
+			<td>셰퍼드
+		<tr>
+			<td>이렇게3
+			<td>비글
+		<tr>
+			<td>이렇게4
+			<td>삽살개
+		<tr>
+			<td>이렇게5
+			<td>풍산개
+	</table>
+
+	
 </body>
 </html>
