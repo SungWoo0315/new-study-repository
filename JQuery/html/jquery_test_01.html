@@ -72,18 +72,43 @@ jquery_test_01.html
 				});
 			*/
 
-			
+			var color = "";
 			tableObj.find("tbody tr").hover(
 				function(){
-					$(this).attr("bgcolor", "pink")
-					$(".msg").html("<div>마우스 댔니?</div>")
+
+					color = $(this).attr("bgcolor");
+					$(this).attr("bgcolor", "pink");
+
+
+					$(".msg").html("<div>개발용 테스트 마우스 올라갔음.</div>")
 				}
 				,function(){
-					$(this).attr("bgcolor", "lightgray")
-					$(".msg").html("<div>마우스 뻈니?</div>")
+
+					$(this).attr("bgcolor", color);
+
+
+					$(".msg").html("<div>개발용 테스트 마우스 빠졌음.</div>")
 
 				}	
 			);
+
+
+			
+			tableObj.find("thead tr th").hover(
+				function(){
+					// 마우스를 댄 열의 배경색상을 바꾸기
+				}
+
+				function(){
+					// 마우스를 뺀 열의 배경색상을 원래대로 바꾸기
+
+				}
+
+			);
+
+
+
+
 
 
 		});
@@ -105,7 +130,7 @@ jquery_test_01.html
 		</tbody>
 	</table>
 
-	<div class="msg"></div>
+	<div class="msg"></div>	 <!-- 개발용 div 태그 -->
 
 </body>
 </html>
