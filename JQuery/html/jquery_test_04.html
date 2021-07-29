@@ -10,8 +10,8 @@
 			// body 태그 안의 요소들을 읽어들인 후 익명함수 내부의 자스코딩을 실행.
 		$(document).ready(function(){
 
-			// var obj1 = $("[name='hobby_all']");
-			// var obj2 = $("[name='hobby']");
+			var obj1 = $("[name='hobby_all']");
+			var obj2 = $("[name='hobby']");
 			// // --------------------------------------------------------
 			// obj1.change(
 			// 	function(){
@@ -81,11 +81,11 @@
 			obj2.change(
 				function(){
 					
-					var thisObj = $(this);
+					// var thisObj = $(this);
 
-					var thisAll = obj1.prop("checked");
+					// var thisAll = obj1.prop("checked");
 				
-					var isChecked = thisObj.prop("checked");
+					// var isChecked = thisObj.prop("checked");
 
 					if( obj2.filter(":checked").length==obj2.length ){
 						
