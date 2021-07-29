@@ -92,15 +92,31 @@ jquery_test_01.html
 				}	
 			);
 
-
-			
 			tableObj.find("thead tr th").hover(
 				function(){
+					// ---------------------------------------
 					// 마우스를 댄 열의 배경색상을 바꾸기
-				}
+					// 마우스가 올라간 th 태그의 형제 순서번호 저장.
+					// <참고> 이 순서번호는 열의 번호와 일치한다.
+					// ---------------------------------------
+					var no = $(this).index()+1;
+					// ---------------------------------------
+					// tbody 안의 각 tr 태그 안에서 위에서 구한 순서번호에 해당하는 td 태그의 배경색 바꾸기.
+					// ---------------------------------------
+					tableObj.find("tbody td:nth-child("+no+")").attr("bgcolor", "lightblue");
 
-				function(){
+
+
+					$(".msg").text("개발용 열 순서번호 테스트 : " + no + " 열");
+				}
+				,function(){
 					// 마우스를 뺀 열의 배경색상을 원래대로 바꾸기
+
+					var no = $(this).index()+1;
+
+					tableObj.find("tbody td:nth-child("+no+")").attr("bgcolor", "lightyellow");
+
+
 
 				}
 
