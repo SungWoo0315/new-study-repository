@@ -100,10 +100,12 @@ jquery_09_searching.html
 						
 						// trObj.find("tbody tr:odd").css("background-color", "lightgray");
 
-
-						trObj.filter("tr:nth-child(odd)").css("background-color", "red");  
+ 
 
 						trObj.show();
+
+						tableObj.find("tbody tr").css("background-color", "white");
+						trObj.parent().find("tr:odd").css("background-color", "red"); 
 					}
 
 				});
@@ -161,6 +163,45 @@ jquery_09_searching.html
 		<tr><td>101<td>John<td>87
 		<tr><td>102<td>Naman<td>90
 		<tr><td>103<td>Chirag<td>85
+		<tr><td>104<td>David<td>92
+		<tr><td>105<td>Kelly<td>81
+		<tr><td>106<td>Charles<td>77
+		<tr><td>107<td>Jerry<td>91
+		<tr><td>108<td>Beth<td>87
+		<tr><td>109<td>Caroline<td>82
+		<tr><td>110<td>Hanen<td>71
+		<tr><td>111<td>Douglas<td>57
+		<tr><td>112<td>Tim<td>86
+		<tr><td>113<td>Michael<td>68
+		<tr><td>114<td>Kimbley<td>88
+		<tr><td>115<td>Christinax<td>72
+		<tr><td>116<td>유원영<td>100
+		<tr><td>117<td>강다니엘<td>20
+		<tr><td>118<td>인간1<td>100
+		<tr><td>119<td>인간2<td>100
+
+	</tbody>
+</table>
+
+<hr>
+
+<table border="1" cellpadding=5 class="test" style="border-collapse:collapse;">
+	<thead>
+		<tr ><th>번호<th>이름<th>평균
+	</thead>
+	<tbody>
+		<tr>
+			<td>101
+			<td>John
+			<td>87
+		<tr>
+			<td>102
+			<td>Naman
+			<td>90
+		<tr>
+			<td>103
+			<td>Chirag
+			<td>85
 		<tr><td>104<td>David<td>92
 		<tr><td>105<td>Kelly<td>81
 		<tr><td>106<td>Charles<td>77
