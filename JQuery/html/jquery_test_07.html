@@ -93,13 +93,17 @@ jquery_09_searching.html
 					// i번째 tr 태그 내부의 3번째 td 태그가 안고 있는 문자열 얻고 소문자로 바꾸어 변수 text3 에 저장하기
 					var text3 = trObj.find("td:eq(2)").text().toLowerCase();
 					
-					// alert(text1 + " / " + text2 + " / " + text3);
+					// alert(text1 + " / " + text2 + " / " + text3);	// 문자열 리턴 확인 테스트용. 
 
 					// 1번째 또는 2번째 또는 3번째 td 태그가 안고 문자열에 keyword1 변수 안의 데이터가 있으면  
 					if( text1.indexOf(keyword1)>=0 || text2.indexOf(keyword1)>=0 || text3.indexOf(keyword1)>=0 ){
 						
-						trObj.show();
+						// trObj.find("tbody tr:odd").css("background-color", "lightgray");
 
+
+						trObj.filter("tr:nth-child(odd)").css("background-color", "red");  
+
+						trObj.show();
 					}
 
 				});
@@ -114,6 +118,21 @@ jquery_09_searching.html
 
 
 
+			// 모두검색 눌렀을 때 모두 나오게 하는 코딩.  
+			$(".allSearch").click(function(){
+
+
+
+			var tableObj = $(".sungjuk");
+
+			// tableObj.find("tbody tr:odd").css("background-color", "lightgray");
+			
+			// tableObj.find("tbody tr:even").css("background-color", "white");
+
+
+			tableObj.find("tr").show();
+
+			});
 
 
 
