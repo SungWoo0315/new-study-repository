@@ -16,6 +16,21 @@ jquery_09_searching.html
 
 	<script>
 		$(document).ready(function() {
+			// ----------------------------------------------------
+			// 변수 tableObj 선언하고 class=sungjuk 을 가진 태그를 관리하는 
+			// JQuery 객체 생성하고 메위주를 저장하기
+			// ----------------------------------------------------
+			var tableobj = $(".sungjuk");
+			// ----------------------------------------------------
+			// thead 태그 안의 tr 의 배경색을 lightblue 로 하기
+			// ----------------------------------------------------
+			tableobj.find("thead tr").attr("bgcolor", "lightblue");
+
+
+
+
+
+			// tableobj.find("tr:odd")
 
 
 
@@ -29,8 +44,6 @@ jquery_09_searching.html
 
 
 
-
-			
 		}); 
 	</script>
 </head>
