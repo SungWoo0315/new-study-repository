@@ -100,21 +100,21 @@ jquery_09_searching.html
                     // i번째 tr 태그를 관리하는 JQuery 객체의 메위주를 얻어서 변수 trsObj 에 저장하기.
                     var trObj = $(this);
                     // i번째 tr 태그 내부의 1번째 td 태그가 안고 있는 문자열 얻고 소문자로 바꾸어 변수 text1 에 저장하기
-                    var text1 = trObj.find("td:eq(0)").text().toLowerCase();
+                    // var text1 = trObj.find("td:eq(0)").text().toLowerCase();
                     // i번째 tr 태그 내부의 2번째 td 태그가 안고 있는 문자열 얻고 소문자로 바꾸어 변수 text2 에 저장하기
-                    var text2 = trObj.find("td:eq(1)").text().toLowerCase();
+                    // var text2 = trObj.find("td:eq(1)").text().toLowerCase();
                     // i번째 tr 태그 내부의 3번째 td 태그가 안고 있는 문자열 얻고 소문자로 바꾸어 변수 text3 에 저장하기
-                    var text3 = trObj.find("td:eq(2)").text().toLowerCase();
+                    // var text3 = trObj.find("td:eq(2)").text().toLowerCase();
                     
                     
-                    // var text = trObj.find("td").text().toLowerCase();  
+                    var text = trObj.find("td").text().toLowerCase();  
                     // alert(text);
                     
                     
                     // alert(text1 + " / " + text2 + " / " + text3);	// 문자열 리턴 확인 테스트용. 
 
                     // 1번째 또는 2번째 또는 3번째 td 태그가 안고 문자열에 keyword1 변수 안의 데이터가 있으면  
-                    if( text1.indexOf(keyword1)>=0 || text2.indexOf(keyword1)>=0 || text3.indexOf(keyword1)>=0 ){
+                    if( text.indexOf(keyword1)>=0 ){
                     
                         trObj.show();
 
@@ -202,8 +202,8 @@ jquery_09_searching.html
         <tr><td>115<td>Christinax<td>72
         <tr><td>116<td>유원영<td>100
         <tr><td>117<td>강다니엘<td>20
-        <tr><td>118<td>인간1<td>100
-        <tr><td>119<td>인간2<td>100
+        <tr><td>118<td>인간 1<td>100
+        <tr><td>119<td>인간 2<td>100
 
     </tbody>
 </table>
