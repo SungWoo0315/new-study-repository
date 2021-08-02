@@ -76,8 +76,9 @@ jquery_test_09.html
 						// 즉, 앞뒤 공백을 제거한 효과 보기
 						word = $.trim(word);
 						// class="word 변수저장문자열" 가지ㅗㄱ 있는 div 태그를 안보이게 하기
-						$("."+word).hide(); 
+						// $("."+word).hide(); 
 
+						$("."+word).delay(2000).hide(1000); 
 
 
 
