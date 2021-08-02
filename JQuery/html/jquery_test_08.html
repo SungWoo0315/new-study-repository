@@ -41,17 +41,40 @@ jquery_test_08.html
                     // money 안의 문자열 중 i 번째 문자 하나가 숫자문자면, num 변수에 축적하기
 
                     var str = money.charAt(i);
-                    var alphabet = "abcdefghijklmnopqrstuvwxyz";
-                    var matchNum = "0123456789"; 
 
-                    if(matchNum.indexOf(str)>0){
+                    if(("0123456789").indexOf(str)>=0){
                         num += str
                     }
+                    // 위와 같은 코딩이다. RegExp 사용해서 작성한 코딩.  
+                    // if(new RegExp(/^[0-9]$/).test(str)>=0){
+                    //    num += str
+                    // }
 
+                
+                    // // 내가 만들어본것.  
+                    // var str = money.charAt(i);
+                    // var matchNum = "0123456789"; 
+
+                    // if(matchNum.indexOf(str)>=0){
+                    //     num += str
+                    // }
+                    
 
 
                 }
+                // ----------------------------
+                // 콤마를 포함한 최종 문자열을 저장할 변수 선언
+                // ----------------------------
+                var result = "";
+
+
+
+
                 
+
+
+                $(this).val(num);
+
                 $(".msg").text(num);   // 테스트용 코드.  
 
 
