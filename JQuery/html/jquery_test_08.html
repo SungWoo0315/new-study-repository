@@ -23,7 +23,38 @@ jquery_test_08.html
             // class=money 를 가진 입력 양식에서 [keyup 이벤트]가 발생하면 임의 자스코딩 실행하기.  
             // -------------------------------------------
             moneyObj.keyup( function(){
-                alert(999);
+                // alert(999);
+                // ----------------------------
+                // keyup 이벤트가 발생한 입력 양식의 value 값, 즉, 유저가 입력한 데이터를
+                // 자바스크립트 영역으로 가져와 money 변수에 저장
+                // ----------------------------
+                var money = $(this).val();  
+                // $(".msg").text(money)   // 테스트용 코드.  
+                // ----------------------------
+                // 숫자만 골라서 저장할 변수 선언
+                // ----------------------------
+                var num = "";
+                // ----------------------------
+                // money 변수 안의 데이터 중 숫자만 골라 num 변수에 누적 시킴
+                // ----------------------------
+                for( var i=0; i<money.length; i++){
+                    // money 안의 문자열 중 i 번째 문자 하나가 숫자문자면, num 변수에 축적하기
+
+                    var str = money.charAt(i);
+                    var alphabet = "abcdefghijklmnopqrstuvwxyz";
+                    var matchNum = "0123456789"; 
+
+                    if(matchNum.indexOf(str)>0){
+                        num += str
+                    }
+
+
+
+                }
+                
+                $(".msg").text(num);   // 테스트용 코드.  
+
+
             });
 
 
