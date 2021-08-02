@@ -239,6 +239,30 @@ class Student {
                                         결국, xxx 변수에는 HashMap, Hashtable, TreeMap, LindedHashMap, Properties 중에 하나가 객체화 했을 때 
                                         메위주가 들어갈 예정이다. 
 
+**************************************
+<8> 자바 문법에서 [인터페이스](=interface)가 뭡니까?  (입) [입사시험문제] 단골.  
+**************************************
+
+    정의 => public, final, static 성격을 가진 속성변수와 
+            public, abstract 이 성격을 가진 메서드로 구성된 일종의 단위 프로그램이다.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
