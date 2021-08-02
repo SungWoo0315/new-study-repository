@@ -24,18 +24,26 @@ jquery_09_searching.html
             ,oddBgcolor     // 홀수번째 tr 태그의 배경색.
             ,evenBgcolor    // 짝수번째 tr 태그의 배경색.  
         ){
+
+            // 함수 안에서 색상 강제 지정.  
+            // oddBgcolor = "white";
+            // evenBgcolor = "lightgray";
+
             // tr 태그 중 화면에 보이는 tr 를 관리하는 JQuery 객체의 메위주 얻기
             var visibleTrsObj = trsObj.filter(":visible")
 
             // tr 태그 중 화면에 보이는 tr 중 홀수 tr 만 골라서 배경색을 주기
+            visibleTrsObj.filter(":even").css("background-color", oddBgcolor);
 
             // tr 태그 중 화면에 보이는 tr 중 짝수 tr 만 골라서 배경색을 주기
+            visibleTrsObj.filter(":odd").css("background-color", evenBgcolor);
+
         }
 
 
 
 
-
+        // 내가 코딩.  
         // 짝수 행 일정하게 회색만드는 공용함수.  
         function colorSort(){
 
@@ -60,6 +68,13 @@ jquery_09_searching.html
             // ----------------------------------------------------
             // tableObj.find("thead tr").attr("bgcolor", "lightblue"); // attr() 메서드 사용해서 색상부여.
             tableObj.find("thead tr").css("background-color", "lightblue");
+
+            // ----------------------------------------------------
+            // inputBgColor_to_tr 함수를 호출하여 화면에 보이는 tr 태그의 짝, 홀 배경색상을 넣어주기
+            // ----------------------------------------------------
+            inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
+
+            /* 위의 공용함수로 만들기 위해 주석처리.
             // ----------------------------------------------------
             // tbody 태그 안의 짝수 tr 의 배경색을 lightgray 로 하기
             // JQuery 객체의 css 라는 메서드를 호출해서 CSS 차원에서 배경색을 lightgray 로 하기.  
@@ -69,7 +84,7 @@ jquery_09_searching.html
             // tbody 태그 안의 홀수 tr 의 배경색을 white 로 하기
             // ----------------------------------------------------
             tableObj.find("tbody tr:even").css("background-color", "white");
-
+            */
 
             // ----------------------------------------------------
             // class="keyword1" 가진 태그에 click 이벤트가 일어나면
@@ -138,7 +153,10 @@ jquery_09_searching.html
                     
                         trObj.show();
 
-                        colorSort();
+
+
+                        // colorSort();
+
                         
                         // trObj.filter("tbody tr:visible:odd").css("background-color", "lightgray");
                         
@@ -155,6 +173,11 @@ jquery_09_searching.html
                     }
 
                 });
+                // ----------------------------------------------------
+                // inputBgColor_to_tr 함수를 호출하여 검색결과로 화면에 보이는 tr 태그의 짝, 홀 배경색상을 넣어주기
+                // ----------------------------------------------------
+                inputBgColor_to_tr( trsObj, "white", "lightgray" );
+
 
                 
 
