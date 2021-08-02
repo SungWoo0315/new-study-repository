@@ -67,10 +67,30 @@ jquery_test_08.html
                 // ----------------------------
                 var result = "";
 
+                // 원시적 코딩.  
+                // var str1 = num.charAt(num.length-1)
+
+                // result = str1 + result;
+
+                // var str1 = num.charAt(num.length-2)
+
+                // result = str1 + result;
+
+                // ----------------------------
+                // num 에서 맨 뒤에서 부터 하나씩 낚아채서 result 변수 누적 시킴.
+                // 이때, 3의 배수만큼 낚아챌 때 콤마(,)를 앞에 넣어 누적시킴
+                // ----------------------------
+                var cnt = 0;
+                for ( var i=num.length-1; i >=0; i--) {
+                    
+                var str1 = num.charAt(num.length-i)
+
+                result = str1 + result;
+                 
+                };
 
 
 
-                
 
 
                 $(this).val(num);
