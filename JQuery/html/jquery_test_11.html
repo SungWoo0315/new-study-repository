@@ -2,108 +2,108 @@
 ~~~~~~~~~~~~~~~~~~~~~~
 jquery_test_11.html
 ~~~~~~~~~~~~~~~~~~~~~~
-	헤더를 클릭하면 행의 순서를 바꾸어 소트가 되는 효과를 본다.
+    헤더를 클릭하면 행의 순서를 바꾸어 소트가 되는 효과를 본다.
  -->
 <html>
 <meta charset="UTF-8">
 <head>
-	<script src="jquery-1.11.0.min.js"></script>
-	<script>
-	$(document).ready(function() {
-		// **************************************************
-		// 첫째 tr 태그 내부의 th 태그를 클릭하면 행의 순서를 바꾸도록 하는 코딩을 설정
-		// **************************************************
-		var thObj = $('.stuList thead tr:eq(0) th');
+    <script src="jquery-1.11.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // **************************************************
+        // 첫째 tr 태그 내부의 th 태그를 클릭하면 행의 순서를 바꾸도록 하는 코딩을 설정
+        // **************************************************
+        var thObj = $('.stuList thead tr:eq(0) th');
 
-		thObj.click(function(){
-			// -------------------------------------------------------------
-			// 클릭한 th 태그를 관리하는 JQuery 객체 메위주를 얻어 변수에 저장
-			// -------------------------------------------------------------
-			var thisThObj = $(this);
-			// -------------------------------------------------------------
-			//  내림차순 또는 오름차순 정보가 저장될 변수선언. 
-			// -------------------------------------------------------------
-			var ascDesc = "";			// 변수명. 알아 볼 수 있게 지어야 한다.  
-			// var asc_or_desc = "";  	// 변수명. 알아 볼 수 있게 지어야 한다.  
-			// -------------------------------------------------------------
-			// 클릭한 th 형제의 th 태그 안의 문자열에 ▲, ▼ 제거.
-			// -------------------------------------------------------------
-			thisThObj.siblings().each(function(){
-				// i 번째 th 태그 안의 문자열을 얻자
-				var txt = $(this).text();
-				// 앞뒤공백을 제거하기.
-				txt = $.trim( txt );
-				// ▲ 제거하기.
-				txt = txt.replace("▲","");
-				// ▼ 제거하기.
-				txt = txt.replace("▼","");
-				// i번째 th 태그 안에 앞뒤 공백, ▲, ▼ 제거한 문자열을 넣기
-				$(this).text(txt);
+        thObj.click(function(){
+            // -------------------------------------------------------------
+            // 클릭한 th 태그를 관리하는 JQuery 객체 메위주를 얻어 변수에 저장
+            // -------------------------------------------------------------
+            var thisThObj = $(this);
+            // -------------------------------------------------------------
+            //  내림차순 또는 오름차순 정보가 저장될 변수선언. 
+            // -------------------------------------------------------------
+            var ascDesc = "";			// 변수명. 알아 볼 수 있게 지어야 한다.  
+            // var asc_or_desc = "";  	// 변수명. 알아 볼 수 있게 지어야 한다.  
+            // -------------------------------------------------------------
+            // 클릭한 th 형제의 th 태그 안의 문자열에 ▲, ▼ 제거.
+            // -------------------------------------------------------------
+            thisThObj.siblings().each(function(){
+                // i 번째 th 태그 안의 문자열을 얻자
+                var txt = $(this).text();
+                // 앞뒤공백을 제거하기.
+                txt = $.trim( txt );
+                // ▲ 제거하기.
+                txt = txt.replace("▲","");
+                // ▼ 제거하기.
+                txt = txt.replace("▼","");
+                // i번째 th 태그 안에 앞뒤 공백, ▲, ▼ 제거한 문자열을 넣기
+                $(this).text(txt);
 
-				var txtall = "";
-				txtall = txt + txtall;
-				// alert(txt);
-				$(".msg").text(txtall);	// 테스트 확인용 코드.  
-
-
-			});
-			// ---------------------------------------------------
-			// 클릭한 th 안의 문자열 뒤에 ▼ 또는 ▲ 붙이기
-			// ---------------------------------------------------
-			// 클릭한 th 안의 문자열을 얻어 변수 txt 저장.
-			var txt = thisThObj.text();
-			// 만약 txt 변수 안의 문자열에 ▲ 가 있으면 ▼ 로 바꾸고 ascDesc 변수에 "desc" 저장하기.
-			if( txt.indexOf("▲")>=0 ){
-				txt = txt.replace("▲","▼");
-				ascDesc = "desc";
-			}
-			// 만약 txt 변수 안의 문자열에 ▼이 있으면 ▲ 로 바꾸고 ascDesc 변수에 "asc" 저장하기.
-			else if( txt.indexOf("▼")>=0 ){
-				txt = txt.replace("▼","▲");
-				ascDesc = "asc";
-			}
-			// 만약 txt 변수 안의 문자열에 ▼도 없고 ▲ 도 없을 경우
-			// ▲ 로 넣어주고, ascDesc 변수에 "asc" 저장하기.
-			else {
-				txt = txt+"▲";
-				ascDesc = "asc";
-			}
-			// txt 안의 데이터를 클릭한 th 안에 덮어쓰기.
-			thisThObj.text(txt);
+                var txtall = "";
+                txtall = txt + txtall;
+                // alert(txt);
+                $(".msg").text(txtall);	// 테스트 확인용 코드.  
 
 
+            });
+            // ---------------------------------------------------
+            // 클릭한 th 안의 문자열 뒤에 ▼ 또는 ▲ 붙이기
+            // ---------------------------------------------------
+            // 클릭한 th 안의 문자열을 얻어 변수 txt 저장.
+            var txt = thisThObj.text();
+            // 만약 txt 변수 안의 문자열에 ▲ 가 있으면 ▼ 로 바꾸고 ascDesc 변수에 "desc" 저장하기.
+            if( txt.indexOf("▲")>=0 ){
+                txt = txt.replace("▲","▼");
+                ascDesc = "desc";
+            }
+            // 만약 txt 변수 안의 문자열에 ▼이 있으면 ▲ 로 바꾸고 ascDesc 변수에 "asc" 저장하기.
+            else if( txt.indexOf("▼")>=0 ){
+                txt = txt.replace("▼","▲");
+                ascDesc = "asc";
+            }
+            // 만약 txt 변수 안의 문자열에 ▼도 없고 ▲ 도 없을 경우
+            // ▲ 로 넣어주고, ascDesc 변수에 "asc" 저장하기.
+            else {
+                txt = txt+"▲";
+                ascDesc = "asc";
+            }
+            // txt 안의 데이터를 클릭한 th 안에 덮어쓰기.
+            thisThObj.text(txt);
+
+            
 
 
 
-		});
+        });
 
-		
-
-
+        
 
 
 
 
 
-	});
-	</script>
+
+
+    });
+    </script>
 </head>
 <body><center>
-	<table border="1" cellpadding=5 cellspacing=0 class="stuList">
-		<thead>
-			<tr bgcolor="lightblue">
-			   <th style="cursor:pointer">학번▲</th>
-			   <th style="cursor:pointer">이름▲</th>
-			   <th style="cursor:pointer">평균▲</th>
-		</thead>
-		<tbody>
-			<tr><td>101<td>John<td>87
-			<tr><td>102<td>Naman<td>50
-			<tr><td>103<td>Chirag<td>85
-			<tr><td>104<td>Tom<td>55
-			<tr><td>105<td>Niki<td>100
-		</tbody>
-	</table>
+    <table border="1" cellpadding=5 cellspacing=0 class="stuList">
+        <thead>
+            <tr bgcolor="lightblue">
+               <th style="cursor:pointer">학번▲</th>
+               <th style="cursor:pointer">이름▲</th>
+               <th style="cursor:pointer">평균▲</th>
+        </thead>
+        <tbody>
+            <tr><td>101<td>John<td>87
+            <tr><td>102<td>Naman<td>50
+            <tr><td>103<td>Chirag<td>85
+            <tr><td>104<td>Tom<td>55
+            <tr><td>105<td>Niki<td>100
+        </tbody>
+    </table>
 
 
 
