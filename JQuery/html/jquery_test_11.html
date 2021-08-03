@@ -80,6 +80,18 @@ jquery_test_11.html
             sortTrObj.each(function(){
                 trObjs.push( $(this) );
             });
+            // ---------------------------------------------------
+            // 클릭한 th 태그의 인덱스번호 저장.
+            // ---------------------------------------------------
+            var thIndex = thisThObj.index();
+
+
+
+
+
+
+
+
 
 
 
@@ -89,6 +101,19 @@ jquery_test_11.html
         });
 
         
+        var kors = [61, 71, 81, 51]
+            for(var i=0; i<kors.length-1; i++){
+                for(var j=i+1; j<kors.length; j++){
+                    if( kors[i]<kors[j] ){
+                        var tmp = kors[i];
+                        kors[i] = kors[j];
+                        kors[j] = tmp;
+
+                    }
+                }
+            }
+
+            $("body").append( kors.join(", ") );
 
 
 
