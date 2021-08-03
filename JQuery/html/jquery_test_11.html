@@ -49,6 +49,8 @@ jquery_test_11.html
 			// 만약 txt 변수 안의 문자열에 ▲ 가 있으면 ▼ 로 바꾸고 ascDesc 변수에 "desc" 저장하기.
 			if( txt.indexOf("▲")>=0 ){
 				txt = txt.replace("▲","▼");
+
+				thisThObj.text(txt);
 			}
 
 
