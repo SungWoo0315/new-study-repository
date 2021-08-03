@@ -9,6 +9,33 @@ jquery_test_11.html
 <head>
     <script src="jquery-1.11.0.min.js"></script>
     <script>
+
+        // ----------------------------------------------------
+        // 화면에 보이는 tr 태그의 짝수행, 홀수행의 배경색을 지정하는 함수 선언하기
+        // ----------------------------------------------------
+        function inputBgColor_to_tr(
+            trsObj          // 화면에 보이거나 안보이게 할 대상이 되는 tr 태그를 관리하는 JQuery 객체의 메위주.
+            ,oddBgcolor     // 홀수번째 tr 태그의 배경색.
+            ,evenBgcolor    // 짝수번째 tr 태그의 배경색.  
+        ){
+
+            // 함수 안에서 색상 강제 지정.  
+            // oddBgcolor = "white";
+            // evenBgcolor = "lightgray";
+
+            // tr 태그 중 화면에 보이는 tr 를 관리하는 JQuery 객체의 메위주 얻기
+            var visibleTrsObj = trsObj.filter(":visible")
+
+            // tr 태그 중 화면에 보이는 tr 중 홀수 tr 만 골라서 배경색을 주기
+            visibleTrsObj.filter(":even").css("background-color", oddBgcolor);
+
+            // tr 태그 중 화면에 보이는 tr 중 짝수 tr 만 골라서 배경색을 주기
+            visibleTrsObj.filter(":odd").css("background-color", evenBgcolor);
+
+        }
+
+
+
     $(document).ready(function() {
         // **************************************************
         // 첫째 tr 태그 내부의 th 태그를 클릭하면 행의 순서를 바꾸도록 하는 코딩을 설정
@@ -133,6 +160,9 @@ jquery_test_11.html
                 $('.stuList tbody:eq(0)').append( trObjs[j] );
 
             }
+
+            var lastSort = $('.stuList tbody:eq(0) tr');
+            inputBgColor_to_tr(lastSort, "white", "lightgray");
 
 
 
