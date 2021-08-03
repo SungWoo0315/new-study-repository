@@ -23,8 +23,8 @@ jquery_test_11.html
 			// -------------------------------------------------------------
 			//  내림차순 또는 오름차순 정보가 저장될 변수선언. 
 			// -------------------------------------------------------------
-			// var ascDesc = "";	// 변수명. 알아 볼 수 있게 지어야 한다.  
-			var asc_or_desc = "";
+			var ascDesc = "";			// 변수명. 알아 볼 수 있게 지어야 한다.  
+			// var asc_or_desc = "";  	// 변수명. 알아 볼 수 있게 지어야 한다.  
 			// -------------------------------------------------------------
 			// 클릭한 th 형제의 th 태그 안의 문자열에 ▲, ▼ 제거.
 			// -------------------------------------------------------------
@@ -40,8 +40,10 @@ jquery_test_11.html
 				// i번째 th 태그 안에 앞뒤 공백, ▲, ▼ 제거한 문자열을 넣기
 				$(this).text(txt);
 
-				alert(txt);
-				$(".msg").text(txt);	// 테스트 확인용 코드.  
+				var txtall = "";
+				txtall = txt + txtall;
+				// alert(txt);
+				$(".msg").text(txtall);	// 테스트 확인용 코드.  
 
 
 			});
@@ -53,12 +55,21 @@ jquery_test_11.html
 			// 만약 txt 변수 안의 문자열에 ▲ 가 있으면 ▼ 로 바꾸고 ascDesc 변수에 "desc" 저장하기.
 			if( txt.indexOf("▲")>=0 ){
 				txt = txt.replace("▲","▼");
-
-				thisThObj.text(txt);
+				ascDesc = "desc";
 			}
-
-
-
+			// 만약 txt 변수 안의 문자열에 ▼이 있으면 ▲ 로 바꾸고 ascDesc 변수에 "asc" 저장하기.
+			else if( txt.indexOf("▼")>=0 ){
+				txt = txt.replace("▼","▲");
+				ascDesc = "asc";
+			}
+			// 만약 txt 변수 안의 문자열에 ▼도 없고 ▲ 도 없을 경우
+			// ▲ 로 넣어주고, ascDesc 변수에 "asc" 저장하기.
+			else {
+				txt = txt+"▲";
+				ascDesc = "asc";
+			}
+			// txt 안의 데이터를 클릭한 th 안에 덮어쓰기.
+			thisThObj.text(txt);
 
 
 
