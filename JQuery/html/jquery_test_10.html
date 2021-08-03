@@ -13,7 +13,7 @@ jquery_test_10.html
         // **************************************************************
         // 준비한 컨테츠들을 차례대로 화면에 보이고, 사라지게 하는 함수 선언.
         // **************************************************************
-        function chageText(
+        function changeText(
             classV		// 클래스 값을 받아오는 매개변수. 화면에 보여줄 컨텐츠를 내포하는 div 태그의 클래스값.  
             , idx       // 화면에 보여줄 컨텐츠의 인덱스번호
             ){
@@ -34,22 +34,26 @@ jquery_test_10.html
                 // 매개변수 idx에 저장된 인덱스번호에 해당하는 놈을 투명해지면서 안보이게 하기. 단 2초뒤에.
                 // -------------------------------------------------------------
                 obj.eq(idx).fadeOut(2000);
+
+                if(idx==4){
+                    setTimeout( function(){changeText( classV, idx=0 );}, 2*1000);
+                }
+                else{
+                    setTimeout( function(){changeText( classV, idx+1 );}, 2*1000);
+                }
                 
-                chageText(
-                    classV	  
-                    , idx+1    
-                )
+                
 
         }
 
         $(document).ready(function() {
-            chageText(
+            changeText(
             "people"		  
             , 0     
             )
 
 
-            $(".msg").text(obj.length);    
+            $(".msg").text(obj.length);  // 테스트 확인용.     
 
 
 
