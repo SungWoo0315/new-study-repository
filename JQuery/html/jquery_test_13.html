@@ -26,9 +26,14 @@ jquery_test_13.html
 
 				// select1.find("option:checked").remove();
 
-				if($("#skills").children("select").eq(0).find("option:checked")==true){
+				alert(select1.find("option:checked").val());
 
-				select2 = select1.find("option:checked").remove();
+				if($("#skills").children("select").eq(0).find("option:checked").val()!=""){
+
+					select1.find("option").hide();
+					select1.find("option:checked").siblings().show();
+
+
 				
 				}
 
