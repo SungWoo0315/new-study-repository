@@ -11,49 +11,46 @@ jquery_test_13.html
 
 			$("#skills").children("select").change(function(){
 
-				var select1 = $("#skills").children("select option").eq(0);
+				var select1 = $("#skills").children("select").eq(0)
 				
-				var select2 = $("#skills").children("select option").eq(1);
+				var select2 = $("#skills").children("select").eq(1).find("option");
 
-				var select3 = $("#skills").children("select option").eq(2);
+				var select3 = $("#skills").children("select").eq(2).find("option");
 
-				// alert(select1.text());
+				// select1.click(function(){
 
-				if($(this).is(":selected")){
+				// 	alert($(this).text());
+				// });
 
-				};
+				// $("#skills").children("select").eq(0).find("option:checked").remove();
+
+				// select1.find("option:checked").remove();
+
+				if($("#skills").children("select").eq(0).find("option:checked")==true){
+
+				select2 = select1.find("option:checked").remove();
+				
+				}
+
+				// alert(select1.length);
+
+				// alert(select1.eq(1).text());
+
+				// alert(select1.prop("checked"));
+
+				
+				// if(select1.prop("checked")==true){
+
+				// 	select2.after(select1.clone())
+				// }
 
 
-
-				var obj = {};
-
-				$("select").children("option").each(function(){
-
-					let val = $(this).attr("value");
-					
-					if(obj[val]){
-					
-						if($(this).is(":selected")){
-						
-							obj[val].remove();
-						
-							obj[val] = $(this);
-					
-						}else if(obj[val].is(":selected")){
-					
-							$(this).remove()
-					
-						}else{
-					
-							$(this).remove();
-					
-						}
-					
-					}
-					
-					obj[val] = $(this);
-					
-				});
+				// var selArry = [];
+				// select1.each(function(){
+				// selArry.push(select1)
+				// });
+		
+				// alert(selArry.length);
 
 
 
