@@ -11,11 +11,11 @@ jquery_test_12.html
 			// ----------------------------------------------
 			// 3초마다 함수 upTr( 'character' )를 반복적으로 호출
 			// ----------------------------------------------
-			setInterval( function(){ upTr('character'); }, 0.7*1000 );
+			setInterval( function(){ upTr('character'); }, 0.8*1000 );
 			// ----------------------------------------------
 			// 3초마다 함수 leftTh( 'movie' )를 반복적으로 호출
 			// ----------------------------------------------
-			setInterval( function(){ leftTd('movie'); }, 1*1000 );
+			setInterval( function(){ leftTd('movie'); }, 0.8*1000 );
 
 		
 			// upTr('character'); // 테스트용. 3초마다 반복적 안하고 확인.  
@@ -69,10 +69,13 @@ jquery_test_12.html
 
 			var tableObj = $("#"+idV);
 
-			var firstTrObj = tableObj.find("td").eq(0);		// 첫번째 tr 잡는것.
-			var lastTrObj = tableObj.find("td").last();
-			lastTrObj.after( firstTrObj.clone() )
-			firstTrObj.remove();
+			var firstTdObj = tableObj.find("td").eq(0);		
+
+			var lastTdObj = tableObj.find("td").last();
+			
+			lastTdObj.after( firstTdObj.clone() )
+			
+			firstTdObj.remove();
 
 		}
 
