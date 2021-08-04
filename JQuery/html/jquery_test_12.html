@@ -8,20 +8,73 @@ jquery_test_12.html
 	<script>
 		$(document).ready(function() {
 		
-		
-		
-		
-		
-		
-		
-		
-		
-
-
-
+			// ----------------------------------------------
+			// 3초마다 함수 upTr( 'character' )를 반복적으로 호출
+			// ----------------------------------------------
+			setInterval( function(){ upTr('character'); }, 0.7*1000 );
+			// ----------------------------------------------
+			// 3초마다 함수 leftTh( 'movie' )를 반복적으로 호출
+			// ----------------------------------------------
+			setInterval( function(){ leftTd('movie'); }, 1*1000 );
 
 		
+			// upTr('character'); // 테스트용. 3초마다 반복적 안하고 확인.  
 		});
+		// *******************************************
+		// 첫번째 tr 를 복사해서 마지막 tr 태그 다음에 삽입하고
+		// 첫번째 tr 을 삭제하는 함수 선언.
+		// *******************************************
+		function upTr( idV ){
+			// ------------------------------
+			// tableObj 변수 선언하고,
+			// id='idV매개변수저장값' 가진 테이블 태그를 관리하는
+			// JQuery 객체를 생성하고, 객체의 메위주를 tableObj 변수에 저장
+			// ------------------------------
+			var tableObj = $("#"+idV);
+			// ------------------------------
+			// firstTrObj 변수 선언하고,
+			// 첫번째 tr을 관리하는 JQuery 객체의 메위주를 firstTrObj 변수에 저장.
+			// ------------------------------
+			var firstTrObj = tableObj.find("tr").eq(0);		// 첫번째 tr 잡는것.
+				// ------------------------------------------
+				// 위 코딩은 아래 코딩으로 대체가 가능하다.
+				// ------------------------------------------
+				// var firstTrObj = tableObj.find("tr:eq(0)");		// 첫번째 tr 잡는것.
+				// var firstTrObj = tableObj.find("tr").first();	// 첫번째 tr 잡는것.
+			// ------------------------------
+			// lastTrObj 변수 선언하고
+			// 마지막 tr 을 관리하는 JQuery 객체의 메위주를 lastTrObj 변수에 저장
+			// ------------------------------
+			var lastTrObj = tableObj.find("tr").last();
+			// var lastTrObj = tableObj.find("tr").ep( tableObj.find("tr").length-1 ); // 위 코딩과 같은것. 마지막인덱스.
+			// ------------------------------
+			// 첫번째 tr 을 복제해서 마지막 tr 다음에 삽입하자.  
+			// ------------------------------
+			lastTrObj.after( firstTrObj.clone() )
+			// ------------------------------
+			// 첫번째 tr 을 삭제하자.
+			// ------------------------------
+			firstTrObj.remove();
+		
+
+
+			// alert(tableObj.length);	// 테스트용. 확인.
+			// $("body").append("테스트 입니다.<br>")  // 테스트용. alert 넣으면 계속 경고창 뜨기 때문에, 이렇게 해야 한다.  
+		}
+		// *******************************************
+		// 첫번째 td 를 복사해서 마지막 td 태그 다음에 삽입하고
+		// 첫번째 td 을 삭제하는 함수 선언.
+		// *******************************************
+		function leftTd( idV ){
+
+			var tableObj = $("#"+idV);
+
+			var firstTrObj = tableObj.find("td").eq(0);		// 첫번째 tr 잡는것.
+			var lastTrObj = tableObj.find("td").last();
+			lastTrObj.after( firstTrObj.clone() )
+			firstTrObj.remove();
+
+		}
 
 	</script>
 </head>
