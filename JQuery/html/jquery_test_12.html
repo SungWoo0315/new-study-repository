@@ -11,7 +11,7 @@ jquery_test_12.html
 			// ----------------------------------------------
 			// 3초마다 함수 upTr( 'character' )를 반복적으로 호출
 			// ----------------------------------------------
-			setInterval( function(){ upTr('character'); }, 0.8*1000 );
+			setInterval( function(){ upTr('character'); }, 0.1*1000 );
 			// ----------------------------------------------
 			// 3초마다 함수 leftTh( 'movie' )를 반복적으로 호출
 			// ----------------------------------------------
@@ -65,13 +65,15 @@ jquery_test_12.html
 		// 첫번째 td 를 복사해서 마지막 td 태그 다음에 삽입하고
 		// 첫번째 td 을 삭제하는 함수 선언.
 		// *******************************************
+
+		// 위 코딩 커스터마이징. 
 		function leftTd( idV ){
 
 			var tableObj = $("#"+idV);
 
-			var firstTdObj = tableObj.find("td").eq(0);		
+			var firstTdObj = tableObj.find("tr td").eq(0);		
 
-			var lastTdObj = tableObj.find("td").last();
+			var lastTdObj = tableObj.find("tr td").last();
 			
 			lastTdObj.after( firstTdObj.clone() )
 			
