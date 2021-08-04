@@ -24,17 +24,27 @@ jquery_test_13.html
 
 				// alert(select1.find("option:checked").val());
 
-				if($("#skills").children("select").eq(0).find("option:checked").val()!=""){
+				if(select1.find("option:checked").val()!=""){
 
 					var i =	select1.find("option:checked").index();
 					// alert(i);
-					select2.find("option").hide();
-					select2.find("option:eq("+i+")").siblings().show();
+
+					var clone_select1 = select1.clone();
+					clone_select1.find("option").hide();
+					var show = clone_select1.find("option:eq("+i+")").siblings().show();
+
+					//select2.find("option").remove();
+					select2.append(show.clone());
 
 					select3.find("option").hide();
 					select3.find("option:eq("+i+")").siblings().show();
 				
+
+					// select2 = select2.find("option").after( .clone() )
 				}
+
+
+
 
 				// alert(select1.length);
 
