@@ -11,6 +11,8 @@ jquery_test_13.html
 
 			$("#skills").children("select").change(function(){
 
+				var selectAll = $("#skills").children("select")
+
 				var select1 = $("#skills").children("select").eq(0)
 				
 				var select2 = $("#skills").children("select").eq(1)
@@ -18,31 +20,61 @@ jquery_test_13.html
 				var select3 = $("#skills").children("select").eq(2)
 
 
-				// 	alert($(this).text());
 
 				// select1.find("option:checked").remove();
-
 				// alert(select1.find("option:checked").val());
+
 
 				if(select1.find("option:checked").val()!=""){
 
 					var i =	select1.find("option:checked").index();
-					// alert(i);
+					// alert(i); // 인덱스번호 알아내기.
 
 					var clone_select1 = select1.clone();
 					clone_select1.find("option").hide();
 					var show = clone_select1.find("option:eq("+i+")").siblings().show();
 
-					//select2.find("option").remove();
-					select2.append(show.clone());
+					select2.find("option").remove();
+					select3.find("option").remove();
 
-					select3.find("option").hide();
-					select3.find("option:eq("+i+")").siblings().show();
+
+					select2 = select2.append(show.clone());
+					select3 = select3.append(show.clone());
+
+
+					// 3번째 셀렉트 수동.
+					// select3.find("option").hide();
+					// select3.find("option:eq("+i+")").siblings().show();
 				
 
 					// select2 = select2.find("option").after( .clone() )
+
 				}
 
+				else if(select2.find("option:checked").val()!=""){
+
+				var i =	select2.find("option:checked").index();
+				alert(i); // 인덱스번호 알아내기.
+
+				var clone_select2 = select2.clone();
+				clone_select2.find("option").hide();
+				var show = clone_select2.find("option:eq("+i+")").siblings().show();
+
+				select1.find("option").remove();
+				select3.find("option").remove();
+
+
+				select1 = select1.append(show.clone());
+				select3 = select3.append(show.clone());
+
+
+				// 3번째 셀렉트 수동.
+				// select3.find("option").hide();
+				// select3.find("option:eq("+i+")").siblings().show();
+			
+
+				// select2 = select2.find("option").after( .clone() )
+				}
 
 
 
