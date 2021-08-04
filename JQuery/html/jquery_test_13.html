@@ -8,6 +8,65 @@ jquery_test_13.html
 		<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 		<script language="JavaScript">
 		$(document).ready(function(){
+
+			$("#skills").children("select").change(function(){
+
+				var select1 = $("#skills").children("select option").eq(0);
+				
+				var select2 = $("#skills").children("select option").eq(1);
+
+				var select3 = $("#skills").children("select option").eq(2);
+
+				// alert(select1.text());
+
+				if($(this).is(":selected")){
+
+				};
+
+
+
+				var obj = {};
+
+				$("select").children("option").each(function(){
+
+					let val = $(this).attr("value");
+					
+					if(obj[val]){
+					
+						if($(this).is(":selected")){
+						
+							obj[val].remove();
+						
+							obj[val] = $(this);
+					
+						}else if(obj[val].is(":selected")){
+					
+							$(this).remove()
+					
+						}else{
+					
+							$(this).remove();
+					
+						}
+					
+					}
+					
+					obj[val] = $(this);
+					
+				});
+
+
+
+
+
+
+
+
+
+			});
+
+			
+
 		});
 </script>
 	</head>
@@ -15,7 +74,7 @@ jquery_test_13.html
 		<!---------------------------------------------------------------->
 		<span id="skills">
 		[소유스킬] :
-		<select name="skill1">
+		<select name="skill1" multiple size=8>
 			<option value="">
 			<option value="JSP">JSP
 			<option value="ASP">ASP
@@ -23,7 +82,7 @@ jquery_test_13.html
 			<option value="Oracle">Oracle
 			<option value="Java">Java
 		</select>
-		<select name="skill2">
+		<select name="skill2" multiple size=8>
 			<option value="">
 			<option value="JSP">JSP
 			<option value="ASP">ASP
@@ -31,7 +90,7 @@ jquery_test_13.html
 			<option value="Oracle">Oracle
 			<option value="Java">Java
 		</select>
-		<select name="skill3">
+		<select name="skill3" multiple size=8>
 			<option value="">
 			<option value="JSP">JSP
 			<option value="ASP">ASP
