@@ -42,53 +42,194 @@ jquery_test_15.html
 			// 테이블 관리 변수.
             var tableObj = $(".sungjuk");
 
-			// 테이블 색상.
+			// 테이블 색상 함수 호출.
 			inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
 
 
 			// 모든 tr 태그 담은 변수
 			var trObj = tableObj.find("tbody tr");
 
-			// alert(trObj.length) 	// tr 개수 확인
-
-			// 배열변수 선언.
-			var trObjs = [];
+			// alert(trObj.length) 	// 테스트 // tr 개수 확인
 
 
 
-			trObj.each(function(){
-				trObjs.push( $(this).find("td").eq(2) )
-			})
-
-
-			// 2번 인덱스 열 전체 구하기
-			tableObj.find("tbody td:nth-child(2)")
-			// 2번 인덱스 열 전체 확인하기.
-			$(".msg").text(tableObj.find("tbody td:nth-child(3)").text());
-
-
-
+			// 2번 인덱스(평균) 열 전체 구하기
+			var allTd = tableObj.find("tbody td:nth-child(3)")
 			
+			
+			// $(".msg").text(allTd.text()); // 테스트 // 2번 인덱스 열 전체 확인하기.
 
-			// $(".msg").text(trObjs.eq(1));
 
-			// alert(trObjs.length);
 
 
             $(".search").click(function(){
 				
-				alert($("[name=hakjum]:eq(0):checked").attr("value"))
 
-				
-				$("input").prop("checked")
+				// 체크박스 체크된것 골라내서 변수 담기. 
+				var input = $("[name=hakjum]:checked")
+
+				// 배열변수 선언.
+				var eve = [];
+
+				// 배열변수에 체크된것의 value 값을 each를 써서 누적.
+				// 체크된 체크박스가 무슨학점인지 value 값 문자로 리턴.
+				input.each(function(){
+					eve.push($(this).val());
+				})
+
+				// alert(eve)	// 테스트용 // 체크 value 값 누적 확인.
+								
+				if(eve=="A"){
+					// A학점 체크하고 검색 누르면 일단 숨기기.
+					trObj.hide();
+
+					// 반복문 돌려서 90점 이상인 A학점들 골라냄
+					for(var i=0; i<allTd.length; i++){
+
+						// 평균 열의 i 번째의 text 값을 int에 대입.
+						var int = allTd.eq(i).text()
+
+						// int 값을 숫자로 변환.
+						int = parseInt(int,10);
+
+						// alert(int) // 테스트용 // 반복문 돌리면서 평균 열 검색 확인. 
+
+						// 조건문으로 숫자 조건을 걸어서 
+						if( int>=90 ){
+							// 조건에 걸린 tr을 보여주기.
+							trObj.eq(i).show();
 
 
+							var count = trObj.filter(":visible").length;
+							aler(count);
+							$(".count").text(count);
 
-				if($("input").prop()==A){
+						}
 
+					};
+					// 검색결과 후 색상 다시 정렬.
+					inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
 
+					
 
 				}
+
+				if(eve=="B"){
+
+					trObj.hide();
+
+					for(var i=0; i<allTd.length; i++){
+
+						var int = allTd.eq(i).text()
+
+						int = parseInt(int,10);
+
+						// alert(int) // 테스트용 // 반복문 돌리면서 평균 열 검색 확인. 
+
+						if( int>=80 && int<90 ){
+							trObj.eq(i).show();
+						}
+
+						
+					};
+					inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
+
+				}
+
+				if(eve=="C"){
+
+					trObj.hide();
+
+					for(var i=0; i<allTd.length; i++){
+
+						var int = allTd.eq(i).text()
+
+						int = parseInt(int,10);
+
+						// alert(int) // 테스트용 // 반복문 돌리면서 평균 열 검색 확인. 
+
+						if( int>=70 && int<80 ){
+							trObj.eq(i).show();
+						}
+
+						
+					};
+					
+				}
+
+				if(eve=="D"){
+
+					trObj.hide();
+
+					for(var i=0; i<allTd.length; i++){
+
+						var int = allTd.eq(i).text()
+
+						int = parseInt(int,10);
+
+						// alert(int) // 테스트용 // 반복문 돌리면서 평균 열 검색 확인. 
+
+						if( int>=60 && int<70 ){
+							trObj.eq(i).show();
+						}
+
+						
+					};
+					
+				}
+
+				if(eve=="F"){
+
+					trObj.hide();
+
+					for(var i=0; i<allTd.length; i++){
+
+						var int = allTd.eq(i).text()
+
+						int = parseInt(int,10);
+
+						// alert(int) // 테스트용 // 반복문 돌리면서 평균 열 검색 확인. 
+
+						if( int<60 ){
+							trObj.eq(i).show();
+						}
+
+						
+					};
+					
+				}
+
+				if(eve=="A,B"){
+
+					trObj.hide();
+
+					for(var i=0; i<allTd.length; i++){
+
+						var int = allTd.eq(i).text()
+
+						int = parseInt(int,10);
+
+						// alert(int) // 테스트용 // 반복문 돌리면서 평균 열 검색 확인. 
+
+						if( int>=80 ){
+							trObj.eq(i).show();
+						}
+
+						
+					};
+					
+				}
+
+
+				// alert($("[name=hakjum]:eq(0):checked").attr("value"))
+
+				
+
+				// alert(input.attr("value"))
+
+				$(".msg").text(input.attr("value"));	// 테스트용. // 체크된 학점 하단에 표기.
+
+
 
 
 
