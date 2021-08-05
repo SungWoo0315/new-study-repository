@@ -4,21 +4,69 @@ jquery_test_13.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  -->
   <html>
+	<meta charset="UTF-8">
 	<head>
 		<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 		<script language="JavaScript">
 		$(document).ready(function(){
+			// *********************************************
+			// id=skills 를 가진 태그의 아들 중 name="skill~" 을 가진 태그들에 
+			// change 이벤트가 발생하면 실행할 코드 설정
+			// *********************************************
+			$("#skills").children("[name^=skill]").change(function(){
+				// --------------------------------------------------
+				// change 이벤트가 발생한 select 태그를 관리하는 JQuery 객체의 메위주를 얻어 
+				// 변수 selectObj 생성해 저장.
+				// --------------------------------------------------
+				var selectObj = $(this);
+				// --------------------------------------------------
+				// change 이벤트가 발생한 select 태그의 현재 선택값을 얻어 변수 choiceVal 에 저장.
+				// --------------------------------------------------
+				var choiceVal = selectObj.val();
+				// --------------------------------------------------
+				// change 이벤트가 발생한 select 태그의 형제 중 나의 인덱스번호 저장.  
+				// --------------------------------------------------
+				var idx = selectObj.index();
+				// --------------------------------------------------
+				// change 이벤트가 발생한 select 태그의 선택값과 형제들의 선택값을
+				// 저장할 Array 객체 생성하고 선택값을 구해서 Array 객체에 저장.
+				// --------------------------------------------------
+				var values = [];
 
-			$("#skills").children("select").change(function(){
+				// --------------------------------------------------
+				selectObj.prevAll().each(function(){
+					var value = $(this).val();
+					if( value==null || value=="" ){
+						values.push( "" );
+					}else{
+						values.push( value );
+					}
+				});
+				// --------------------------------------------------
+					if( choiceVal==null || choiceVal=="" ){
+						values.push( "" );
+					}else{
+						values.push( choiceVal );
+					}
+				// --------------------------------------------------
+				selectObj.nextAll().each(function(){
+					var value = $(this).val();
+					if( value==null || value=="" ){
+						values.push( "" );
+					}else{
+						values.push( value );
+					}
+				});
+
 
 				
 				
-
-
+				$("body").append( "<hr>" + values.join(",") )	// 테스트용 // 형 동생 나의 value 값을 array 객체에 저장한것 확인.
+				// alert(idx)	// 테스트 // 인덱스번호 확인 
+				// alert( choiceVal )	// 테스트 // select 네임 속성값 확인.  
+				// alert( $(this).attr("name") )	// 테스트 // select 네임 속성값 확인.  
 
 			});
-
-			
 
 		});
 </script>
