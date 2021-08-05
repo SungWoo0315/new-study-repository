@@ -75,7 +75,33 @@ jquery_test_13.html
 				// 덮어 씌우고 형이 선택한 데이터가 있으면 그 데이터를 가진
 				// option 태그를 지우기
 				// --------------------------------------------------
+				for( var i=0; i<allSelectObj.length-1; i++){
+					// i 번째 select 태그의 선택값을 얻어서 변수에 저장하기.
+					var nowValue = allSelectObj.eq(i).val();
+					// i+1 번째 select 태그의 선택값을 얻어서 변수에 저장하기.
+					var nextValue = allSelectObj.eq(i+1).val();
+					// i 번째 select 태그가 가진 모든 option 태그를 복해서 
+					// i+1 번째 select 태그의 안에 덮어 씌우기
+					allSelectObj.eq(i+1).html(
 
+						allSelectObj.eq(i).html()
+
+					)
+					// i 번째 select 태그의 선택값이 있으면
+					if( nowValue!="" ){
+						// ------------------------------------
+						// i+1 번째 select 태그 내부의 option 태그 중
+						// i 번째 select 태그의 선택값을 가진 option 태그를 지우기.
+						// ------------------------------------
+						allSelectObj.eq(i+1).children().filter("[value='"+nowValue+"']").remove();
+
+					}
+					// i 번째 select 태그의 선택값이 없으면
+					else{
+						// i+1 번째 select 태그의 선택값 지우기.  
+						allSelectObj.eq(i+1).val("");
+					}
+				}
 
 				
 				
