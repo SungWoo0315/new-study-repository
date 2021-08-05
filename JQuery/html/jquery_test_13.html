@@ -94,6 +94,10 @@ jquery_test_13.html
 						// i 번째 select 태그의 선택값을 가진 option 태그를 지우기.
 						// ------------------------------------
 						allSelectObj.eq(i+1).children().filter("[value='"+nowValue+"']").remove();
+						// ------------------------------------
+						// i+1 번째 select 태그에 선택값이 있었다면, 그 값을 다시 선택하게 하기.  
+						// ------------------------------------
+						if( nextValue!="" ){ allSelectObj.eq(i+1).val(nextValue);}
 
 					}
 					// i 번째 select 태그의 선택값이 없으면
@@ -136,6 +140,14 @@ jquery_test_13.html
 			<option value="Java">Java
 		</select>
 		<select name="skill3" >
+			<option value="">
+			<option value="JSP">JSP
+			<option value="ASP">ASP
+			<option value="PHP">PHP
+			<option value="Oracle">Oracle
+			<option value="Java">Java
+		</select>
+		<select name="skill4" >
 			<option value="">
 			<option value="JSP">JSP
 			<option value="ASP">ASP
