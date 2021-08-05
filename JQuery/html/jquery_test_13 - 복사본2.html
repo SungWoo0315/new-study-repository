@@ -35,7 +35,8 @@ jquery_test_13.html
 
 
 					if( i==1){
-						select2.find("option:eq("+i+")").siblings()
+						select2.find("option:eq("+i+")").siblings().show();
+						alert(select2.find("option:eq("+i+")").length)
 						select3.find("option:eq("+i+")").siblings()
 					}
 
