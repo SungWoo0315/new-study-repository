@@ -100,9 +100,7 @@ jquery_test_15.html
 							trObj.eq(i).show();
 
 
-							var count = trObj.filter(":visible").length;
-							aler(count);
-							$(".count").text(count);
+							
 
 						}
 
@@ -110,7 +108,6 @@ jquery_test_15.html
 					// 검색결과 후 색상 다시 정렬.
 					inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
 
-					
 
 				}
 
@@ -227,7 +224,7 @@ jquery_test_15.html
 
 				// alert(input.attr("value"))
 
-				$(".msg").text(input.attr("value"));	// 테스트용. // 체크된 학점 하단에 표기.
+				$(".msg").text(eve);	// 테스트용. // 체크된 학점 하단에 표기.
 
 
 
@@ -237,8 +234,9 @@ jquery_test_15.html
 
 
 
-
-
+				// div 태그에 검색된 개수 표시
+				var co = trObj.filter(":visible").length;
+				$(".count").text(co);
 
 			});
 
@@ -257,6 +255,15 @@ jquery_test_15.html
             tableObj.find("tbody tr:even").css("background-color", "white");
 
             tableObj.find("tr").show();
+
+
+			// 체크된것을 모두 풀기.
+			$("[name=hakjum]:checked").prop("checked", false);
+
+
+			// div 태그에 검색된 개수 표시
+			var co = trObj.filter(":visible").length;
+			$(".count").text(co);
 
             });
 
