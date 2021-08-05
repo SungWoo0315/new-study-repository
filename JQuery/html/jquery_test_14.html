@@ -8,10 +8,37 @@ jquery_test_14.html
 <html>
 <head>
 	<style>
+		/* .small img{ border:none; margin: 10px; width: 60px; height: 60px; } */
+		/* .large{width: 200px; height: 200px;} */
+
+
 	</style>
 	<script src="jquery-1.11.0.min.js" type="text/javascript"></script>  
 	<script>
 		$(document).ready(function() {
+			// -----------------------------------------
+			// class = small 을 가진 태그에 마우스 대면, 떼면 일어나는 일 설정
+			// -----------------------------------------
+			$(".small").hover(
+				function(){
+
+				}
+				,function(){
+
+				}
+			);
+
+
+
+
+
+
+
+
+
+
+
+
 		});
 	</script>  
 
@@ -20,29 +47,49 @@ jquery_test_14.html
 	<table border="1" cellspacing=0>
 		<tr>
 			<td width=130 align=center> 
+
+				<!-- ================================================================== -->
 				<a href="src/img/P1001.jpg" class="small"><img src="src/img/P1001.jpg"></a>
+				<!-- ================================================================== -->
+
 				<p>P1001</p>
 			</td>
 			<td rowspan="4" width=350 align=center>
+
+				<!-- ================================================================== -->
 				<img src="src/img/P1001.jpg" class="large">
+				<!-- ================================================================== -->
+
 			</td>
 		</tr>
 		<tr>
 			<td align=center>
+
+				<!-- ================================================================== -->
 				<a href="src/img/P1002.jpg" class="small">
 				<img src="src/img/P1002.jpg"></a>
+				<!-- ================================================================== -->
+
 				<p>P1002</p>
 			</td>
 		</tr>
 		<tr>
 			<td align=center>
+
+				<!-- ================================================================== -->
 				<a href="src/img/P1003.jpg" class="small"><img src="src/img/P1003.jpg"></a>
+				<!-- ================================================================== -->
+
 				<p>P1003</p>
 			</td>
 		</tr>
 		<tr>
 			<td align=center> 
+
+				<!-- ================================================================== -->
 				<a href="src/img/P1004.jpg" class="small"><img src="src/img/P1004.jpg"></a>
+				<!-- ================================================================== -->
+
 				<p>P1004</p>
 			</td>
 		</tr>
