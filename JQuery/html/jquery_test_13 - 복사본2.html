@@ -30,18 +30,51 @@ jquery_test_13.html
 
 				// if(select1.find("option:checked").val()!=""){
 
-					var i =	select1.find("option:checked").index();
-					// alert(i); // 인덱스번호 알아내기.
+					var i =	selectAll.find("option:checked").index();
+					alert(i); // 인덱스번호 알아내기.
 
 
 					if( i==1){
 						select2.find("option:eq("+i+")").hide();
+						select3.find("option:eq("+i+")").hide();
+
+						select2.find("option:eq("+i+")").siblings().show();
+						select3.find("option:eq("+i+")").siblings().show();
+					}
+
+					if( i==2){
+						select2.find("option:eq("+i+")").hide();
+						select3.find("option:eq("+i+")").hide();
+
+						select2.find("option:eq("+i+")").siblings().show();
+						select3.find("option:eq("+i+")").siblings().show();
+					}
+
+					if( i==3){
+						select2.find("option:eq("+i+")").hide();
+						select3.find("option:eq("+i+")").hide();
+
+						select2.find("option:eq("+i+")").siblings().show();
+						select3.find("option:eq("+i+")").siblings().show();
+					}
+
+					if( i==4){
+						select2.find("option:eq("+i+")").hide();
+						select3.find("option:eq("+i+")").hide();
+
+						select2.find("option:eq("+i+")").siblings().show();
+						select3.find("option:eq("+i+")").siblings().show();
+					}
+					
+					if( i==5){
+						select2.find("option:eq("+i+")").hide();
+						select3.find("option:eq("+i+")").hide();
+
 						select2.find("option:eq("+i+")").siblings().show();
 						select3.find("option:eq("+i+")").siblings().show();
 					}
 
 
-					
 					/*
 					var clone_select1 = select1.clone();
 					// clone_select1.find("option").hide();
