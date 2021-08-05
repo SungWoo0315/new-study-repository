@@ -1,0 +1,165 @@
+<!-- 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+jquery_test_13.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ -->
+  <html>
+	<head>
+		<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+		<script language="JavaScript">
+		$(document).ready(function(){
+
+			$("#skills").children("select").change(function(){
+
+				var selectAll = $("#skills").children("select")
+
+				var select1 = $("#skills").children("select").eq(0)
+				
+				var select2 = $("#skills").children("select").eq(1)
+
+				var select3 = $("#skills").children("select").eq(2)
+
+
+
+
+
+
+				// select1.find("option:checked").remove();
+				// alert(select1.find("option:checked").val());
+
+
+				// if(select1.find("option:checked").val()!=""){
+
+					var i =	select1.find("option:checked").index();
+					// alert(i); // 인덱스번호 알아내기.
+
+
+					if( i==1){
+						select2.find("option:eq("+i+")").siblings()
+						select3.find("option:eq("+i+")").siblings()
+					}
+
+
+					
+					/*
+					var clone_select1 = select1.clone();
+					// clone_select1.find("option").hide();
+					var selhide = clone_select1.find("option:eq("+i+")").siblings();
+
+					select2.find("option").remove();
+					select3.find("option").remove();
+
+
+					select2 = select2.append(selhide.clone());
+					// alert(select2.find("option").length);
+					select3 = select3.append(selhide.clone());
+					*/
+
+
+
+
+					// 3번째 셀렉트 수동.
+					// select3.find("option").hide();
+					// select3.find("option:eq("+i+")").siblings().show();
+				
+
+					// select2 = select2.find("option").after( .clone() )
+
+				// }
+
+				// if(select2.find("option:checked").val()!=""){
+
+
+
+
+/*
+				var i2 =	select2.find("option:checked").index();
+				// alert(i); // 인덱스번호 알아내기.
+
+				var clone_select2 = select2.clone();
+				clone_select2.find("option").hide();
+				var show = clone_select2.find("option:eq("+i2+")").siblings().show();
+
+				select1.find("option").remove();
+				select3.find("option").remove();
+
+
+				select1 = select1.append(show.clone());
+				select3 = select3.append(show.clone());
+*/
+
+
+
+
+
+
+				// 3번째 셀렉트 수동.
+				// select3.find("option").hide();
+				// select3.find("option:eq("+i+")").siblings().show();
+			
+
+				// select2 = select2.find("option").after( .clone() )
+				// }
+
+
+
+				// alert(select1.length);
+
+				// alert(select1.eq(1).text());
+
+				// alert(select1.prop("checked"));
+
+				
+				// if(select1.prop("checked")==true){
+
+				// 	select2.after(select1.clone())
+				// }
+
+
+				// var selArry = [];
+				// select1.each(function(){
+				// selArry.push(select1)
+				// });
+		
+				// alert(selArry.length);
+
+
+
+			});
+
+			
+
+		});
+</script>
+	</head>
+	<body>
+		<!---------------------------------------------------------------->
+		<span id="skills">
+		[소유스킬] :
+		<select name="skill1" >	<!-- multiple size=8-->
+			<option value="">
+			<option value="JSP">JSP
+			<option value="ASP">ASP
+			<option value="PHP">PHP
+			<option value="Oracle">Oracle
+			<option value="Java">Java
+		</select>
+		<select name="skill2" >
+			<option value="">
+			<option value="JSP">JSP
+			<option value="ASP">ASP
+			<option value="PHP">PHP
+			<option value="Oracle">Oracle
+			<option value="Java">Java
+		</select>
+		<select name="skill3" >
+			<option value="">
+			<option value="JSP">JSP
+			<option value="ASP">ASP
+			<option value="PHP">PHP
+			<option value="Oracle">Oracle
+			<option value="Java">Java
+		</select>
+		</span>
+	</body>
+</html>
