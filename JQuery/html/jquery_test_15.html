@@ -46,16 +46,29 @@ jquery_test_15.html
 			inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
 
 
-
+			// 모든 tr 태그 담은 변수
 			var trObj = tableObj.find("tbody tr");
 
-			// alert(trObj.length)
+			// alert(trObj.length) 	// tr 개수 확인
 
+			// 배열변수 선언.
 			var trObjs = [];
+
+
 
 			trObj.each(function(){
 				trObjs.push( $(this).find("td").eq(2) )
 			})
+
+
+			// 2번 인덱스 열 전체 구하기
+			tableObj.find("tbody td:nth-child(2)")
+			// 2번 인덱스 열 전체 확인하기.
+			$(".msg").text(tableObj.find("tbody td:nth-child(3)").text());
+
+
+
+			
 
 			// $(".msg").text(trObjs.eq(1));
 
@@ -64,7 +77,7 @@ jquery_test_15.html
 
             $(".search").click(function(){
 				
-				alert($("[name=hakjum]:eq(1):checked").attr("value"))
+				alert($("[name=hakjum]:eq(0):checked").attr("value"))
 
 				
 				$("input").prop("checked")
