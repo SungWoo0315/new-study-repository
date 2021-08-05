@@ -9,7 +9,9 @@ jquery_test_14.html
 <head>
 	<style>
 		/* .small img{ border:none; margin: 10px; width: 60px; height: 60px; } */
+		.small img{ border:none; margin: 10px; width: 190px; height: px; }
 		/* .large{width: 200px; height: 200px;} */
+		.large{width: 280px; height: px;}
 
 
 	</style>
@@ -21,10 +23,10 @@ jquery_test_14.html
 			// -----------------------------------------
 			$(".small").hover(
 				function(){
-
+					$(".msg").text("마우스 온!!");
 				}
 				,function(){
-
+					$(".msg").text("마우스 아웃!!");
 				}
 			);
 
@@ -94,5 +96,8 @@ jquery_test_14.html
 			</td>
 		</tr>
 	</table>
+
+    <div class="msg"></div>  <!--테스트용 div 태그--> 
+
 </body>
 </html>
