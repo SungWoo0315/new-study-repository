@@ -34,7 +34,9 @@ jquery_test_13.html
 				var values = [];
 
 				// --------------------------------------------------
-				selectObj.prevAll().each(function(){
+				var allSelectObj = selectObj.parent().children("[name^=skill]");
+				allSelectObj.each(function(){
+				// $("#skills").children("[name^=skill]").each(function(){ // 윗줄과 같은 코드이다.  
 					var value = $(this).val();
 					if( value==null || value=="" ){
 						values.push( "" );
@@ -43,20 +45,33 @@ jquery_test_13.html
 					}
 				});
 				// --------------------------------------------------
-					if( choiceVal==null || choiceVal=="" ){
-						values.push( "" );
-					}else{
-						values.push( choiceVal );
+				for( var i=0; i<values.length-1; i++ ){
+					for( var ii=i+1; ii<values.length; ii++ ){
+						// ------------------------------------
+						// i 번째 select 태그의 선택값은 없는데 
+						// ii 번째 select 태그의 선택값은 있다면,
+						// 즉, i 번째 형의 선택값은 없는데 ii 번째 동생의 선택값은 있다면
+						// ------------------------------------
+						if( values[i]=="" && values[ii]!="" ){
+							// i 번째 select 태그 이후의 모든 select 태그의 value 값을 비우기.
+							allSelectObj.eq(i).nextAll().val("");
+						}
+						// ------------------------------------
+						// i 번째 select 태그의 선택값이 있고,
+						// i 번째 select 태그의 선택값과 ii 번째 select 태그의 선택값이 같으면 
+						// 즉, i 번째 형의 선택값과 ii 번째 동생의 선택값이 같으면
+						// ------------------------------------
+						else if( values[i]!="" && values[i]==values[ii] ){
+							// ii 번째 select 태그 부터 시작해서 그 이후의 모든 select 태그의 value 값을 비우기  
+							allSelectObj.eq(ii-1).nextAll().val("");
+						}
 					}
+				}
 				// --------------------------------------------------
-				selectObj.nextAll().each(function(){
-					var value = $(this).val();
-					if( value==null || value=="" ){
-						values.push( "" );
-					}else{
-						values.push( value );
-					}
-				});
+				// 형이 가진 option 태그를 복사해 바로 아래 동생의 select 태그 안에
+				// 덮어 씌우고 형이 선택한 데이터가 있으면 그 데이터를 가진
+				// option 태그를 지우기
+				// --------------------------------------------------
 
 
 				
