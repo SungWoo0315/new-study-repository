@@ -47,13 +47,24 @@ jquery_test_15.html
 
 
 
-			var tdObj = tableObj.children("tbody tr ")
+			var trObj = tableObj.find("tbody tr");
 
+			// alert(trObj.length)
+
+			var trObjs = [];
+
+			trObj.each(function(){
+				trObjs.push( $(this).find("td").eq(2) )
+			})
+
+			// $(".msg").text(trObjs.eq(1));
+
+			// alert(trObjs.length);
 
 
             $(".search").click(function(){
 				
-				alert($("[name=hakjum]:checked").attr("value"))
+				alert($("[name=hakjum]:eq(1):checked").attr("value"))
 
 				
 				$("input").prop("checked")
@@ -136,6 +147,10 @@ jquery_test_15.html
 		<tr><td>118<td>박인선<td>20
 	</tbody>
 </table>
+
+
+<div class="msg"></div>  <!--테스트용 div 태그--> 
+
 </body>
 
 
