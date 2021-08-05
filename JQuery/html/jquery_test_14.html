@@ -19,7 +19,7 @@ jquery_test_14.html
 	</style>
 
 	<script src="jquery-1.11.0.min.js" type="text/javascript"></script>  
-	
+
 	<script>
 		$(document).ready(function() {
 			// *****************************************
@@ -28,23 +28,29 @@ jquery_test_14.html
 			$(".small").hover(
 				function(){
 					// ------------------------------------------------------------
+					// 변수 thisObj 선언하고,
+					// 마우스를 댄 태그를 관리하는 JQuery 객체의 메위주를 얻어 변수 thisObj 에 저장
+					// ------------------------------------------------------------
+					var thisObj = $(this);
+					// ------------------------------------------------------------
 					// 마우스를 댄 것의 부모 태그, 즉, td 에 class=hover 을 삽입.
 					// 그러면 CSS 가 꾸며준다.  
 					// ------------------------------------------------------------
-					$(this).parent().addClass("hover");
+					thisObj.parent().addClass("hover");
 					// ------------------------------------------------------------
 					// 마우스를 댄 a 태그의 href 속성값 얻기.  
 					// ------------------------------------------------------------
-					var imgName = $(this).attr("href");
+					var imgName = thisObj.attr("href");
 					// ------------------------------------------------------------
 					// class="large" 인 것의 서서히 사라지고 난 후, src 속성에 마우스를 댄 
 					// img 태그의 href 속성값 설정하기. 그리고 다시 서서히 나타나기
 					// ------------------------------------------------------------
-					$(".large").fadeOut(
+					var largeObj = $(".large");
+					largeObj.fadeOut(
 						"slow"
 						, function(){
-							$(".large").attr("src", imgName);
-							$(".large").fadeIn("slow")
+							largeObj.attr("src", imgName);
+							largeObj.fadeIn("slow")
 						}
 					)
 
