@@ -1,0 +1,237 @@
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+jquery_test_15.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	=>학점 관련 [체크박스]를 체크하고 [검색] 버튼 클릭하면 체크한 학점에 맞는 [검색 결과]만 화면에 보여준다.
+-->
+<html><meta charset="UTF-8">
+<head>
+	<style>.style1 { background-color: #00f; color: #fff; } </style>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script>
+
+        // ----------------------------------------------------
+        // 화면에 보이는 tr 태그의 짝수행, 홀수행의 배경색을 지정하는 함수 선언하기
+        // ----------------------------------------------------
+        function inputBgColor_to_tr(
+            trsObj          // 화면에 보이거나 안보이게 할 대상이 되는 tr 태그를 관리하는 JQuery 객체의 메위주.
+            ,oddBgcolor     // 홀수번째 tr 태그의 배경색.
+            ,evenBgcolor    // 짝수번째 tr 태그의 배경색.  
+        ){
+
+            // 함수 안에서 색상 강제 지정.  
+            // oddBgcolor = "white";
+            // evenBgcolor = "lightgray";
+
+            // tr 태그 중 화면에 보이는 tr 를 관리하는 JQuery 객체의 메위주 얻기
+            var visibleTrsObj = trsObj.filter(":visible")
+
+            // tr 태그 중 화면에 보이는 tr 중 홀수 tr 만 골라서 배경색을 주기
+            visibleTrsObj.filter(":even").css("background-color", oddBgcolor);
+
+            // tr 태그 중 화면에 보이는 tr 중 짝수 tr 만 골라서 배경색을 주기
+            visibleTrsObj.filter(":odd").css("background-color", evenBgcolor);
+        }
+
+
+		$(document).ready(function() {
+
+
+			// **********************************************
+			// class=search 가진 태그에 click 이벤트가 일어나면
+			// 검색을 구현하는 코딩을 실행하게 설정.
+			// **********************************************
+			// $(".search").click(function(){			// click() 메서드 말고, 
+			// });										// 아래와 같이 bind() 써서 사용해도 된다.  
+
+			$(".search").bind("click", function(){
+				var trsObj = $(".sungjuk tbody tr")
+				// -------------------------------
+				// 체크된 학점의 개수를 얻기
+				// -------------------------------
+				var checkedHakjumCnt = $("[name='hakjum']").filter(":checked").size();
+					// var checkedHakjumCnt = $("[name='hakjum']:checked").size();	// 윗줄 코딩과 같다. filter 안쓰고하는법.  
+				// -------------------------------
+				// 만약 체크된 학점이 0개면 모두 보이고 함수 중단.
+				// -------------------------------
+				if( checkedHakjumCnt==0 ){
+					trsObj.show()
+					return;
+				}
+				// -------------------------------
+				// 모든 tr 을 감추기
+				// -------------------------------
+				trsObj.hide()
+				// -------------------------------
+				// 체크된 학점을 Array 객체에 저장하기
+				// -------------------------------
+				var hakjums = [];   // var hakjums = new Array();  // 이렇게 적는것이 정석적인 방법.
+
+				$("[name='hakjum']").each(function(){
+					// -----------
+					// i 번째 name='hakjum' 을 가진 놈을 관리하는 JQuery 객체의
+					// 메위주를 변수 thisObj 에 저장하기
+					// -----------
+					var thisObj = $(this);
+					// -----------
+					// 만약 i 번째 놈이 체크가 되어 있으면 Array 객체에 value 값 저장하기
+					// -----------
+					if( thisObj.prop("checked") ){
+						// if( thisObj.filter(":checked").length==1 )	// 윗줄 코드와 같은 작동을한다.  
+						// if( thisObj.is("checked") )					// 윗줄 코드와 같은 작동을한다.
+
+						hakjums.push( thisObj.val() )
+					}
+				});
+				alert( hakjums.join(" ") )	// 테스트용 // 배열에 저장된것들 나열해서 확인하기.
+				// -------------------------------
+				// 검색 대상이되는 tr에 차례대로 접근해서 각 tr 내부에 체크한 학점에 맞는 평균이 있으면
+				// tr 태그 보이게 한다.
+				// -------------------------------
+				trsObj.each(function(){
+					// -----------
+					// i 번째 tr 태그를 관리하는 JQuery 객체를 생성하고 객체의 메위주를 변수 thisTrObj 에 저장하기
+					// -----------
+					var thisTrObj = $(this);
+					// -----------
+					// i 번째 tr 태그 안의 3번째 td 가 감싸고 있는 문자, 
+					// 즉, 평균을 얻은 후 avg 변수에 저장
+					// -----------
+					var avg = thisTrObj.find("td:eq(2)").text();
+						// var avg = thisTrObj.find("td").eq(2).text();			// 윗줄 코드와 똑같다.
+						// var avg = thisTrObj.children("td:eq(2)").eq(2).text();	// 윗줄 코드와 똑같다.
+						// var avg = thisTrObj.children("td").eq(2).text();		// 윗줄 코드와 똑같다.
+					avg = $.trim(avg);
+
+						// 테스트용 // 공백 걸러내는 경고창
+						// if( avg.indexOf(" ")>=0 ){
+						// 	alert("공백 발견..!");
+						// }
+
+					avg = parseInt(avg, 10);	
+					
+					
+					var hakjum = "A";
+					if( avg>=80 && avg<90 ) {hakjum = "B";}
+					else if( avg>=70 && avg<80 ) {hakjum = "C";}
+					else if( avg>=60 && avg<70 ) {hakjum = "B";}
+					else if( avg>=0 && avg<60 ) {hakjum = "F";}
+					/*
+					// -----------
+					// i 번째 tr 내부의 평균이 Array 객체에 저장된 
+					// 학점에 맞는 평균이면 i번째 tr을 보이고 반복문 중단하기
+					// -----------
+					var flag = false;
+					for( var j=0; j<hakjums.length; j++){
+						// 만약에 j 번째 배열변수안의 값이 "A" 이고, avg 변수안의 값이 90~100 사이이면 i번째 tr 을 보이기.
+
+						if( hakjums[j]=="A" && avg>=90 && avg<=100 ){
+							// 조건에 걸린 tr을 보여주기.
+							flag = true;
+							break;
+							
+						}
+
+						// 만약에 j 번째 배열변수안의 값이 "B" 이고, avg 변수안의 값이 80~90 사이이면 i번째 tr 을 보이기.
+
+						else if( hakjums[j]=="B" && avg>=80 && avg<90 ){
+							flag = true;
+							break;
+
+						}
+						// 만약에 j 번째 배열변수안의 값이 "C" 이고, avg 변수안의 값이 70~80 사이이면 i번째 tr 을 보이기.
+						else if( hakjums[j]=="C" && avg>=70 && avg<80 ){
+							flag = true;
+							break;
+
+						}
+						// 만약에 j 번째 배열변수안의 값이 "D" 이고, avg 변수안의 값이 60~70 사이이면 i번째 tr 을 보이기.
+						else if( hakjums[j]=="D" && avg>=60 && avg<70 ){
+							flag = true;
+							break;
+
+						}
+						// 만약에 j 번째 배열변수안의 값이 "F" 이고, avg 변수안의 값이 50~60 사이이면 i번째 tr 을 보이기.
+						else if( hakjums[j]=="F" && avg>=0 && avg<60 ){
+							flag = true;
+							break;
+
+						}
+					
+					}
+					// ---------------------------
+					// flag 에 true 가 있으면 i 번째 tr 보이기
+					// ---------------------------
+					if( flag ){ thisTrObj.show(); }
+
+					// alert(avg)
+
+					*/
+
+				});
+
+
+
+
+
+				
+				// alert(checkedHakjumCnt); // 테스트용 // 체크된 개수 확인용. 
+
+
+				
+			});
+
+			// 검색된 행의 개수 구하는 식.  
+			$(".sungjuk").find("tbody tr").filter(":visible").length;
+
+
+
+
+		}); 
+	</script>
+</head>
+<body><center>
+<!-------------------------------------------------->
+<input type="checkbox" name="hakjum" value="A">A학점
+<input type="checkbox" name="hakjum" value="B">B학점
+<input type="checkbox" name="hakjum" value="C">C학점
+<input type="checkbox" name="hakjum" value="D">D학점
+<input type="checkbox" name="hakjum" value="F">F학점<br>
+
+<input type="button" value="검색" class="search" >
+<input type="button" value="모두검색" class="allSearch" ><br><br>
+<!-------------------------------------------------->
+<div class="count"></div>
+<table border="1" cellpadding=5 class="sungjuk" style="border-collapse:collapse;">
+	<thead>
+		<tr ><th>번호<th>이름<th>평균
+	</thead>
+	<tbody>
+		<tr><td>101<td>John<td>87
+		<tr><td>102<td>Naman<td>90
+		<tr><td>103<td>Chirag<td>85
+		<tr><td>104<td>David<td>92
+		<tr><td>105<td>Kelly<td>81
+		<tr><td>106<td>Charles<td>77
+		<tr><td>107<td>Jerry<td>91
+		<tr><td>108<td>Beth<td>87
+		<tr><td>109<td>Caroline<td>82
+		<tr><td>110<td>Hanen<td>71
+		<tr><td>111<td>Douglas<td>57
+		<tr><td>112<td>Tim<td>86
+		<tr><td>113<td>Michael<td>68
+		<tr><td>114<td>Kimbley<td>88
+		<tr><td>115<td>Christinax<td>72
+		<tr><td>116<td>유원영<td>100
+		<tr><td>117<td>강다니엘<td>20
+		<tr><td>118<td>박인선<td>20
+	</tbody>
+</table>
+
+
+<div class="msg"></div>  <!--테스트용 div 태그--> 
+
+</body>
+
+
+</html>
