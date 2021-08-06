@@ -85,7 +85,51 @@ jquery_test_15.html
 				});
 				alert( hakjums.join(" ") )	// 테스트용 // 배열에 저장된것들 나열해서 확인하기.
 				// -------------------------------
+				// 검색 대상이되는 tr에 차례대로 접근해서 각 tr 내부에 체크한 학점에 맞는 평균이 있으면
+				// tr 태그 보이게 한다.
+				// -------------------------------
+				trsObj.each(function(){
+					// -----------
+					// i 번째 tr 태그를 관리하는 JQuery 객체를 생성하고 객체의 메위주를 변수 thisTrObj 에 저장하기
+					// -----------
+					var thisTrObj = $(this);
+					// -----------
+					// i 번째 tr 태그 안의 3번째 td 가 감싸고 있는 문자, 
+					// 즉, 평균을 얻은 후 avg 변수에 저장
+					// -----------
+					var avg = thisTrObj.find("td:eq(2)").text();
+						// var avg = thisTrObj.find("td").eq(2).text();			// 윗줄 코드와 똑같다.
+						// var avg = thisTrObj.children("td:eq(2)").eq(2).text();	// 윗줄 코드와 똑같다.
+						// var avg = thisTrObj.children("td").eq(2).text();		// 윗줄 코드와 똑같다.
+					avg = $.trim(avg);
 
+						// 테스트용 // 공백 걸러내는 경고창
+						// if( avg.indexOf(" ")>=0 ){
+						// 	alert("공백 발견..!");
+						// }
+
+					avg = parseInt(avg, 10);	
+					
+					// -----------
+					// i 번째 tr 내부의 평균이 Array 객체에 저장된 
+					// 학점에 맞는 평균이면 i번째 tr을 보이고 반복문 중단하기
+					// -----------
+					for( var j=0; j<hakjums.length; j++){
+
+						if( avg>=90 ){
+							// 조건에 걸린 tr을 보여주기.
+							trsObj.eq(j).show();
+
+
+							
+
+						}
+
+
+					}
+
+					alert(avg)
+				});
 
 
 
