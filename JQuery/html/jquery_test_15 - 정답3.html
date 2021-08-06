@@ -111,11 +111,32 @@ jquery_test_15.html
 					avg = parseInt(avg, 10);	
 					
 					
+					// -------------------------
+					// hakjum 변수 선언하고 평균에서 학점 구해 저장하기
+					// -------------------------
 					var hakjum = "A";
 					if( avg>=80 && avg<90 ) {hakjum = "B";}
 					else if( avg>=70 && avg<80 ) {hakjum = "C";}
 					else if( avg>=60 && avg<70 ) {hakjum = "B";}
 					else if( avg>=0 && avg<60 ) {hakjum = "F";}
+					// -------------------------
+					// i번째 tr 내부의 평균이 Array 객체에 저장된
+					// 학점에 맞는 평균이면 false 에 true 저장하고 반복문을 중단하기
+					// -------------------------
+					var flag = false;
+					for( var j=0; j<hakjums.length; j++){
+						// 만약에 j 번째 배열변수안의 값이 hakjum 변수안의 값과 같으면
+						if( hakjums[j]==hakjum ){flag = true; break;}
+					}
+					// -------------------------
+					// flag에 true 가 있으면 i 번째 tr 보이기
+					// -------------------------
+					if(flag){thisTrObj.show();}
+
+
+
+
+					
 					/*
 					// -----------
 					// i 번째 tr 내부의 평균이 Array 객체에 저장된 
