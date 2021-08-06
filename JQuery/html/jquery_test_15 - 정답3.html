@@ -37,6 +37,39 @@ jquery_test_15.html
         $(document).ready(function() {
 
 
+            var tt = $(".sungjuk").find("thead tr").prepend("<th>번호");
+
+            // var tt = $(".sungjuk").find("tbody tr").prepend("<th>");
+            
+            var tr = $(".sungjuk").find("tbody tr")
+
+            var no = tr.length
+
+            tr.each(function(){
+
+                var thistr = $(this);
+
+                thistr.prepend("<td>" + no--)
+
+                return;
+            });
+
+            // var no = trObj.length-1;
+
+			// trObj.each( 
+			// 		function(i){
+			// 			var thisObj = $(this);
+			// 			if(i==0){
+			// 				thisObj.prepend("<th>번호")
+			// 			}
+			// 			else{
+			// 				thisObj.prepend("<td>" +  no-- )
+			// 			}
+			// 		}
+			// );
+
+
+
             // **********************************************
             // class=search 가진 태그에 click 이벤트가 일어나면
             // 검색을 구현하는 코딩을 실행하게 설정.
@@ -121,8 +154,8 @@ jquery_test_15.html
                     else if( avg>=0 && avg<60 ) {hakjum = "F";}
                     // -------------------------
                     // i번째 tr 내부의 평균에 해당하는 학점이 
-                    // Array 객체의 배열번수에 존재하면 
-                    // false 에 true 저장하고 반복문을 중단하기
+                    // Array 객체의 배열변수에 존재하면 
+                    // 변수 flag 에 true 저장하고 반복문을 중단하기
                     // -------------------------
                     var flag = false;
                     for( var j=0; j<hakjums.length; j++){
@@ -132,7 +165,7 @@ jquery_test_15.html
                     // -------------------------
                     // flag에 true 가 있으면 i 번째 tr 보이기
                     // -------------------------
-                    if(flag){thisTrObj.show();}
+                    if(flag) {thisTrObj.show();}
 
 
 
@@ -200,11 +233,39 @@ jquery_test_15.html
                 // alert(checkedHakjumCnt); // 테스트용 // 체크된 개수 확인용. 
 
 
+
+
+                // div 태그에 검색된 개수 표시
+				var count = trsObj.filter(":visible").length;
+				$(".count").text(count);
+
+
                 
             });
+            
+            
+            // **********************************************
+            // class=allSearch 가진 태그에 click 이벤트가 일어나면
+            // 체크를 모두 풀고 모든행을 보이는 코딩을 실행하게 설정.
+            // **********************************************
+            $(".allSearch").bind("click", function(){
+                // 학점 체크를 모두 풀기
+                $("[name=hakjum]").prop("checked", false);
 
-            // 검색된 행의 개수 구하는 식.  
-            $(".sungjuk").find("tbody tr").filter(":visible").length;
+                // 검색 대상이 되는 모든 행을 보이기.
+                $(".sungjuk tbody tr").show();
+
+
+                // 총 행의 개수 구하는 식.  
+                var count = $(".sungjuk tbody tr").filter(":visible").length;
+		    	$(".count").text(count);
+
+
+            });
+
+
+
+
 
 
 
@@ -226,7 +287,7 @@ jquery_test_15.html
 <div class="count"></div>
 <table border="1" cellpadding=5 class="sungjuk" style="border-collapse:collapse;">
     <thead>
-        <tr ><th>번호<th>이름<th>평균
+        <tr ><th>학생번호<th>이름<th>평균
     </thead>
     <tbody>
         <tr><td>101<td>John<td>87
