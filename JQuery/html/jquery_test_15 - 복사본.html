@@ -78,6 +78,12 @@ jquery_test_15.html
 				})
 
 				// alert(eve)	// 테스트용 // 체크 value 값 누적 확인.
+
+				if(eve==""){
+					trObj.show();
+					inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
+					return;
+				}
 								
 				if(eve=="A"){
 					// A학점 체크하고 검색 누르면 일단 숨기기.
@@ -151,6 +157,7 @@ jquery_test_15.html
 
 						
 					};
+					inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
 					
 				}
 
@@ -172,6 +179,7 @@ jquery_test_15.html
 
 						
 					};
+					inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
 					
 				}
 
@@ -193,6 +201,7 @@ jquery_test_15.html
 
 						
 					};
+					inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
 					
 				}
 
@@ -214,6 +223,7 @@ jquery_test_15.html
 
 						
 					};
+					inputBgColor_to_tr( tableObj.find("tbody tr"), "white", "lightgray" );
 					
 				}
 
@@ -235,8 +245,8 @@ jquery_test_15.html
 
 
 				// div 태그에 검색된 개수 표시
-				var co = trObj.filter(":visible").length;
-				$(".count").text(co);
+				var count = trObj.filter(":visible").length;
+				$(".count").text(count);
 
 			});
 
@@ -262,8 +272,8 @@ jquery_test_15.html
 
 
 			// div 태그에 검색된 개수 표시
-			var co = trObj.filter(":visible").length;
-			$(".count").text(co);
+			var count = trObj.filter(":visible").length;
+			$(".count").text(count);
 
 
 			// 하단에 학점 테스트용 표시 모두검색 시 삭제.
