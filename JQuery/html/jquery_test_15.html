@@ -76,9 +76,11 @@ jquery_test_15.html
 					// -----------
 					// 만약 i 번째 놈이 체크가 되어 있으면 Array 객체에 value 값 저장하기
 					// -----------
-					if(checkedHakjumCnt!=0){
+					if( thisObj.prop("checked") ){
+						// if( thisObj.filter(":checked").length==1 )	// 윗줄 코드와 같은 작동을한다.  
+						// if( thisObj.is("checked") )					// 윗줄 코드와 같은 작동을한다.
 
-						hakjums.push(thisObj.val())
+						hakjums.push( thisObj.val() )
 					}
 				});
 				alert( hakjums.join(" ") )	// 테스트용 // 배열에 저장된것들 나열해서 확인하기.
