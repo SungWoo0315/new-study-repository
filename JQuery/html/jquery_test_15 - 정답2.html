@@ -110,16 +110,19 @@ jquery_test_15.html
 
 					avg = parseInt(avg, 10);	
 					
+					
+					
 					// -----------
 					// i 번째 tr 내부의 평균이 Array 객체에 저장된 
 					// 학점에 맞는 평균이면 i번째 tr을 보이고 반복문 중단하기
 					// -----------
+					var flag = false;
 					for( var j=0; j<hakjums.length; j++){
 						// 만약에 j 번째 배열변수안의 값이 "A" 이고, avg 변수안의 값이 90~100 사이이면 i번째 tr 을 보이기.
 
 						if( hakjums[j]=="A" && avg>=90 && avg<=100 ){
 							// 조건에 걸린 tr을 보여주기.
-							thisTrObj.show();
+							flag = true;
 							break;
 							
 						}
@@ -127,36 +130,39 @@ jquery_test_15.html
 						// 만약에 j 번째 배열변수안의 값이 "B" 이고, avg 변수안의 값이 80~90 사이이면 i번째 tr 을 보이기.
 
 						else if( hakjums[j]=="B" && avg>=80 && avg<90 ){
-							thisTrObj.show();
+							flag = true;
 							break;
 
 						}
 						// 만약에 j 번째 배열변수안의 값이 "C" 이고, avg 변수안의 값이 70~80 사이이면 i번째 tr 을 보이기.
 						else if( hakjums[j]=="C" && avg>=70 && avg<80 ){
-							thisTrObj.show();
+							flag = true;
 							break;
 
 						}
 						// 만약에 j 번째 배열변수안의 값이 "D" 이고, avg 변수안의 값이 60~70 사이이면 i번째 tr 을 보이기.
 						else if( hakjums[j]=="D" && avg>=60 && avg<70 ){
-							thisTrObj.show();
+							flag = true;
 							break;
 
 						}
 						// 만약에 j 번째 배열변수안의 값이 "F" 이고, avg 변수안의 값이 50~60 사이이면 i번째 tr 을 보이기.
 						else if( hakjums[j]=="F" && avg>=0 && avg<60 ){
-							thisTrObj.show();
+							flag = true;
 							break;
 
 						}
-
-							
-
-
-
+					
 					}
+					// ---------------------------
+					// flag 에 true 가 있으면 i 번째 tr 보이기
+					// ---------------------------
+					if( flag ){ thisTrObj.show(); }
 
 					// alert(avg)
+
+					
+
 				});
 
 
