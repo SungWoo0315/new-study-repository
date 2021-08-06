@@ -36,6 +36,7 @@ jquery_test_15.html
 
         $(document).ready(function() {
 
+            inputFirstColumn(  $(".sungjuk") )
 
             inputSearchCnt(); // 시작할 때 총개수 body 태그 읽어들이고 바로 보이기.  
       
@@ -101,7 +102,7 @@ jquery_test_15.html
                     // i 번째 tr 태그 안의 3번째 td 가 감싸고 있는 문자, 
                     // 즉, 평균을 얻은 후 avg 변수에 저장
                     // -----------
-                    var avg = thisTrObj.find("td:eq(2)").text();
+                    var avg = thisTrObj.find("td:eq(3)").text();        // 새로운 열이 추가되어 eq(3)이 되어야한다.
                         // var avg = thisTrObj.find("td").eq(2).text();			// 윗줄 코드와 똑같다.
                         // var avg = thisTrObj.children("td:eq(2)").eq(2).text();	// 윗줄 코드와 똑같다.
                         // var avg = thisTrObj.children("td").eq(2).text();		// 윗줄 코드와 똑같다.
@@ -198,6 +199,7 @@ jquery_test_15.html
 
                 inputSearchCnt();   // 검색버튼 눌러서 검색된 개수 표시.
 
+                inputFirstColumn(  $(".sungjuk") )
                 // div 태그에 검색된 개수 표시
                 // var count = trsObj.filter(":visible").length;
                 // $(".count").text(count+"개");
@@ -252,7 +254,9 @@ jquery_test_15.html
                 // 총 행의 개수 표시.  
                 // var count = $(".sungjuk tbody tr").filter(":visible").length;
 		    	// $(".count").text(count+"개");
-                inputSearchCnt()    // 함수로 변경.               
+                inputSearchCnt()    // 함수로 변경.         
+                
+                inputFirstColumn(  $(".sungjuk") )
              
             });
 
@@ -298,6 +302,14 @@ jquery_test_15.html
             // ----------------------------------------
             if( flag ){
                 // 보이는 tr 태그 안의 번호 컬럼 열에 새로운 역순 일련번호를 구해 덮어쓰기.
+                visible_trsObj.each(function(i){
+                    if( i>0 ){
+
+                        $(this).find("td:eq(0)").text( (visibleTrCnt--) );
+
+
+                    }
+                });
             }
             // ----------------------------------------
             // flag 변수에 false 가 저장되어 있으면, 즉, table 태그의 1행 1열에 "번호" 컬럼이 없으면
@@ -305,7 +317,15 @@ jquery_test_15.html
             // ----------------------------------------
             else{
                 // 모든 tr 태그 안에 새로운 1열을 삽입하기.  
-
+                trsObj.each(function(i){
+                    var thisTrObj = $(this);
+                    if( i==0 ){
+                        thisTrObj.prepend( "<th>번호" )
+                    }
+                    else{
+                        thisTrObj.prepend( "<td>" + (visibleTrCnt--) )
+                    }
+                });
             }
         }
         
