@@ -31,14 +31,34 @@ jquery_test_15.html
 
             // tr 태그 중 화면에 보이는 tr 중 짝수 tr 만 골라서 배경색을 주기
             visibleTrsObj.filter(":odd").css("background-color", evenBgcolor);
-
         }
 
 
 		$(document).ready(function() {
 
 
-			
+			// **********************************************
+			// class=search 가진 태그에 click 이벤트가 일어나면
+			// 검색을 구현하는 코딩을 실행하게 설정.
+			// **********************************************
+			// $(".search").click(function(){			// click() 메서드 말고, 
+			// });										// 아래와 같이 bind() 써서 사용해도 된다.  
+
+			$(".search").bind("click", (function(){
+				// -------------------------------
+				// 체크된 학점의 개수를 얻기
+				// -------------------------------
+				var checkedHakjumCnt = 
+				
+
+
+
+				
+				alert(999);
+
+
+				
+			}));
 
 
 
