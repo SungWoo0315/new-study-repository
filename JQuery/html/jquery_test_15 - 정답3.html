@@ -37,22 +37,7 @@ jquery_test_15.html
         $(document).ready(function() {
 
 
-            var tt = $(".sungjuk").find("thead tr").prepend("<th>번호");
-
-            // var tt = $(".sungjuk").find("tbody tr").prepend("<th>");
-            
-            var tr = $(".sungjuk").find("tbody tr")
-
-            var no = tr.length
-
-            tr.each(function(){
-
-                var thistr = $(this);
-
-                thistr.prepend("<td>" + no--)
-
-                return;
-            });
+      
 
             // var no = trObj.length-1;
 
@@ -78,6 +63,30 @@ jquery_test_15.html
             // });										// 아래와 같이 bind() 써서 사용해도 된다.  
 
             $(".search").bind("click", function(){
+
+
+                // 역순으로 번호 나오도록 ...
+                // ===============================================================
+                var tt = $(".sungjuk").find("thead tr").prepend("<th>번호");
+
+                // var tt = $(".sungjuk").find("tbody tr").prepend("<th>");
+
+                var tr = $(".sungjuk").find("tbody tr")
+
+                var no = tr.length
+
+                tr.each(function(){
+
+                    var thistr = $(this);
+
+                    thistr.prepend("<td>" + no--)
+
+                    return;
+                });
+                // ===============================================================
+
+
+                
                 var trsObj = $(".sungjuk tbody tr")
                 // -------------------------------
                 // 체크된 학점의 개수를 얻기
