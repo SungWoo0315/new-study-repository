@@ -120,8 +120,9 @@ jquery_test_15.html
 					else if( avg>=60 && avg<70 ) {hakjum = "B";}
 					else if( avg>=0 && avg<60 ) {hakjum = "F";}
 					// -------------------------
-					// i번째 tr 내부의 평균이 Array 객체에 저장된
-					// 학점에 맞는 평균이면 false 에 true 저장하고 반복문을 중단하기
+					// i번째 tr 내부의 평균에 해당하는 학점이 
+					// Array 객체의 배열번수에 존재하면 
+					// false 에 true 저장하고 반복문을 중단하기
 					// -------------------------
 					var flag = false;
 					for( var j=0; j<hakjums.length; j++){
