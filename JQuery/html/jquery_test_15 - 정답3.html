@@ -63,29 +63,6 @@ jquery_test_15.html
             // });										// 아래와 같이 bind() 써서 사용해도 된다.  
 
             $(".search").bind("click", function(){
-
-
-                // 역순으로 번호 나오도록 ...
-                // ===============================================================
-                var tt = $(".sungjuk").find("thead tr").prepend("<th>번호");
-
-                // var tt = $(".sungjuk").find("tbody tr").prepend("<th>");
-
-                var tr = $(".sungjuk").find("tbody tr")
-
-                var no = tr.length
-
-                tr.each(function(){
-
-                    var thistr = $(this);
-
-                    thistr.prepend("<td>" + no--)
-
-                    return;
-                });
-                // ===============================================================
-
-
                 
                 var trsObj = $(".sungjuk tbody tr")
                 // -------------------------------
@@ -159,7 +136,7 @@ jquery_test_15.html
                     var hakjum = "A";
                     if( avg>=80 && avg<90 ) {hakjum = "B";}
                     else if( avg>=70 && avg<80 ) {hakjum = "C";}
-                    else if( avg>=60 && avg<70 ) {hakjum = "B";}
+                    else if( avg>=60 && avg<70 ) {hakjum = "D";}
                     else if( avg>=0 && avg<60 ) {hakjum = "F";}
                     // -------------------------
                     // i번째 tr 내부의 평균에 해당하는 학점이 
@@ -246,9 +223,35 @@ jquery_test_15.html
 
                 // div 태그에 검색된 개수 표시
 				var count = trsObj.filter(":visible").length;
-				$(".count").text(count);
+				$(".count").text(count+"개");
 
 
+
+                // 역순으로 번호 나오도록 ...
+                // ===============================================================
+                var tt = $(".sungjuk").find("thead tr").prepend("<th>번호");
+
+                // var tt = $(".sungjuk").find("tbody tr").prepend("<th>");
+
+
+                var tr = $(".sungjuk").find("tbody tr:visible")
+
+                // var tr = thisTrObj.show()
+
+
+                var no = tr.length
+
+                // alert(no)
+
+                tr.each(function(){
+
+                    var thistr = $(this);
+
+                    thistr.prepend("<td>" + no--)
+
+                    return;
+                });
+                // ===============================================================
                 
             });
             
@@ -267,9 +270,13 @@ jquery_test_15.html
 
                 // 총 행의 개수 구하는 식.  
                 var count = $(".sungjuk tbody tr").filter(":visible").length;
-		    	$(".count").text(count);
+		    	$(".count").text(count+"개");
 
+                // var tt = $(".sungjuk").find("thead tr").prepend("<th>번호");
+                // var tr = $(".sungjuk").find("tbody tr:visible")
 
+                // tt.hide();
+                // tr.hide();
             });
 
 
