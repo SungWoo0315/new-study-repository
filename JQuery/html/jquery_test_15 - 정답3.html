@@ -37,23 +37,8 @@ jquery_test_15.html
         $(document).ready(function() {
 
 
+            inputSearchCnt(); // 시작할 때 총개수 body 태그 읽어들이고 바로 보이기.  
       
-
-            // var no = trObj.length-1;
-
-			// trObj.each( 
-			// 		function(i){
-			// 			var thisObj = $(this);
-			// 			if(i==0){
-			// 				thisObj.prepend("<th>번호")
-			// 			}
-			// 			else{
-			// 				thisObj.prepend("<td>" +  no-- )
-			// 			}
-			// 		}
-			// );
-
-
 
             // **********************************************
             // class=search 가진 태그에 click 이벤트가 일어나면
@@ -211,8 +196,11 @@ jquery_test_15.html
 
                 });
 
+                inputSearchCnt();   // 검색버튼 눌러서 검색된 개수 표시.
 
-
+                // div 태그에 검색된 개수 표시
+                // var count = trsObj.filter(":visible").length;
+                // $(".count").text(count+"개");
 
 
                 
@@ -220,37 +208,30 @@ jquery_test_15.html
 
 
 
-
-                // div 태그에 검색된 개수 표시
-				var count = trsObj.filter(":visible").length;
-				$(".count").text(count+"개");
-
-
-
                 // 역순으로 번호 나오도록 ...
                 // ===============================================================
-                var tt = $(".sungjuk").find("thead tr").prepend("<th>번호");
+                // var tt = $(".sungjuk").find("thead tr").prepend("<th>번호");
 
-                // var tt = $(".sungjuk").find("tbody tr").prepend("<th>");
-
-
-                var tr = $(".sungjuk").find("tbody tr:visible")
-
-                // var tr = thisTrObj.show()
+                // // var tt = $(".sungjuk").find("tbody tr").prepend("<th>");
 
 
-                var no = tr.length
+                // var tr = $(".sungjuk").find("tbody tr:visible")
 
-                // alert(no)
+                // // var tr = thisTrObj.show()
 
-                tr.each(function(){
 
-                    var thistr = $(this);
+                // var no = tr.length
 
-                    thistr.prepend("<td>" + no--)
+                // // alert(no)
 
-                    return;
-                });
+                // tr.each(function(){
+
+                //     var thistr = $(this);
+
+                //     thistr.prepend("<td>" + no--)
+
+                //     return;
+                // });
                 // ===============================================================
                 
             });
@@ -268,9 +249,13 @@ jquery_test_15.html
                 $(".sungjuk tbody tr").show();
 
 
-                // 총 행의 개수 구하는 식.  
-                var count = $(".sungjuk tbody tr").filter(":visible").length;
-		    	$(".count").text(count+"개");
+                // 총 행의 개수 표시.  
+                // var count = $(".sungjuk tbody tr").filter(":visible").length;
+		    	// $(".count").text(count+"개");
+                inputSearchCnt()    // 함수로 변경.  
+
+
+
 
 
 
@@ -282,13 +267,18 @@ jquery_test_15.html
             });
 
 
-
-
-
-
-
-
         }); 
+
+        
+        // ***********************************************
+        // class=count 가진 태그안에 검색결과물, 
+        // 즉, 화면에 보이는 tr 태그의 총개수 삽입하는 함수선언
+        // ***********************************************
+        function inputSearchCnt(){
+            $(".count").text($(".sungjuk tbody tr:visible").length + "개 입니다.")
+        }         
+        
+
     </script>
 </head>
 <body><center>
