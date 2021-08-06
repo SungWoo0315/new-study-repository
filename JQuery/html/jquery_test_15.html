@@ -44,30 +44,60 @@ jquery_test_15.html
 			// $(".search").click(function(){			// click() 메서드 말고, 
 			// });										// 아래와 같이 bind() 써서 사용해도 된다.  
 
-			$(".search").bind("click", (function(){
+			$(".search").bind("click", function(){
+				var trsObj = $(".sungjuk tbody tr")
 				// -------------------------------
 				// 체크된 학점의 개수를 얻기
 				// -------------------------------
-				var checkedHakjumCnt = 
-				
+				var checkedHakjumCnt = $("[name='hakjum']").filter(":checked").size();
+					// var checkedHakjumCnt = $("[name='hakjum']:checked").size();	// 윗줄 코딩과 같다. filter 안쓰고하는법.  
+				// -------------------------------
+				// 만약 체크된 학점이 0개면 모두 보이고 함수 중단.
+				// -------------------------------
+				if( checkedHakjumCnt==0 ){
+					trsObj.show()
+					return;
+				}
+				// -------------------------------
+				// 모든 tr 을 감추기
+				// -------------------------------
+				trsObj.hide()
+				// -------------------------------
+				// 체크된 학점을 Array 객체에 저장하기
+				// -------------------------------
+				var hakjums = [];   // var hakjums = new Array();  // 이렇게 적는것이 정석적인 방법.
+
+				$("[name='hakjum']").each(function(){
+					// -----------
+					// i 번째 name='hakjum' 을 가진 놈을 관리하는 JQuery 객체의
+					// 메위주를 변수 thisObj 에 저장하기
+					// -----------
+					var thisObj = $(this);
+					// -----------
+					// 만약 i 번째 놈이 체크가 되어 있으면 Array 객체에 value 값 저장하기
+					// -----------
+					if(checkedHakjumCnt!=0){
+
+						hakjums.push(thisObj.val())
+					}
+				});
+				alert( hakjums.join(" ") )	// 테스트용 // 배열에 저장된것들 나열해서 확인하기.
+				// -------------------------------
+
+
+
 
 
 
 				
-				alert(999);
+				// alert(checkedHakjumCnt); // 테스트용 // 체크된 개수 확인용. 
 
 
 				
-			}));
+			});
 
-
-
-
-
-
-
-
-
+			// 검색된 행의 개수 구하는 식.  
+			$(".sungjuk").find("tbody tr").filter(":visible").length;
 
 
 
