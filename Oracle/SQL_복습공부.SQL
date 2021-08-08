@@ -202,6 +202,8 @@ from
 where
 	dep_no = '10'
 
+-- 오라클에서는 `==` 이 없다.  `=` 을 써주어야 한다.
+
 
 --<27> employee 테이블에서 20번 부서의 과장을 검색하면?
 select
@@ -219,7 +221,7 @@ from
 	employee
 where
 	dep_no = '20' or jikup = '과장'
--- order by dep_no asc, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4, 5) asc, salary desc; 정렬 테스트.
+-- order by dep_no asc, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4, 5) asc--, salary desc; --정렬 테스트.
 
 --<29> employee 테이블에서 과장 중에 연봉 3400 이상을 검색하면?
 select
@@ -248,8 +250,12 @@ from
 	employee
 where
 	jikup!='사장'
-order BY
-	"세금" desc, dep_no desc
+order by
+	 "세금" desc, dep_no desc
+
+-- order by 에서 세금이 먼저 나오면 세금 기준으로 정렬을 먼저 하고, 부서번호를 세금 기준으로 잡는다.
+
+-- 부서번호와 세금의 순서를 바꾸면, 부서번호를 먼저 정렬하고 그 기준으로 세금을 정렬한다.  순서 바꿔서 결과 실행 해보기.
 
 
 --<32> employee 테이블에서 20번 부서 중에 연봉 2000~3000 사이 검색하면?
@@ -272,6 +278,8 @@ where
 	and
 	salary >= 2000 and salary <= 3000
 
+-- betwwen '숫자' and '숫자
+
 
 --<33> employee 테이블에서 직속 상관이 없는 직원을 검색하면?
 
@@ -281,6 +289,7 @@ from
 	employee
 where
 	mgr_emp_no is null
+
 
 
 --<34> employee 테이블에서 직속 상관이 있는 직원을 검색하면?
@@ -299,10 +308,15 @@ select
 	,avg(salary)			평균연봉
 	,sum(salary)			연봉총합
 	,count(emp_no)		"총인원수(emp_no)"
-	,count(*)					"총인원수(행의개수)"
+	,count(*)					as "총인원수(행의개수)"
 from
 	employee
 
+
+--<기억하기> min, max, avg, sum, count, 함수들은 null 값을 제외하고 계산한다.
+
+-- count(emp_no) 는 null 값을 제외하고 개수를 리턴하지만,
+-- count(*) 는 행의 개수를 리턴하므로 null 값도 포함해서 리턴.
 
 --<참고>
 select
@@ -320,6 +334,14 @@ FROM
 	customer
 where
 	emp_no is null;  -- null을 제외 하여서. 0개가 나올수 밖에 없음.
+
+--<37> 아래 SQL 구문은 무슨 문제의 답인가?
+
+select count(emp_no)"담당직원이있는고객" from customer;
+
+-- 담당 직원이 있는 고객의 명수는?
+-- emp_no 컬럼안의 담당 직원의 직원번호이므로 직원번호의 개수는 결국  담당직원이 있는 고객의 명수가 된다.
+
 
 
 --<38> 고객을 담당하고 있는 직원의 명수는?
@@ -353,6 +375,8 @@ select
 from
 	employee
 
+-- substr 사용 익히기.
+
 
 --<41> customer 테이블에서 모든 컬럼, 모든 행을 검색해서 출력하면?
 --	단, 주민번호는 901225-2****** 형태로 출력하세요.
@@ -365,6 +389,7 @@ select
 from
 	customer
 
+-- 오라클에서 연결 연산자는 `||` 이다.
 
 --<42> customer 테이블에서 고객번호, 고객명, 담당직원번호 를 출력하면?
 --	단, 담당직원번호가 없으면 null 출력하지 말고 '없음' 으로 표시 하삼!
@@ -377,6 +402,10 @@ from
 	customer
 
 
+-- emp_no 가 숫자데이터 이므로 to_char 로 문자로 변경해서 '없음'을 대체해주어야 한다.
+-- nvl( 컬럼명, null값일때 대체데이터)
+
+
 --<43> customer 테이블에서 고객번호, 고객명, 담당직원존재여부 를 출력하면?
 --	단, 직원번호가 있으면 '있음', 없으면 '없음'으로 표시
 
@@ -387,6 +416,8 @@ select
 from
 	customer
 
+-- nvl2( 컬럼명, null값아닐때대체데이터, null값일때대체데이터 )
+
 
 --<44> employee 테이블에서 직원번호, 직원명, 직급, 성별 를 출력하면?
 --방법1
@@ -394,7 +425,7 @@ select
 	emp_no
 	,emp_name
 	,jikup
-	,decode(substr(jumin_num,7,1), '1', '남', '3', '남', '여') 성별
+	,decode(substr(jumin_num,7,1), '1', '남', '3', '남', '여') as "성별"
 from
 	employee
 
@@ -408,7 +439,7 @@ select
 	emp_no
 	,emp_name
 	,jikup
-	,case substr(jumin_num,7,1) when '1' then '남' when '3' then '남' else '여' end 성별
+	,case substr(jumin_num,7,1) when '1' then '남' when '3' then '남' else '여' end "성별"
 from
 	employee
 
@@ -423,8 +454,10 @@ select
 from
 	employee
 
---방법3 에서 `=` 대신에 필요에 따라 `>=, >, <, <=, !=` 등의 비교연산자도 사용할 수 있다.
+-- 방법3 에서 `=` 대신에 필요에 따라 `>=, >, <, <=, !=` 등의 비교연산자도 사용할 수 있다.
 --	필요에 따라 `else 리턴값n` 는 생략 될 수 있다.
+
+-- end 로 닫아주는거 까먹지 말기.
 
 
 --<45> employee 테이블에서 직원번호, 직원명, 직급, 출생년도(4자리) 를 출력하면?
@@ -439,12 +472,40 @@ from
 
 
 
+select
+	emp_no
+	,emp_name
+	,jikup
+	,case
+		when substr(jumin_num,7,1)='1' then '19'
+		when substr(jumin_num,7,1)='2' then '19'
+		else '20'
+	end||substr(jumin_num,1,2)||'년생' "출생년도"
+from
+	employee
+
+
+
+
 --<46> employee 테이블에서 직원번호, 직원명, 직급, 출생년대(4자리) 를 출력하면?
 select
 	emp_no
 	,emp_name
 	,jikup
 	,decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,1)||'0 년대생' "출생년대(4자리)"
+from
+	employee
+
+
+select
+	emp_no
+	,emp_name
+	,jikup
+	,case
+		when substr(jumin_num,7,1)='1' then '19'
+		when substr(jumin_num,7,1)='2' then '19'
+		else '20'
+	end||substr(jumin_num,1,1)||'0년생' "출생년도"
 from
 	employee
 
