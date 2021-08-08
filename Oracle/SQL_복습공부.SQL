@@ -579,11 +579,82 @@ select
 from
  employee
 
+--<51> employee 테이블에서 직원번호, 직원명, 근무년차를 검색해서 출력하면?
+
+select
+	emp_no
+	,emp_name
+	,ceil(  (sysdate - hire_date)/365  )||'년차'	  "근무년차"
+from
+	employee
+
+-- ceil(~)  => 소수 첫째 자리에서 무조건 올림해서 리턴하는 수학 함수의 일종이다.
+-- floor(~) => 소수 첫째 자리에서 무조건 내림해서 리턴하는 수학 함수이다.
 
 
 
+--<52> employee 테이블에서 직원번호, 직원명, 연령대를 검색해서 출력하면?
+
+select
+ emp_no		 		"직원번호"
+ ,emp_name 		"직원명"
+ ,floor(
+			 	(
+				 	to_number(  to_char(sysdate, 'YYYY')  )
+				 	-
+				 	to_number(
+						case substr(jumin_num,7,1) when '1' then '19' when '2' then '19' else '20' end
+				  	||substr(jumin_num,1,2)
+				  )
+				  +1
+		  	)* 0.1
+ ) ||'0 대'  "연령대"
+from
+ employee
 
 
+--<53> employee 테이블에서 직원번호, 직원명, 100일잔치날짜를 검색해서 출력하면?
+
+select
+	emp_no				"직원번호"
+	,emp_name     "직원명"
+	,	to_char(
+				  	to_date(
+				  		  		case substr(jumin_num,7,1) when '1' then '19'
+				  		  		                           when '2' then '19'
+				  		  															 else '20' end ||substr(jumin_num,1,6)
+				  				, 'YYYYMMDD'
+						) +100
+						, 'YYYY-MM-DD'
+		)	 	"100일잔치날짜"
+from
+ employee;
+
+
+--<53-1> 개강일이 2021년5월12일 이고 종강일이 2021년11월10일 이다. 며칠 동안 학원 생활을 하나?
+
+select
+	to_date('20211110','YYYYMMDD') - to_date('20210512','YYYYMMDD') "남은일수"
+from
+ dual;
+
+
+--<54> employee 테이블에서 직원번호, 직원명, 현재나이, 입사일당시나이 를 검색해서 출력하면?
+
+select
+ emp_no "직원번호"
+ ,emp_name "직원명"
+ ,to_number(to_char(sysdate, 'YYYY'))
+ -
+ to_number( decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,2) )+1||'세' "현재나이"
+ ,to_number(to_char(hire_date, 'YYYY'))
+ -
+ to_number( decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,2) )+1||'세' "입사일당시나이"
+from
+ employee
+
+
+--<55> employee 테이블에서 직원번호, 직원명, 주민번호, 다가올생일날(년-월-일), 생일까지남은일수 를 검색하면?
 
 
 
