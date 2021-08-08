@@ -46,6 +46,7 @@ select
 from
 	employee;
 
+-- 연결 연산자 `||` 주의 하기.
 
 
 --<18> employee 테이블에서 직원명, 직급, 연봉, 세금, 실수령액을 검색하면? (세금은 연봉의 12%)
@@ -57,12 +58,17 @@ select
 	,salary||' 만원'							"연봉"
 	,salary*0.12||'만원'    			"세금"
 	,salary-(salary*0.12)||'만원' "실수령액"
-	,salary*0.88
+	,salary*0.88									"실수령액 다른계산"
 from
 	employee;
 
 
 --<19> employee 테이블에서 직급을 중복없이 검색하면?
+
+select
+	distinct jikup
+from
+employee;
 
 select
 	distinct(jikup)				"직급"
@@ -73,7 +79,9 @@ from
 select
 	unique(jikup)				"직급"
 from
-	employee;
+	employee
+order by
+	decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc;  -- 직급별 정렬 방법.
 
 
 --<20> employee 테이블에서 부서번호와 직급을 중복 없이 검색하면?
@@ -81,8 +89,16 @@ from
 select
 	distinct dep_no, jikup
 from
-	employee;
+	employee
+order by	-- 직급별 정렬 + 부서넘버 정렬.
+	decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc, dep_no asc;
 -- order by dep_no asc; -- 정렬 테스트.
+
+select
+	unique dep_no, jikup
+from
+ employee;
+
 
 --<21> employee 테이블에서 연봉이 3000 이상인 직원을 검색해서 검색하면?
 
@@ -94,6 +110,20 @@ where
 	salary >= 3000
 
 
+
+
+-- 직급별 정렬 추가해서 해봄.
+select
+ salary	"연봉"
+ ,jikup "직급"
+from
+	employee
+where
+	salary >= 3000
+order by
+	decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4) asc;
+
+
 --<22> employee 테이블에서 연봉 오름차순으로 검색하면?
 
 select
@@ -102,7 +132,14 @@ from
 	employee
 order by salary asc;
 
+-- 오름차순(asc)은 생략 가능하다.
+select
+	*
+from
+	employee
+order by salary;
 
+-- 컬럼 위치번호로도 작성 가능하다.  테이블 도식 참고,
 select
 	*
 from
@@ -119,6 +156,15 @@ from
 order by salary desc;
 
 
+-- 컬럼명 대신에 컬럼명 위치번호 가능.
+-- 대신, 내림차순(desc)는 생략 불가능하다.
+select
+	*
+from
+	employee
+order by 5 desc;
+
+
 --<24> employee 테이블에서 부서번호 오름차순을 유지하면서 연봉 내림차순으로 검색하면?
 select
 	*
@@ -129,6 +175,7 @@ order by
 
 
 --<25> employee 테이블에서 직급이 높은 순서 나열해서 검색하면?
+
 select
 	*
 from
@@ -144,6 +191,16 @@ from
 	employee
 where
 	jikup = '부장'
+
+
+-- 26번 추가 연습.
+select
+	dep_no
+	,emp_name
+from
+	employee
+where
+	dep_no = '10'
 
 
 --<27> employee 테이블에서 20번 부서의 과장을 검색하면?
