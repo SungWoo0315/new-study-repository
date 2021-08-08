@@ -1,6 +1,11 @@
 ﻿--<Oracle 복습>
 --<2021년 7월 4일>
 
+--<DATE>
+select to_date('20211225', 'YYYYMMDD')-to_date('20210808', 'YYYYMMDD') from dual;
+
+select to_char(sysdate, 'YYYY-MM-DD-DAY') from dual;
+
 --<9>
 
 select to_char(to_date('20211225', 'YYYYMMDD') - to_date('20210704', 'YYYYMMDD'))||'일' as "12월25까지 남은 날" from dual;
@@ -77,7 +82,7 @@ select
 	distinct dep_no, jikup
 from
 	employee;
-
+-- order by dep_no asc; -- 정렬 테스트.
 
 --<21> employee 테이블에서 연봉이 3000 이상인 직원을 검색해서 검색하면?
 
@@ -157,6 +162,7 @@ from
 	employee
 where
 	dep_no = '20' or jikup = '과장'
+-- order by dep_no asc, decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4, 5) asc, salary desc; 정렬 테스트.
 
 --<29> employee 테이블에서 과장 중에 연봉 3400 이상을 검색하면?
 select
@@ -235,8 +241,8 @@ select
 	,max(salary)			최대연봉
 	,avg(salary)			평균연봉
 	,sum(salary)			연봉총합
-	,count(emp_no)		총인원수
-	,count(*)		총인원수
+	,count(emp_no)		"총인원수(emp_no)"
+	,count(*)					"총인원수(행의개수)"
 from
 	employee
 
@@ -435,38 +441,21 @@ select
 	 -
 	 to_number(decode(substr(jumin_num,7,1),'1','19','2','19','20')||substr(jumin_num,1,2))+1||'살' "나이"
 from
- employee;
-
-
---<51> employee 테이블에서 직원번호, 직원명, 근무년차를 검색해서 출력하면?
-select
-	emp_no                                       "직원번호"
-	, emp_name                                   "직원명"
-	, ceil((sysdate - hire_date)/365)||'년차'     "근무년차"  -- 현재년월 기준으로
-	,to_number(to_char(sysdate, 'YYYY'))
-   -
- 	 to_number(to_char(hire_date, 'YYYY'))+1||'년차' as "근무년차2"  -- 그냥 년도만 계산
-from
-	employee
-order by 3 desc;
---
---강사님정답에서 결과값이 17번 이성계랑 9번 무궁화 결과값이 다른이유는?
---현재 월 기준인 7월으로. 이성계는 5월이였기 때문에 이미 지나서 무궁화 보다 1년이 더 많고,
---무궁화는 8월이기 때문에 현재 7월이므로 1년을 채우지 못하여 근무년차가 1년 적다.
---그럼 8월 1일이 넘은 시점에서 이 문제를 다시 푼다면 이성계와 무궁화는 같은 연차가 될것이다.
-
--- 내가 푼것은 단순 년도 계산이라서 같은 연차로 계산된것이다.
-
-
---<52> employee 테이블에서 직원번호, 직원명, 연령대를 검색해서 출력하면?
-select
-	emp_no
-	,emp_name
-	,floor((to_number(to_char(sysdate, 'YYYY'))
-	 -
-	 to_number(decode(substr(jumin_num,7,1), '1', '19', '2', '19', '20')||substr(jumin_num,1,2))+1)*0.1)||'0 대' "연령대"
-from
  employee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
