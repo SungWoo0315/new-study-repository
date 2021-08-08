@@ -505,7 +505,7 @@ select
 		when substr(jumin_num,7,1)='1' then '19'
 		when substr(jumin_num,7,1)='2' then '19'
 		else '20'
-	end||substr(jumin_num,1,1)||'0년생' "출생년도"
+	end||substr(jumin_num,1,1)||'0 년대생' "출생년도"
 from
 	employee
 
@@ -532,7 +532,7 @@ order by
 select
 	emp_no
 	,emp_name
-	,to_char(hire_date, 'YYYY-MM-DD(DAY) HH:MI:SS') "입사일"
+	,to_char(hire_date, 'YYYY-MM-DD(DAY) HH24:MI:SS') "입사일"
 from
 	employee;
 
@@ -541,12 +541,30 @@ select to_char(sysdate, 'YYYY-MM-DD Q"분기"') from dual;
 
 
 
+-- to_char(날짜또는숫자컬럼명, '리턴시원하는문자패턴')
+
+-- 지정한 날짜 또는 숫자를 원하는 출력문자패턴 으로 바꾸어 주는 변환함수의 일종
+--		리턴시 원하는 문자패턴
+--			YYYY   => 년도 4자리
+--			MM     => 월 2자리
+--			DD     => 일 2자리
+--			AM HH  => 오전|오후 1~12사이의 시간
+--			HH24   => 0~23 사이의 시간
+--			MI     => 0~59 사이의 분
+--			SS     => 0~59 사이의 초
+--			DAY    => 영문 요일 풀네임
+--			DY     => 영문 요일 약어
+--			Q      => 1~4 사이의 분기
+--
+
+
+
 --<49-1> employee 테이블에서 직원번호, 직원명, 입사일(X년-X월-X일(요일) X분기 X시X분X초) 검색하면?
 
 select
 	emp_no
 	,emp_name
-	,to_char(hire_date, 'YYYY"년"-MM"월"-DD"일" (dy"요일") HH"시":MI"분":SS"초"') "입사일"
+	,to_char(hire_date, 'YYYY"년"-MM"월"-DD"일" (dy"요일") Q"분기" HH"시":MI"분":SS"초"') "입사일"
 from
 	employee;
 
