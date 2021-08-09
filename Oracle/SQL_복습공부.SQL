@@ -984,23 +984,36 @@ where
 
 --<71> employee 테이블에서 연봉이 3000만원 이상 ~4000 만원 미만 사이인 직원을 검색하면?
 
+select * from employee
+where
+	salary >= 3000 and salary < 4000;
+
+-----------------------------------
+
+select * from employee
+where
+	(salary between 3000 and 4000) and salary != 4000;
 
 
+--<72> employee 테이블에서 연봉을 5% 인상했다고 가정하고 3000 이상인 직원을  검색하면?
+
+select * from employee
+where
+ salary + (salary*0.05) >= 3000;
+
+----------------------------------
+
+select * from employee where salary*1.05 >= 3000
 
 
+--<73> employee 테이블에서 입사일이 '1995-1-1' 이상인 직원을  검색하면?
+
+select * from employee
+where
+  to_number(to_char(hire_date, 'YYYYMMDD')) >= 19950101
 
 
-
-
-
-
-
-
-
-
-
-
-
+select * from employee where hire_date >= to_date('1995-1-1','YYYY-MM-DD');
 
 
 
