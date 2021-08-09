@@ -656,6 +656,145 @@ from
 
 --<55> employee 테이블에서 직원번호, 직원명, 주민번호, 다가올생일날(년-월-일), 생일까지남은일수 를 검색하면?
 
+select
+ emp_no			"직원번호"
+,emp_name   "직원명"
+,jumin_num  "주민번호"
+,case when
+				to_date(
+	    		to_char(sysdate,'YYYY')||substr(jumin_num,3,4)
+					, 'YYYYMMDD'
+	  		)
+				-
+				sysdate
+				>=0
+			then	--올해 생일을 년-월-일 로 리턴하는 식
+				to_char(
+						to_date(
+								to_char(sysdate,'YYYY')||substr(jumin_num,3,4)
+								, 'YYYYMMDD'
+						)
+						,'YYYY-MM-DD'
+				)||'(올해)'
+			else  --내년 생일을 년-월-일 로 리턴하는 식
+				to_char(
+						to_date(
+								to_number(to_char(sysdate,'YYYY'))+1||substr(jumin_num,3,4)
+								, 'YYYYMMDD'
+						)
+						,'YYYY-MM-DD (dy)'
+				)
+		end    "다가올생일날"
+		,ceil(
+		case when
+				to_date(
+					to_number(to_char(sysdate,'YYYY'))||substr(jumin_num,3,4)
+					, 'YYYYMMDD'
+				)
+				-
+				sysdate
+				>=0
+		then
+				to_date(
+				to_number(to_char(sysdate,'YYYY'))||substr(jumin_num,3,4)
+				, 'YYYYMMDD'
+				)
+				-
+				sysdate
+		else
+				to_date(
+					to_number(to_char(sysdate,'YYYY'))+1||substr(jumin_num,3,4)
+					, 'YYYYMMDD'
+				)
+				-
+				sysdate
+		end
+		)
+		 "생일까지남은일수"
+from
+	employee;
+
+
+----------------------------------
+--	생일까지 남은일수 계산 방법
+----------------------------------
+--		만약 올해생일-지금날짜 값이 양수면 생일이 안지났으므로 올해생일날짜-지금날짜면 된다.
+--		만약 올해생일-지금날짜 값이 음수면 생일이 지났으므로 내년생일날짜-지금날짜면 된다.
+
+
+--<56> employee 테이블에서 직원번호, 직원명, 직급, 연봉(xxx,xxx,xxx만원) 를 검색하면?
+
+select
+ emp_no
+ ,emp_name
+ ,jikup
+ ,to_char(salary, '999,999,999')||'만원'	as "연봉"
+from
+ employee;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
