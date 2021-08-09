@@ -1804,12 +1804,16 @@ $(".xxx").val("") 는 class=xxx 의 value 값에 길이가 없는 "" 을 넣어�
 
         --------------------------------------------------------------
         <form name="memRegForm">
-            아이디 : <input type="text" name="uid"> <br> 
-            암  호 : <input type="password" name="pwd">
+            아이디 : <input type="text" name="uid">     <br> 
+            암  호 : <input type="password" name="pwd"> <br>
+            이  름 : <input type="text" name="uname">
         </form>
         --------------------------------------------------------------
-        위 html 소스의 실행 결과로 웹화면에 [문자열 입력상자]와 [암호 입력상자]가 보일 것이다.  
-        아이디는 abc123 가 입력되고,
+        위 html 소스의 실행 결과로 웹화면에 2개의 [문자열 입력상자]와 1개의 [암호 입력상자]가 보일 것이다.  
+        아이디는 abc123 가 입력되고, 암호는 1234 가 입력되고, 이름은 사오정이 입력되었을 때 
+        자스 코드  $("[name='memRegForm']").serialize() 가 실행되면?
+
+        "uid=abc123&pwd=1234&uname=%EA%B6%8C%EC%9B%85%EC%88%9C" 문자열이 리턴된다.  
 
 
 
