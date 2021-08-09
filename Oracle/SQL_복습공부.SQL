@@ -728,48 +728,121 @@ select
  emp_no
  ,emp_name
  ,jikup
+ ,salary
  ,to_char(salary, '999,999,999')||'만원'	as "연봉"
 from
  employee;
 
+---------------------------------------------------------
+--to_char(salary, '999,999,999') => salary 컬럼안의 숫자를 3자리마다 끊어서 `,` 를 삽입해서 문자로 리턴하기
+--                                  만약 각 9 자리에 대응하는 숫자 없으면 화면에 출략이 안된다.
+---------------------------------------------------------
+--to_char(salary, '099,999,999') => salary 컬럼안의 숫자를 3자리마다 끊어서 `,` 를 삽입해서 문자로 리턴하기
+--																	맨앞에 0이 있으면 그자리가 비면 0이 대체된다. 따라서 나머지도 9이어도 다 0으로 대체가 된다.
+---------------------------------------------------------
 
 
 
+--<57> employee 테이블에서 수요일에 태어난 직원을 검색하라 (새로추가)
+
+select
+	*
+from
+ employee
+where
+ to_char(
+ 					to_date(
+ 					decode(substr(jumin_num,7,1),'1','19','2','19','20')||substr(jumin_num,1,6)
+ 					, 'YYYYMMDD'
+ 					)
+ 					,'DY'
+ 					, 'NLS_DATE_LANGUAGE = Korean'
+ ) = '수';
+
+-----------------------------------------
+select
+	*
+from
+ employee
+where
+ to_char(
+ 					to_date(
+ 					decode(substr(jumin_num,7,1),'1','19','2','19','20')||substr(jumin_num,1,6)
+ 					, 'YYYYMMDD'
+ 					)
+ 					,'DAY'
+ 					, 'NLS_DATE_LANGUAGE = Korean'
+ ) = '수요일';
+
+-----------------------------------------
+select
+	*
+from
+ employee
+where
+ to_char(
+ 					to_date(
+ 					decode(substr(jumin_num,7,1),'1','19','2','19','20')||substr(jumin_num,1,6)
+ 					, 'YYYYMMDD'
+ 					)
+ 					,'D'
+ 					, 'NLS_DATE_LANGUAGE = Korean'
+ ) = '4';
 
 
+--<58> employee 테이블에서 70년대생 남자 직원을 검색하라 (새로추가)
+
+select * from employee
+
+where
+		substr(jumin_num,1,1) = '7'
+		and
+		substr(jumin_num,7,1) = '1'
 
 
+--<59> employee 테이블에서 1960년대, 1970년대 출생자중 남자만 검색하라
 
 
+select * from employee
+
+where
+		(substr(jumin_num,1,1) = '6'
+		or
+		substr(jumin_num,1,1) = '7')
+		and
+		(substr(jumin_num,7,1) = '1'
+		or
+		substr(jumin_num,7,1) = '3')
 
 
+--<60> employee 테이블에서 오래 근무한 직원이 먼저 나오게 검색하면?
+
+select
+	emp_name "직원명"
+	,ceil(sysdate-hire_date) "근무일수"
+from
+	employee
+order by
+	(sysdate-hire_date) desc;
 
 
+-- sysdate-hire_date => 지금날짜 - 입사일. 날짜에서 날짜를 빼면 차이만큼 일수를 리턴한다.
 
 
+--<61> employee 테이블에서 직원번호, 직원명, 근무일수, 근무개월수, 입사후 5개월후 날짜(년-월-일),
+-- 입사한달의마지막날짜(년-월-일), 입사한날짜에서돌아오는일요일날짜(년-월-일) 검색하면?
+-- 단, 근무일수는 소수 2자리에서 반올림 하삼
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+select
+		emp_no                                         "직원번호"
+		,emp_name                                      "직원명"
+		,round(sysdate-hire_date, 1)                   "근무일수"
+		,months_between(sysdate,hire_date)             "근무개월수"
+		,to_char(add_months(hire_date,5), 'YYYY-MM-DD')  "입사후5개월후날짜"
+		,to_char(last_day(hire_date), 'YYYY-MM-DD')  "입사한달의마지막날짜"
+		,to_char(next_day(hire_date,1), 'YYYY-MM-DD') "입사돌아오는일요날짜"
+from
+ 	employee;
 
 
 
