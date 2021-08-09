@@ -917,6 +917,132 @@ select * from employee where jikup = any('과장', '부장');
 
 --<66> employee 테이블에서 10번, 20번 부서 중에 직급이 과장인 직원을 검색하면?
 
+select * from employee
+
+where
+	(dep_no = 10 or dep_no = 20) and jikup = '과장';
+
+------------------------------------
+
+select * from employee
+
+where
+	dep_no in(10, 20) and jikup = '과장';
+
+------------------------------------
+
+select * from employee
+
+where
+	dep_no = any(10, 20) and jikup = '과장';
+
+
+--<67> employee 테이블에서 담당직원이 없는 고객을 검색하면?
+
+select * from customer
+where
+	emp_no is null;
+
+
+--<68> customer 테이블에서 담당직원이 있는 고객을 검색하면?
+
+select * from customer
+where
+	emp_no is not null;
+
+
+--<69> customer 테이블에서 담당직원 번호가 9번이 아닌 고객을 검색하면?
+
+select * from customer
+where
+	(emp_no != 9)
+	or
+	emp_no is null;
+
+--<주의> emp_no is null 조건도 붙이는 이유는 emp_no가 null 일 경우
+--emp_no != 9 조건에 포함되지 않기 때문이다.
+--즉, null 은 is null 또는 is not null 연산자에 의해서만 검색된다.
+
+
+--<70> employee 테이블에서 연봉이 3000만원~4000 만원 사이인 직원을 검색하면?
+
+select * from employee
+where
+	salary between 3000 and 4000
+
+------------------------------------
+
+select * from employee
+where
+	salary >= 3000 and salary <= 4000;
+
+--<주의>
+--between 왼쪽에 컬럼명이 나온다.
+--select * from employee where between salary 3000 and 4000;  (X)
+--틀린것 조심하기.
+
+
+--<71> employee 테이블에서 연봉이 3000만원 이상 ~4000 만원 미만 사이인 직원을 검색하면?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
