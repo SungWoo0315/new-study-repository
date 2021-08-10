@@ -1475,6 +1475,46 @@ cross join
 
 
 
+--<90> 직원번호, 직원명, 소속부서명 검색?
+
+--직원번호와 직원명은 employee 테이블 소속이고, 소속부서명은 dept 테이블 테이블 소속이다.
+--2개 테이블로 부터 연관성 있는 [컬럼]을 복사해서 횡으로 붙이는 작업. 즉, 조인이 필요하다.
+
+
+--조인 조건에 맞는 행만 포함하는 조인 오라클 inner join
+select
+	e.emp_no
+	,e.emp_name
+	,d.dep_name
+from
+ employee e, dept d
+where
+  e.dep_no = d.dep_no
+
+
+----------------------------
+-- ANSI inner 조인
+
+select
+	e.emp_no
+	,e.emp_name
+	,d.dep_name
+from
+	employee e inner join dept d
+on
+	e.dep_no=d.dep_no
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
