@@ -1221,7 +1221,7 @@ select * from employee where
 (substr(jumin_num,1,1) in('6','7') ) and substr(jumin_num,7,1) = '1';
 ---------------------------------------------------------
 select * from employee where
-(jumin_num like '6______1%') or (jumin_num like '7______1%');
+(jumin_num like '6_____1%') or (jumin_num like '7_____1%');
 
 
 
@@ -1234,6 +1234,10 @@ select * from employee where
 	abs(n)
 	-------------
 		▶ 숫자 n의 절대값을 반환
+		select
+		 abs(-100)
+		from
+		 dual;
 	-------------
 	floor(n)
 	-------------
@@ -1241,32 +1245,83 @@ select * from employee where
 			제일 가까운 정수를 반환.
 		▶ 좌표계에서 쿵 찍어서 왼쪽 정수값
 			소수를 버려서 작아짐.
+
+		select
+		 floor(11.111)
+		from
+		 dual;
+
+		select
+		 floor(-11.111)
+		from
+		 dual;
+
 	-------------
 	ceil(n)
 	-------------
 		▶ 숫자 n이 정수면 그대로 반환하고, 실수면 실수보다 크면서
 			제일 가까운 정수를 반환.
 		▶ 좌표계에서 쿵 찍어서 오른쪽 정수값
+
+		select
+		 ceil(11.111)
+		from
+		 dual;
+
+ 		select
+		 ceil(-11.111)
+		from
+		 dual;
+
 	-------------
 	round(n,m)
 	-------------
 		▶ 숫자 n에서 소수 m+1 자리에서 반올림한 수 리턴
+		select
+		 round(11.151, 1)
+		from
+		 dual;
 	-------------
 	trunc(n,m)
 	-------------
 		▶ 숫자 n에서 소수 m+1 자리부터 버림
+		select
+		 trunc(11.151, 1)
+		from
+		 dual;
+
 	-------------
 	sign(n)
 	-------------
 		▶ n>0 이면 1, n<0 이면 -1, n=0 이면 0을 반환
+	select
+		 sign(11)
+	from
+		 dual;
+
+
+	select
+		 sign(-11)
+	from
+		 dual;
+
 	-------------
 	mod(n,m)
 	-------------
 		▶ n/m 후 나머지 값을 반환
+		select
+			mod(5,2)  "5/2"
+			,mod(7,1) "7/1"
+			,mod(10,7) "10/7"
+		from dual;
 	-------------
 	power(n,m)
 	-------------
 		▶ n의 m승을 반환
+		select
+		 power(2,2) "2의 2승"
+		from
+		 dual;
 
 
 -----------------------------------
@@ -1276,21 +1331,41 @@ select * from employee where
 	chr(n)
 	-------------
 		▶ 정수 n을 ascii(아스키) 문자기호로 리턴한다
-
+		select
+		 chr(70)
+		from
+		 dual;
 	-------------
-	uppper(s)
+	upper(s)
 	-------------
 		▶ 문자열 s를 대문자로 변환시켜 리턴한다
+		select
+		 upper('day')
+		from
+		 dual;
+
 
 	-------------
 	lower(s)
 	-------------
 		▶ 문자열 s를 소문자로 변환시켜 리턴한다
+		select
+		 lower('DAY')
+		from
+		 dual;
+
+
 
 	-------------
 	length(s)
 	-------------
 		▶ 문자열 s의 길이를 리턴한다
+		select
+		 length('DAY')
+		from
+		 dual;
+
+
 
 	-------------
 	substr(s, n1, n2)
