@@ -1506,6 +1506,163 @@ on
 
 
 
+--<91> 고객명, 고객전화번호, 담당직원명, 담당직원직급을 출력하면? <조건>담당직원이 있는 고객만 출력<inner join>
+
+--<주의>담당직원이 있는 고객만 나와야하므로 즉, 조건에 맞는 행만 나와야하므로 inner 조인이다.
+
+--inner join
+select
+	c.cus_name
+	,c.tel_num
+	,e.emp_name
+	,e.jikup
+from
+ customer c, employee e
+where
+ c.emp_no = e.emp_no
+
+--ANSI join
+select
+	c.cus_name
+	,c.tel_num
+	,e.emp_name
+	,e.jikup
+from
+ customer c inner join employee e
+on
+	c.emp_no = e.emp_no
+
+
+--<92> 고객명, 고객전화번호, 담당직원명, 담당직원직급을 출력하면?
+--<조건>10번부서의 담당직원이 있는 고객만 출력<inner join>
+
+--inner join
+select
+	c.cus_name
+	,c.tel_num
+	,e.emp_name
+	,e.jikup
+from
+ customer c, employee e
+where
+ c.emp_no = e.emp_no
+ and
+ e.dep_no = '10'
+-- <주의>오라클 조인에서 where 절에 조인 조건과 행을 골라내는 조건이 같이 나올수 있다. and 로 연결하면된다.
+
+
+
+--ANSI join
+select
+	c.cus_name
+	,c.tel_num
+	,e.emp_name
+	,e.jikup
+from
+ customer c inner join employee e
+on
+	c.emp_no = e.emp_no
+where
+ e.dep_no = 10
+
+-- <주의>ANSI 조인에서 on 절에 조인조건을 쓰고, where 절에 행을 골라내는 조건을 쓴다.
+
+
+
+--<93> 고객명, 고객전화번호, 담당직원명, 담당직원직급을 출력하면?
+--<조건>연봉이 3000만원 이상인 담당직원이 있는 고객만 포함.
+
+--inner join
+select
+	c.cus_name
+	,c.tel_num
+	,e.emp_name
+	,e.jikup
+	,e.salary "직원연봉"
+from
+ customer c, employee e
+where
+ c.emp_no = e.emp_no
+ and
+ e.salary >= 3000
+
+--ANSI join
+select
+	c.cus_name
+	,c.tel_num
+	,e.emp_name
+	,e.jikup
+	,e.salary "직원연봉"
+from
+ customer c inner join employee e
+on
+	c.emp_no = e.emp_no
+where
+	e.salary >= 3000
+
+
+--<94> [직원명], [직원직급], [직원부서명], [담당고객명], [고객전화]를 출력하면?
+--<조건>직원 이름 오름차순 정렬
+
+select
+	e.emp_name
+	,e.jikup
+	,d.dep_name
+	,c.cus_name
+	,c.tel_num
+from
+	employee e, customer c, dept d
+where
+	e.emp_no = c.emp_no and e.dep_no = d.dep_no
+order by
+	e.emp_name asc;
+
+
+-- ANSI join
+select
+	e.emp_name
+	,e.jikup
+	,d.dep_name
+	,c.cus_name
+	,c.tel_num
+from
+	(employee e inner join customer c on e.emp_no = c.emp_no)
+	inner join dept d on e.dep_no = d.dep_no
+order by
+	e.emp_name asc;
+
+
+--<95> 직원명, 직원직급, 소속부서명, 연봉등급 을 출력하면?
+--연봉등급 오름차순, 직급높은순서 오름차순, 나이높은 순서 내림 유지 요망
+
+select
+	e.emp_name
+	,e.jikup
+	,d.dep_name
+	,s.sal_grade_no
+from
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
