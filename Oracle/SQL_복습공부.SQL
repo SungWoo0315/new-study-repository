@@ -1643,21 +1643,50 @@ select
 from
 	employee e, dept d, salary_grade s
 where
-	e.dep_no = d.dep_no and (e.salary >= s.min_salary and e.salary <= s.max_salary)
-
-	e.dep_no = d.dep_no and (e.salary between s.min_salary and s.max_salary)
-
-
-
-
-
+--	e.dep_no = d.dep_no and (e.salary >= s.min_salary and e.salary <= s.max_salary)
+		e.dep_no = d.dep_no and (e.salary between s.min_salary and s.max_salary)
+order by
+	s.sal_grade_no asc
+	,decode(e.jikup, '사장',1 ,'부장',2, '과장',3, '대리',4,'주임',5,6) asc
+	,decode(substr(jumin_num,7,1),'1','19','2','19','20')||substr(jumin_num,1,6) asc
 
 
+-------------------------------------------------
+--ANSI 조인
+-------------------------------------------------
+	select
+	e.emp_name	"직원명"
+	,e.jikup	"직원직급"
+	,d.dep_name	"소속부서명"
+	,s.sal_grade_no "연봉등급"
+	from
+		 (employee e inner join dept d on e.dep_no=d.dep_no)
+		 inner join salary_grade s on (e.salary>=s.min_salary and e.salary<=s.max_salary)
+	order by
+		s.sal_grade_no asc
+		,decode(e.jikup, '사장',1 ,'부장',2, '과장',3, '대리',4,'주임',5,6) asc
+		,	case
+			when substr(e.jumin_num,7,1) in('1','2') then '19'
+			else '20'
+		end || substr(jumin_num,1,6)
+		asc;
 
 
+--<96> 부하직원명, 부하직원직급, 직속상관명, 직속상관직급을 출력하면?
+--<조건>상관이 있는 직원만 포함
+
+select
+	e1.emp_name	"직원명"
+	,e1.jikup	"직원직급"
+	,e2.emp_name	"직속상관명"
+	,e2.jikup "직속상관직급"
+from
+	employee e1, employee e2
+where
+	e1.mgr_emp_no = e2.emp_no;
 
 
-
+--<97> 직속상관명, 직속상관직급, 부하직원명, 부하직원직급을 출력하면? <조건>상관이 있는 직원만 포함
 
 
 
