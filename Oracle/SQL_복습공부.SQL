@@ -1641,8 +1641,11 @@ select
 	,d.dep_name
 	,s.sal_grade_no
 from
+	employee e, dept d, salary_grade s
+where
+	e.dep_no = d.dep_no and (e.salary >= s.min_salary and e.salary <= s.max_salary)
 
-
+	e.dep_no = d.dep_no and (e.salary between s.min_salary and s.max_salary)
 
 
 
