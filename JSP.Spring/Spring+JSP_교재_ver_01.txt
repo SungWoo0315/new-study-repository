@@ -455,6 +455,63 @@
                 setAttribute 메소드는 호출 코딩
                     request.setAttribute( "avgSalary", avgSalary );
 
+            ----------------------------------------------------------------
+            <예> 1행 n열 검색 select 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                select 구문 
+                    select emp_no, emp_name, salary from employee where emp_no = 3;
+                select 구문의 실행 결과가 저장되는 변수 
+                    HashMap empMap = ~;
+                setAttribute 메소드는 호출 코딩
+                    request.setAttribute( "empMap", empMap );
+
+            ----------------------------------------------------------------
+            <예> n행 1열 검색 select 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                select 구문 
+                    select emp_name from employee where jikup = '과장';
+                select 구문의 실행 결과가 저장되는 변수 
+                    ArrayList empNames = ~;
+                    ArrayList empNameList = ~;
+                setAttribute 메소드는 호출 코딩
+                    request.setAttribute( "empNames", empNames );
+                    request.setAttribute( "empNameList", empNameList );
+
+            ----------------------------------------------------------------
+            <예> n행 m열 검색 select 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                select 구문 
+                    ----------------------------------------------------
+                    보여줄 컬럼명
+                        직원번호, 직원명, 소속부서명
+                    조건
+                        연봉이 3000 이상인직원
+                    ----------------------------------------------------
+                    select 
+                        e.emp_no, e.emp_name, d.dep_name 
+                    from 
+                        employee e, dept d 
+                    where 
+                        e.det_no = d.dep_no and e.salary >= 3000;
+                    ----------------------------------------------------
+                    > ANSI join
+                    select e.emp_no, e.emp_name, d.dep_name, e.salary 
+                    from employee e inner join dept d 
+                    on e.dep_no = d.dep_no 
+                    where e.salary >= 3000;
+                    ----------------------------------------------------
+                select 구문의 실행 결과가 저장되는 변수 
+                    List<Map<String,String>> empList = ~;
+                setAttribute 메소드는 호출 코딩
+                    request.setAttribute( "empList", empList );
+
+
+
+
+
+
+
+
 
 
 
