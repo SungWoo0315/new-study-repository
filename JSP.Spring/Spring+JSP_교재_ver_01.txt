@@ -356,6 +356,9 @@
                         결국, 배열변수 skills[0] 에 저장된 데이터는 "JSP" 이다.  
                         결국, 배열변수 skills[1] 에 저장된 데이터는 "ASP" 이다.  
 
+                    > 변수이름 아래처럼 주는것이 구분하기 쉽다.  
+                    String[] skillArr = request.getParameterValues( "skill" );
+                    String[] skill_arr = request.getParameterValues( "skill" );
 
                         
 
