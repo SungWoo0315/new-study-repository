@@ -506,13 +506,102 @@
                     request.setAttribute( "empList", empList );
 
 
+                &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+                `<<>>` 설명을 위한 자바내용.  `제네릭스`
+
+                ```java
+                ArrayList list = new ArrayList();
+                list.add("이름1");
+                list.add("이름2");
+                list.add("이름3");
+                list.add( new Integer(kor) );
+
+                String name1 = (String)list.get(0);
+                String name2 = (String)list.get(1);
+                String name3 = (String)list.get(2);
+                Integer kor  = (Integer)list.get(3);
+                ```
+                > `get()` 메서드 리턴값 => `Object`  
+
+                > 다량의 내용을 저장하기 때문에,   
+                > 꺼낼 때는 뭘 꺼내는지 모르기 때문에,   
+                > 합당하게 형 변환을 시켜주어야 한다.   
+
+                > 꺼낼때는 형변환을 해주어야 한다.   
+
+                > 위와같이 하면 형변환이 힘들다. 자료가 많아지면 다 기억못하므로.    
+
+                ```Java
+                ArrayList list = new ArrayList();
+                list.add("이름1");
+                list.add("이름2");
+                list.add("이름3");
+
+                String name1 = (String)list.get(0);
+                String name2 = (String)list.get(1);
+                String name3 = (String)list.get(2);
+                //------------------------------------
+                ArrayList<String> list = new ArrayList<String>();
+                list.add("이름1");
+                list.add("이름2");
+                list.add("이름3");
+
+                String name1 = list.get(0);
+                String name2 = list.get(1);
+                String name3 = list.get(2);
+                //------------------------------------
+                //------------------------------------
+                //------------------------------------
+                HashMap map = new HashMap();
+                map.put( "이름", "홍길동" );
+                map.put( "주소", "가산동" );
+                map.put( "키", new Integer(182) );
+
+                String name = (String)map.get("이름");
+                String addr = (String)map.get("주소");
+                Integer tall = (integer)map.get("키");
+                //------------------------------------
+                HashMap<String,String> map = new HashMap<String,String>();
+                map.put( "이름", "홍길동" );
+                map.put( "주소", "가산동" );
+
+                String name = map.get("이름");
+                String addr = map.get("주소");
+
+                ```
+                > `제네릭스`를 쓰면 꺼낼 때 형변환을 해주지 않아도 된다.      
+                > `제네릭스`를 써서 객체생성을 하면 꺼낼때 형변환 필요 없다.      
+                > 특정 유형만 저장하도록 `제네릭스` `<   >` 로 지정.  
+
+                > 위에서는 String 만 저장하도록 했음.    
+
+                > 개발자가 직접 자료형을 설정.    
+                &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+                ----------------------------------------------------------
+                ----------------------------------------------------------
+                ----------------------------------------------------------
+                Map<String,String> map1 = new HashMap<String,String>();
+                map1.put( "이름", "홍길동" );
+                map1.put( "주소", "가산동" );
+
+                Map<String,String> map2 = new HashMap<String,String>();
+                map2.put( "이름", "최현준" );
+                map2.put( "주소", "가산동" );
+
+                Map<String,String> map3 = new HashMap<String,String>();
+                map3.put( "이름", "한승태" );
+                map3.put( "주소", "김포동" );
+
+                List<Map<String,String>> list = new ArrayList<Map<String,String>>;
+                list.add( map1 );
+                list.add( map2 );
+                list.add( map3 );
 
 
-
-
-
-
-
+        -------------------------------------
+        Object getAttribute( "키값문자열" )   ★★★★ (입)
+        -------------------------------------
+            setAttribute( "키값문자열", 저장객체 )로 저장된 [저장객체]를 Object 타입으로 리턴한다.                  
 
 
 
