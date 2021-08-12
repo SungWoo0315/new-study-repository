@@ -359,8 +359,24 @@
                     > 변수이름 아래처럼 주는것이 구분하기 쉽다.  
                     String[] skillArr = request.getParameterValues( "skill" );
                     String[] skill_arr = request.getParameterValues( "skill" );
+                    -----------------------------------------------------------
 
                         
+        -------------------------------------
+        void setAttribute( "키값문자열", 저장객체 )   ★★★★★ (입)
+        -------------------------------------
+            [키값문자열]에 [저장객체]를 연결하여 저장한다. HashMap 객체와 동일한 역할을 한다.  
+            매개변수로 전달되는 저장객체는 주로 DB 연동 결과물이다.  
+
+            DB 연동이 insert, update, delete 일 경우 [저장객체]는 [정수]이다.  
+            DB 연동이 select 일 경우 DB 연동 결과물은 검색 결과에 따라 아래 처럼 다르다.  
+                1행 1열 검색된 경우 => DB 연동 결과물은 [정수 또는 실수 또는 String] 이다.    
+                1행 n열 검색된 경우 => DB 연동 결과물은 [HashMap 객체] 이다.    
+                n행 1열 검색된 경우 => DB 연동 결과물은 [ArrayList, LinkedList, 배열 객체] 이다.    
+
+
+
+
 
 
 
