@@ -370,13 +370,90 @@
 
             DB 연동이 insert, update, delete 일 경우 [저장객체]는 [정수]이다.  
             DB 연동이 select 일 경우 DB 연동 결과물은 검색 결과에 따라 아래 처럼 다르다.  
+                ------------------------------------------------------------------------
                 1행 1열 검색된 경우 => DB 연동 결과물은 [정수 또는 실수 또는 String] 이다.    
                 1행 n열 검색된 경우 => DB 연동 결과물은 [HashMap 객체] 이다.    
                 n행 1열 검색된 경우 => DB 연동 결과물은 [ArrayList, LinkedList, 배열 객체] 이다.    
+                n행 m열 검색된 경우 => DB 연동 결과물은 List<Map<String,String>> 이다.    
+                ------------------------------------------------------------------------
+            
+            =================================================================================
+            SQL 구문의 종류             SQL 구문 실행결과(=DB 연동 결과물)를 저장하는 자바 객체 자료형
+            =================================================================================
+            insert,update,delete       int
+            ---------------------------------------------------------------------------------
+            1행 1열 검색 select         int 또는 double 또는 String
+            ---------------------------------------------------------------------------------
+            1행 n열 검색 select         HashMap 객체   
+            ---------------------------------------------------------------------------------
+            n행 1열 검색 select         ArrayList 또는 LinkedList 또는 배열 객체
+            ---------------------------------------------------------------------------------
+            n행 m열 검색 select         List<Map<String,String>> 객체
+            ---------------------------------------------------------------------------------
 
 
+        /*  참고, new Integer(deptInsertCnt) 설명.  
+            ----------------------------------------------------------------
+            <예> insert 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                insert into dept values(50,'기획부','서울');
+                위 insert 구문에 의해 입력된 행의 개수는 1개이다.
+                결국 insert 구문을 실행한 결과물은 int 형이다.
+                자바변수 deptInsertCnt 에  insert 구문을 실행한 결과물을 저장한 경우
+                setAttribute 메소드는 다음 처럼 코딩한다
+                ----------------------------------------------------------------
+                int deptInsertCnt = 위 insert 구문에 의해 입력된 행의 개수;
+                request.setAttribute( "deptInsertCnt", deptInsertCnt );
+                request.setAttribute( "deptInsertCnt", new Integer(deptInsertCnt) );
+        */
 
 
+            ----------------------------------------------------------------
+            <예> insert 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                insert 구문
+                    insert into dept values(50,'기획부','서울');
+                insert 구문의 실행 결과가 저장되는 변수 
+                    int deptInsertCnt = ~;
+                setAttribute 메소드는 호출 코딩
+                    request.setAttribute( "deptInsertCnt", deptInsertCnt );
+
+            ----------------------------------------------------------------
+            <예> update 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                update 구문
+                    update dept set loc='부산' where dep_no=50; 
+                update 구문의 실행 결과가 저장되는 변수 
+                   int deptUpCnt = ~;
+                setAttribute 메소드는 호출 코딩
+                    request.setAttribute( "deptUpCnt", deptUpCnt );
+            ----------------------------------------------------------------
+            <예> 1행 1열 검색 select 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                select 구문  
+                    select count(*) from employee where salary >= 4000
+                select 구문의 실행 결과가 저장되는 변수 
+                   int empCnt = ~;
+                setAttribute 메소드는 호출 코딩
+                    request.setAttribute( "empCnt", empCnt );
+            ----------------------------------------------------------------
+            <예> 1행 1열 검색 select 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                select 구문  
+                    select dep_name from dept where dep_no = 40
+                select 구문의 실행 결과가 저장되는 변수 
+                   String depName = ~;
+                setAttribute 메소드는 호출 코딩
+                    request.setAttribute( "depName", depName );
+            ----------------------------------------------------------------
+            <예> 1행 1열 검색 select 구문의 실행 결과를 setAttribute 메소드로 저장하기
+            ----------------------------------------------------------------
+                select 구문  
+                    select avg(salary) from employee
+                select 구문의 실행 결과가 저장되는 변수 
+                   double avgSalary = ~;
+                setAttribute 메소드는 호출 코딩
+                    request.setAttribute( "avgSalary", avgSalary );
 
 
 
