@@ -1780,21 +1780,42 @@ where
 --<100> 고객번호, 고객명, 고객전화번호, 담당직원명, 담당직원직급을 출력하면?
 --<조건> 고객정보는 모두 보이고 직원정보는 10번 부서만 보일것.
 select
-	c.CUS_NO
-	,c.CUS_NAME
-	,c.TEL_NUM
-	,e.EMP_NAME
-	,e.JIKUP
-	,e.DEP_NO
+	c.CUS_NO			"고객번호"
+	,c.CUS_NAME		"고객명"
+	,c.TEL_NUM		"고객전화번호"
+	,e.EMP_NAME		"담당직원명"
+	,e.JIKUP			"담당직원직급"
+	,e.DEP_NO			"부서번호(확인용)"
 from
   customer c, EMPLOYEE e
 where
   c.EMP_NO = e.EMP_NO(+) and e.DEP_NO(+) = 10
 order by c.CUS_NO asc
 
+---------------------------------------------------------
+--<주의> outer join 에서 where 에 (+)가 붙는 놈은?
+---------------------------------------------------------
+--	where 절에 다나오는 메인 테이블 소속이 아닌 모든 컬럼에 붙는다.
+--	심지어 행을 골라내는 조건의 컬럼도 여기에 속한다.
+---------------------------------------------------------
+--<참고>만약 e.dep_no(+)=10 을 e.dep_no=10 로 수정하면?
+---------------------------------------------------------
+--	▶담당직원이 10번 부서인 고객만 포함된다.
+--	마치 inner join 결과 처럼 보인다.
 
-
-
+--ANSI 조인
+select
+	c.CUS_NO			"고객번호"
+	,c.CUS_NAME		"고객명"
+	,c.TEL_NUM		"고객전화번호"
+	,e.EMP_NAME		"담당직원명"
+	,e.JIKUP			"담당직원직급"
+	,e.DEP_NO			"부서번호(확인용)"
+from
+  customer c left outer join EMPLOYEE e
+on
+  c.EMP_NO = e.EMP_NO and e.DEP_NO = 10
+order by c.CUS_NO asc
 
 
 
