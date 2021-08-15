@@ -1855,12 +1855,12 @@ order by c.CUS_NO asc
 --<101> 고객번호, 고객명, 고객전화번호, 담당직원명, 담당직원직급, 담당직원연봉등급을 출력하면?
 --<조건> 담당직원이 없는 고객도 포함.
 select
-  c.CUS_NO
-  ,c.CUS_NAME
-  ,c.TEL_NUM
-  ,e.EMP_NAME
-  ,e.JIKUP
-  ,s.sal_grade_no
+  c.CUS_NO			"고객번호"
+  ,c.CUS_NAME		"고객명"
+  ,c.TEL_NUM		"고객전화번호"
+  ,e.EMP_NAME		"담당직원명"
+  ,e.JIKUP			"담당직원직급"
+  ,s.sal_grade_no	"담당직원연봉등급"
 from
   customer c, employee e, salary_grade s
 where
@@ -1877,15 +1877,107 @@ order by
 --<주의>아래 처럼은 안된다. 즉, (+)를 양쪽에 붙일수는 없다.
 --s.min_salary(+) <= e.salary(+) and s.max_salary(+) >= e.salary(+)
 
+-- ANSI
+select
+  c.CUS_NO			"고객번호"
+  ,c.CUS_NAME		"고객명"
+  ,c.TEL_NUM		"고객전화번호"
+  ,e.EMP_NAME		"담당직원명"
+  ,e.JIKUP			"담당직원직급"
+  ,s.sal_grade_no	"담당직원연봉등급"
+from
+  customer c
+
+  left outer join employee e
+on
+  c.emp_no = e.emp_no
+
+  left outer join salary_grade s
+on
+  (e.salary between s.min_salary and s.max_salary)
+order by
+	c.cus_no asc
+
+-- ANSI 방식 숙지하기.
 
 
+--<102> 고객번호, 고객명, 고객주민번호 출력하라.
+--단, 연봉이 3000 이상인 담당직원이 담당한 고객이어야 한다.
+
+select
+  c.cus_no
+  ,c.cus_name
+	,c.jumin_num
+	,e.salary
+from
+  customer c, employee e
+where
+	c.emp_no = e.emp_no
+	and
+	e.salary >= 3000
 
 
+--<103> 고객번호, 고객명, 고객주민번호 출력하라.
+--단 40살 이상인 담당직원이 담당한 고객이어야한다.
 
+select
+	c.cus_no	"고객번호"
+	,c.cus_name "고객명"
+	,c.jumin_num	"고객주민번호"
+from
+  customer c, employee e
+where
+  c.emp_no = e.emp_no
+  and
+  (to_number(to_char(sysdate, 'YYYY'))
+  -
+  to_number(decode(substr(e.jumin_num,7,1),'1','19','2','19','20')||substr(e.jumin_num,1,2)))+1 >= 40
+order by
+ c.cus_no asc
 
+--
 
+select
+	c.cus_no	"고객번호"
+	,c.cus_name "고객명"
+	,c.jumin_num	"고객주민번호"
 
+from
+	customer c, employee e
+where
+	to_number(to_char(sysdate, 'YYYY'))
+	- to_number(
+		case substr(e.jumin_num,7,1) when '1' then '19' when '2' then '19' else '20' end
+		||substr(e.jumin_num,1,2)+1) >= 40 and e.emp_no=c.emp_no
+order by
+ c.cus_no asc
 
+--
 
+select
+	c.cus_no	"고객번호"
+	,c.cus_name "고객명"
+	,c.jumin_num	"고객주민번호"
 
+from
+	customer c, employee e
+where
+	c.emp_no = e.emp_no
+	and
+		(
+			extract(year from sysdate)
+			-
+			extract(
+					year from
+					to_date(
+						decode(substr(e.jumin_num,7,1), '1', '19', '2', '19', '20')
+							||substr(e.jumin_num,1,6)
+						,'YYYYMMDD'
+					)
+			)+1
+		)>=40
+order by
+ c.cus_no asc
+
+-- 위 셋다 정답.  각각의 방식 참고.
 
