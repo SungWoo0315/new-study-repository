@@ -1865,11 +1865,17 @@ from
   customer c, employee e, salary_grade s
 where
   c.emp_no = e.emp_no(+)
-  and (e.salary between min_salary(+) and max_salary(+))
+  and (e.salary between s.min_salary(+) and s.max_salary(+))
 order by
 	c.cus_no asc
 
-
+---------------------------------------------------------
+--<주의> employee 입장에서는 메인 테이블은 customer 이고,
+--salary_grade 테이블 입장에서는 메인테이블은 employee 이다.
+--메인에 ->>>>> 딸려나오는 테이블의 컬럼에 (+)를 붙이면 된다.
+---------------------------------------------------------
+--<주의>아래 처럼은 안된다. 즉, (+)를 양쪽에 붙일수는 없다.
+--s.min_salary(+) <= e.salary(+) and s.max_salary(+) >= e.salary(+)
 
 
 
