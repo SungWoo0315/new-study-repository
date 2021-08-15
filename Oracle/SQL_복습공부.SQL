@@ -1817,6 +1817,64 @@ on
   c.EMP_NO = e.EMP_NO and e.DEP_NO = 10
 order by c.CUS_NO asc
 
+-- ANSI outer join test
+
+select
+	c.CUS_NO			"고객번호"
+	,c.CUS_NAME		"고객명"
+	,c.TEL_NUM		"고객전화번호"
+	,e.EMP_NAME		"담당직원명"
+	,e.JIKUP			"담당직원직급"
+	,e.DEP_NO			"부서번호(확인용)"
+from
+ EMPLOYEE e right outer join  customer c
+on
+  c.EMP_NO = e.EMP_NO and e.DEP_NO = 10
+order by c.CUS_NO asc
+
+--ANSI 조인에서
+--customer 테이블이 다 나오면 되므로 , left, right customer 테이블이 해당 되도록 지정해주면
+--고객 정보는 모두 보인다.
+
+---------------------------------------------------------
+--<주의> ANSI조인에서 left outer join 나오면 left outer join 왼쪽에 있는 테이블이 다나오는 테이블이다.
+---------------------------------------------------------
+--<주의> ANSI조인에서 right outer join 나오면 right outer join 오른쪽에 있는 테이블이 다나오는 테이블이다.
+---------------------------------------------------------
+
+
+--<기억하기>만약 e.dep_no(+)=10 를 따로 빼내서 where e.dep_no =10 로 추가하면?
+---------------------------------------------------------
+--	▶where 절이 있으면 행을 골라내므로 고객이 2명만 나온다.
+--	▶ANSI 방식의 outer join에서는 행을 골라내는 조건도 on 절에 들어가야한다.
+--	만약에 where 절을 쓰면 메인테이블이 다 나오지 않을수 있다.
+
+
+
+
+--<101> 고객번호, 고객명, 고객전화번호, 담당직원명, 담당직원직급, 담당직원연봉등급을 출력하면?
+--<조건> 담당직원이 없는 고객도 포함.
+select
+  c.CUS_NO
+  ,c.CUS_NAME
+  ,c.TEL_NUM
+  ,e.EMP_NAME
+  ,e.JIKUP
+  ,s.sal_grade_no
+from
+  customer c, employee e, salary_grade s
+where
+  c.emp_no = e.emp_no(+)
+  and (e.salary between min_salary(+) and max_salary(+))
+order by
+	c.cus_no asc
+
+
+
+
+
+
+
 
 
 
