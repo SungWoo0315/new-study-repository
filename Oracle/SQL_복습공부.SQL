@@ -2029,7 +2029,7 @@ where
   and
   (e1.salary between s1.min_salary(+) and s1.max_salary(+))
   and
-  e1.mgr_emp_no = e2.emp_no(+)
+  e1.mgr_emp_no = e2.emp_no(+)  -- 이부분 잘 숙지하기.  헷갈리는 부분
   and
   (e2.salary between s2.min_salary(+) and s2.max_salary(+))
 order by
