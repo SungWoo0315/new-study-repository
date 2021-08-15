@@ -1981,3 +1981,113 @@ order by
 
 -- 위 셋다 정답.  각각의 방식 참고.
 
+--------------------------------------------------------
+--<주의>코딩 상 분명히 조인이지만 출력되는 컬럼은 한개의 테이블에서 나오는 컬럼이다.
+--위 코딩은 조인이 출력 목적이 아닌, 조건목적으로 사용된것이다.
+--------------------------------------------------------
+--<추가문제>10부서 또는 30번 부서 직원이 담당하는 고객을 검색하면?
+--------------------------------------------------------
+select
+	c.cus_no	"고객번호"
+	,c.cus_name "고객명"
+	,c.jumin_num	"고객주민번호"
+	,e.dep_no  "부서번호 확인"
+from
+  customer c, employee e
+where
+  c.emp_no = e.emp_no
+  and
+  (e.dep_no = 10 or e.dep_no = 30)
+order by
+ c.cus_no asc
+
+
+
+--<104> 고객번호, 고객명, 담당직원번호, 담당직원명,
+--담당직원소속부서명, 담당직원연봉등급, 담당직원직속상관명,
+--담당직원직속상관직급, 직속상관연봉등급 출력하라.
+--단, 고객은 다 나와야하고 null은 없음 으로 표시.
+
+--조인(join)의 대표적인 문제임. 이것만 정확히 안다면 조인은 다 안다고 볼 수 있다.
+
+select
+  c.cus_no
+  ,c.cus_name
+  ,e1.emp_no
+  ,e1.emp_name
+  ,d.dep_name
+  ,s1.sal_grade_no
+  ,e2.emp_name
+  ,e2.jikup
+  ,s2.sal_grade_no
+from
+  customer c, employee e1, employee e2, dept d, salary_grade s1, salary_grade s2
+where
+  c.emp_no = e1.emp_no(+)
+  and
+  e1.dep_no = d.dep_no(+)
+  and
+  (e1.salary between s1.min_salary(+) and s1.max_salary(+))
+  and
+  e1.mgr_emp_no = e2.emp_no(+)
+  and
+  (e2.salary between s2.min_salary(+) and s2.max_salary(+))
+order by
+c.cus_no asc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
