@@ -1686,23 +1686,68 @@ where
 	e1.mgr_emp_no = e2.emp_no;
 
 
---<97> 직속상관명, 직속상관직급, 부하직원명, 부하직원직급을 출력하면? <조건>상관이 있는 직원만 포함
+--<97> 직속상관명, 직속상관직급, 부하직원명, 부하직원직급을 출력하면?
+--<조건>상관이 있는 직원만 포함
+
+select
+ e2.emp_name "직속상관명"
+ ,e2.jikup   "직속상관직급"
+ ,e1.emp_name "부하직원명"
+ ,e1.jikup
+ from
+  employee e2, employee e1
+ where
+  e2.emp_no = e1.mgr_emp_no
 
 
+---------------------------------------------------
+--ANSI 조인
+---------------------------------------------------
+select
+	e1.emp_name	"직속상관명"
+	,e1.jikup	"직속상관직급"
+	,e2.emp_name	"직원명"
+	,e2.jikup "직원직급"
+from
+	employee e1 inner join employee e2
+	on
+	 e1.emp_no = e2.mgr_emp_no;
 
 
+--<98> 직원명, 직원직급, 소속부서명, 연봉등급, 직속상관명, 직속상관직급, 담당고객명 을 출력하면?
 
+select
+  e1.emp_name  "직원명"
+  ,e1.jikup			"직원직급"
+  ,d.dep_name		"소속부서명"
+  ,s.sal_grade_no  "연봉등급"
+  ,e2.emp_name    "직속상관명"
+  ,e2.jikup       "직속상관직급"
+  ,c.cus_name			"담당고객명"
+from
+  employee e1, employee e2, dept d, salary_grade s, customer c
+where
+  e1.mgr_emp_no = e2.emp_no
+  and e1.dep_no = d.dep_no
+  and (e1.salary>=s.min_salary and e1.salary<=s.max_salary)
+  and e1.emp_no = c.emp_no
 
-
-
-
-
-
-
-
-
-
-
+-------------------------------------------------
+--ANSI 조인
+-------------------------------------------------
+select
+	e1.emp_name	"직원명"
+	,e1.jikup	"직원직급"
+	,d.dep_name	"소속부서명"
+	,s.sal_grade_no "연본등급"
+	,e2.emp_name "직속상관명"
+	,e2.jikup "직속상관직급"
+	,c.cus_name "담당고객명"
+from
+	(((employee e1 inner join dept d on e1.dep_no = d.dep_no)
+	inner join salary_grade s on e1.salary between s.min_salary and s.max_salary)
+	inner join employee e2 on e2.emp_no = e1.mgr_emp_no)
+	inner join customer c on e1.emp_no = c.emp_no;
 
 
 
