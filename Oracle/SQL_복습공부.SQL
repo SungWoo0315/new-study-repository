@@ -2011,15 +2011,15 @@ order by
 --조인(join)의 대표적인 문제임. 이것만 정확히 안다면 조인은 다 안다고 볼 수 있다.
 
 select
-  c.cus_no
-  ,c.cus_name
-  ,e1.emp_no
-  ,e1.emp_name
-  ,d.dep_name
-  ,s1.sal_grade_no
-  ,e2.emp_name
-  ,e2.jikup
-  ,s2.sal_grade_no
+  c.cus_no						"고개번호"
+  ,c.cus_name					"고개명"
+  ,e1.emp_no					"담당직원번호"
+  ,e1.emp_name				"담당직원명"
+  ,d.dep_name					"담당지원소속부서명"
+  ,s1.sal_grade_no		"담당직원연봉등급"
+  ,e2.emp_name				"담당지원직속상관명"
+  ,e2.jikup						"담당직원직속상관직급"
+  ,s2.sal_grade_no		"직속상관연봉등급"
 from
   customer c, employee e1, employee e2, dept d, salary_grade s1, salary_grade s2
 where
@@ -2034,14 +2034,6 @@ where
   (e2.salary between s2.min_salary(+) and s2.max_salary(+))
 order by
 c.cus_no asc;
-
-
-
-
-
-
-
-
 
 
 
