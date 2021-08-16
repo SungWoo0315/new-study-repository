@@ -2013,7 +2013,7 @@ order by
 select
   c.cus_no						"고개번호"
   ,c.cus_name					"고개명"
-  ,e1.emp_no					"담당직원번호"
+  ,nvl(e1.emp_no||'', '없음')					"담당직원번호"
   ,e1.emp_name				"담당직원명"
   ,d.dep_name					"담당지원소속부서명"
   ,s1.sal_grade_no		"담당직원연봉등급"
