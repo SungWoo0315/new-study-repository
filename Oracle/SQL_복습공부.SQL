@@ -2081,6 +2081,19 @@ from
 --<106> 직원명, 직원전화번호와 고객명, 고객전화번호를 종으로 붙여 출력하라.
 --조건은 중복허락
 
+select
+	emp_name
+	,phone_num
+from
+	employee
+
+union all
+
+select
+	cus_name
+	,tel_num
+from
+	customer
 
 
 
