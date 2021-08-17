@@ -2095,11 +2095,12 @@ select
 from
 	customer
 
+--<참고>
+--union all 을 쓰면 중복행을 허락한다.
 
 
 
-
-
+--<107> subquery(서브쿼리)가 뭐죠?
 
 
 
