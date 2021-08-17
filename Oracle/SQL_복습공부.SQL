@@ -2181,11 +2181,15 @@ where salary = (select max(salary) from employee where dep_no = 20)
 --<111> [직원명], [직급], [연봉], [전체연봉에서 차지하는 비율]을 검색하라.
 --[전체연봉에서 차지하는 비율]은 소수점 버림하고 %로 표현하라.
 --단, 높은 비율이 먼저 나오게 정렬하라.
-
-
-
-
-
+select
+	emp_name "직원명"
+	,jikup  	"직급"
+	,salary   "연봉"
+	,floor(salary / (select sum(salary) from employee) * 100) ||'%' "연봉비율"
+from
+  employee
+order by
+	salary / (select sum(salary) from employee) * 100 desc;
 
 
 
