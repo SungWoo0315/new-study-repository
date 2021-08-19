@@ -53,11 +53,15 @@ public class LoginController {
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
         // [ModelAndView 객체] 에 아이디 암호 존재개수 저장하기. 즉, DB 연동 결과물 저장하기.
+            // [ModelAndView 객체] 에 저장된 DB 연동 결과물은 
+            // HttpServletRequest 객체에 setAttribute 메소드로 저장된다. 
         // [ModelAndView 객체] 리턴하기.
         // ---------------------------
         ModelAndView mav = new ModelAndView();
         mav.setViewName("loginProc.jsp");
         mav.addObject("idCnt", 1);      // DB 연동한 결과물이 1이라고 치고, 결과 보는것.  
+            // 위 addObject 메소드로 저장된 DB 연동 결과물은 
+            // HttpServletRequest 객체에 setAttribute 메소드로 저장된다.
         return mav;
 
     }
