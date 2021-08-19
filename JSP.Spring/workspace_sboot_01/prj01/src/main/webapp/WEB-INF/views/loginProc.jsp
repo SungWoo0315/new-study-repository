@@ -10,18 +10,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Proc</title>
-
 
 </head>
 <!-- -------------------------------------------------------- -->
 <body>
 
-<span class="idCnt"><%out.print( (int)request.getAttribute("idCnt") );%></span>
+<!-- -------------------------------------------------------- -->
+<!-- HttpServletRequest 객체에 setAttribute("idCnt", ~) 로 저장된 데이터꺼내서 span 사이에 표현하기  -->
+<!-- -------------------------------------------------------- -->
+<span class="idCnt"><%out.print(   (int)request.getAttribute("idCnt")   );%></span>
 	
 </body>
 <!-- -------------------------------------------------------- -->
