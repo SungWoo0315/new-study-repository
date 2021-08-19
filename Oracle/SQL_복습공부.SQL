@@ -2191,15 +2191,25 @@ from
 order by
 	salary / (select sum(salary) from employee) * 100 desc;
 
+----
+
+select
+			emp_name "직원명"
+			,jikup "직급"
+			,salary "연봉"
+			,trunc(salary / (select sum(salary) from employee) * 100, 2) ||'%' "연봉비율"
+			-- trunc 사용하여 소수점 조절.
+	from
+			employee
+	order by
+			salary/(select sum(salary) from employee)*100 desc;
+
+--<주의>정렬할때는 소수점 컨트롤을 하지 말고 소수점이 널부러지게 하고 정렬해야 정확한 정렬이 된다.
 
 
 
 
-
-
-
-
-
+--<112> 10번 부서 직원들이 관리하는 [고객번호], [고객명], [직원번호]을 검색하면?
 
 
 
