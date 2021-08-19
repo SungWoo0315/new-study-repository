@@ -49,13 +49,15 @@ public class LoginController {
         // 클라이언트가 보낸 암호를 꺼내라
         // --------------------------------------------------
         String pwd = request.getParameter("pwd");
-
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // [ModelAndView 객체] 에 아이디 암호 존재개수 저장하기. 즉, DB 연동 결과물 저장하기.
         // [ModelAndView 객체] 리턴하기.
         // ---------------------------
         ModelAndView mav = new ModelAndView();
+        mav.setViewName("loginProc.jsp");
+        mav.addObject("idCnt", 1);      // DB 연동한 결과물이 1이라고 치고, 결과 보는것.  
         return mav;
 
     }
