@@ -17,11 +17,15 @@ public class LoginController {
     @RequestMapping( value="/loginForm.do")
     public ModelAndView loginForm( ){
 
-        System.out.print("정상 작동합니다..!");
-        return null; 
+        // System.out.print("정상 작동합니다..!");
+        // ---------------------------
+        // [ModelAndView 객체] 생성하기.
+        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // [ModelAndView 객체] 리턴하기.
+        // ---------------------------
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("loginForm.jsp");
+        return mav;
+
     }
-
-
-
-
 }
