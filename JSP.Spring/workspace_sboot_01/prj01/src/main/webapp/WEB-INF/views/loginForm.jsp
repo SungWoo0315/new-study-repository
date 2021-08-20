@@ -45,13 +45,13 @@
             // ---------------------------------------------------
             // 입력된 [아이디]를 가져와 변수에 저장
             // ---------------------------------------------------
-            var id = $('.id').val();
+            var login_id = $('.login_id').val();
             // 아이디를 입력 안했거나 공백으로 이루어져 있으면
             // 아이디 입력란을 비우고 경고하고 함수 중단.  
-            if(id.split(" ").join("")==""){
+            if(login_id.split(" ").join("")==""){
                 alert("로그인 아이디 입력 요망");
-                $('.id').val("");
-                $('.id').focus();
+                $('.login_id').val("");
+                $('.login_id').focus();
                 return;
             }
             // ---------------------------------------------------
@@ -229,7 +229,7 @@
             <caption><b>[로그인]</b></caption>
             <tr>
                 <th bgcolor="lightgray" align="center">아이디</th>
-                <td><input type="text" name="id" class="id" size="20"></td>
+                <td><input type="text" name="login_id" class="login_id" size="20"></td>
             </tr>	
             <tr>
                 <th bgcolor="lightgray" align="center">암호</th>
