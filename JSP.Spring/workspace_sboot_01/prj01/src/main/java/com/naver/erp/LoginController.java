@@ -72,7 +72,8 @@ public class LoginController {
         // HttpServletRequest 객체의 메소드를 이용하면 파라미터값을 얻을 수 있다.
         HttpServletRequest request
     ){
-        System.out.println(1);
+        System.out.println("LoginController.loginProc 메소드 호출 시작!");
+        System.out.println("LoginController.loginProc => " + 1);
         // --------------------------------------------------
         // 클라이언트가 보낸 요청 메시지 안의 "id" 라는 파라미터명의 파라미터값 꺼내기
         // 클라이언트가 보낸 아이디를 꺼내라
@@ -81,8 +82,10 @@ public class LoginController {
         // --------------------------------------------------
         String login_id = request.getParameter("login_id");
         String pwd = request.getParameter("pwd");
-        System.out.println(login_id);
-        System.out.println(pwd);
+        
+        System.out.println("LoginController.loginProc => 파명 login_id => " + login_id);
+        System.out.println("LoginController.loginProc => 파명 pwd => " + pwd);
+
         
         // --------------------------------------------------
         // HashMap 객체 생성하기
@@ -97,11 +100,11 @@ public class LoginController {
         // loginDAOImpl 객체의 getLogin_idCnt 메소드를 호출하여 
         // 로그인 아이디와 암호의 전체 개수 얻기
         // --------------------------------------------------
-        System.out.println(2);
-        System.out.println(map);
+        System.out.println("LoginController.loginProc => " + 2);
+        System.out.println("LoginController.loginProc => " + map);
 
         int login_idCnt = loginDAO.getLogin_idCnt(map);
-        System.out.println(3);
+        System.out.println("LoginController.loginProc => " + 3);
         
 
 
@@ -121,6 +124,9 @@ public class LoginController {
         mav.addObject("idCnt", login_idCnt);      // DB 연동한 결과물이 1이라고 치고, 결과 보는것.  
             // 위 addObject 메소드로 저장된 DB 연동 결과물은 
             // HttpServletRequest 객체에 setAttribute 메소드로 저장된다.
+        
+        System.out.println("LoginController.loginProc 메소드 호출 완료!");
+
         return mav;
 
     }
