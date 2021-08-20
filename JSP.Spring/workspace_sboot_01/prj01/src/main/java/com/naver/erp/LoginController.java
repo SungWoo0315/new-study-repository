@@ -44,11 +44,13 @@ public class LoginController {
         // 클라이언트가 보낸 아이디를 꺼내라
         // --------------------------------------------------
         String id = request.getParameter("id");
+        System.out.println( "id => " + id );
         // --------------------------------------------------
         // 클라이언트가 보낸 요청 메시지 안의 "pwd" 라는 파라미터명의 파라미터값 꺼내기
         // 클라이언트가 보낸 암호를 꺼내라
         // --------------------------------------------------
         String pwd = request.getParameter("pwd");
+        System.out.println( "pwd => " + pwd );
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
