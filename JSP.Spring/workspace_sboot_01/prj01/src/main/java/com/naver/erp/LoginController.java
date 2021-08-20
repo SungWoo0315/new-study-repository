@@ -2,6 +2,8 @@ package com.naver.erp;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +14,21 @@ import org.springframework.web.servlet.ModelAndView;
 // ---------------------------------------------------------------
 @Controller
 public class LoginController {
+
+    // ++++++++++++++++++++++++++++++++++++++++
+    // SqlSessionTemplate 객체를 생성해 속성변수 sqlSession 에 저장
+    // @Autowired 어노테이션을 붙이면 자료형에 맞는 SqlSessionTemplate 객체를 생성한다.
+    // 결국 속성변수 sqlSession 에는 SqlSessionTemplate 객체의 메위주가 저장되어 있다.  
+    // SqlSessionTemplate 객체의 메소드를 이용하면 xml 에 저장된 SQL 구문을 읽어 DB 연동을 할 수 있다.  
+    // ++++++++++++++++++++++++++++++++++++++++
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+
+
+
+
+
 
     // ********************************************
     // 가상주소 /loginForm.do 로 접근하면 호출되는 메소드 선언
