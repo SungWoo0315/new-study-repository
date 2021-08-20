@@ -1,0 +1,10 @@
+﻿
+
+
+create table login(
+	login_no         number(3)                       -- 정수 0~999 까지 저장.
+	,login_id        varchar2(20) not null unique    -- 로그인 아이디 저장
+	,pwd             varchar2(20) not null           -- 암호
+
+
+);
