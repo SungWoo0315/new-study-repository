@@ -1,5 +1,8 @@
 package com.naver.erp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
+    /*
     // ++++++++++++++++++++++++++++++++++++++++
     // SqlSessionTemplate 객체를 생성해 속성변수 sqlSession 에 저장
     // @Autowired 어노테이션을 붙이면 자료형에 맞는 SqlSessionTemplate 객체를 생성한다.
@@ -23,8 +27,20 @@ public class LoginController {
     // ++++++++++++++++++++++++++++++++++++++++
     @Autowired
     private SqlSessionTemplate sqlSession;
+    */
 
-
+    // ===================================
+    // 속성변수 loginDAO 선언하고, LoginDAO 라는 인터페이스를
+    // 구현한 클래스를 객체화하여 저장
+    // 즉, 속성변수 loginDAO 에는 loginDAOImpl 객체의 메위주가 저장된다.  
+    // ===================================
+        // @Autowired 가 붙은 속성변수에는 인터페이스 자료형을 쓰고
+        // 이 인터페이스를 구현한 클래스를 객체화하여 저장한다.
+        // LoginDAO 라는 인터페이스를 구현한 클래스의 이름을 몰라도 관계없다.
+        // 1개 존재하기만 하면된다.  
+    // ===================================
+    @Autowired
+    private LoginDAO loginDAO;
 
 
 
@@ -56,6 +72,7 @@ public class LoginController {
         // HttpServletRequest 객체의 메소드를 이용하면 파라미터값을 얻을 수 있다.
         HttpServletRequest request
     ){
+        System.out.println(1);
         // --------------------------------------------------
         // 클라이언트가 보낸 요청 메시지 안의 "id" 라는 파라미터명의 파라미터값 꺼내기
         // 클라이언트가 보낸 아이디를 꺼내라
@@ -64,9 +81,33 @@ public class LoginController {
         // --------------------------------------------------
         String login_id = request.getParameter("login_id");
         String pwd = request.getParameter("pwd");
+        System.out.println(login_id);
+        System.out.println(pwd);
         
-        System.out.println( "login_id => " + login_id );
-        System.out.println( "pwd => " + pwd );
+        // --------------------------------------------------
+        // HashMap 객체 생성하기
+        // HashMap 객체에 로그인 아이디 저장하기
+        // HashMap 객체에 암호 저장하기
+        // --------------------------------------------------
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("login_id", login_id);
+        map.put("pwd", pwd);
+
+        // --------------------------------------------------
+        // loginDAOImpl 객체의 getLogin_idCnt 메소드를 호출하여 
+        // 로그인 아이디와 암호의 전체 개수 얻기
+        // --------------------------------------------------
+        System.out.println(2);
+        System.out.println(map);
+
+        int login_idCnt = loginDAO.getLogin_idCnt(map);
+        System.out.println(3);
+        
+
+
+
+        // System.out.println( "login_id => " + login_id ); // 입력된 아이디값 콘솔출력.
+        // System.out.println( "pwd => " + pwd );           // 입력된 암호값 콘솔 출력.   
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
@@ -77,7 +118,7 @@ public class LoginController {
         // ---------------------------
         ModelAndView mav = new ModelAndView();
         mav.setViewName("loginProc.jsp");
-        mav.addObject("idCnt", 1);      // DB 연동한 결과물이 1이라고 치고, 결과 보는것.  
+        mav.addObject("idCnt", login_idCnt);      // DB 연동한 결과물이 1이라고 치고, 결과 보는것.  
             // 위 addObject 메소드로 저장된 DB 연동 결과물은 
             // HttpServletRequest 객체에 setAttribute 메소드로 저장된다.
         return mav;
