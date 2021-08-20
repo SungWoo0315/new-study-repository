@@ -3,5 +3,22 @@
 
 --<아이디, 암호 테이블 작업>
 
+-- src/main/webapp/WEB-INF/sql 경로에 넣는다.
 
+create table login(
+	login_no         number(3)                       -- 정수 0~999 까지 저장.
+	,login_id        varchar2(20) not null unique    -- 로그인 아이디 저장
+	,pwd             varchar2(20) not null           -- 암호
+	,primary key(login_no)
+
+);
+
+insert into login values(1,'abc', '123');
+insert into login values(2,'xyz', '123');
+insert into login values(3,'tom', '123');
+
+commit;
+
+
+select * from login
 
