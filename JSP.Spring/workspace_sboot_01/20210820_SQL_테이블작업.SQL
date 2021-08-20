@@ -22,3 +22,7 @@ commit;
 
 select * from login
 
+
+
+        select count(*) from login where login_id='abc' and pwd='123'
+
