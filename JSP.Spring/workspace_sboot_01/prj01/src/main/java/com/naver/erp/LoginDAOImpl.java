@@ -30,6 +30,7 @@ public class LoginDAOImpl implements LoginDAO {
 			System.out.println( "LoginDAOImpl.getLogin_idCnt 메소드 호출 시작!");
 			System.out.println( "LoginDAOImpl.getLogin_idCnt => " + 11);
 			System.out.println( "매개변수 id_pwd_map => " + id_pwd_map);
+			System.out.println( "=================================");
 
 		// ------------------------------------------------------
 		// SqlSessionTemplate 객체의 selectOne 메소드 호출로
@@ -37,12 +38,20 @@ public class LoginDAOImpl implements LoginDAO {
 		// 1행의 데이터인 [로그인 아이디, 암호 존재개수]를 얻기
 		// ------------------------------------------------------
 		int login_idCnt = this.sqlSession.selectOne(
-
+			// ----------------------------------------------
 			// SQL 구문 설정 XML 파일(=mapper_login.xml)에서 
 			// <mapper namespace="com.naver.erp.LoginDAO"> 태그 내부의 
 			// <select id="getLogin_idCnt" ~> 태그 내부의 
 			// [1행 리턴 select 쿼리문]을 실행하고 얻은 데이터를 int 로 리턴한다. 
+			// ----------------------------------------------
+			// 실행할 SQL 구문의 위치를 지정하기.
+			// 실행할 SQL 구문의 위치 문자열 패턴은 아래와 같다.  
+			// xml 파일 중에   "mapper태그의namespace명.mapper태그내부의호출할SQL구문소유한태그id값"
+			// ----------------------------------------------
 			"com.naver.erp.LoginDAO.getLogin_idCnt"  //  xml 파일 내부의  select문이 있는 곳의 위치
+			// ----------------------------------------------
+			// 호출할 SQL 구문에서 사용할 데이터 지정하기.
+			// ----------------------------------------------
 			// <select id="getLogin_idCnt" ~> 태그 내부에 전달되는 데이터 설정
 			,id_pwd_map
 		);
