@@ -42,7 +42,7 @@ public class LoginDAOImpl implements LoginDAO {
         System.out.println( "=================================");
         System.out.println( "LoginDAOImpl 메소드 호출 시작!");
         System.out.println( "LoginDAOImpl.getLogin_idCnt => " + 1);
-        System.out.println( "매개변수 id_pwd_map => " + id_pwd_map);
+        System.out.println( "LoginDAOImpl 매개변수 id_pwd_map => " + id_pwd_map);
 		// ------------------------------------------------------
 
 
@@ -84,8 +84,6 @@ public class LoginDAOImpl implements LoginDAO {
             System.out.println( "LoginDAOImpl 메소드 호출 종료!");
             System.out.println( "=================================");
 		    // ------------------------------------------------------
-
-		    return login_idCnt;
             
             // ------------------------------------------------------
             // 진행과정 콘솔 확인용.  
@@ -93,6 +91,8 @@ public class LoginDAOImpl implements LoginDAO {
             System.out.println( "LoginDAOImpl 최종리턴값 확인 => " + login_idCnt);
             System.out.println( "=================================");
 		    // ------------------------------------------------------
+
+		    return login_idCnt;
 
 	}
 	
