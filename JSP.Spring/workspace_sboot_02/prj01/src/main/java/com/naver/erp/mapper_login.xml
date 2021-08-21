@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.naver.erp.LoginDAO">
+    <select id='getLogin_idCnt' parameterType="hashmap" resultType="int">
+        select count(*) from login where login_id=#{login_id} and pwd=#{pwd}
+    </select>
+</mapper>
+
+
+
+<!-- 위는 SQL 쿼리문,  -->
+<!-- DB 와 연동하여 LoginDAOImpl.java 에서 호출한 메소드 getLogin_idCnt 의 리턴값을 받아서, -->
+<!-- 쿼리문에서 검색하여, -->
+<!-- 검색된 결과를 count 한 결과출력. -->
+
+
+<!-- 다시 LoginController.java 로 돌아가서, -->
+<!-- /loginProc.do 로 접근하면 호출되는 메소드 부분 추가 코딩 -->
