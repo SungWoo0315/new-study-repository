@@ -83,8 +83,8 @@ public class LoginController {
         String login_id = request.getParameter("login_id");
         String pwd = request.getParameter("pwd");
         
-        System.out.println("LoginController.loginProc => 파명 login_id => " + login_id);
-        System.out.println("LoginController.loginProc => 파명 pwd => " + pwd);
+        System.out.println("LoginController.loginProc => 파라미터명 login_id => " + login_id);
+        System.out.println("LoginController.loginProc => 파라미터명 pwd => " + pwd);
 
         
         // --------------------------------------------------
@@ -101,10 +101,11 @@ public class LoginController {
         // 로그인 아이디와 암호의 전체 개수 얻기
         // --------------------------------------------------
         System.out.println("LoginController.loginProc => " + 2);
-        System.out.println("LoginController.loginProc => " + map);
+        System.out.println("LoginController.loginProc 해시맵 객체 => " + map);
 
         int login_idCnt = loginDAO.getLogin_idCnt(map);
         System.out.println("LoginController.loginProc => " + 3);
+        System.out.println("LoginController.loginProc login_idCnt 보기 => " + login_idCnt);
         
 
 
