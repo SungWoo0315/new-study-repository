@@ -2,6 +2,7 @@ package com.naver.erp;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;      //  @Autowired 어노테이션 사용으로 import
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,48 @@ import org.springframework.web.servlet.ModelAndView;
 //---------------------------------------------------------------
 @Controller
 public class LoginController {
+	
+
+    // ------------------------------------------------
+    // 2021-08-21 비동기방식 DB연동 추가 코딩
+	// ------------------------------------------------
+    // ===================================
+    // 속성변수 loginDAO 선언하고, LoginDAO 라는 인터페이스를
+    // 구현한 클래스를 객체화하여 저장
+    // 즉, 속성변수 loginDAO 에는 loginDAOImpl 객체의 메위주가 저장된다.  
+    // ===================================
+        // @Autowired 가 붙은 속성변수에는 인터페이스 자료형을 쓰고
+        // 이 인터페이스를 구현한 클래스를 객체화하여 저장한다.
+        // LoginDAO 라는 인터페이스를 구현한 클래스의 이름을 몰라도 관계없다.
+        // 1개 존재하기만 하면된다.  
+    // ===================================
+    @Autowired      // import org.springframework.beans.factory.annotation.Autowired; 로 import 해주어야함. 
+
+	// ------------------------------------------------
+    // 이 코드를 작성하고, 인터페이스 LoginDAO.java 만들어야한다.  
+    // 파일 위치는 
+    // src/main/java 경로안의,
+    // com/naver/erp 경로에,
+    // LoginDAO.java 생성.
+	// ------------------------------------------------
+    private LoginDAO loginDAO;  
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// ********************************************
     // 가상주소 /loginForm.do 로 접근하면 호출되는 메소드 선언
@@ -19,7 +62,7 @@ public class LoginController {
 	@RequestMapping( value = "/loginForm.do")
 	public ModelAndView loginForm() {
 		
-		// System.out.print("정상 작동합니다..!");
+		 System.out.print("정상 작동, 로그인 화면 접속 성공..!");
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
