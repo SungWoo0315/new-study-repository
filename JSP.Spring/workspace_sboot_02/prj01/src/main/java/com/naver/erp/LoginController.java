@@ -54,7 +54,11 @@ public class LoginController {
 	@RequestMapping( value = "/loginForm.do")
 	public ModelAndView loginForm() {
 		
-		 System.out.print("정상 작동, 로그인 화면 접속 성공..!");
+        System.out.println( "=================================");  
+		System.out.print("정상 작동, 로그인 화면 접속 성공..!");  
+        System.out.println( "==");  
+        System.out.println( "=================================");  
+
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
@@ -64,6 +68,10 @@ public class LoginController {
 		mav.setViewName("loginForm.jsp");
 		return mav;
 	}
+
+
+
+    
 	// ********************************************
     // 가상주소 /loginProc.do 로 접근하면 호출되는 메소드 선언
     // ********************************************
