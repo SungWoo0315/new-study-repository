@@ -1,5 +1,8 @@
 package com.naver.erp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;      //  @Autowired 어노테이션 사용으로 import
@@ -70,16 +73,71 @@ public class LoginController {
         // HttpServletRequest 객체의 메소드를 이용하면 파라미터값을 얻을 수 있다.
         HttpServletRequest request
     ){
+
+        // ------------------------------------------------------
+        // 진행과정 콘솔 확인용.  
+		// ------------------------------------------------------
+        System.out.println( "=================================");
+        System.out.println("LoginController.java 에서 loginProc 메소드 호출 시작!");
+        System.out.println("LoginController.loginProc => " + 1);
+		// ------------------------------------------------------
+
+
         // --------------------------------------------------
         // 클라이언트가 보낸 요청 메시지 안의 "id" 라는 파라미터명의 파라미터값 꺼내기
         // 클라이언트가 보낸 아이디를 꺼내라
         // --------------------------------------------------
-        String id = request.getParameter("id");
-        // --------------------------------------------------
         // 클라이언트가 보낸 요청 메시지 안의 "pwd" 라는 파라미터명의 파라미터값 꺼내기
         // 클라이언트가 보낸 암호를 꺼내라
         // --------------------------------------------------
+        String login_id = request.getParameter("login_id");
         String pwd = request.getParameter("pwd");
+
+
+        // ------------------------------------------------------
+        // 진행과정 콘솔 확인용.  
+		// ------------------------------------------------------
+        System.out.println("LoginController.loginProc => 파라미터명 login_id => " + login_id);
+        System.out.println("LoginController.loginProc => 파라미터명 pwd => " + pwd);
+		// ------------------------------------------------------
+
+
+
+
+        // --------------------------------------------------
+        // HashMap 객체 생성하기
+        // HashMap 객체에 로그인 아이디 저장하기
+        // HashMap 객체에 암호 저장하기
+        // --------------------------------------------------
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("login_id", login_id);
+        map.put("pwd", pwd);
+
+
+        // --------------------------------------------------
+        // loginDAOImpl 객체의 getLogin_idCnt 메소드를 호출하여 
+        // 로그인 아이디와 암호의 전체 개수 얻기
+        // --------------------------------------------------
+
+        int login_idCnt = loginDAO.getLogin_idCnt(map);
+        
+        // ------------------------------------------------------
+        // 진행과정 콘솔 확인용.  
+		// ------------------------------------------------------
+        System.out.println( "login_id => " + login_id ); // 입력된 아이디값 콘솔출력.
+        System.out.println( "pwd => " + pwd );           // 입력된 암호값 콘솔 출력.   
+
+        System.out.println("LoginController.loginProc => " + 2);
+        System.out.println("LoginController.loginProc 해시맵 객체 확인 => " + map);
+
+        System.out.println("LoginController.loginProc => " + 3);
+        System.out.println("LoginController.loginProc login_idCnt 보기 => " + login_idCnt);
+		// ------------------------------------------------------
+
+
+
+
+
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
@@ -90,9 +148,17 @@ public class LoginController {
         // ---------------------------
         ModelAndView mav = new ModelAndView();
         mav.setViewName("loginProc.jsp");
-        mav.addObject("idCnt", 1);      // DB 연동한 결과물이 1이라고 치고, 결과 보는것.  
+        mav.addObject("idCnt", login_idCnt);      // DB 연동한 결과물이 1이라고 치고, 결과 보는것을 login_idCnt 로 수정.
             // 위 addObject 메소드로 저장된 DB 연동 결과물은 
             // HttpServletRequest 객체에 setAttribute 메소드로 저장된다.
+       
+        // ------------------------------------------------------
+        // 진행과정 콘솔 확인용.  
+		// ------------------------------------------------------
+        System.out.println("LoginController.loginProc 메소드 호출 완료!");
+        System.out.println( "=================================");
+		// ------------------------------------------------------
+
         return mav;
 
     }
