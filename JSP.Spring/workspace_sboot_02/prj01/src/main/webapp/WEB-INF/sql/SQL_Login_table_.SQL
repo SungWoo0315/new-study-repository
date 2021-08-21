@@ -20,6 +20,7 @@ insert into login values(4,'lsw0315', 'lsw0315');
 
 select * from login
 
+delete from login where LOGIN_NO = 4
 
 commit;
 
