@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-    /*
+    /*  잘못된 코딩 
     // ++++++++++++++++++++++++++++++++++++++++
     // SqlSessionTemplate 객체를 생성해 속성변수 sqlSession 에 저장
     // @Autowired 어노테이션을 붙이면 자료형에 맞는 SqlSessionTemplate 객체를 생성한다.
@@ -108,10 +108,10 @@ public class LoginController {
         System.out.println("LoginController.loginProc login_idCnt 보기 => " + login_idCnt);
         
 
-
-
         // System.out.println( "login_id => " + login_id ); // 입력된 아이디값 콘솔출력.
         // System.out.println( "pwd => " + pwd );           // 입력된 암호값 콘솔 출력.   
+
+
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
