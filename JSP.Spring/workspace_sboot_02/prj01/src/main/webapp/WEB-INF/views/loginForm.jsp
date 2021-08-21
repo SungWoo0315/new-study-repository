@@ -41,7 +41,7 @@
 			// 웹브라우저에서 상에 입력한 아이디를 가져와 리턴하기 
 			// var uid = document.loginForm.uid.value; 아래와 같은 결과를 가진다 DOM 객체 사용.  
 			// ---------------------------------------------------
-			var id = $(".id").val();
+			var login_id = $(".login_id").val();
 			// ---------------------------------------------------
 			// 변수 pwd 선언. 입력한 아이디를 얻어서 변수 pwd 에 저장하기.
 			// ---------------------------------------------------
@@ -55,7 +55,7 @@
 			// 만약에 유저가 입력한 아이디가 비어있거나 공백으로 이루어져있으면
 			// isEmpty 함수 호출하여 true 를 리턴받으면, 즉, 비어있거나 공백으로 이루어져 있으면
 			//------------------------------------------------------
-			if( isEmpty(id) ) {
+			if( isEmpty(login_id) ) {
 				// 경고 상자 띄우기
 				alert("아이디가 비어있음. 입력바람.");
 				// 함수 중단하기. 이후 코딩은 실행되지 않는다.  
@@ -156,7 +156,7 @@
             <caption><b>[로그인]</b></caption>
             <tr>
                 <th bgcolor="lightgray" align="center">아이디</th>
-                <td><input type="text" name="id" class="id" size="20"></td>
+                <td><input type="text" name="login_id" class="login_id" size="20"></td>
             </tr>	
             <tr>
                 <th bgcolor="lightgray" align="center">암호</th>
