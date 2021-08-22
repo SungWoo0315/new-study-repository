@@ -2608,11 +2608,19 @@ order by
 
 
 
+--<124> 부서별로 [부서번호], [급여합], [평균급여], [인원수]를 출력하면?
+--단, 평균은 소수 2째자리에서 반올림할 것.
+select
+	dep_no
+	,sum(salary)
+	,round(avg(salary),1)
+	,count(*)
+from
+	employee
+group by
+		dep_no ;
 
-
-
-
-
+--▶select 절에 일반 컬럼과 그룹함수 컬럼이 등장하면 group by 뒤에는 반드시 그룹지을 일반 컬럼이 나와야 한다.
 
 
 
