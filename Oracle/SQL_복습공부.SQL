@@ -2303,42 +2303,119 @@ where
 --<113> 평균 연봉 이상이고
 --최대 연봉 미만의 [직원명], [연봉],
 --[전체평균연봉], [전체최대연봉]을 출력하면?
+select
+	emp_name
+	,salary
+	,(select avg(salary) from employee) "전체평균연봉"
+	,(select max(salary) from employee)	"전체최대연봉"
+from
+	employee
+where
+	salary >= (select avg(salary) from employee)
+	and
+	salary < (select max(salary) from employee);
 
 
 
 
+--<114> 최고연봉 직원의 [직원번호], [직원명], [부서명], [연봉]을 검색하면?
+select
+	e.emp_no
+	,e.emp_name
+	,d.dep_name
+	,e.salary
+from
+	employee e, dept d
+where
+	e.dep_no = d.dep_no
+	and
+	e.salary = (select max(salary) from employee)
+
+
+--<115> 담당 고객이 2명 이상인 [직원번호], [직원명], [직급]을 검색하면?
+select
+	e.emp_no
+	,e.emp_name
+	,e.jikup
+from
+	employee e
+where
+	( select count(*) from customer c where c.emp_no=e.emp_no ) >=2
 
 
 
+--<116> [직원번호], [직원명], [소속부서명]을 검색하면?
+-----------------------------------------------------------------
+--조인(join) 답
+-----------------------------------------------------------------
+select
+	e.emp_no
+	,e.emp_name
+	,d.dep_name "소속부서명"
+from
+	employee e, dept d
+where
+	e.dep_no = d.dep_no
+-----------------------------------------------------------------
+--ANSI 조인(join) 답
+-----------------------------------------------------------------
+select
+	e.emp_no
+	,e.emp_name
+	,d.dep_name "소속부서명"
+from
+	employee e inner join dept d
+on
+	e.dep_no = d.dep_no
+
+-----------------------------------------------------------------
+--서브쿼리 답
+-----------------------------------------------------------------
+select
+	emp_no
+	,emp_name
+	,(select d.dep_name from dept d where d.dep_no = e.dep_no) "소속부서명"
+from
+	employee e
 
 
 
+--<117> [직원번호], [직원명], [연봉], [연봉순위]를 출력하면?
+--단 [연봉순위]를 오름차순 유지
+select
+	e1.emp_no    "직원번호"
+	,e1.emp_name "직원명"
+	,e1.salary   "연봉"
+	,(select count(*)+1 from employee e2 where e2.salary > e1.salary)  "연봉순위"
+from
+ employee e1
+order by
+	"연봉순위" asc;
+
+
+--<118> [직원번호], [직원명], [담당고객수]를 출력하면?
+select
+	e1.emp_no    "직원번호"
+	,e1.emp_name "직원명"
+	,(select count(*) from customer c where c.emp_no = e1.emp_no ) "담당고객수"
+from
+	employee e1
 
 
 
+-- ?????????????????????????? 이해가 잘 안됨 다시보기.
+--<119> 애래 처럼 [부서명], [부서직원수], [부서담당고객수]를 출력하면?
+select
+	d.dep_name
+	,(select count(*) from employee e where e.dep_no = d.dep_no) "부서직원수"
+	,(select count(*) from employee e, customer c where c.emp_no = e.emp_no and e.dep_no = d.dep_no) "부서담당고객수"
+from
+	dept d
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--<120> [직원번호], [직원명], [직급], [주민번호], [직급서열순위]를 출력하면? *****
+--단, 직급이 같으면 나이 많은 직원이 [직급서열순위] 위이다. 그리고 [직급서열순위]를 오름차순 유지.
 
 
 
