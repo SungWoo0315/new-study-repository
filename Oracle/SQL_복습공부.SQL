@@ -2416,32 +2416,194 @@ from
 
 --<120> [직원번호], [직원명], [직급], [주민번호], [직급서열순위]를 출력하면? *****
 --단, 직급이 같으면 나이 많은 직원이 [직급서열순위] 위이다. 그리고 [직급서열순위]를 오름차순 유지.
+select
+	e1.emp_no
+	,e1.emp_name
+	,e1.jikup
+	,e1.jumin_num
+	,(select count(*)+1 from employee e2 where decode(e2.jikup,
+	'사장', 1
+	,'부장', 2
+	,'과장', 3
+	,'대리', 4
+	,'주임', 5
+	, 6) || decode (substr(e2.jumin_num,7,1), '1', '19', '2', '19', '20' )
+		   || substr(e2.jumin_num,1,6)
+
+	<
+
+	decode( e1.jikup
+		,'사장', 1
+		,'부장', 2
+		,'과장', 3
+		,'대리', 4
+		,'주임', 5
+		,6)|| decode (substr(e1.jumin_num,7,1), '1', '19', '2', '19', '20' )
+       || substr(e1.jumin_num,1,6) )
+	 "직급서열순위"
+from
+	employee e1
+order by
+	"직급서열순위" asc
+
+---
+select
+	e1.emp_no      "직원번호"
+	,e1.emp_name   "직원명"
+	,e1.jikup      "직급"
+	,e1.jumin_num  "주민번호"
+	,(
+		select count(*)+1 from employee e2
+		where
+		decode( e2.jikup
+			,'사장', 1
+			,'부장', 2
+			,'과장', 3
+			,'대리', 4
+			,'주임', 5
+			,6)
+		<
+		decode( e1.jikup
+			,'사장', 1
+			,'부장', 2
+			,'과장', 3
+			,'대리', 4
+			,'주임', 5
+			,6)
+		or
+		(
+			e2.jikup = e1.jikup
+			and
+			to_number(
+        decode (substr(e2.jumin_num,7,1), '1', '19', '2', '19', '20' )
+		    ||substr(e2.jumin_num,1,6)
+      )
+      <
+			to_number(
+        decode (substr(e1.jumin_num,7,1), '1', '19', '2', '19', '20' )
+		    ||substr(e1.jumin_num,1,6)
+      )
+		)
+	)         "직급서열순위"
+from
+	employee e1
+order by
+	5;
 
 
 
+--<121> [고객번호], [고객명], [고객전화번호], [담당직원명], [담당직원직급], [부서번호] 를 출력하면?
+--<조건>담당직원이 없는 고객도 포함
+--단, 조인을 사용하지 말고 서브쿼리를 사용하십시오.
+
+---------------------------------------------
+--	서브쿼리 답
+---------------------------------------------
+select
+	c.cus_no
+	,c.cus_name
+	,c.tel_num
+	,(select e.emp_name from employee e where e.emp_no = c.emp_no) "담당직원명"
+	,(select e.jikup from employee e where e.emp_no = c.emp_no) "담당직원직급"
+	,(select e.dep_no from employee e where e.emp_no = c.emp_no) "부서번호"
+from
+	customer c;
+
+---------------------------------------------
+--조인 답(오라클조인)
+---------------------------------------------
+select
+	  c.cus_no     "고객번호"
+	  ,c.cus_name  "고객명"
+	  ,c.tel_num   "고객전화번호"
+	  ,e.emp_name  "담당직원명"
+	  ,e.jikup     "담당직원직급"
+	  ,e.dep_no    "부서번호"
+from
+	customer c, employee e
+where
+	c.emp_no = e.emp_no(+)
+order by
+	"고객번호" asc;
+
+---------------------------------------------
+--조인 답(ANSI 조인)
+---------------------------------------------
+select
+	  c.cus_no     "고객번호"
+	  ,c.cus_name  "고객명"
+	  ,c.tel_num   "고객전화번호"
+	  ,e.emp_name  "담당직원명"
+	  ,e.jikup     "담당직원직급"
+	  ,e.dep_no    "부서번호"
+from
+	customer c left outer join employee e
+on
+	c.emp_no = e.emp_no
+order by
+	1 asc;
+
+
+--<122> 고객번호, 고객명, 고객전화번호, 담당직원명, 담당직원직급, 부서번호 를 출력하면?
+--<조건>고객정보는 모두 보이고 직원정보는 10번 부서만 보일것.
+--단, 조인을 사용하지 말고 서브쿼리를 사용하십시오.
+---------------------------------------------
+--서브쿼리 답
+---------------------------------------------
+select
+	c.cus_no     "고객번호"
+	,c.cus_name  "고객명"
+	,c.tel_num   "고객전화번호"
+	,(select e.emp_name from employee e where e.emp_no = c.emp_no and e.dep_no=10 ) "담당직원명"
+	,(select e.jikup from employee e where e.emp_no = c.emp_no and e.dep_no=10 ) "담당직원직급"
+	,(select e.dep_no from employee e where e.emp_no = c.emp_no and e.dep_no=10 )"부서번호"
+from customer c;
+
+---------------------------------------------
+--조인 답(오라클조인)
+---------------------------------------------
+select
+	c.cus_no
+	,c.cus_name
+	,c.tel_num
+	,e.emp_name
+	,e.jikup
+	,e.dep_no
+from
+	customer c, employee e
+where
+	c.emp_no = e.emp_no(+)
+	and
+	e.dep_no(+) = 10
+order by
+1 asc;
+---------------------------------------------
+--조인 답(ANSI 조인)
+---------------------------------------------
+select
+	c.cus_no     "고객번호"
+	,c.cus_name  "고객명"
+	,c.tel_num   "고객전화번호"
+	,e.emp_name  "담당직원명"
+	,e.jikup     "담당직원직급"
+	,e.dep_no    "부서번호"
+from
+	customer c left outer join employee e
+on
+	c.emp_no = e.emp_no
+  and
+  e.dep_no=10  -- 고객정보를 모두 보이게 하려면 where 이 아니라 on 안에다가 써야 한다.
+order by
+1 asc;
 
 
 
+--<123> GROUP BY 구문이 뭡니까?
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--▶select 절에 있는 컬럼안의 중복 데이터를 [하나로 그룹]지어 주는 역할을 한다.
+--▶주로 그룹을 지어 통계를 낼때 사용한다.
+--▶GROUP BY 구문 문법은 간단하나 통계를 내는 과정에서 각종 함수가 때거지로 등장한다.
+--	그러므로 GROUP BY 구문은 함수와의 싸움이다.
 
 
 
