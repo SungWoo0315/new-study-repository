@@ -2216,7 +2216,7 @@ select
 select
 	c.cus_no
 	,c.cus_name
-	,e.emp_no
+	,c.emp_no
 from
 	customer c, employee e
 where
@@ -2229,7 +2229,7 @@ where
 select
 	c.cus_no
 	,c.cus_name
-	,e.emp_no
+	,c.emp_no
 from
 	customer c inner join employee e
 on
@@ -2259,21 +2259,50 @@ where
 --	n행 1열의 데이터가 in 뒤에 콤마(,)로 나열된다.
 
 
+-------------------------------------------------------------------
+--<3>서브쿼리(subquery) 중 비상관쿼리 답2
+-------------------------------------------------------------------
+select
+	cus_no
+	,cus_name
+	,emp_no
+from
+	customer
+where
+	emp_no = any(select emp_no from employee where dep_no = 10)
+
+
+-------------------------------------------------------------------
+--<4>서브쿼리(subquery) 중 상관 쿼리 답1
+-------------------------------------------------------------------
+select
+	c.cus_no
+	,c.cus_name
+	,c.emp_no
+from
+	customer c
+where
+	(select e.dep_no from employee e where c.emp_no = e.emp_no) = 10
+
+
+-------------------------------------------------------------------
+--<5>서브쿼리(subquery) 중 상관 쿼리 답2
+-------------------------------------------------------------------
+select
+	c.cus_no
+	,c.cus_name
+	,c.emp_no
+from
+	customer c
+where
+	(select count(*) from employee e where c.emp_no = e.emp_no and e.dep_no=10)>0;
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+--<113> 평균 연봉 이상이고
+--최대 연봉 미만의 [직원명], [연봉],
+--[전체평균연봉], [전체최대연봉]을 출력하면?
 
 
 
