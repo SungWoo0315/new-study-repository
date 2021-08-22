@@ -2210,6 +2210,71 @@ select
 
 
 --<112> 10번 부서 직원들이 관리하는 [고객번호], [고객명], [직원번호]을 검색하면?
+-------------------------------------------------------------------
+--<1>조인(join) 답
+-------------------------------------------------------------------
+select
+	c.cus_no
+	,c.cus_name
+	,e.emp_no
+from
+	customer c, employee e
+where
+	c.emp_no = e.emp_no
+	and
+	e.dep_no = 10
+
+-----
+-- ANSI
+select
+	c.cus_no
+	,c.cus_name
+	,e.emp_no
+from
+	customer c inner join employee e
+on
+	c.emp_no = e.emp_no
+where
+	e.dep_no = 10
+
+-------------------------------------------------------------------
+--<2>서브쿼리(subquery) 중 비상관쿼리 답1
+-------------------------------------------------------------------
+select
+	cus_no
+	,cus_name
+	,emp_no
+from
+	customer
+where
+	emp_no in(select emp_no from employee where dep_no = 10)
+
+	--emp_no = any (select emp_no from employee where dep_no=10)
+	-- in 대신 any도 쓸 수 있다. `=` 을 주의해서 써주어야 한다.
+
+-------------------------------------------------------------------
+-- n행1열 서브쿼리 쓰면 , 자동으로 붙어서 나오게 된다.
+-------------------------------------------------------------------
+--	in 뒤에 n행 1열의 결과가 나오는 서브쿼리가 나오면
+--	n행 1열의 데이터가 in 뒤에 콤마(,)로 나열된다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
