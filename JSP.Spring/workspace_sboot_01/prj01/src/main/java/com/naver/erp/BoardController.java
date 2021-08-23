@@ -71,7 +71,9 @@ public class BoardController {
     // 가상주소 /boardRegProc.do 로 접근하면 호출되는 메소드 선언
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     @RequestMapping( value="/boardRegProc.do")
-    public ModelAndView boardRegProc( 
+    public ModelAndView insertBoard( 
+
+    
         
         HttpServletRequest request
 
