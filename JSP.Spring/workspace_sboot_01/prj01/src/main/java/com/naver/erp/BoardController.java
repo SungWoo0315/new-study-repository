@@ -29,7 +29,6 @@ public class BoardController {
 
 
     ){
-
         // ***************************************
         // [ModelAndView 객체] 생성하기
         // ***************************************
@@ -42,6 +41,29 @@ public class BoardController {
         // [ModelAndView 객체] 리턴하기
         // ***************************************
         return mav;
+    }
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 가상주소  /boardRegForm.do 로 접근하면 호출되는 메소드 선언
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @RequestMapping( value = "/boardRegForm.do" )
+    public ModelAndView goBoardRegForm(
+    
+    
+    ){
+        // ***************************************
+        // [ModelAndView 객체] 생성하기
+        // ***************************************
+        ModelAndView mav = new ModelAndView();
+        // ***************************************
+        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // ***************************************
+        mav.setViewName("boardRegForm.jsp");
+        // ***************************************
+        // [ModelAndView 객체] 리턴하기
+        // ***************************************
+        return mav;
+
     }
 
 }
