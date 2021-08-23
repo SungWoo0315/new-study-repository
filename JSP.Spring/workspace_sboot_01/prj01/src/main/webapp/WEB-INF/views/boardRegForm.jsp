@@ -19,23 +19,111 @@
 <title>BoardList</title>
 
     <script>
-      
+
+        <% System.out.print("============================\r"); %>
+        <% System.out.print("boardRegForm.jsp 접속 성공!!!\r"); %>
+        <% System.out.print("============================\r"); %>
+
+        // ***************************************************
+        // [게시판 등록 화면]에 입력된 데이터의 유효성 체크를 자스로 하지 않고
+        // 비동기 방식으로 서버에 "boardRegProc.do" 로 접속하는 함수 선언
+        // ***************************************************
+        function checkBoardRegForm(){
+            // ------------------------------------
+            // "정말 등록 하시겠습니까?" 라고 물어보기
+            // ------------------------------------
+            if(confirm("정말 등록 하시겠습니까??")==false) {return;}
+            // --------------------------------------------
+            // 현재 화면에서 페이지 이동 없이(=비동기방식으로)
+            // 서버쪽 boardRegProc.do 로 접속하여 게시판 글쓰기를 하고 
+            // 글쓰기 성공 여부를 알려주기  
+            // --------------------------------------------
+            $.ajax(
+
+
+
+
+
+
+            
+            );
+
+        }
 
 
     </script>
 
 
 </head>
-<body>
+<body><center>
 
-    <center>
+    
     <span style="font-size:30px; font-weight: bold; color: rebeccapurple;">
         boardRegForm.jsp 접속 성공!!
     </span>
+    
 
         <hr> 
 
+    <!-- **************************************************** -->
+    <!-- [게시판 글쓰기] 화면을 출력하는 form 태그 선언 -->
+    <!-- **************************************************** -->
+    <form name="boardRegForm" method="POST" action="/boardRegProc.do">
+    
+        <table border="1" style="border-collapse:collapse" cellpadding=5>
+            <caption>새글쓰기</caption>
+            <tr>
+                <th bgcolor="lightgray">이  름</th>
+                <td>
+                <!-- ------------------------------------------------- -->
+                <input type="text" size="10" name="writer" maxlength="10">
+                <!-- ------------------------------------------------- -->
+                </td>
+            </tr>
+            <tr>
+                <th bgcolor="lightgray">제  목</th>
+                <td>
+                <!-- ------------------------------------------------- -->
+                <input type="text" size="40" name="subject" maxlength="30">
+                <!-- ------------------------------------------------- -->
+                </td>
+            </tr>
+            <tr>
+                <th bgcolor="lightgray">이메일</th>
+                <td>
+                <!-- ------------------------------------------------- -->
+                <input type="text" size="40" name="email" maxlength="30">
+                <!-- ------------------------------------------------- -->
+                </td>
+            </tr>
+            <tr>
+                <th bgcolor="lightgray">이메일</th>
+                <td>
+                <!-- ------------------------------------------------- -->
+                <textarea name="content" rows="13" cols="40"  maxlength="300"></textarea>
+                <!-- ------------------------------------------------- -->
+                </td>
+            </tr>
+            <tr>
+                <th bgcolor="lightgray">비밀번호</th>
+                <td>
+                <!-- ------------------------------------------------- -->
+                <input type="password" size="8" name="pwd" maxlength="4">
+                <!-- ------------------------------------------------- -->
+                </td>
+            </tr>
+        </table>
+        <div style="height: 6px;"></div> <!-- 공백조절용 div 태그 -->
+        <input type="button" value="저장" onclick="checkBoardRegForm()">
+        <input type="reset" value="다시작성">
+        <input type="button" value="목록보기" onclick="document.boardListForm.submit();">
         
+    
+    
+    </form>
+
+
+
    
 
 </body>
