@@ -17,6 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 	
+    @Autowired
+    private BoardService boardService;
+
+
+
+    
+
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 가상주소 /boardList.do 로 접근하면 호출되는 메소드 선언
     //      @RequestMapping 내부에, method="RequestMethod.POST" 가 없으므로
