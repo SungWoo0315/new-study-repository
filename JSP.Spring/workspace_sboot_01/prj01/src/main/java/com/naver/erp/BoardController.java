@@ -19,6 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 
+
+    @Autowired
+    private BoardService boardService;
+
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 가상주소 /boardList.do 로 접근하면 호출되는 메소드 선언
     //      @RequestMapping 내부에, method="RequestMethod.POST" 가 없으므로
@@ -90,7 +94,27 @@ public class BoardController {
         
     ){
 
-        
+        System.out.println( "====================\r" );
+        System.out.println( "BoardController 에서 받아오는 값 확인.\r" );
+        System.out.println( "getB_no => " + boardDTO.getB_no() );
+        System.out.println( "getSubject => " + boardDTO.getSubject() );
+        System.out.println( "getWriter => " + boardDTO.getWriter() );
+        System.out.println( "getContent => " + boardDTO.getContent() );
+        System.out.println( "getPwd => " + boardDTO.getPwd() );
+        System.out.println( "====================\r" );
+
+
+        // *********************************************
+        // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
+        // *********************************************
+
+        // *********************************************
+        // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
+        // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
+        // *********************************************
+        // boardRegCnt = this.boardService 
+
+
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
@@ -103,7 +127,14 @@ public class BoardController {
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
-        System.out.println("LoginController 수행완료\r");
+
+
+        // ***************************************
+        // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
+        // ***************************************
+
+
+        System.out.println("BoardController 수행완료\r");
         return mav;
 
 
