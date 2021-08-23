@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;      //  @Autowired 어노테이션 사용으로 import
+import org.springframework.beans.factory.annotation.Autowired;  //  @Autowired 어노테이션 사용으로 import
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,12 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 	
-    @Autowired
-    private BoardService boardService;
-
-
-
-    
+    // @Autowired
+    // private BoardService boardService;
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 가상주소 /boardList.do 로 접근하면 호출되는 메소드 선언
