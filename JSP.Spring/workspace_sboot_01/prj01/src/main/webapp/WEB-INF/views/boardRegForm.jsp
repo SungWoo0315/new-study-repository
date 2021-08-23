@@ -37,7 +37,8 @@
 
 
             alert( $("[name=boardRegForm]").serialize()  ); // serialize 확인용 테스트 
-            return;                                         // serialize 확인용 테스트 
+            // return;                                         // serialize 확인용 테스트 
+
             // --------------------------------------------
             // 현재 화면에서 페이지 이동 없이(=비동기방식으로)
             // 서버쪽 boardRegProc.do 로 접속하여 게시판 글쓰기를 하고 
@@ -68,7 +69,7 @@
                 ,success  : function( responseHTML ){
                     
 
-
+                    location.replace("/boardList.do")
 
                 }
                 // ----------------------------------------------------------
