@@ -52,9 +52,11 @@ public class LoginController {
     @RequestMapping( value="/loginForm.do")
     public ModelAndView loginForm( ){
 
-        System.out.print("접속 성공, 로그인화면 진입했습니다..!");
-        System.out.print("  ");
-        System.out.print("==================================");
+        System.out.print("==================================\r");  
+
+        System.out.print("접속 성공, 로그인화면 진입했습니다..!\r");   
+
+        System.out.print("==================================\r");   
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
