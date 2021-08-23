@@ -26,6 +26,10 @@
 
             location.replace('/boardRegForm.do');
 
+            <% System.out.print("============================\r"); %>
+            <% System.out.print("boardList.jsp 접속 성공!!\r"); %>
+            <% System.out.print("============================\r"); %>
+
         }
 
 
