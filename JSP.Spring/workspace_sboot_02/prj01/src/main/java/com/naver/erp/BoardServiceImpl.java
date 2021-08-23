@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class BoardServiceImpl {
+public class BoardServiceImpl implements BoardService{
 
 	
 	// ****************************************************
