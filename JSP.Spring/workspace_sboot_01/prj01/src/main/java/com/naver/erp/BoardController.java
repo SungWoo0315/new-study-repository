@@ -102,6 +102,7 @@ public class BoardController {
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
+        System.out.println("LoginController 수행완료\r");
         return mav;
 
 
