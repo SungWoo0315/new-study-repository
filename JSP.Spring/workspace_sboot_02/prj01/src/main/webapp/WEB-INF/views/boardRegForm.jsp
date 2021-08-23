@@ -143,6 +143,7 @@
         <input type="reset" value="다시작성">
         <input type="button" value="목록보기" onclick="document.boardListForm.submit();">
         
+        <input type="hidden" name="b_no" value="1">
 </form>
     
         
