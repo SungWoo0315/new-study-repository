@@ -19,18 +19,29 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 
-
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 가상주소 /boardList.do 로 접근하면 호출되는 메소드 선언
+    //      @RequestMapping 내부에, method="RequestMethod.POST" 가 없으므로
+    //      가상주소 /boardList.do 로 접근 시 get 또는 post 방식 접근 모두 허용한다. 
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     @RequestMapping( value = "/boardList.do" )
     public ModelAndView getBoardList(
 
 
-
-
-
     ){
 
-        return 1;
-
+        // ***************************************
+        // [ModelAndView 객체] 생성하기
+        // ***************************************
+        ModelAndView mav = new ModelAndView();
+        // ***************************************
+        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // ***************************************
+        mav.setViewName("boardList.jsp");
+        // ***************************************
+        // [ModelAndView 객체] 리턴하기
+        // ***************************************
+        return mav;
     }
 
 }
