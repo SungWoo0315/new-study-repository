@@ -72,26 +72,25 @@ public class BoardController {
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     @RequestMapping( value="/boardRegProc.do")
     public ModelAndView insertBoard( 
+        // **********************************************
+        // 파라미터값을 저장할 [BoardDTO 객체]를 매개변수로 선언
+        // **********************************************
+            // [파라미터명]과 [BoardDTO 객체]의 [속성변수명]이 같으면
+            // setter 메소드가 작동되어 [파라미터값]이 [속성변수]에 저장된다.
+            // [속성변수명]에 대응하는 [파라미터명]이 없으면 setter 메소드가 작동되지 않는다.
+            // [속성변수명]에 대응하는 [파라미터명]이 있는데 [파라미터값]이 없으면
+            // [속성변수]의 자료형에 관계없이 무조건 null 값이 저장된다.
+            // 이때 [속성변수]의 자료형이 기본형일 경우 null 값이 저장될 수 없어 에러가 발생한다. 
+            // 이런 에러를 피하려면 파라미터값이 기본형이거나 속성변수의 자료형을 String 으로 해야한다.
+            // 이런 에러가 발생하면 메소드안의 실행구문은 하나도 실행되지 않음에 주의한다.
+            // 매개변수로 들어온 [DTO 객체]는 이 메소드가 끝난 후 호출되는 JSP 페이지로 그대로 이동한다.
+            // 즉, HttpServletRequest 객체에 boardDTO 라는 키값명으로 저장된다.  
 
-    
+        BoardDTO boardDTO
         
-        HttpServletRequest request
-
     ){
 
-        String writer = request.getParameter("writer");
-        String subject = request.getParameter("subject");
-        String email = request.getParameter("email");
-        String content = request.getParameter("content");
-        String pwd = request.getParameter("pwd");
         
-        System.out.println("==============================================\r ");
-        System.out.println("BoardController.boardRegProc.do => 파라미터명 writer => " + writer);
-        System.out.println("LoginController.boardRegProc.do => 파라미터명 subject => " + subject);
-        System.out.println("LoginController.boardRegProc.do => 파라미터명 email => " + email);
-        System.out.println("LoginController.boardRegProc.do => 파라미터명 content => " + content);
-        System.out.println("LoginController.boardRegProc.do => 파라미터명 pwd => " + pwd);
-        System.out.println("==============================================\r ");
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
@@ -100,7 +99,7 @@ public class BoardController {
         // ***************************************
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
         // ***************************************
-        mav.setViewName("boardList.jsp");
+        mav.setViewName("boardRegProc.jsp");
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
