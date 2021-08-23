@@ -123,7 +123,7 @@
                             // ------------------------------------
                             if( idCnt == 1 ){
                                 alert("로그인 성공!")	// 테스트용 확인.  
-                                // location.replace("/boardList.do")
+                                location.replace("/boardList.do") // boardList 로 이동.
                             }
                             // ------------------------------------
                             // 그렇지 않으면, 즉, 아이디, 암호가 존재하지 않으면
