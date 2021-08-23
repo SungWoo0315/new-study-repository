@@ -19,6 +19,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 
- 
+
+    @RequestMapping( value = "/boardList.do" )
+    public ModelAndView getBoardList(
+
+
+
+
+
+    ){
+
+        return 1;
+
+    }
 
 }
