@@ -55,8 +55,7 @@ public class LoginController {
 	public ModelAndView loginForm() {
 		
         System.out.println( "=================================");  
-		System.out.print("정상 작동, 로그인 화면 접속 성공..!");  
-        System.out.println( "==");  
+		System.out.print("정상 작동, 로그인 화면 접속 성공..!\r");  
         System.out.println( "=================================");  
 
         // ---------------------------
