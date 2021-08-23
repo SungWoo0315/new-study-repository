@@ -19,7 +19,14 @@
 <title>BoardList</title>
 
     <script>
+        // *****************************************
+        // [게시판 글쓰기 화면]으로 이동하는 함수 선언
+        // *****************************************
+        function goBoardRegForm( ){
 
+            location.replace('/boardRegForm.do');
+
+        }
 
 
     </script>
@@ -28,9 +35,17 @@
 </head>
 <body>
 
+    <center>
+    <span style="font-size:30px; font-weight: bold; color: orange;">
+        boardList.jsp 접속 성공!!
+    </span>
+    <center>
 
-    boardList.jsp 접속 성공!!
+        <hr>  
 
+    <center>
+    <a href="javascript:goBoardRegForm( );">[새글쓰기]</a>
+    </center>
 
 </body>
 
