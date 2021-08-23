@@ -17,7 +17,7 @@
 	<script>
 
 		<% System.out.print("============================\r"); %>
-		<% System.out.print("boardRegForm.jsp 접속 성공!!!\r"); %>
+		<% System.out.print("boardRegProc.jsp 접속 성공!!!\r"); %>
 		<% System.out.print("============================\r"); %>
 
 	</script>	
