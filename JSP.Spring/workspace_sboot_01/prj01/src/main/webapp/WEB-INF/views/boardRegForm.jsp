@@ -20,6 +20,19 @@
 
     <script>
 
+        // 테스트용 입력양식 고정값 넣어주는 코드.  
+        // 테스트가 끝나면 지우면 된다. 
+        // 주석처리하면 소스보기에서 보여지기 때문에 지우는것이 좋다.   
+        $(document).ready(function(){
+
+            // writer subject email content pwd
+            $(".writer").val("테스트");
+            $(".subject").val("테스트 제목을 쓰고있습니다.");
+            $(".email").val("abc@naver.com");
+            $(".content").val("테스트 내용을 쓰고있습니다.");
+            $(".pwd").val("1234");
+        })
+
         <% System.out.print("============================\r"); %>
         <% System.out.print("boardRegForm.jsp 접속 성공!!!\r"); %>
         <% System.out.print("============================\r"); %>
@@ -67,11 +80,50 @@
                 // 응답 메시지 안의 html 소스는 loginProc.jsp 의 실행 결과물이다.
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
+
+                    var msg = $(responseHTML).filter(".msg").text();
+                    msg = $.trim(msg);
+
+                    if( msg!=null && msg.length>0 ){
+                        alert(msg);
+                        return;
+                    }
                     
 
-                    location.replace("/boardRegProc.do")
+                    // location.replace("/boardRegProc.do") // boardRegProc.jsp 페이지 이동확인용.
 
                     alert(responseHTML) // boardRegProc.jsp 결과물 확인하기.  
+
+
+                    // 매개변수 responseHTML 안의 HTML 소스 문자열에 DB 연동 결과물을 뽑아
+                    // 현재 화면에 반영하는 등의 소스가 나온다.
+                    
+                    // alert(responseHTML);  // 테스트용 확인.
+
+                    // ------------------------------------
+                    // 매개변수로 들어온 html 소스에서 class="idCnt" 를 가진 태그가 끌어안고 있는 숫자 꺼내기.
+                    // 게시판 글 입력 성공 행의 개수 꺼내기.
+                    // 꺼낸 개수의 앞뒤 공백 제거하기
+                    // ------------------------------------
+                    var boardRegCnt = $(responseHTML).filter(".boardRegCnt").text();
+                    boardRegCnt = $.trim(boardRegCnt);
+                    boardRegCnt = parseInt(boardRegCnt,10);  // 정석적으로는 이렇게 해야 숫자변환된다. 
+                    // ------------------------------------
+                    // 만약 게시판 글 입력 성공 행의 개수가 1이면, 즉, 입력이 성공했으면
+                    // ------------------------------------
+                    if( boardRegCnt == 1 ){
+                        alert("새글쓰기 성공!")	// 테스트용 확인.  
+                        location.replace("/boardList.do")
+                    }
+                    // ------------------------------------
+                    // 그렇지 않고, 즉, 입력이 실패했으면
+                    // ------------------------------------
+                    else{
+                        alert("새글쓰기 실패...");
+                    }
+
+
+
 
                 }
                 // ----------------------------------------------------------
@@ -109,10 +161,10 @@
         <table border="1" style="border-collapse:collapse" cellpadding=5>
             <caption>새글쓰기</caption>
             <tr>
-                <th bgcolor="lightgray">이  름</th>
+                <th bgcolor="lightgray">이  름</th>  
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="10" name="writer" maxlength="10">
+                <input type="text" size="10" name="writer" class="writer" maxlength="10">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -120,7 +172,7 @@
                 <th bgcolor="lightgray">제  목</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="subject" maxlength="30">
+                <input type="text" size="40" name="subject" class="subject" maxlength="20">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -128,15 +180,15 @@
                 <th bgcolor="lightgray">이메일</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="email" maxlength="30">
+                <input type="text" size="40" name="email" class="email" maxlength="30">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">이메일</th>
+                <th bgcolor="lightgray">내용</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <textarea name="content" rows="13" cols="40"  maxlength="300"></textarea>
+                <textarea name="content" class="content" rows="13" cols="40"  maxlength="300"></textarea>
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -144,7 +196,7 @@
                 <th bgcolor="lightgray">비밀번호</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="password" size="8" name="pwd" maxlength="4">
+                <input type="password" size="8" name="pwd" class="pwd" maxlength="4">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -155,7 +207,7 @@
         <input type="button" value="목록보기" onclick="document.boardListForm.submit();">
     
         
-        <input type="hidden" name="b_no" value="1">
+        <!-- <input type="hidden" name="b_no" value="1"> -->
     
     
     </form>

@@ -30,6 +30,11 @@
     </span>
 
 		<hr> 
+
+	<span class="boardRegCnt"><%out.print( (int)request.getAttribute("boardRegCnt"));%></span>
+
+	<span class="msg"><%out.print( (String)request.getAttribute("msg"));%></span>
+
 	
 	
 </body>
