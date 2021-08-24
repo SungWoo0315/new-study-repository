@@ -76,8 +76,8 @@ public class BoardValidator implements Validator {
 			// Errors 객체에 속성변수명 "subject" 과 경고 메시지 저장하기
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 			String subject = dto.getSubject();
-			if( subject!=null && subject.length() >30) {
-				errors.rejectValue("subject", "제목은 30자이하 입니다.");
+			if( subject!=null && subject.length() >20) {
+				errors.rejectValue("subject", "제목은 20자이하 입니다.");
 			}
 
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
