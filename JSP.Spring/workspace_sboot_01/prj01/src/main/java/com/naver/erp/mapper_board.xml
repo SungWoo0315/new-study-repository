@@ -3,6 +3,14 @@
 
 <mapper namespace="com.naver.erp.BoardDAO">
 
+    <!-- ***************************************************** -->
+    <!-- 게시판 글 입력하는 insert 문을 내포한 insert 태그 선언 -->
+    <!-- ***************************************************** -->
+        <!-- pararmeterType 속성은 안에 내장된 쿼리 호출하면서 삽입되는 데이터의 자료형을 지정함. -->
+        <!-- insert 태그안에서는 resultType 속성이 없다. 리턴값은 자동으로 int 형이다. -->
+        <!-- insert, update, delete 태그도 동일하다. -->
+    <!-- ***************************************************** -->
+
     <insert id='insertBoard' parameterType="com.naver.erp.BoardDTO">
     
         insert into board(
@@ -20,12 +28,12 @@
 
         ) values(
             (select nvl(max(b_no),0)+1 from board)
-            ,#{subject}
-            ,#{writer}
+            ,#{subject} <!-- BoardDTO 객체의 subject 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            ,#{writer}  <!-- BoardDTO 객체의 writer 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
             ,0
-            ,#{content}
-            ,#{pwd}
-            ,#{email}
+            ,#{content} <!-- BoardDTO 객체의 content 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            ,#{pwd}     <!-- BoardDTO 객체의 pwd 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            ,#{email}   <!-- BoardDTO 객체의 email 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
             ,(select nvl(max(b_no),0)+1 from board)
             ,0
             ,0
