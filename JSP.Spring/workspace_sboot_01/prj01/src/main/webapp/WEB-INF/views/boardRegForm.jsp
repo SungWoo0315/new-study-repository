@@ -29,7 +29,7 @@
             $(".writer").val("테스트");
             $(".subject").val("테스트 제목을 쓰고있습니다.");
             $(".email").val("abc@naver.com");
-            $(".content").val("테스트 내용을 쓰고있습니다.\r테스트1\r테스트2");
+            $(".content").val("테스트 내용을 쓰고있습니다.");
             $(".pwd").val("1234");
         })
 
@@ -80,6 +80,14 @@
                 // 응답 메시지 안의 html 소스는 loginProc.jsp 의 실행 결과물이다.
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
+
+                    var msg = $(responseHTML).filter(".msg").text();
+                    msg = $.trim(msg);
+
+                    if( msg!=null && msg.length>0 ){
+                        alert(msg);
+                        return;
+                    }
                     
 
                     // location.replace("/boardRegProc.do") // boardRegProc.jsp 페이지 이동확인용.
@@ -177,7 +185,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">이메일</th>
+                <th bgcolor="lightgray">내용</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <textarea name="content" class="content" rows="13" cols="40"  maxlength="300"></textarea>
