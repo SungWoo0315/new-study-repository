@@ -172,7 +172,7 @@
                 <th bgcolor="lightgray">제  목</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="subject" class="subject" maxlength="30">
+                <input type="text" size="40" name="subject" class="subject" maxlength="20">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
