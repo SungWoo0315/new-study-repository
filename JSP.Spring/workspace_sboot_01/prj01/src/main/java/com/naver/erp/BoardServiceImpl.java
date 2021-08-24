@@ -37,6 +37,9 @@ public class BoardServiceImpl implements BoardService {
         // ---------------------------------------
         // 1개 게시판 글 입력 적용 행의 개수 리턴하기
         // ---------------------------------------
+       
+        System.out.println("BoardServiceImpl. insertBoard() 메서드 수행완료\r");
+       
         return boardRegCnt;
 
 
