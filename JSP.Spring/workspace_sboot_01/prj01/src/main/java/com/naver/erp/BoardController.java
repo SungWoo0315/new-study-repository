@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -96,7 +97,12 @@ public class BoardController {
             // 즉, HttpServletRequest 객체에 boardDTO 라는 키값명으로 저장된다.  
 
         BoardDTO boardDTO
-        
+        // **********************************************
+        // Error 객체를 관리하는 BindingResult 객체가 저장되어 들어오는 매개변수 bindingResult 선언
+        // **********************************************
+        , BindingResult bindingResult
+
+
     ){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("boardRegProc.jsp");
@@ -116,7 +122,16 @@ public class BoardController {
             // *********************************************
             // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
             // *********************************************
- 
+            // 유효성 체크 에러 메시지 저장할 변수 선언
+            String msg = "";
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 [에러 메시지] 문자 얻기
+
+            msg = check_BoardDTO( boardDTO, bindingResult );  
+
+
+
+
+
 
 
 
@@ -129,17 +144,17 @@ public class BoardController {
             // *********************************************
             int boardRegCnt = this.boardService.insertBoard(boardDTO); 
 
-
-            System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );
-            
+            System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
 
 
             // ***************************************
             // [ModelAndView 객체] 생성하기
             // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
             // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
+            // [ModelAndView 객체] 에 [유효성 체크 에러 메시지] 저장하기  
             // ***************************************
             mav.addObject("boardRegCnt", boardRegCnt);        
+            mav.addObject("msg", msg);        
             
 
             // ***************************************
@@ -157,6 +172,19 @@ public class BoardController {
         return mav;
 
 
+    }
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 게시판 입력 또는 수정 시 게시판 입력글의 입력양식의 유효성을 검사하고
+    // 문제가 있으면 경고 문자를 리턴하는 메소드 선언.
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    public String check_BoardDTO( BoardDTO boardDTO, BindingResult bindingResult ){
+        String checkMsg = "";
+
+        
+        return checkMsg;
     }
 
 }
