@@ -27,7 +27,8 @@ select * from login
         select count(*) from login where login_id='tom' and pwd='123'
 
 
+
 select * from board
 
-delete from board where b_no = 10
+delete from board where b_no >= 5
 
