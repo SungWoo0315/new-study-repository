@@ -116,9 +116,9 @@ public class BoardController {
         // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
         // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
         // *********************************************
-        // int boardRegCnt = this.boardService.insertBoard(boardDTO); 
+        int boardRegCnt = this.boardService.insertBoard(boardDTO); 
 
-
+        System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
@@ -132,7 +132,7 @@ public class BoardController {
         // [ModelAndView 객체] 리턴하기
         // ***************************************
 
-
+        mav.addObject("boardRegCnt", boardRegCnt);
         // ***************************************
         // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
         // ***************************************

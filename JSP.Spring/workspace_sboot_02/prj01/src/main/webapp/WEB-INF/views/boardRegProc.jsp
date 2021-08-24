@@ -26,6 +26,7 @@
 
 		<hr> 
 	
+    <span class="boardRegCnt"><%out.print( (int)request.getAttribute("boardRegCnt"));%></span>
 	
 </body>
 </html>

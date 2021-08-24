@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.naver.erp.BoardDAO">
+
+    <!-- ***************************************************** -->
+    <!-- 게시판 글 입력하는 insert 문을 내포한 insert 태그 선언 -->
+    <!-- ***************************************************** -->
+        <!-- pararmeterType 속성은 안에 내장된 쿼리 호출하면서 삽입되는 데이터의 자료형을 지정함. -->
+        <!-- insert 태그안에서는 resultType 속성이 없다. 리턴값은 자동으로 int 형이다. -->
+        <!-- insert, update, delete 태그도 동일하다. -->
+    <!-- ***************************************************** -->
+
+    <insert id='insertBoard' parameterType="com.naver.erp.BoardDTO">
+    
+        insert into board(
+
+            b_no
+            ,subject
+            ,writer
+            ,readcount
+            ,content
+            ,pwd
+            ,email
+            ,group_no
+            ,print_no
+            ,print_level
+
+        ) values(
+            (select nvl(max(b_no),0)+1 from board)
+            ,#{subject} <!-- BoardDTO 객체의 subject 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            ,#{writer}  <!-- BoardDTO 객체의 writer 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            ,0
+            ,#{content} <!-- BoardDTO 객체의 content 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            ,#{pwd}     <!-- BoardDTO 객체의 pwd 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            ,#{email}   <!-- BoardDTO 객체의 email 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            ,(select nvl(max(b_no),0)+1 from board)
+            ,0
+            ,0
+            
+
+        )
+    
+    </insert>
+
+    
+</mapper>  
+
+
+
+<!-- 위는 SQL 쿼리문,  -->
+<!-- DB 와 연동하여 BoardDAOImpl.java 에서 호출한 메소드 boardDTO 의 리턴값을 받아서, -->
+<!-- 쿼리문에서  -->
+<!-- insert 를 날린다.  -->
+
+
+
+
+
+
