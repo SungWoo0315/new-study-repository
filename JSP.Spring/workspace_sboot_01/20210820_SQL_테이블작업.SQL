@@ -29,5 +29,5 @@ select * from login
 
 select * from board
 
-delete from board where
+delete from board where b_no = 10
 
