@@ -98,48 +98,56 @@ public class BoardController {
         BoardDTO boardDTO
         
     ){
-
-        System.out.println( "====================\r" );
-        System.out.println( "BoardController 에서 받아오는 값 확인.\r" );
-        System.out.println( "getB_no => " + boardDTO.getB_no() );
-        System.out.println( "getSubject => " + boardDTO.getSubject() );
-        System.out.println( "getWriter => " + boardDTO.getWriter() );
-        System.out.println( "getContent => " + boardDTO.getContent() );
-        System.out.println( "getPwd => " + boardDTO.getPwd() );
-        System.out.println( "====================\r" );
-
-
-        // *********************************************
-        // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
-        // *********************************************
-
-        // *********************************************
-        // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
-        // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
-        // *********************************************
-        int boardRegCnt = this.boardService.insertBoard(boardDTO); 
-
-
-        System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );
-        
-
-
-        // ***************************************
-        // [ModelAndView 객체] 생성하기
-        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
-        // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
-        // ***************************************
         ModelAndView mav = new ModelAndView();
         mav.setViewName("boardRegProc.jsp");
-        mav.addObject("boardRegCnt", boardRegCnt);        
-        
+
+        try{
+
+            System.out.println( "====================\r" );
+            System.out.println( "BoardController 에서 받아오는 값 확인.\r" );
+            System.out.println( "getB_no => " + boardDTO.getB_no() );
+            System.out.println( "getSubject => " + boardDTO.getSubject() );
+            System.out.println( "getWriter => " + boardDTO.getWriter() );
+            System.out.println( "getContent => " + boardDTO.getContent() );
+            System.out.println( "getPwd => " + boardDTO.getPwd() );
+            System.out.println( "====================\r" );
 
 
-        // ***************************************
-        // [ModelAndView 객체] 리턴하기
-        // ***************************************
-        
-        System.out.println("BoardController. insertBoard() 메서드 수행완료\r");
+            // *********************************************
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
+            // *********************************************
+
+            // *********************************************
+            // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
+            // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
+            // *********************************************
+            int boardRegCnt = this.boardService.insertBoard(boardDTO); 
+
+
+            System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );
+            
+
+
+            // ***************************************
+            // [ModelAndView 객체] 생성하기
+            // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+            // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
+            // ***************************************
+            mav.addObject("boardRegCnt", boardRegCnt);        
+            
+
+            // ***************************************
+            // [ModelAndView 객체] 리턴하기
+            // ***************************************
+            
+            System.out.println("BoardController. insertBoard() 메서드 수행완료");
+        }catch(Exception ex){
+            
+            System.out.println("예외처리 발생, 조치바람!!");
+
+            mav.addObject("boardRegCnt", -1); 
+            
+        }    
         return mav;
 
 
