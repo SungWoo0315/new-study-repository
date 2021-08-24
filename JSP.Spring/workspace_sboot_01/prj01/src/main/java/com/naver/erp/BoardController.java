@@ -139,7 +139,7 @@ public class BoardController {
         // [ModelAndView 객체] 리턴하기
         // ***************************************
         
-        System.out.println("BoardController 수행완료\r");
+        System.out.println("BoardController. insertBoard() 메서드 수행완료\r");
         return mav;
 
 
