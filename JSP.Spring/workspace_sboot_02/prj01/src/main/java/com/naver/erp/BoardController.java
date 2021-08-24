@@ -17,9 +17,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 	
-    // @Autowired
-    // private BoardService boardService;
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 속성변수 boardService 선언하고 [BoardService 인터페이스]를 구현한 클래스를 찾아 객체 생성해 객체의 메위주를 저장.
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+        // @Autowired 역할 -> 속성변수에 붙은 자료형인 [인터페이스]를 구현할 [클래스]를 객체화하여 객체의 메위주를 저장한다.
+        // [인터페이스]를 구현한 [클래스]가 1개가 아니면 에러가 발생한다.  
+        // 단, @Autowired( required=false ) 로 선언하여 [인터페이스]를 구현할 [클래스]가 0개 이어도 에러없이 null 이 저장된다.    
+    @Autowired
+    private BoardService boardService;
 
+    
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 가상주소 /boardList.do 로 접근하면 호출되는 메소드 선언
     //      @RequestMapping 내부에, method="RequestMethod.POST" 가 없으므로
