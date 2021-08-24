@@ -19,7 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 
-
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 속성변수 boardService 선언하고 [BoardService 인터페이스]를 구현한 클래스를 찾아 객체 생성해 객체의 메위주를 저장.
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+        // @Autowired 역할 -> 속성변수에 붙은 자료형인 [인터페이스]를 구현할 [클래스]를 객체화하여 객체의 메위주를 저장한다.
+        // [인터페이스]를 구현한 [클래스]가 1개가 아니면 에러가 발생한다.  
+        // 단, @Autowired( required=false ) 로 선언하여 [인터페이스]를 구현할 [클래스]가 0개 이어도 에러없이 null 이 저장된다.    
     @Autowired
     private BoardService boardService;
 
@@ -112,7 +117,7 @@ public class BoardController {
         // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
         // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
         // *********************************************
-        // int boardRegCnt = this.boardService.insertBoard(boardDTO); 
+        int boardRegCnt = this.boardService.insertBoard(boardDTO); 
 
 
 
