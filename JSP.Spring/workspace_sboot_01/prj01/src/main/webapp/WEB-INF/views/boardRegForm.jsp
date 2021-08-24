@@ -69,9 +69,40 @@
                 ,success  : function( responseHTML ){
                     
 
-                    location.replace("/boardRegProc.do")
+                    // location.replace("/boardRegProc.do") // boardRegProc.jsp 페이지 이동확인용.
 
                     alert(responseHTML) // boardRegProc.jsp 결과물 확인하기.  
+
+
+                    // 매개변수 responseHTML 안의 HTML 소스 문자열에 DB 연동 결과물을 뽑아
+                    // 현재 화면에 반영하는 등의 소스가 나온다.
+                    
+                    // alert(responseHTML);  // 테스트용 확인.
+
+                    // ------------------------------------
+                    // 매개변수로 들어온 html 소스에서 class="idCnt" 를 가진 태그가 끌어안고 있는 숫자 꺼내기.
+                    // 즉, 아이디, 암호의 존재 개수 꺼내기.
+                    // 꺼낸 존재 개수의 앞뒤 공백 제거하기
+                    // ------------------------------------
+                    var boardRegCnt = $(responseHTML).filter(".boardRegCnt").text();
+                    boardRegCnt = $.trim(boardRegCnt);
+                    // boardRegCnt = parseInt(boardRegCnt,10);  // 정석적으로는 이렇게 해야 숫자변환된다. 
+                    // ------------------------------------
+                    // 만약 아이디, 암호의 존재가 1이면, 즉, 존재하면
+                    // ------------------------------------
+                    if( boardRegCnt == 1 ){
+                        alert("새글쓰기 성공!")	// 테스트용 확인.  
+                        location.replace("/boardList.do")
+                    }
+                    // ------------------------------------
+                    // 그렇지 않으면, 즉, 아이디, 암호가 존재하지 않으면
+                    // ------------------------------------
+                    else{
+                        alert("새글쓰기 실패...")
+                    }
+
+
+
 
                 }
                 // ----------------------------------------------------------
@@ -155,7 +186,7 @@
         <input type="button" value="목록보기" onclick="document.boardListForm.submit();">
     
         
-        <input type="hidden" name="b_no" value="1">
+        <!-- <input type="hidden" name="b_no" value="1"> -->
     
     
     </form>
