@@ -46,6 +46,7 @@ public class BoardDAOImpl implements BoardDAO {
             ,boardDTO                             
         );
 
+        System.out.println("BoardDAOImpl. sqlSession.insert() 메서드 수행완료\r");
 
         return boardRegCnt;
     }
