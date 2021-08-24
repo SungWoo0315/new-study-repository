@@ -120,25 +120,25 @@ public class BoardController {
         int boardRegCnt = this.boardService.insertBoard(boardDTO); 
 
 
+        System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );
+        
+
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
+        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
         // ***************************************
         ModelAndView mav = new ModelAndView();
-        // ***************************************
-        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
-        // ***************************************
         mav.setViewName("boardRegProc.jsp");
+        mav.addObject("boardRegCnt", boardRegCnt);        
+        
+
+
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
-
-
-        // ***************************************
-        // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
-        // ***************************************
-
-
+        
         System.out.println("BoardController 수행완료\r");
         return mav;
 
