@@ -20,6 +20,11 @@
 
     <script>
 
+        $(document).ready(function(){
+            // writer subject email content pwd
+            $(".")
+        })
+
         <% System.out.print("============================\r"); %>
         <% System.out.print("boardRegForm.jsp 접속 성공!!!\r"); %>
         <% System.out.print("============================\r"); %>
@@ -98,7 +103,7 @@
                     // 그렇지 않고, 즉, 입력이 실패했으면
                     // ------------------------------------
                     else{
-                        alert("새글쓰기 실패...")
+                        alert("새글쓰기 실패...");
                     }
 
 
@@ -140,10 +145,10 @@
         <table border="1" style="border-collapse:collapse" cellpadding=5>
             <caption>새글쓰기</caption>
             <tr>
-                <th bgcolor="lightgray">이  름</th>
+                <th bgcolor="lightgray">이  름</th>  
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="10" name="writer" maxlength="10">
+                <input type="text" size="10" name="writer" class="writer" maxlength="10">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -151,7 +156,7 @@
                 <th bgcolor="lightgray">제  목</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="subject" maxlength="30">
+                <input type="text" size="40" name="subject" class="subject" maxlength="30">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -159,7 +164,7 @@
                 <th bgcolor="lightgray">이메일</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="email" maxlength="30">
+                <input type="text" size="40" name="email" class="email" maxlength="30">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -167,7 +172,7 @@
                 <th bgcolor="lightgray">이메일</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <textarea name="content" rows="13" cols="40"  maxlength="300"></textarea>
+                <textarea name="content" class="content" rows="13" cols="40"  maxlength="300"></textarea>
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -175,7 +180,7 @@
                 <th bgcolor="lightgray">비밀번호</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="password" size="8" name="pwd" maxlength="4">
+                <input type="password" size="8" name="pwd" class="pwd" maxlength="4">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
