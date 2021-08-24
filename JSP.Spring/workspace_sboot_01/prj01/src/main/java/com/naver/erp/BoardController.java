@@ -182,8 +182,26 @@ public class BoardController {
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     public String check_BoardDTO( BoardDTO boardDTO, BindingResult bindingResult ){
         String checkMsg = "";
+        // *******************************************
+        // BoardDTO 객체에 저장된 데이터의 유효성 체크할 BoardValidator 객체 생성하기
+        // BoardValidator 객체의 validate 메소드 호출하여 유효성 체크 실행하기.  
+        // *******************************************
+        BoardValidator boardValidator = new BoardValidator();
+        boardValidator.validate(
+            boardDTO            // 유효성 체크할 DTO 객체
+            , bindingResult     // 유효성 체크 결과 관리하는 BindingResult 객체
 
-        
+        );
+        // *******************************************
+        // 만약 BindingResult 객체의 hasErrors() 메소드 호출하여 true 값을 얻으면
+        // *******************************************
+        if( bindingResult.hasErrors() ) {
+            // 변수 checkMsg 에 BoardValidator 객체에 저장된 경고문구 얻어 저장하기.
+            checkMsg = bindingResult.getFieldError().getCode();
+        }
+        // *******************************************
+        // checkMsg 안의 문자 리턴하기.
+        // *******************************************
         return checkMsg;
     }
 
