@@ -128,34 +128,35 @@ public class BoardController {
 
             msg = check_BoardDTO( boardDTO, bindingResult );  
 
+            // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
+            if( msg.equals("") ){
+
+                // *********************************************
+                // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
+                // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
+                // *********************************************
+                int boardRegCnt = this.boardService.insertBoard(boardDTO); 
+
+                System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
 
 
-
-
-
-
-
-
-
-
-            // *********************************************
-            // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
-            // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
-            // *********************************************
-            int boardRegCnt = this.boardService.insertBoard(boardDTO); 
-
-            System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
-
-
-            // ***************************************
-            // [ModelAndView 객체] 생성하기
-            // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
-            // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
-            // [ModelAndView 객체] 에 [유효성 체크 에러 메시지] 저장하기  
-            // ***************************************
-            mav.addObject("boardRegCnt", boardRegCnt);        
-            mav.addObject("msg", msg);        
+                // ***************************************
+                // [ModelAndView 객체] 생성하기
+                // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+                // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
+                // [ModelAndView 객체] 에 [유효성 체크 에러 메시지] 저장하기  
+                // ***************************************
+                mav.addObject("boardRegCnt", boardRegCnt);        
+                mav.addObject("msg", msg);        
             
+            }
+            // 만약 msg 안에 "" 가 저장되어 있지 않으면, 즉, 유효성 체크를 통과 못했으면
+            else{
+                
+                mav.addObject("boardRegCnt", 0);        
+                mav.addObject("msg", msg); 
+
+            }
 
             // ***************************************
             // [ModelAndView 객체] 리턴하기
@@ -167,6 +168,7 @@ public class BoardController {
             System.out.println("예외처리 발생, 조치바람!!");
 
             mav.addObject("boardRegCnt", -1); 
+            mav.addObject("msg", "서버에서 문제 발생! 서버 관리자에게 문의 하세요."); 
             
         }    
         return mav;
