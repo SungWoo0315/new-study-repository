@@ -26,9 +26,9 @@ select * from login
 
         select count(*) from login where login_id='tom' and pwd='123'
 
+--------------------------------------------------------------------------------
 
-
-select * from board
+select * from board order by b_no asc
 
 delete from board where b_no >= 5
 
