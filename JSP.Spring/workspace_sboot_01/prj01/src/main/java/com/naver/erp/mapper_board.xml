@@ -10,7 +10,6 @@
             b_no
             ,subject
             ,writer
-            ,reg_date
             ,readcount
             ,content
             ,pwd
@@ -21,8 +20,16 @@
 
         ) values(
             (select nvl(max(b_no),0)+1 from board)
-            ,
-
+            ,#{subject}
+            ,#{writer}
+            ,0
+            ,#{content}
+            ,#{pwd}
+            ,#{email}
+            ,(select nvl(max(b_no),0)+1 from board)
+            ,0
+            ,0
+            
 
         )
     
