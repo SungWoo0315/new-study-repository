@@ -86,7 +86,7 @@
                     // ------------------------------------
                     var boardRegCnt = $(responseHTML).filter(".boardRegCnt").text();
                     boardRegCnt = $.trim(boardRegCnt);
-                    // boardRegCnt = parseInt(boardRegCnt,10);  // 정석적으로는 이렇게 해야 숫자변환된다. 
+                    boardRegCnt = parseInt(boardRegCnt,10);  // 정석적으로는 이렇게 해야 숫자변환된다. 
                     // ------------------------------------
                     // 만약 아이디, 암호의 존재가 1이면, 즉, 존재하면
                     // ------------------------------------
