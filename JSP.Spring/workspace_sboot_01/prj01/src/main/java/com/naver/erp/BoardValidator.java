@@ -40,7 +40,6 @@ public class BoardValidator implements Validator {
 			//        }
 
 
-
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 			// ValidationUtils 클래스의 rejectIfEmptyOrWhitespace 메소드 호출하여
@@ -50,7 +49,7 @@ public class BoardValidator implements Validator {
 			ValidationUtils.rejectIfEmptyOrWhitespace(
 				errors                       // Errors 객체
 				, "writer"                   // BoardDTO 객체의 속성변수명
-				, "작성자명 입력요망"         // BoardDTO 객체의 속성변수명이 비거나 공백으로 구성되어 있을때 경고 문구
+				, "작성자명 입력요망"        // BoardDTO 객체의 속성변수명이 비거나 공백으로 구성되어 있을때 경고 문구
 			);
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 			// BoardDTO 객체의 속성변수명 "writer" 저장된 데이터의 길이가 10자 보다 크면
@@ -70,17 +69,16 @@ public class BoardValidator implements Validator {
 			ValidationUtils.rejectIfEmptyOrWhitespace(
 				errors                       // Errors 객체
 				, "subject"                   // BoardDTO 객체의 속성변수명
-				, "작성자명 입력요망"         // BoardDTO 객체의 속성변수명이 비거나 공백으로 구성되어 있을때 경고 문구
+				, "제목 입력요망"         // BoardDTO 객체의 속성변수명이 비거나 공백으로 구성되어 있을때 경고 문구
 			);
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 			// BoardDTO 객체의 속성변수명 "subject" 저장된 데이터의 길이가 30자 보다 크면
 			// Errors 객체에 속성변수명 "subject" 과 경고 메시지 저장하기
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 			String subject = dto.getSubject();
-			if( subject!=null && subject.length() >10) {
+			if( subject!=null && subject.length() >30) {
 				errors.rejectValue("subject", "제목은 30자이하 입니다.");
 			}
-
 
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
@@ -97,10 +95,23 @@ public class BoardValidator implements Validator {
 			// BoardDTO 객체의 속성변수명 "content" 저장된 데이터의 길이가 30자 보다 크면
 			// Errors 객체에 속성변수명 "content" 과 경고 메시지 저장하기
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
-			String content = dto.getSubject();
-			if( content!=null && content.length() >10) {
+			String content = dto.getContent();
+			if( content!=null && content.length() >300) {
 				errors.rejectValue("content", "내용은 공백없이 300자이하 입니다.");
 			}
+
+			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+			// ValidationUtils 클래스의 rejectIfEmptyOrWhitespace 메소드 호출하여
+			//		BoardDTO 객체의 속성변수명 writer 이 비거나 공백으로 구성되어 있으면
+			//		경고 메시지를 Errors 객체에 저장하기
+			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+			ValidationUtils.rejectIfEmptyOrWhitespace(
+				errors                    // Errors 객체
+				, "email"                 // BoardDTO 객체의 속성변수명
+				, "이메일 입력요망"         // BoardDTO 객체의 속성변수명이 비거나 공백으로 구성되어 있을때 경고 문구
+			);
+
 
 
 			//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
