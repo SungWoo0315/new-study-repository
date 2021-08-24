@@ -20,9 +20,17 @@
 
     <script>
 
+        // 테스트용 입력양식 고정값 넣어주는 코드.  
+        // 테스트가 끝나면 지우면 된다. 
+        // 주석처리하면 소스보기에서 보여지기 때문에 지우는것이 좋다.   
         $(document).ready(function(){
+
             // writer subject email content pwd
-            $(".")
+            $(".writer").val("테스트");
+            $(".subject").val("테스트 제목을 쓰고있습니다.");
+            $(".email").val("abc@naver.com");
+            $(".content").val("테스트 내용을 쓰고있습니다.\r테스트1\r테스트2");
+            $(".pwd").val("1234");
         })
 
         <% System.out.print("============================\r"); %>
