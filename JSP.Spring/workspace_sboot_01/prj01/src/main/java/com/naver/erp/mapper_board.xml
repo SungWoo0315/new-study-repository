@@ -52,7 +52,8 @@
     <select id="getBoardList" resultType="java.util.HashMap">
     
         select 
-            subject                          "subject"
+            b_no||''                         "b_no"
+            ,subject                         "subject"
             ,writer                          "writer"
             ,readcount||''                   "readcount"
             ,to_char(reg_date, 'YY-MM-DD (dy)', 'NLS_DATE_LANGUAGE = Korean') "reg_date"
