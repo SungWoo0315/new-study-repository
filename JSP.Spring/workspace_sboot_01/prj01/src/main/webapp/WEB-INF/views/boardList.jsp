@@ -77,7 +77,10 @@
             for( int i=0; i<boardList.size(); i++ ){
 
                 Map<String,String> map = boardList.get(i);
+
+
                 String b_no = map.get("b_no");
+
                 String subject = map.get("subject");
                 String writer = map.get("writer");
                 String readcount = map.get("readcount");
@@ -93,7 +96,7 @@
                     xxx = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
                 if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
-                out.println("<tr><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+                out.println("<tr onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
             }
         }    
