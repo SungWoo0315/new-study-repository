@@ -40,6 +40,26 @@
 
         }
 
+        // *****************************************
+        // [게시판 상세보기 화면]으로 이동하는 함수 선언
+        // *****************************************
+        function goBoardContentForm( b_no ){
+
+            // alert("상세보기 화면 활성화 성공! PK 번호는 => " + b_no) // 테스트 확인용. PK 번호 확인. 
+            
+            // ---------------------------------------
+            // name=boardContentForm 가진 form 태그 내부의 name=b_no 가진 입력 양식에 클릭한 행의 
+            // 게시판 번호 저장하기
+            // ---------------------------------------
+            $("[name=boardContentForm] [name=b_no]").val(b_no) 
+            // ---------------------------------------
+            // name=boardContentForm 가진 form 태그 내부의 action 값의 URL 주소로 서버에 접속하기
+            // 즉, 상세보기 화면으로 이동하기  
+            // ---------------------------------------
+            document.boardContentForm.submit();
+            
+        }
+
 
     </script>
 
@@ -96,13 +116,25 @@
                     xxx = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
                 if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
-                out.println("<tr onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+                out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
             }
         }    
     %>
     </table>
 
+    <!-- ********************************************************* -->
+    <!-- 게시판 상세보기 화면 이동하는 form 태그 선언하기 -->
+    <!-- ********************************************************* -->
+    <form name="boardContentForm" method="post" action="/boardContentForm.do">
+        <!-- ------------------------------------------------------ -->
+        <!-- [클릭한 게시판 글의 고유번호]가 저장되는 [hidden 입력양식] 선언. -->
+        <!-- ------------------------------------------------------ -->
+        <input type="text" name="b_no">  
+    
+    
+    
+    </form>
 
     </center>
 
