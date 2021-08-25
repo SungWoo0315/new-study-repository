@@ -1,5 +1,8 @@
 package com.naver.erp;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.taglibs.standard.lang.jstl.test.beans.PublicInterface2;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +53,22 @@ public class BoardDAOImpl implements BoardDAO {
 
         return boardRegCnt;
     }
+
+    // ******************************************************
+    // [검색한 게시판 목록] 리턴하는 메소드 선언
+    // ******************************************************
+    public List<Map<String,String>>getBoardList(){
+
+
+        List<Map<String,String>> boardList = this.sqlSession.selectList(
+
+            "com.naver.erp.BoardDAO.getBoardList"  // 실행할 SQL 구문의 위치 지정  
+
+         );
+        return boardList;
+    }
+
+
 
 
 
