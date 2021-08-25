@@ -35,6 +35,7 @@ delete from board where b_no >= 5
 
 select
     subject
+    ,rownum
     ,writer
     ,readcount||''
     ,reg_date
