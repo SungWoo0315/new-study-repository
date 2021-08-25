@@ -7,6 +7,14 @@
     <!-- 모든 JSP 페이지 상단에는 무조건 아래 설정이 들어간다. -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+
+<!-- ************************************************** -->
+<!-- 현재 JSP 페이지에서 사용할 클래스의 패키지 수입하기 -->
+<!-- ************************************************** -->
+<%@ page import="java.util.Map"%>
+<%@ page import="java.util.List"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -49,6 +57,30 @@
 
     <center>
     <a href="javascript:goBoardRegForm( );">[새글쓰기]</a>
+
+    <table border="1">
+        <tr><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
+
+
+    
+
+    <%
+        List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
+
+        for( int i=0; i<boardList.size(); i++ ){
+
+            Map<String,String> map = boardList.get(i);
+            String subject = map.get("subject");
+            String writer = map.get("writer");
+            String readcount = map.get("readcount");
+            String reg_date = map.get("reg_date");
+            out.println("<tr><td>" + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+
+        }
+    %>
+    </table>
+
+
     </center>
 
 </body>
