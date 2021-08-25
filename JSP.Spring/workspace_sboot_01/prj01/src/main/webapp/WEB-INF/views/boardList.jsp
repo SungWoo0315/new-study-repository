@@ -90,9 +90,9 @@
 
                 for( int j=0; j<print_level_int; j++){
 
-                    xxx = xxx + "&nbsp;&nbsp;&nbsp;";
+                    xxx = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
-                if( print_level_int > 0 ){xxx = xxx + "&#10551;"; }
+                if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
                 out.println("<tr><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
             }
