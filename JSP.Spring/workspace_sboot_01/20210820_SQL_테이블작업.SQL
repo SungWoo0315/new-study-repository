@@ -32,3 +32,12 @@ select * from board order by b_no asc
 
 delete from board where b_no >= 5
 
+
+select
+    subject
+    ,writer
+    ,readcount||''
+    ,reg_date
+from
+    board
+
