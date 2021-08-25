@@ -64,7 +64,10 @@ public class BoardDAOImpl implements BoardDAO {
 
             "com.naver.erp.BoardDAO.getBoardList"  // 실행할 SQL 구문의 위치 지정  
 
-         );
+        );
+
+        System.out.println("게시판 목록 List 값 확인 =>" + boardList);
+        
         return boardList;
     }
 
