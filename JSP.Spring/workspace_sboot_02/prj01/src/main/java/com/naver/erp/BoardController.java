@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;  //  @Autowired 어노테이션 사용으로 import
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +26,15 @@ public class BoardController {
         // 단, @Autowired( required=false ) 로 선언하여 [인터페이스]를 구현할 [클래스]가 0개 이어도 에러없이 null 이 저장된다.    
     @Autowired
     private BoardService boardService;
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 속성변수 boardDAO 선언하고 [BoardDAO 인터페이스]를 구현한 클래스를 찾아 객체 생성해 객체의 메위주를 저장.
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+        // @Autowired 역할 -> 속성변수에 붙은 자료형인 [인터페이스]를 구현할 [클래스]를 객체화하여 객체의 메위주를 저장한다.
+        // [인터페이스]를 구현한 [클래스]가 1개가 아니면 에러가 발생한다.  
+        // 단, @Autowired( required=false ) 로 선언하여 [인터페이스]를 구현할 [클래스]가 0개 이어도 에러없이 null 이 저장된다.    
+    @Autowired
+    private BoardDAO boardDAO;
 
     
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -95,53 +105,116 @@ public class BoardController {
             // 즉, HttpServletRequest 객체에 boardDTO 라는 키값명으로 저장된다.  
 
         BoardDTO boardDTO
+        // **********************************************
+        // Error 객체를 관리하는 BindingResult 객체가 저장되어 들어오는 매개변수 bindingResult 선언
+        // **********************************************
+        , BindingResult bindingResult
         
     ){
-
-        System.out.println( "====================\r" );
-        System.out.println( "BoardController 에서 받아오는 값 확인.\r" );
-        System.out.println( "getB_no => " + boardDTO.getB_no() );
-        System.out.println( "getSubject => " + boardDTO.getSubject() );
-        System.out.println( "getWriter => " + boardDTO.getWriter() );
-        System.out.println( "getContent => " + boardDTO.getContent() );
-        System.out.println( "getPwd => " + boardDTO.getPwd() );
-        System.out.println( "====================\r" );
-
-
-        // *********************************************
-        // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
-        // *********************************************
-
-        // *********************************************
-        // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
-        // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
-        // *********************************************
-        int boardRegCnt = this.boardService.insertBoard(boardDTO); 
-
-        System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
-
-        // ***************************************
-        // [ModelAndView 객체] 생성하기
-        // ***************************************
         ModelAndView mav = new ModelAndView();
-        // ***************************************
-        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
-        // ***************************************
         mav.setViewName("boardRegProc.jsp");
-        // ***************************************
-        // [ModelAndView 객체] 리턴하기
-        // ***************************************
 
-        mav.addObject("boardRegCnt", boardRegCnt);
-        // ***************************************
-        // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
-        // ***************************************
+        try{
 
 
-        System.out.println("BoardController 수행완료\r");
+            System.out.println( "====================\r" );
+            System.out.println( "BoardController 에서 받아오는 값 확인.\r" );
+            System.out.println( "getB_no => " + boardDTO.getB_no() );
+            System.out.println( "getSubject => " + boardDTO.getSubject() );
+            System.out.println( "getWriter => " + boardDTO.getWriter() );
+            System.out.println( "getContent => " + boardDTO.getContent() );
+            System.out.println( "getPwd => " + boardDTO.getPwd() );
+            System.out.println( "====================\r" );
+
+
+            // *********************************************
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
+            // *********************************************
+            // 유효성 체크 에러 메시지 저장할 변수 선언
+            String msg = "";
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 [에러 메시지] 문자 얻기
+
+            msg = check_BoardDTO( boardDTO, bindingResult );  
+
+            // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
+            if( msg.equals("") ){
+
+                // *********************************************
+                // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
+                // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
+                // *********************************************
+                int boardRegCnt = this.boardService.insertBoard(boardDTO); 
+
+                System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
+
+                // ***************************************
+                // [ModelAndView 객체] 생성하기
+                // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+                // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기 
+                // [ModelAndView 객체] 에 [유효성 체크 에러 메시지] 저장하기 
+                // ***************************************
+                mav.addObject("boardRegCnt", boardRegCnt);
+                mav.addObject("msg", msg);    
+            
+            }
+            // 만약 msg 안에 "" 가 저장되어 있지 않으면, 즉, 유효성 체크를 통과 못했으면
+            else{
+                
+                mav.addObject("boardRegCnt", 0);        
+                mav.addObject("msg", msg); 
+
+            }
+
+            // ***************************************
+            // [ModelAndView 객체] 리턴하기
+            // ***************************************
+
+            System.out.println("BoardController. insertBoard() 메서드 수행완료");
+        }catch(Exception ex){
+        
+            System.out.println("예외처리 발생, 조치바람!!");
+    
+            mav.addObject("boardRegCnt", -1); 
+            mav.addObject("msg", "서버에서 문제 발생! 서버 관리자에게 문의 하세요."); 
+            
+        }    
         return mav;
 
 
     }
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 게시판 입력 또는 수정 시 게시판 입력글의 입력양식의 유효성을 검사하고
+    // 문제가 있으면 경고 문자를 리턴하는 메소드 선언.
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    public String check_BoardDTO( BoardDTO boardDTO, BindingResult bindingResult ){
+        String checkMsg = "";
+        // *******************************************
+        // BoardDTO 객체에 저장된 데이터의 유효성 체크할 BoardValidator 객체 생성하기
+        // BoardValidator 객체의 validate 메소드 호출하여 유효성 체크 실행하기.  
+        // *******************************************
+        BoardValidator boardValidator = new BoardValidator();
+        boardValidator.validate(
+            boardDTO            // 유효성 체크할 DTO 객체
+            , bindingResult     // 유효성 체크 결과 관리하는 BindingResult 객체
+
+        );
+        // *******************************************
+        // 만약 BindingResult 객체의 hasErrors() 메소드 호출하여 true 값을 얻으면
+        // *******************************************
+        if( bindingResult.hasErrors() ) {
+            // 변수 checkMsg 에 BoardValidator 객체에 저장된 경고문구 얻어 저장하기.
+            checkMsg = bindingResult.getFieldError().getCode();
+        }
+        // *******************************************
+        // checkMsg 안의 문자 리턴하기.
+        // *******************************************
+        return checkMsg;
+    }
+
+
+
 	
 }
