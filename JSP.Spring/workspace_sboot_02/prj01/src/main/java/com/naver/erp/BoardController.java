@@ -1,6 +1,7 @@
 package com.naver.erp;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;  //  @Autowired �
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 //---------------------------------------------------------------
@@ -49,6 +51,13 @@ public class BoardController {
     ){
 
         // ***************************************
+        // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
+        // ***************************************
+        List<Map<String, String>> boardList = this.boardDAO.getBoardList(  );
+
+
+
+        // ***************************************
         // [ModelAndView 객체] 생성하기
         // ***************************************
         ModelAndView mav = new ModelAndView();
@@ -56,6 +65,13 @@ public class BoardController {
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
         // ***************************************
         mav.setViewName("boardList.jsp");
+
+        // ***************************************
+        // [ModelAndView 객체] 에 [게시판 목록 검색 결과]를 저장하기
+        // ***************************************
+        mav.addObject("boardList", boardList);
+
+
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
@@ -212,6 +228,35 @@ public class BoardController {
         // checkMsg 안의 문자 리턴하기.
         // *******************************************
         return checkMsg;
+    }
+
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // /boardContentForm.do 접속 시 호출되는 메소드 선언
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @RequestMapping( value="/boardContentForm.do" )
+
+    public ModelAndView goBoardContentForm( 
+            @RequestParam( value = "b_no" ) int b_no
+    ){
+
+        // ******************************************
+        // [BoardServiceImpl 객체]의 getBoard 메소드 호출로 [1개의 게시판 글]을 BoardDTO 객체에 담아오기
+        // ******************************************
+        // BoardDTO board = this.boardService.getBoard(b_no);
+
+
+        //*******************************************
+        // [ModelAndView 객체] 생성하기
+        // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
+        //*******************************************
+        ModelAndView mav = new ModelAndView( );
+        mav.setViewName("boardContentForm.jsp");
+        mav.addObject("b_no", b_no);
+
+        //*******************************************
+        // [ModelAndView 객체] 리턴하기
+        //*******************************************
+        return mav;
     }
 
 

@@ -1,5 +1,6 @@
 package com.naver.erp;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -105,5 +106,23 @@ public class LoginDAOImpl implements LoginDAO {
             // com/naver/erp 경로에 xml 파일 만들어주어야 한다.
             // ------------------------------------------------------
 	
+
+
+	// ******************************************************
+	// [검색한 게시판 목록] 리턴하는 메소드 선언
+	// ******************************************************
+	public List<Map<String,String>>getBoardList(){
+
+
+		List<Map<String,String>> boardList = this.sqlSession.selectList(
+
+			"com.naver.erp.BoardDAO.getBoardList"  // 실행할 SQL 구문의 위치 지정  
+			
+		);
+
+		System.out.println("게시판 목록 List 값 확인 =>" + boardList);
+		
+		return boardList;
+	}
 
 }
