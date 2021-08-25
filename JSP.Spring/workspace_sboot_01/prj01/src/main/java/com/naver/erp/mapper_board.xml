@@ -46,5 +46,20 @@
     
     </insert>
 
+    <!-- ********************************************************************* -->
+    <!-- 게시판 검색하는 select 문을 내포한 select 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <select id="getBoardList" resultType="java.util.HashMap">
+    
+        select 
+            subject
+            ,writer
+            ,readcount
+            ,reg_date
+        from
+            board
+    
+    </select>
+
     
 </mapper>
