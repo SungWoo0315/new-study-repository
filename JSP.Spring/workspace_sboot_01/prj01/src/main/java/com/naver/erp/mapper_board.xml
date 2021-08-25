@@ -55,7 +55,7 @@
             subject                          "subject"
             ,writer                          "writer"
             ,readcount||''                   "readcount"
-            ,to_char(reg_date, 'YYYY-MM-DD') "reg_date"
+            ,to_char(reg_date, 'YYYY-MM-DD (dy)') "reg_date"
             ,print_level||''                 "print_level"     
         from
             board
