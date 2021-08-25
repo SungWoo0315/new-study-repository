@@ -204,7 +204,7 @@
         <div style="height: 6px;"></div> <!-- 공백조절용 div 태그 -->
         <input type="button" value="저장" onclick="checkBoardRegForm()">
         <input type="reset" value="다시작성">
-        <input type="button" value="목록보기" onclick="document.boardListForm.submit();">
+        <input type="button" value="목록보기" onclick="location.replace('/boardList.do')">
     
         
         <!-- <input type="hidden" name="b_no" value="1"> -->
