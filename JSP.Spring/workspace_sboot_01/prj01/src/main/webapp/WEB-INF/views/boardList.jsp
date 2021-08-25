@@ -92,7 +92,7 @@
 
                     xxx = xxx + "&nbsp;&nbsp;&nbsp;";
                 }
-                if( print_level_int > 0 ){xxx = xxx + "↘"; }
+                if( print_level_int > 0 ){xxx = xxx + "&#10551;"; }
                 out.println("<tr><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
             }
