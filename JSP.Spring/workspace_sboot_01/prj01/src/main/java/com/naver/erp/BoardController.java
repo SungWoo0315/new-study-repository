@@ -1,6 +1,7 @@
 package com.naver.erp;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,15 @@ public class BoardController {
     private BoardService boardService;
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 속성변수 boardDAO 선언하고 [BoardDAO 인터페이스]를 구현한 클래스를 찾아 객체 생성해 객체의 메위주를 저장.
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+        // @Autowired 역할 -> 속성변수에 붙은 자료형인 [인터페이스]를 구현할 [클래스]를 객체화하여 객체의 메위주를 저장한다.
+        // [인터페이스]를 구현한 [클래스]가 1개가 아니면 에러가 발생한다.  
+        // 단, @Autowired( required=false ) 로 선언하여 [인터페이스]를 구현할 [클래스]가 0개 이어도 에러없이 null 이 저장된다.    
+    @Autowired
+    private BoardDAO boardDAO;
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 가상주소 /boardList.do 로 접근하면 호출되는 메소드 선언
     //      @RequestMapping 내부에, method="RequestMethod.POST" 가 없으므로
     //      가상주소 /boardList.do 로 접근 시 get 또는 post 방식 접근 모두 허용한다. 
@@ -39,6 +49,16 @@ public class BoardController {
 
 
     ){
+
+        // ***************************************
+        // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
+        // ***************************************
+        List<Map<String, String>> boardList = this.boardDAO.getBoardList(  );
+
+
+
+
+
         // ***************************************
         // [ModelAndView 객체] 생성하기
         // ***************************************
@@ -52,6 +72,14 @@ public class BoardController {
         // ***************************************
         return mav;
     }
+
+
+
+
+
+
+
+
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 가상주소  /boardRegForm.do 로 접근하면 호출되는 메소드 선언
