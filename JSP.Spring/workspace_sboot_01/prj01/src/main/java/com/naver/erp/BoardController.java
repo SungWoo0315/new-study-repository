@@ -242,4 +242,38 @@ public class BoardController {
         return checkMsg;
     }
 
+
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // /boardContentForm.do 접속 시 호출되는 메소드 선언
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @RequestMapping( value="/boardContentForm.do" )
+    public ModelAndView goBoardContentForm( 
+            @RequestParam(value="b_no") int b_no
+    ){
+
+        // ******************************************
+        // [BoardServiceImpl 객체]의 getBoard 메소드 호출로 [1개의 게시판 글]을 BoardDTO 객체에 담아오기
+        // ******************************************
+        // BoardDTO board = this.boardService.getBoard(b_no);
+
+
+        //*******************************************
+        // [ModelAndView 객체] 생성하기
+        // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
+        //*******************************************
+        ModelAndView mav = new ModelAndView( );
+        mav.setViewName("boardContentForm.jsp");
+        mav.addObject("b_no", b_no);
+
+        //*******************************************
+        // [ModelAndView 객체] 리턴하기
+        //*******************************************
+        return mav;
+    }
+
+
+
+
+
+
 }
