@@ -58,8 +58,11 @@
     <center>
     <a href="javascript:goBoardRegForm( );">[새글쓰기]</a>
 
-    <table border="1">
-        <tr><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
+    <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
+    
+
+    <table border="1" style="border-collapse:collapse" cellpadding=5>
+        <tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
 
 
     
@@ -67,16 +70,19 @@
     <%
         List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
 
-        for( int i=0; i<boardList.size(); i++ ){
+        if( boardList!=null){
+            for( int i=0; i<boardList.size(); i++ ){
 
-            Map<String,String> map = boardList.get(i);
-            String subject = map.get("subject");
-            String writer = map.get("writer");
-            String readcount = map.get("readcount");
-            String reg_date = map.get("reg_date");
-            out.println("<tr><td>" + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+                Map<String,String> map = boardList.get(i);
+                String b_no = map.get("b_no");
+                String subject = map.get("subject");
+                String writer = map.get("writer");
+                String readcount = map.get("readcount");
+                String reg_date = map.get("reg_date");
+                out.println("<tr><td>"+ b_no +"<td>" + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
-        }
+            }
+        }    
     %>
     </table>
 
