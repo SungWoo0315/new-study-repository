@@ -52,16 +52,16 @@
     <select id="getBoardList" resultType="java.util.HashMap">
     
         select 
-            to_char(((select count(*) from board) - rownum) + 1 ) "b_no"
+            to_char((select count(*) from board) - b_no + 1)  "b_no"
             ,subject        "subject"
             ,writer        "writer"
             ,readcount||'' "readcount"
             ,to_char(reg_date, 'YYYY-MM-DD') "reg_date"
         from
             board
-        order by 
-            group_no desc
-            ,print_no asc
+        --order by 
+            --group_no desc
+            --,print_no asc
     
     </select>
 
