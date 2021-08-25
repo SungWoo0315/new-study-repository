@@ -44,6 +44,9 @@
     %>
 
 
+    <hr> 
+    <input type="button" value="목록보기" onclick="location.replace('/boardList.do')">
+
 
 </body>
 
