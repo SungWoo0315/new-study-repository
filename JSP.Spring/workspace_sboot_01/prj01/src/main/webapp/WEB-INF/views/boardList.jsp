@@ -71,6 +71,9 @@
         List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
 
         if( boardList!=null){
+
+            int totCnt = boardList.size();
+
             for( int i=0; i<boardList.size(); i++ ){
 
                 Map<String,String> map = boardList.get(i);
@@ -79,7 +82,18 @@
                 String writer = map.get("writer");
                 String readcount = map.get("readcount");
                 String reg_date = map.get("reg_date");
-                out.println("<tr><td>"+ b_no +"<td>" + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+                String print_level = map.get("print_level");
+
+                int print_level_int = Integer.parseInt(print_level,10);
+
+                String xxx = "";
+
+                for( int j=0; j<print_level_int; j++){
+
+                    xxx = xxx + "&nbsp;&nbsp;&nbsp;";
+                }
+                if( print_level_int > 0 ){xxx = xxx + "↘"; }
+                out.println("<tr><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
             }
         }    
