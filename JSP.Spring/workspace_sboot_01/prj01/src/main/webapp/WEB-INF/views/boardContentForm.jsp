@@ -22,6 +22,11 @@
 
         $(document).ready(function(){
 
+            <% System.out.println("============================"); %>
+            <% System.out.println("boardContentForm.jsp 접속 성공!!"); %>
+            <% System.out.println("PK 값 출력 => " + (int)request.getAttribute("b_no") ); %>
+            <% System.out.println("============================"); %>
+
         })
 
 
