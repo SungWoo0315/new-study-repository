@@ -51,14 +51,15 @@
 
     <%
         BoardDTO boardDTO = (BoardDTO)request.getAttribute("boardDTO");
-        int b_no = boardDTO.getB_no();
-        String subject = boardDTO.getSubject();
-        String writer = boardDTO.getWriter();
-        String reg_date = boardDTO.getReg_date();
-        String content = boardDTO.getContent();
-        int readcount = boardDTO.getReadcount();
-        String email = boardDTO.getEmail();
-
+        if( boardDTO!=null ){
+            int b_no = boardDTO.getB_no();
+            String subject = boardDTO.getSubject();
+            String writer = boardDTO.getWriter();
+            String reg_date = boardDTO.getReg_date();
+            String content = boardDTO.getContent();
+            int readcount = boardDTO.getReadcount();
+            String email = boardDTO.getEmail();
+        
     %>
 
     <b>[글 상세 보기]</b>
@@ -95,8 +96,12 @@
     <input type="button" value="댓글쓰기" onclick="goBoardRegFrom();">&nbsp;
     <input type="button" value="수정/삭제" onclick="goBoardUpDelForm();">&nbsp;
     <input type="button" value="글 목록 보기" onclick="location.replace('/boardList.do')">
-    
-
+    <%
+    }
+    else{
+        out.print("<script>alert('삭제된 글입니다.'); location.replace('/boardList.do');</script>");
+    }
+    %>
 
     <hr> 
 

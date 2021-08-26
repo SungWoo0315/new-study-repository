@@ -257,6 +257,7 @@ public class BoardController {
         BoardDTO boardDTO = this.boardService.getBoard(b_no);
 
 
+        if( boardDTO!=null ){
         // ========================================================================
         String email = boardDTO.getEmail(); // 테스트용, 출력값 콘솔확인.
 
@@ -264,7 +265,7 @@ public class BoardController {
         System.out.println("PK 값 출력 컨트롤러에서 => " + b_no); // 테스트용, 출력값 콘솔확인. 
         System.out.println("PK 값 출력 컨트롤러에서 boardDTO 객체 메위주 => " + boardDTO); // 테스트용, 출력값 콘솔확인.  
         // ========================================================================
-
+        }
 
 
         //*******************************************

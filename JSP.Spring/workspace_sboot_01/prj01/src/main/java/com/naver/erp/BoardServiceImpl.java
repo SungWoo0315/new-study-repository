@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService {
         // [조회수 증가]하고 수정한 행의 개수를 얻는다
         // -------------------------------------------
         int updateCnt = this.boardDAO.updateReadcount(b_no);
-
+        if( updateCnt == 0 ){ return null; }
         // -------------------------------------------
         // BoardDAOImpl 객체의 getBoard 메소드를 호출하여
         // [1개 게시판 글]을 얻는다
