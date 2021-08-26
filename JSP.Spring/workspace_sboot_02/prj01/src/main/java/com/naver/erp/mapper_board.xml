@@ -43,6 +43,26 @@
     
     </insert>
 
+    <!-- ********************************************************************* -->
+    <!-- 게시판 검색하는 select 문을 내포한 select 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <select id="getBoardList" resultType="java.util.HashMap">
+
+    select 
+        b_no||''                                "b_no"
+        ,subject                          "subject"
+        ,writer                          "writer"
+        ,readcount||''                   "readcount"
+        ,to_char(reg_date, 'YYYY-MM-DD (dy)') "reg_date"
+        ,print_level||''                 "print_level"     
+    from
+        board
+    order by 
+        group_no desc
+        ,print_no asc
+    
+    </select>
+
     
 </mapper>  
 

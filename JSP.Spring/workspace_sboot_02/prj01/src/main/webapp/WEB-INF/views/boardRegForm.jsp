@@ -15,6 +15,20 @@
    
 	<script>	
 
+        // 테스트용 입력양식 고정값 넣어주는 코드.  
+        // 테스트가 끝나면 지우면 된다. 
+        // 주석처리하면 소스보기에서 보여지기 때문에 지우는것이 좋다.   
+        $(document).ready(function(){
+
+            // writer subject email content pwd
+            $(".writer").val("테스트");
+            $(".subject").val("테스트 제목을 쓰고있습니다.");
+            $(".email").val("abc@naver.com");
+            $(".content").val("테스트 내용을 쓰고있습니다.\r테스트1\r테스트2");
+            $(".pwd").val("1234");
+        })
+
+
         <% System.out.print("============================\r"); %>
         <% System.out.print("boardRegForm.jsp 접속 성공!!!\r"); %>
         <% System.out.print("============================\r"); %>
@@ -60,6 +74,15 @@
                 // 응답 메시지 안의 html 소스는 loginProc.jsp 의 실행 결과물이다.
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
+
+                    var msg = $(responseHTML).filter(".msg").text();
+                    msg = $.trim(msg);
+
+                    if( msg!=null && msg.length>0 ){
+                        alert(msg);
+                        return;
+                    }
+                                    
                     
                     // location.replace("/boardRegProc.do")
 
@@ -128,7 +151,7 @@
                 <th bgcolor="lightgray">이  름</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="10" name="writer" maxlength="10">
+                <input type="text" size="10" name="writer" class="writer" maxlength="10">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -136,7 +159,7 @@
                 <th bgcolor="lightgray">제  목</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="subject" maxlength="30">
+                <input type="text" size="40" name="subject" class="subject" maxlength="30">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -144,15 +167,15 @@
                 <th bgcolor="lightgray">이메일</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="email" maxlength="30">
+                <input type="text" size="40" name="email" class="email" maxlength="30">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">이메일</th>
+                <th bgcolor="lightgray">내  용</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <textarea name="content" rows="13" cols="40"  maxlength="300"></textarea>
+                <textarea name="content" class="content" rows="13" cols="40"  maxlength="300"></textarea>
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -160,7 +183,7 @@
                 <th bgcolor="lightgray">비밀번호</th>
                 <td>
                 <!-- ------------------------------------------------- -->
-                <input type="password" size="8" name="pwd" maxlength="4">
+                <input type="password" size="8" name="pwd" class="pwd" maxlength="4">
                 <!-- ------------------------------------------------- -->
                 </td>
             </tr>
@@ -168,7 +191,7 @@
         <div style="height: 6px;"></div> <!-- 공백조절용 div 태그 -->
         <input type="button" value="저장" onclick="checkBoardRegForm()">
         <input type="reset" value="다시작성">
-        <input type="button" value="목록보기" onclick="document.boardListForm.submit();">
+        <input type="button" value="목록보기" onclick="location.replace('/boardList.do')">
         
         <!-- <input type="hidden" name="b_no" value="1"> -->
 </form>
