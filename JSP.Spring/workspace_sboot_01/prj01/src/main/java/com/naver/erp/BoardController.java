@@ -254,7 +254,7 @@ public class BoardController {
         // ******************************************
         // [BoardServiceImpl 객체]의 getBoard 메소드 호출로 [1개의 게시판 글]을 BoardDTO 객체에 담아오기
         // ******************************************
-        // BoardDTO board = this.boardService.getBoard(b_no);
+        BoardDTO board = this.boardService.getBoard(b_no);
 
 
         //*******************************************
