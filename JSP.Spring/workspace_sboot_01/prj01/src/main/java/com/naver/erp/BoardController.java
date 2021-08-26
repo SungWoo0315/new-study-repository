@@ -286,8 +286,31 @@ public class BoardController {
         return mav;
     }
 
-
-
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // /boardUpDelForm.do 접속 시 호출되는 메소드 선언
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @RequestMapping( value="/boardUpDelForm.do" )
+    public ModelAndView goBoardUpDelForm( 
+        // -------------------------------
+        // "b_no" 라는 파라미터명의 파라미터값이 저장되는 매개변수 b_no 선언
+        // 수정 또는 삭제할 게시판 고유번호가 들어오는 매개변수 선언
+        // -------------------------------
+        @RequestParam(value="b_no") int b_no
+    ){
+        //*******************************************
+        // boardDAOImp 객체의 getBoard 메소드 호출로
+        // 1개의 게시판글을 boardDTO 객체에 담아서 가져오기
+        //*******************************************
+        BoardDTO boardDTO = this.boardDAO.getBoard(b_no);
+        //*******************************************
+        // [ModelAndView 객체] 생성하기
+        // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
+        //*******************************************
+        ModelAndView mav = new ModelAndView( );
+        mav.setViewName("boardUpDelForm.jsp");
+        mav.addObject("boardDTO", boardDTO);
+        return mav;
+    }
 
 
 
