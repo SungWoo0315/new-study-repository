@@ -263,12 +263,12 @@ public class BoardController {
         // ========================================================================
         String email = boardDTO.getEmail(); // 테스트용, 출력값 콘솔확인.
 
-        System.out.println("email 값 출력 컨트롤러에서 => " + email); // 테스트용, 출력값 콘솔확인. 
-        System.out.println("PK 값 출력 컨트롤러에서 => " + b_no); // 테스트용, 출력값 콘솔확인. 
+        System.out.println("상세목록 email 값 출력 컨트롤러에서 => " + email); // 테스트용, 출력값 콘솔확인. 
+        System.out.println("상세목록 PK 값 출력 컨트롤러에서 => " + b_no); // 테스트용, 출력값 콘솔확인. 
         System.out.println("PK 값 출력 컨트롤러에서 boardDTO 객체 메위주 => " + boardDTO); // 테스트용, 출력값 콘솔확인.  
         // ========================================================================
         }else{
-            System.out.println("null 값이나 다른값이 들어와 에러가 났습니다. 확인하세요.");
+            System.out.println("null 값이 들어와 에러가 났습니다. 확인하세요.");
         }
 
 
