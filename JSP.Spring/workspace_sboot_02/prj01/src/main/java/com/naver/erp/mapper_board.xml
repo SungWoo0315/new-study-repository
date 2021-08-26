@@ -63,6 +63,45 @@
     
     </select>
 
+
+    <!-- ********************************************************************* -->
+    <!-- 게시판 1개 글 검색하는 select 문을 내포한 select 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <select id="getBoard" parameterType="int" resultType="com.naver.erp.BoardDTO">
+
+        select
+
+            b_no            "b_no"
+            ,subject        "subject"
+            ,writer         "writer"
+            ,to_char(reg_date, 'YY-MM-DD (dy) HH24:MI:SS')       "reg_date"
+            ,readcount      "readcount"
+            ,content        "content"
+            ,pwd            "pwd"
+            ,email          "email"
+            ,group_no       "group_no"
+            ,print_no       "print_no"
+            ,print_level    "print_level"
+
+        from board 
+
+        where 
+            b_no=#{b_no}
+    
+    </select>
+
+
+
+    <!-- ********************************************************************* -->
+    <!-- 조회수 1 증가하는 즉, 수정하는 update 문을 내포한 update 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <update id="updateReadcount" parameterType="int">
+    
+       update board set readcount = readcount + 1 where b_no=#{b_no}
+    
+    </update>
+
+
     
 </mapper>  
 

@@ -242,7 +242,21 @@ public class BoardController {
         // ******************************************
         // [BoardServiceImpl 객체]의 getBoard 메소드 호출로 [1개의 게시판 글]을 BoardDTO 객체에 담아오기
         // ******************************************
-        // BoardDTO board = this.boardService.getBoard(b_no);
+        BoardDTO boardDTO = this.boardService.getBoard(b_no);
+
+        System.out.println("boardDTO 객체 메위주 => " + boardDTO);
+
+        if( boardDTO!=null ){
+        // ========================================================================
+        String email = boardDTO.getEmail(); // 테스트용, 출력값 콘솔확인.
+
+        System.out.println("상세목록 email 값 출력 컨트롤러에서 => " + email); // 테스트용, 출력값 콘솔확인. 
+        System.out.println("상세목록 PK 값 출력 컨트롤러에서 => " + b_no); // 테스트용, 출력값 콘솔확인. 
+        System.out.println("PK 값 출력 컨트롤러에서 boardDTO 객체 메위주 => " + boardDTO); // 테스트용, 출력값 콘솔확인.  
+        // ========================================================================
+        }else{
+            System.out.println("null 값이 들어와 에러가 났습니다. 확인하세요.");
+        }
 
 
         //*******************************************
@@ -251,7 +265,7 @@ public class BoardController {
         //*******************************************
         ModelAndView mav = new ModelAndView( );
         mav.setViewName("boardContentForm.jsp");
-        mav.addObject("b_no", b_no);
+        mav.addObject("boardDTO", boardDTO);
 
         //*******************************************
         // [ModelAndView 객체] 리턴하기
@@ -259,6 +273,31 @@ public class BoardController {
         return mav;
     }
 
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // /boardUpDelForm.do 접속 시 호출되는 메소드 선언
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @RequestMapping( value="/boardUpDelForm.do" )
+    public ModelAndView goBoardUpDelForm( 
+        // -------------------------------
+        // "b_no" 라는 파라미터명의 파라미터값이 저장되는 매개변수 b_no 선언
+        // 수정 또는 삭제할 게시판 고유번호가 들어오는 매개변수 선언
+        // -------------------------------
+        @RequestParam(value="b_no") int b_no
+    ){
+        //*******************************************
+        // boardDAOImp 객체의 getBoard 메소드 호출로
+        // 1개의 게시판글을 boardDTO 객체에 담아서 가져오기
+        //*******************************************
+        BoardDTO boardDTO = this.boardDAO.getBoard(b_no);
+        //*******************************************
+        // [ModelAndView 객체] 생성하기
+        // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
+        //*******************************************
+        ModelAndView mav = new ModelAndView( );
+        mav.setViewName("boardUpDelForm.jsp");
+        mav.addObject("boardDTO", boardDTO);
+        return mav;
+    }
 
 
 	

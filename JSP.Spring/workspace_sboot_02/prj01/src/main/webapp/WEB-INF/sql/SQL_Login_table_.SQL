@@ -50,11 +50,11 @@ b_no        number(9)                        			--> 게시판 글 고유번호
 
 
 
-select * from board;
+select * from board order by b_no;
 
 
+delete from board where b_no = 28
 
 
-
-
+commit
 
