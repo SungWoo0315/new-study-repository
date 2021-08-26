@@ -104,5 +104,24 @@
     </update>
 
 
+
+    <!-- ********************************************************************* -->
+    <!-- 글 수정하는 update 문을 내포한 update 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <update id="updateChange" parameterType="int">
+    
+        update 
+            board
+        set 
+            subject=#{subject}         
+            ,writer=#{writer} 
+            ,reg_date
+            ,content=#{content} 
+        where 
+            b_no=#{b_no}
+    
+    </update>
+
+
     
 </mapper>
