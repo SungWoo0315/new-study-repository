@@ -21,6 +21,7 @@
             b_no
             ,subject
             ,writer
+            --,reg_date       
             ,readcount
             ,content
             ,pwd
@@ -73,10 +74,11 @@
     <select id="getBoard" parameterType="int" resultType="com.naver.erp.BoardDTO">
 
         select
-        
+
             b_no            "b_no"
             ,subject        "subject"
             ,writer         "writer"
+            ,reg_date       "reg_date"
             ,readcount      "readcount"
             ,content        "content"
             ,pwd            "pwd"
