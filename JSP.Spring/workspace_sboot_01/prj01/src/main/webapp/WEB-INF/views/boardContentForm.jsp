@@ -60,7 +60,7 @@
         String email = boardDTO.getEmail();
 
 
-        System.out.println("PK 값 출력 => " + b_no);
+       
 
     %>
 
