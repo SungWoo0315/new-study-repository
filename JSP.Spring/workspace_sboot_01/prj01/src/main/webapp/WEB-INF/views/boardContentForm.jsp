@@ -69,7 +69,7 @@
     <table border="1" style="border-collapse:collapse" cellpadding=5>
         <tr align="center">
             <th bgcolor="lightgray">글번호</th>
-            <td><% out.print(b_no); %></td>
+            <td><%=b_no%></td>
             <th bgcolor="lightgray">조회수</th>
             <td><% out.print(readcount); %></td>
         </tr>
