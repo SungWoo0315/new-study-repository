@@ -59,12 +59,12 @@
         int readcount = boardDTO.getReadcount();
         String email = boardDTO.getEmail();
 
-
-       
-
     %>
 
     <b>[글 상세 보기]</b>
+
+    <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
+
     <table border="1" style="border-collapse:collapse" cellpadding=5>
         <tr align="center">
             <th bgcolor="lightgray">글번호</th>
@@ -91,11 +91,14 @@
 
 
 
-    </table>
+    </table><br>
+    <input type="button" value="댓글쓰기" onclick="goBoardRegFrom();">&nbsp;
+    <input type="button" value="수정/삭제" onclick="goBoardUpDelForm();">&nbsp;
+    <input type="button" value="글 목록 보기" onclick="location.replace('/boardList.do')">
+    
 
 
     <hr> 
-    <input type="button" value="목록보기" onclick="location.replace('/boardList.do')">
 
 
 </body>
