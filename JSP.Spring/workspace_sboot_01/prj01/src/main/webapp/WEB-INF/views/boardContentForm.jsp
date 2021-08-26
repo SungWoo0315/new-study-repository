@@ -29,7 +29,15 @@
 
             
         })
-
+        // -----------------------------------------
+        // 게시판 수정/삭제 화면으로 이동하는 함수 선언
+        // -----------------------------------------
+        function goBoardUpDelForm(){
+            // -----------------------------------------
+            // name=boardUpDelForm 을 가진 form 태그의 action 값을 URL로 서버에 접속하라
+            // -----------------------------------------
+            document.boardUpDelForm.submit();
+        }
 
     </script>
 
@@ -51,8 +59,9 @@
 
     <%
         BoardDTO boardDTO = (BoardDTO)request.getAttribute("boardDTO");
+        int b_no = 0;
         if( boardDTO!=null ){
-            int b_no = boardDTO.getB_no();
+            b_no = boardDTO.getB_no();
             String subject = boardDTO.getSubject();
             String writer = boardDTO.getWriter();
             String reg_date = boardDTO.getReg_date();
@@ -102,6 +111,13 @@
         out.print("<script>alert('삭제된 글입니다.'); location.replace('/boardList.do');</script>");
     }
     %>
+
+    <!-- ****************************************************** -->
+    <!-- [게시판 수정/삭제] 화면으로 이동하는 form 태그 선언 -->
+    <!-- ****************************************************** -->
+    <form name="boardUpDelForm" method="POST" action="/boardUpDelForm.do">
+        <input type="hidden" name="b_no" value="<%=b_no%>">
+    </form>
 
     <hr> 
 
