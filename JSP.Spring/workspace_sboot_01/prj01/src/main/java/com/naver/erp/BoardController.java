@@ -257,6 +257,12 @@ public class BoardController {
         BoardDTO boardDTO = this.boardService.getBoard(b_no);
 
 
+        System.out.println("PK 값 출력 컨트롤러에서 => " + b_no); // 테스트용, 출력값 콘솔확인. 
+        System.out.println("PK 값 출력 컨트롤러에서 => " + b_no); // 테스트용, 출력값 콘솔확인.  
+        System.out.println("PK 값 출력 컨트롤러에서 boardDTO 객체 => " + boardDTO); // 테스트용, 출력값 콘솔확인.  
+
+
+
         //*******************************************
         // [ModelAndView 객체] 생성하기
         // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
