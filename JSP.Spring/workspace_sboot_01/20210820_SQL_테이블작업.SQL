@@ -32,6 +32,8 @@ select * from board order by b_no asc
 
 delete from board where b_no >= 5
 
+delete from board
+
 
 select
     subject
@@ -41,4 +43,14 @@ select
     ,reg_date
 from
     board
+
+
+--
+--조회수 초기화 하는 쿼리
+update board set readcount = 0 where b_no=27
+
+select * from board  -- 테이블 확인
+
+commit
+
 
