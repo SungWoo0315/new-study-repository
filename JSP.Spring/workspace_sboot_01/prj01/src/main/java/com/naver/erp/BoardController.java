@@ -254,7 +254,7 @@ public class BoardController {
         // ******************************************
         // [BoardServiceImpl 객체]의 getBoard 메소드 호출로 [1개의 게시판 글]을 BoardDTO 객체에 담아오기
         // ******************************************
-        BoardDTO board = this.boardService.getBoard(b_no);
+        BoardDTO boardDTO = this.boardService.getBoard(b_no);
 
 
         //*******************************************
@@ -263,7 +263,7 @@ public class BoardController {
         //*******************************************
         ModelAndView mav = new ModelAndView( );
         mav.setViewName("boardContentForm.jsp");
-        mav.addObject("b_no", b_no);
+        mav.addObject("boardDTO", boardDTO);
 
         //*******************************************
         // [ModelAndView 객체] 리턴하기
