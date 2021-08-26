@@ -78,7 +78,7 @@
             b_no            "b_no"
             ,subject        "subject"
             ,writer         "writer"
-            ,reg_date       "reg_date"
+            ,to_char(reg_date, 'YY-MM-DD (dy) HH24:MI:SS')       "reg_date"
             ,readcount      "readcount"
             ,content        "content"
             ,pwd            "pwd"
@@ -94,6 +94,14 @@
     
     </select>
 
+    <!-- ********************************************************************* -->
+    <!-- 조회수 1 증가하는 즉, 수정하는 update 문을 내포한 update 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <update id="updateReadcount" parameterType="int">
+    
+       update board set readcount = readcount + 1 where b_no=#{b_no}
+    
+    </update>
 
 
     

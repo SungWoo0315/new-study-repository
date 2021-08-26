@@ -102,5 +102,23 @@ public class BoardDAOImpl implements BoardDAO {
     }
 
 
+    // ******************************************************
+    // [게시판 글 조회수 증가하고 수정행의 개수] 리턴하는 메소드 선언
+    // ******************************************************
+    public int updateReadcount(int b_no) {
+        // ------------------------------------------------------------
+        // [SqlSessionTemplate 객체]의 update(~,~) 를 호출하여 [조회수 증가]하기
+        // ------------------------------------------------------------
+        int updateCnt = this.sqlSession.update(
+            
+            "com.naver.erp.BoardDAO.updateReadcount" // 실행할 SQL 구문의 위치 지정
+            ,b_no                                    // 실행할 SQL 구문에서 사용할 데이터 지정
+
+        );
+        return updateCnt;
+
+
+    }
+
 
 }
