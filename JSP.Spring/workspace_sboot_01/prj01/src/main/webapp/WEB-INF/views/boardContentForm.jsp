@@ -7,6 +7,11 @@
     <!-- 모든 JSP 페이지 상단에는 무조건 아래 설정이 들어간다. -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- ***************************************************** -->
+<!-- 현재 JSP 페이지에서 사용할 클래스 수입하기 -->
+<!-- ***************************************************** -->
+<%@ page import="com.naver.erp.BoardDTO"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -22,11 +27,7 @@
 
         $(document).ready(function(){
 
-            <% System.out.println("============================"); %>
-            <% System.out.println("boardContentForm.jsp 접속 성공!!"); %>
-            <% System.out.println("PK 값 출력 => " + (int)request.getAttribute("b_no") ); %>
-            <% System.out.println("============================"); %>
-
+            
         })
 
 
@@ -40,13 +41,57 @@
     <span style="font-size:30px; font-weight: bold; color: blue;">
         boardContentForm.jsp 접속 성공!!
     </span>
-    
+
+    <% System.out.println("============================"); %>
+    <% System.out.println("boardContentForm.jsp 접속 성공!!"); %>
+    <% System.out.println("============================"); %>
+
 
         <hr> 
 
     <%
-        out.print(  (int)request.getAttribute("b_no") );
+        BoardDTO boardDTO = (BoardDTO)request.getAttribute("boardDTO");
+        int b_no = boardDTO.getB_no();
+        String subject = boardDTO.getSubject();
+        String writer = boardDTO.getWriter();
+        String reg_date = boardDTO.getReg_date();
+        String content = boardDTO.getContent();
+        int readcount = boardDTO.getReadcount();
+        String email = boardDTO.getEmail();
+
+
+        System.out.println("PK 값 출력 => " + b_no);
+
     %>
+
+    <b>[글 상세 보기]</b>
+    <table border="1" style="border-collapse:collapse" cellpadding=5>
+        <tr align="center">
+            <th bgcolor="lightgray">글번호</th>
+            <td><% out.print(b_no); %></td>
+            <th bgcolor="lightgray">조회수</th>
+            <td><% out.print(readcount); %></td>
+        </tr>
+        <tr align="center">
+            <th bgcolor="lightgray">작성자</th>
+            <td><% out.print(writer); %></td>
+            <th bgcolor="lightgray">작성일</th>
+            <td><% out.print(reg_date); %></td>
+        </tr>
+        <tr align="center">
+            <th bgcolor="lightgray">글제목</th>
+            <td colspan="3"><% out.print(subject); %></td>
+        </tr>
+        <tr align="center">
+            <th bgcolor="lightgray">글내용</th>
+            <td colspan="3">
+                <textarea name="content" rows="13" cols="45" style="border: 0;" readonly><% out.print(content); %></textarea></td>
+        </tr>
+
+
+
+
+    </table>
 
 
     <hr> 
