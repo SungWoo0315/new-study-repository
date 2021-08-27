@@ -349,8 +349,12 @@ public class BoardController {
         if( upDel.equals("del") ){
             // 삭제 실행하고 삭제 적용행의 개수 얻기
             int boardUpDelCnt = this.boardService.deleteBoard(boardDTO);
+            mav.addObject("boardUpDelCnt", boardUpDelCnt);        
 
 
+
+
+            
 
 
         }
