@@ -352,11 +352,16 @@ public class BoardController {
             int boardUpDelCnt = this.boardService.deleteBoard(boardDTO);
             mav.addObject("boardUpDelCnt", boardUpDelCnt);        
 
-          
+            System.out.println( "====================" );
+            System.out.println( "BoardController 에서 /boardUpDelProc.do 접속." );
+            System.out.println( "삭제할 PK 번호 호출 getB_no => " + boardDTO.getB_no() );
             
 
 
         }
+
+
+
         // **********************************************
         // 만약 게시판 수정 모드이면 수정 실행하고 수정 적용행의 개수 얻기
         // **********************************************
@@ -383,7 +388,10 @@ public class BoardController {
                 // -----------------------------------------
                 // [ModelAndView 객체]에 [게시판 수정 적용행의 개수] 저장하기
                 // -----------------------------------------
-                mav.addObject("boardUpDelCnt", boardUpDelCnt);        
+                mav.addObject("boardUpDelCnt", boardUpDelCnt);  
+                
+                System.out.println( "유효성체크 통과." );
+                
 
             }
             // 만약 msg 안에 "" 가 저장되어 있지 않으면, 즉, 유효성 체크를 통과 못했으면
@@ -391,13 +399,17 @@ public class BoardController {
 
                 mav.addObject("boardUpDelCnt", 0);        
 
+                System.out.println( "유효성체크 통과 못함." );
+
                 
             }
 
 
         }
-
+        
         return mav;
+
+
 
 
     }
