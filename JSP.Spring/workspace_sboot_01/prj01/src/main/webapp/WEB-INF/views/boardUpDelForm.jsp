@@ -116,7 +116,7 @@
                     else if( boardUpDelCnt==1 ){
                         alert("수정 성공.");
 
-                        if(confirm("최종 수정 승인입니다. 진행하시려면 확인 눌러주세요.")==false) {return;}
+                        if(confirm("목록화면으로 이동할까요?")==false) {return;}
 
                         location.replace("/boardList.do")
 
