@@ -63,7 +63,7 @@
                 // $(".xxx").remove()       // 테스트 확인용.
                 // $("body").append("<div class=xxx>테스트 메시지.</div>")  // 테스트 확인용.
                 if(confirm("정말 수정 하시겠습니까??")==false) {return;}
-                $("[name=upDel]").val("up")
+                $("[name=upDel]").val("up");
                 
                 // --------------------------------------------
                 // 현재 화면에서 페이지 이동 없이(=비동기방식으로)
@@ -92,6 +92,22 @@
                 // 응답 메시지 안의 html 소스는 boardUpDelProc.jsp 의 실행 결과물이다.
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
+
+                    var result = $(responseHTML).filter(".result").text();
+
+                    alert("웹서버 통신 확인 => " + result)
+
+                    return;
+
+
+
+
+
+
+
+
+
+                    
 
                     var msg = $(responseHTML).filter(".msg").text();
                     msg = $.trim(msg);
