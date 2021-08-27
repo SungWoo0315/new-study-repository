@@ -102,20 +102,23 @@
                 // 응답 메시지 안의 html 소스는 boardUpDelProc.jsp 의 실행 결과물이다.
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
-
+                    // -----------------------------------------
                     var msg = $(responseHTML).filter(".msg").text();
-                    msg = $.trim(msg);
-
-                    if( msg!=null && msg.length>0 ){
-                        alert(msg);
-                        return;
-                    }
-
                     var boardUpDelCnt = $(responseHTML).filter(".boardUpDelCnt").text();
-                    boardUpDelCnt = $.trim(boardUpDelCnt);
-                    boardUpDelCnt = parseInt(boardUpDelCnt,10);  
+                    // -----------------------------------------
                     
                     if(upDel=="up"){
+
+                        msg = $.trim(msg);
+
+                        if( msg!=null && msg.length>0 ){
+                            alert(msg);
+                            return;
+                        }
+
+                        boardUpDelCnt = $.trim(boardUpDelCnt);
+                        boardUpDelCnt = parseInt(boardUpDelCnt,10);  
+
 
                         if( boardUpDelCnt==-1 ){
                             alert("게시판 글이 삭제 되었습니다.");
@@ -135,12 +138,35 @@
 
                         }
                         else{
-                            alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm")
+                            alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm : up ")
                         }
                     }
-                    else if( upDel=="del"){
+                    else if( upDel=="del" ){
 
-                        //????
+
+                        if( boardUpDelCnt == 1 ){
+                            alert("삭제 성공!");
+                            location.replace("/boardList.do")
+
+                        }
+                        else if( boardUpDelCnt == -1 ){
+                            alert("게시판 글이 이미 삭제 되었습니다.");
+                            location.replace("/boardList.do")
+
+                        }
+                        else if( boardUpDelCnt == -2 ){
+                            alert("암호가 틀립니다.");
+                            $("[name=pwd]").val("");
+                            $("[name=pwd]").focus();
+
+                        }
+                        else if( boardUpDelCnt == -3 ){
+                            alert("댓글이 있어 삭제가 불가능 합니다.");
+                        }
+                        else{
+                            alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm : del ")
+                        }
+                        
                     }
                     
 
