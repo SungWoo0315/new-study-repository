@@ -67,5 +67,36 @@ public class BoardServiceImpl implements BoardService {
 
     }
 
+    // ****************************************************
+    // [1개 게시판] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
+    // ****************************************************
+    public int updateBoard(BoardDTO boardDTO) {
+        // --------------------------------------
+        // [BoardDAOImpl 객체]의 getBoardCnt 메소드를 호출하여
+        // 수정할 게시판의 존재 개수를 얻는다.
+        // --------------------------------------
+        int boardCnt = this.boardDAO.getBoardCnt(boardDTO);
+        if(boardCnt==0) {return -1;}
+        // --------------------------------------
+        // [BoardDAOImpl 객체]의 getPwdCnt 메소드를 호출하여
+        // 수정할 게시판의 비밀번호 존재 개수를 얻는다.
+        // --------------------------------------
+        int pwdCnt = this.boardDAO.getPwdCnt(boardDTO);
+        if(pwdCnt==0) {return -2;}
+        // --------------------------------------
+        // [BoardDAOImpl 객체]의 updateBoard 메소드를 호출하여
+        // 게시판 수정 명령한 후 수정 적용행의 개수를 얻는다.
+        // --------------------------------------
+        int updateCnt = this.boardDAO.updateBoard(boardDTO);
+        // --------------------------------------
+        // 게시판 수정 명령한 후 수정 적용행의 개수를 리턴하기.
+        // --------------------------------------
+        return updateCnt;
+
+
+
+    }
+    
+
 
 }
