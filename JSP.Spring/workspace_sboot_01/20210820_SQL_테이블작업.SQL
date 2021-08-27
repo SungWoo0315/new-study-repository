@@ -58,3 +58,16 @@ delete from board where b_no = 28
 
 -- 존재 개수 확인, PK 이용.
 select count(*) from board where b_no = 1
+
+
+--자식글 개수 구하기
+select
+    count(*)
+from
+    board
+where
+    group_no=(select group_no from board where b_no = 1)
+    and
+    print_no=(select print_no+1 from board where b_no = 1)
+    and
+    print_level=(select print_level+1 from board where b_no =1)
