@@ -312,6 +312,74 @@ public class BoardController {
         return mav;
     }
 
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // /boardUpDelProc.do 접속 시 호출되는 메소드 선언
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @RequestMapping( value="/boardUpDelProc.do" )
+    public ModelAndView boardUpDelProc( 
+        // ***********************************************
+        // 파라미터값을 저장할 [BoardDTO 객체]를 매개변수로 선언
+        // ***********************************************
+        BoardDTO boardDTO
+        // ***********************************************
+        // "upDel" 라는 파라미터명의 파라미터값이 저장된 매개변수 b_no 선언
+        // ***********************************************
+        ,@RequestParam(value = "upDel") String upDel
+        // **********************************************
+        // Error 객체를 관리하는 BindingResult 객체가 저장되어 들어오는 매개변수 bindingResult 선언
+        // 유효성 검사결과를 관리
+        // **********************************************
+        , BindingResult bindingResult
+    ){
 
+        // ***************************************
+        // [ModelAndView 객체] 생성하기
+        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // [ModelAndView 객체] 에 [수정/삭제할 1개의 게시판 글 정보] 저장하기  
+        // [ModelAndView 객체] 리턴하기
+        // ***************************************
+        ModelAndView mav = new ModelAndView( );
+        mav.setViewName("boardUpDelProc.jsp");
+
+        // **********************************************
+        // 만약 게시판 삭제 모드이면
+        // **********************************************
+        if( upDel.equals("del") ){
+
+        }
+        // **********************************************
+        // 만약 게시판 수정 모드이면 수정 실행하고 수정 적용행의 개수 얻기
+        // **********************************************
+        else if(upDel.equals("up")){
+
+            // *********************************************
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
+            // *********************************************
+            // 유효성 체크 에러 메시지 저장할 변수 선언
+            String msg = "";
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 [에러 메시지] 문자 얻기
+            msg = check_BoardDTO( boardDTO, bindingResult );  
+            // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
+            if( msg.equals("") ){
+                // 수정 DB 연동
+                // mav.addObject("?", ?);        
+
+
+            }
+            // 만약 msg 안에 "" 가 저장되어 있지 않으면, 즉, 유효성 체크를 통과 못했으면
+            else{
+                // mav.addObject("?", ?);        
+
+            }
+
+
+        }
+
+        return mav;
+
+
+    }
 
 }
