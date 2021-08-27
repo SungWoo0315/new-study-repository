@@ -106,21 +106,39 @@
 
 
     <!-- ********************************************************************* -->
-    <!-- 글 수정하는 update 문을 내포한 update 태그 선언 -->
+    <!-- 삭제/수정할 게시판의 존재 개수를 리턴하는 select 선언 -->
     <!-- ********************************************************************* -->
-    <update id="updateChange" parameterType="int">
+    <select id="getBoardCnt" parameterType="com.naver.erp.BoardDTO" resultType="int">
+    
+        select count(*) from board where b_no=#{b_no}
+    
+    </select>
+
+    <!-- ********************************************************************* -->
+    <!-- 삭제/수정할 비밀번호 개수를 리턴하는 select 선언 -->
+    <!-- ********************************************************************* -->
+    <select id="getPwdCnt" parameterType="com.naver.erp.BoardDTO" resultType="int">
+        
+        select count(*) from board where pwd=#{pwd}
+
+    </select>
+    <!-- ********************************************************************* -->
+    <!-- 게시판 수정하는 메소드 선언 -->
+    <!-- ********************************************************************* -->
+    <update id="updateBoard" parameterType="int">
     
         update 
-            board
+            board 
         set 
-            subject=#{subject}         
-            ,writer=#{writer} 
-            ,reg_date
-            ,content=#{content} 
+            writer=#{writer}
+            ,subject=#{subject}
+            ,email=#{email}
+            ,content=#{content}
         where 
             b_no=#{b_no}
     
     </update>
+
 
 
     
