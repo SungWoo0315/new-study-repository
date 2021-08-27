@@ -104,7 +104,7 @@
                 ,success  : function( responseHTML ){
                     // -----------------------------------------
                     var msg = $(responseHTML).filter(".msg").text();
-                    var boardUpDelCnt = $(responseHTML).filter(".boardUpDelCnt").text();
+                    var boardUpDelCnt = $(responseHTML).filter(".boardUpDelCnt").text();                   
                     // -----------------------------------------
                     
                     if(upDel=="up"){
@@ -134,8 +134,9 @@
 
                             if(confirm("목록화면으로 이동할까요?")==false) {return;}
 
-                            location.replace("/boardList.do")
-
+                            // location.replace("/boardList.do") // 테스트 목록화면으로 이동
+                            // location.replace("/boardContentForm.do?b_no=" + $('[name=b_no]').val()) // get 방식 상세보기화면으로 이동   
+                            document.boardContentForm.submit(); // hidden 태그 이용하여서 이동.  
                         }
                         else{
                             alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm : up ")
@@ -144,29 +145,35 @@
                     else if( upDel=="del" ){
 
 
-                        if( boardUpDelCnt == 1 ){
-                            alert("삭제 성공!");
-                            location.replace("/boardList.do")
-
-                        }
-                        else if( boardUpDelCnt == -1 ){
-                            alert("게시판 글이 이미 삭제 되었습니다.");
-                            location.replace("/boardList.do")
-
-                        }
-                        else if( boardUpDelCnt == -2 ){
-                            alert("암호가 틀립니다.");
-                            $("[name=pwd]").val("");
-                            $("[name=pwd]").focus();
-
-                        }
-                        else if( boardUpDelCnt == -3 ){
-                            alert("댓글이 있어 삭제가 불가능 합니다.");
+                        if( $("[name=pwd]").val() == "" ){
+                            alert("암호를 입력해야 삭제가 됩니다.")
                         }
                         else{
-                            alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm : del ")
-                        }
+
+                            if( boardUpDelCnt == 1 ){
+                                alert("삭제 성공!");
+                                location.replace("/boardList.do")
+
+                            }
+                            else if( boardUpDelCnt == -1 ){
+                                alert("게시판 글이 이미 삭제 되었습니다.");
+                                location.replace("/boardList.do")
+
+                            }
+                            else if( boardUpDelCnt == -2 ){
+                                alert("암호가 틀립니다.");
+                                $("[name=pwd]").val("");
+                                $("[name=pwd]").focus();
+
+                            }
+                            else if( boardUpDelCnt == -3 ){
+                                alert("댓글이 있어 삭제가 불가능 합니다.");
+                            }
+                            else{
+                                alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm : del ")
+                            }
                         
+                        }
                     }
                     
 
@@ -325,7 +332,13 @@
     %>
 
 
-   
+    <!-- ****************************************************** -->
+    <!-- [게시판 수정/삭제] 화면으로 이동하는 form 태그 선언 -->
+    <!-- ****************************************************** -->
+    <form name="boardContentForm" method="POST" action="/boardContentForm.do">
+        <input type="hidden" name="b_no" value="<%=b_no%>">
+    </form>
+
 
 </body>
 
