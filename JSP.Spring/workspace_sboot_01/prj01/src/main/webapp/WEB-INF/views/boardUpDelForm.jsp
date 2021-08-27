@@ -152,7 +152,9 @@
 
                             if( boardUpDelCnt == 1 ){
                                 alert("삭제 성공!");
-                                location.replace("/boardList.do")
+                                location.replace("/boardList.do");
+                                xxx = "삭제 성공!";
+                                System.out.print(xxx);
 
                             }
                             else if( boardUpDelCnt == -1 ){
