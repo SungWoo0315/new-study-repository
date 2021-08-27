@@ -189,6 +189,53 @@ public class BoardDAOImpl implements BoardDAO {
 
     }
 
+    // ******************************************************
+    // 삭제할 게시판의 자식글 존재 개수를 리턴하는 메소드 선언
+    // ******************************************************
+    public int getChildrenCnt(BoardDTO boardDTO){
+        //-------------------------------------------------------
+        // [SqlSessionTemplate 객체]의 update(~,~) 를 호출하여 [자식글 존재 개수] 얻기
+        //-------------------------------------------------------
+        int childrenCnt = this.sqlSession.selectOne(
+                "com.naver.erp.BoardDAO.getChildrenCnt"  // 실행할 SQL 구문의 위치 지정
+                ,boardDTO							     // 실행할 SQL 구문에서 사용할 데이터 지정
+        );
+        return childrenCnt;
+
+    }
+
+    // ******************************************************
+    // 삭제될 게시판 이후 글의 출력 순서번호를 1씩 감소 시킨 후 수정 적용행의 개수를 리턴하는 메소드 선언
+    // ******************************************************
+    public int downPrintNo(BoardDTO boardDTO){
+        //-------------------------------------------------------
+        // [SqlSessionTemplate 객체]의 update(~,~) 를 호출하여 
+        // [삭제될 게시판 이후 글의 출력순서번호를 1씩 감소]하고 감소된 행의 개수 얻기
+        //-------------------------------------------------------
+        int downPrintNoCnt = this.sqlSession.update(
+                "com.naver.erp.BoardDAO.downPrintNo"  // 실행할 SQL 구문의 위치 지정
+                ,boardDTO							  // 실행할 SQL 구문에서 사용할 데이터 지정
+        );
+        return downPrintNoCnt;
+
+    }
+
+    // ******************************************************
+    // 게시판 삭제 명령한 후 삭제 적용행의 개수를 리턴하는 메소드 선언
+    // ******************************************************
+    public int deleteBoard(BoardDTO boardDTO){
+        //-------------------------------------------------------
+        // [SqlSessionTemplate 객체]의 update(~,~) 를 호출하여 
+        // [게시판 삭제 명령]한 후 삭제 적용행의 개수 얻기
+        //-------------------------------------------------------
+        int deleteBoardCnt = this.sqlSession.delete(
+                "com.naver.erp.BoardDAO.deleteBoard"  // 실행할 SQL 구문의 위치 지정
+                ,boardDTO							  // 실행할 SQL 구문에서 사용할 데이터 지정
+        );
+        return deleteBoardCnt;
+
+    }
+
 
 
 }

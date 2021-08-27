@@ -119,9 +119,18 @@ public class BoardServiceImpl implements BoardService {
         // --------------------------------------
         int childrenCnt = this.boardDAO.getChildrenCnt(boardDTO);
         if(childrenCnt>0) {return -3;}
+        // --------------------------------------
+        // [BoardDAOImpl 객체]의 downPrintNo 메소드를 호출하여
+        // [삭제될 게시판 이후 글의 출력 순서번호를 1씩 감소 시킨 후 수정 적용행의 개수]를 얻는다
+        // --------------------------------------
+        int downPrintNoCnt = this.boardDAO.downPrintNo(boardDTO);
+        // --------------------------------------
+        // [BoardDAOImpl 객체]의 deleteBoard 메소드를 호출하여
+        // [게시판 삭제 명령 한 후 삭제 적용행의 개수]를 얻는다.
+        // --------------------------------------
+        int deleteCnt = this.boardDAO.deleteBoard(boardDTO);
 
-
-
+        return deleteCnt;
 
 
     }

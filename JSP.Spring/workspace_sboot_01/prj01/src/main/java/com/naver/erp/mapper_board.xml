@@ -122,7 +122,7 @@
         select count(*) from board where b_no=#{b_no} and pwd=#{pwd}
 
     </select>
-    
+
     <!-- ********************************************************************* -->
     <!-- 게시판 수정하는 update 을 내포하는 update 태그 선언 -->
     <!-- ********************************************************************* -->
@@ -142,6 +142,58 @@
     
     </update>
 
+    <!-- ********************************************************************* -->
+    <!-- 삭제할 게시판의 자식글 존재 개수를 리턴하는 select 내포하는 select 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <select id="getChildrenCnt" parameterType="com.naver.erp.BoardDTO" resultType="int">
+    
+        select 
+            count(*) 
+        from 
+            board 
+        where 
+            group_no=#{group_no} 
+            and 
+            print_no=#{print_no}+1 
+            and 
+            print_level=#{print_level}+1
+            and
+            b_no=#{b_no}+1
+    
+    </select>
+
+
+    <!-- ********************************************************************* -->
+    <!-- 삭제될 게시판 이후 글의 출력 순서번호를 1씩 감소 시킨 후 수정하는 update 내포하는 update 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <update id="downPrintNo" parameterType="com.naver.erp.BoardDTO">
+    
+        update 
+            board 
+        set 
+            print_no=#{print_no} - 1
+        where 
+            b_no=#{b_no} + 1
+    
+    </update>
+
+
+    <!-- ********************************************************************* -->
+    <!-- 게시판 삭제하는 delete 내포하는 delete 태그 선언 -->
+    <!-- ********************************************************************* -->
+
+    <delete id="deleteBoard" parameterType="com.naver.erp.BoardDTO">
+
+        delete
+
+        from 
+            board         
+        where 
+            b_no=#{b_no}
+            and
+            pwd=#{pwd}
+
+    </delete>
 
 
     
