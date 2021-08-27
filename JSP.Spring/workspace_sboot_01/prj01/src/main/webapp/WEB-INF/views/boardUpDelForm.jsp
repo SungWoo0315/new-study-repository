@@ -93,22 +93,6 @@
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
 
-                    var result = $(responseHTML).filter(".result").text();
-
-                    alert("웹서버 통신 확인 => " + result)
-
-                    return;
-
-
-
-
-
-
-
-
-
-                    
-
                     var msg = $(responseHTML).filter(".msg").text();
                     msg = $.trim(msg);
 
@@ -116,9 +100,33 @@
                         alert(msg);
                         return;
                     }
+
+                    var boardUpDelCnt = $(responseHTML).filter(".boardUpDelCnt").text();
+                    boardUpDelCnt = $.trim(boardUpDelCnt);
+                    boardUpDelCnt = parseInt(boardUpDelCnt,10);  
+                    if( boardUpDelCnt==-1 ){
+                        alert("게시판 글이 삭제 되었습니다.");
+                    }
+                    else if( boardUpDelCnt==-2 ){
+                        alert("암호가 틀립니다.");
+                        $("[name=boardUpDelForm]").find(".pwd").val("");
+                        $("[name=boardUpDelForm]").find(".pwd").focus();
+
+                    }
+                    else if( boardUpDelCnt==1 ){
+                        alert("수정 성공.");
+
+                        if(confirm("최종 수정 승인입니다. 진행하시려면 확인 눌러주세요.")==false) {return;}
+
+                        location.replace("/boardList.do")
+
+                    }
+                    else{
+                        alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm")
+                    }
+                    
                     
 
-                    // location.replace("/boardRegProc.do") // boardRegProc.jsp 페이지 이동확인용.
 
                     alert(responseHTML) // boardRegProc.jsp 결과물 확인하기.  
 
@@ -133,22 +141,16 @@
                     // 게시판 글 입력 성공 행의 개수 꺼내기.
                     // 꺼낸 개수의 앞뒤 공백 제거하기
                     // ------------------------------------
-                    var boardRegCnt = $(responseHTML).filter(".boardRegCnt").text();
-                    boardRegCnt = $.trim(boardRegCnt);
-                    boardRegCnt = parseInt(boardRegCnt,10);  // 정석적으로는 이렇게 해야 숫자변환된다. 
+                    
+
                     // ------------------------------------
                     // 만약 게시판 글 입력 성공 행의 개수가 1이면, 즉, 입력이 성공했으면
                     // ------------------------------------
-                    if( boardRegCnt == 1 ){
-                        alert("수정 성공!")	// 테스트용 확인.  
-                        location.replace("/boardList.do")
-                    }
+             
                     // ------------------------------------
                     // 그렇지 않고, 즉, 입력이 실패했으면
                     // ------------------------------------
-                    else{
-                        alert("수정 실패...");
-                    }
+              
 
 
 
