@@ -369,14 +369,18 @@ public class BoardController {
                 // -----------------------------------------
                 int boardUpDelCnt = this.boardService.updateBoard(boardDTO);
 
-                // mav.addObject("?", ?);        
+                mav.addObject("boardUpDelCnt", boardUpDelCnt);        
+                mav.addObject("msg", msg);        
 
 
             }
             // 만약 msg 안에 "" 가 저장되어 있지 않으면, 즉, 유효성 체크를 통과 못했으면
             else{
-                // mav.addObject("?", ?);        
 
+                mav.addObject("boardUpDelCnt", 0);        
+
+                mav.addObject("msg", msg);        
+                
             }
 
 
