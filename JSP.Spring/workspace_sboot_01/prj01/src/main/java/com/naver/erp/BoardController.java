@@ -347,6 +347,11 @@ public class BoardController {
         // 만약 게시판 삭제 모드이면
         // **********************************************
         if( upDel.equals("del") ){
+            // 삭제 실행하고 삭제 적용행의 개수 얻기
+            int boardUpDelCnt = this.boardService.deleteBoard(boardDTO);
+
+
+
 
         }
         // **********************************************
@@ -361,6 +366,10 @@ public class BoardController {
             String msg = "";
             // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 [에러 메시지] 문자 얻기
             msg = check_BoardDTO( boardDTO, bindingResult );  
+            
+            // [ModelAndView 객체]에 유효성체크 시 발생한 [유효성 체크 에러 메시지] 저장하기
+            mav.addObject("msg", msg);        
+
             // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
             if( msg.equals("") ){
                 // -----------------------------------------
@@ -368,10 +377,10 @@ public class BoardController {
                 // 게시판 수정 실행하고 수정 적용행의 개수 얻기
                 // -----------------------------------------
                 int boardUpDelCnt = this.boardService.updateBoard(boardDTO);
-
+                // -----------------------------------------
+                // [ModelAndView 객체]에 [게시판 수정 적용행의 개수] 저장하기
+                // -----------------------------------------
                 mav.addObject("boardUpDelCnt", boardUpDelCnt);        
-                mav.addObject("msg", msg);        
-
 
             }
             // 만약 msg 안에 "" 가 저장되어 있지 않으면, 즉, 유효성 체크를 통과 못했으면
@@ -379,7 +388,6 @@ public class BoardController {
 
                 mav.addObject("boardUpDelCnt", 0);        
 
-                mav.addObject("msg", msg);        
                 
             }
 

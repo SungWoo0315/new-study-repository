@@ -64,7 +64,17 @@
                 // $("body").append("<div class=xxx>테스트 메시지.</div>")  // 테스트 확인용.
                 if(confirm("정말 수정 하시겠습니까??")==false) {return;}
                 $("[name=upDel]").val("up");
-                
+            }
+            // ------------------------------------------
+            // 매개변수로 들어온 upDel 에 "del" 이 저장되었으면
+            // 즉, 삭제 버튼을 눌렀으면 암호 확인하고 삭제 여부를 물어보기
+            // ------------------------------------------
+            else if (upDel=='del'){
+                if(confirm("정말 삭제 하시겠습니까??")==false) {return;}
+                $("[name=upDel]").val("del");
+
+            }    
+
                 // --------------------------------------------
                 // 현재 화면에서 페이지 이동 없이(=비동기방식으로)
                 // 서버쪽 boardUpDelProc.do 로 접속해서 수정 또는 삭제하기 
@@ -104,31 +114,38 @@
                     var boardUpDelCnt = $(responseHTML).filter(".boardUpDelCnt").text();
                     boardUpDelCnt = $.trim(boardUpDelCnt);
                     boardUpDelCnt = parseInt(boardUpDelCnt,10);  
-                    if( boardUpDelCnt==-1 ){
-                        alert("게시판 글이 삭제 되었습니다.");
+                    
+                    if(upDel=="up"){
+
+                        if( boardUpDelCnt==-1 ){
+                            alert("게시판 글이 삭제 되었습니다.");
+                        }
+                        else if( boardUpDelCnt==-2 ){
+                            alert("암호가 틀립니다.");
+                            $("[name=boardUpDelForm]").find(".pwd").val("");
+                            $("[name=boardUpDelForm]").find(".pwd").focus();
+
+                        }
+                        else if( boardUpDelCnt==1 ){
+                            alert("수정 성공.");
+
+                            if(confirm("목록화면으로 이동할까요?")==false) {return;}
+
+                            location.replace("/boardList.do")
+
+                        }
+                        else{
+                            alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm")
+                        }
                     }
-                    else if( boardUpDelCnt==-2 ){
-                        alert("암호가 틀립니다.");
-                        $("[name=boardUpDelForm]").find(".pwd").val("");
-                        $("[name=boardUpDelForm]").find(".pwd").focus();
+                    else if( upDel=="del"){
 
-                    }
-                    else if( boardUpDelCnt==1 ){
-                        alert("수정 성공.");
-
-                        if(confirm("목록화면으로 이동할까요?")==false) {return;}
-
-                        location.replace("/boardList.do")
-
-                    }
-                    else{
-                        alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm")
+                        //????
                     }
                     
-                    
 
 
-                    alert(responseHTML) // boardRegProc.jsp 결과물 확인하기.  
+                    // alert(responseHTML) // 테스트용. boardRegProc.jsp 결과물 확인하기.  
 
 
                     // 매개변수 responseHTML 안의 HTML 소스 문자열에 DB 연동 결과물을 뽑아
@@ -167,7 +184,7 @@
                 });
 
 
-            }
+            
 
 
 
