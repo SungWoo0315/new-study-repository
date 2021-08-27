@@ -138,6 +138,56 @@ public class BoardDAOImpl implements BoardDAO {
 
     }
 
+    // ******************************************************
+    // 삭제/수정할 게시판의 존재 개수를 리턴하는 메소드 선언
+    // ******************************************************
+    public int getBoardCnt(BoardDTO boardDTO){
+        // --------------------------------------------------------
+        // [SqlSessionTemplate 객체]의 selectOne(~,~) 를 호출하여 [게시판의 존재 개수] 얻기
+        // --------------------------------------------------------
+        int boardCnt = this.sqlSession.selectOne(
+            "com.naver.erp.BoardDAO.getBoardCnt"   // 실행할 SQL 구문의 위치 지정
+            ,boardDTO                              // 실행할 SQL 구문에서 사용할 데이터 지정
+    
+        );
+        return boardCnt;
+
+
+
+    }
+    // ******************************************************
+    // 삭제/수정할 게시판의 비밀번호 존재 개수를 리턴하는 메소드 선언
+    // ******************************************************
+    public int getPwdCnt(BoardDTO boardDTO){
+        // --------------------------------------------------------
+        // [SqlSessionTemplate 객체]의 selectOne(~,~) 를 호출하여 [비밀번호 존재 개수] 얻기
+        // --------------------------------------------------------
+        int pwdCnt = this.sqlSession.selectOne(
+            "com.naver.erp.BoardDAO.getPwdCnt"   // 실행할 SQL 구문의 위치 지정
+            ,boardDTO                            // 실행할 SQL 구문에서 사용할 데이터 지정
+    
+        );
+        return pwdCnt;
+
+        
+    }
+
+
+    // ******************************************************
+    // 게시판 수정 후 수정행의 적용 개수를 리턴하는 메소드 선언
+    // ******************************************************
+    public int updateBoard(BoardDTO boardDTO){
+        //-------------------------------------------------------
+        // [SqlSessionTemplate 객체]의 update(~,~) 를 호출하여 [게시판 수정]하기
+        //-------------------------------------------------------
+        int updateCnt = this.sqlSession.update(
+                "com.naver.erp.BoardDAO.updateBoard"  // 실행할 SQL 구문의 위치 지정
+                ,boardDTO							  // 실행할 SQL 구문에서 사용할 데이터 지정
+        );
+        return updateCnt;
+    
+
+    }
 
 
 
