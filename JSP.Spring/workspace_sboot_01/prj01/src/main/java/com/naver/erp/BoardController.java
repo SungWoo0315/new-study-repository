@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -351,9 +352,7 @@ public class BoardController {
             int boardUpDelCnt = this.boardService.deleteBoard(boardDTO);
             mav.addObject("boardUpDelCnt", boardUpDelCnt);        
 
-
-
-
+          
             
 
 
