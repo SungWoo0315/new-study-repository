@@ -363,7 +363,12 @@ public class BoardController {
             msg = check_BoardDTO( boardDTO, bindingResult );  
             // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
             if( msg.equals("") ){
-                // 수정 DB 연동
+                // -----------------------------------------
+                // BoardServiceImpl 객체의 updateBoard 라는 메소드 호출로
+                // 게시판 수정 실행하고 수정 적용행의 개수 얻기
+                // -----------------------------------------
+                int boardUpDelCnt = this.boardService.updateBoard(boardDTO);
+
                 // mav.addObject("?", ?);        
 
 
