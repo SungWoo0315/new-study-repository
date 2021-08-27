@@ -53,7 +53,7 @@ select * from board order by b_no -- 테이블 확인
 
 commit
 
-delete from board where b_no = 28
+delete from board where b_no = 26
 
 
 -- 존재 개수 확인, PK 이용.
