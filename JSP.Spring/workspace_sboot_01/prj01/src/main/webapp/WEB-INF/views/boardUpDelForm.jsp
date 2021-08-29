@@ -25,11 +25,8 @@
 
     <script>
 
-        // 테스트용 입력양식 고정값 넣어주는 코드.  
-        // 테스트가 끝나면 지우면 된다. 
-        // 주석처리하면 소스보기에서 보여지기 때문에 지우는것이 좋다.   
-        $(document).ready(function(){
 
+        $(document).ready(function(){
 
             // 리셋버튼으로 내용물 비우는 JQuery 만들어보기.  
             $(".reset").click(function(){
@@ -40,7 +37,6 @@
                 $("[name=boardUpDelForm]").find(".content").val("");
             
             });
-
 
 
            
@@ -121,7 +117,9 @@
 
 
                         if( boardUpDelCnt==-1 ){
-                            alert("게시판 글이 삭제 되었습니다.");
+                            alert("게시판 글이 이미 삭제 되었습니다.");
+                            location.replace("/boardList.do");
+
                         }
                         else if( boardUpDelCnt==-2 ){
                             alert("암호가 틀립니다.");
