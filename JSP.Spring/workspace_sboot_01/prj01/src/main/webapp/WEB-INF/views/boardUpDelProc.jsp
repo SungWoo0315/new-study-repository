@@ -20,6 +20,15 @@
 		<% System.out.print("boardUpDelProc.jsp 접속 성공!!!\r"); %>
 		<% System.out.print("============================\r"); %>
 
+
+
+		<% if((String)request.getAttribute("msg")!=null){;%>
+		<% System.out.println("============================");%>
+		<% System.out.println(" boardUpDelProc 에서 boardUpDelCnt 값 ==>  " + (int)request.getAttribute("boardUpDelCnt"));%>
+		<% System.out.println(" boardUpDelProc 에서 에러 메시지 ==> " + (String)request.getAttribute("msg"));%>
+		<% System.out.println("============================");%>
+		<%}%>
+
 	</script>	
 
 </head>
