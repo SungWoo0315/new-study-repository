@@ -55,7 +55,20 @@
                 // "정말 수정 하시겠습니까?" 라고 물어보기
                 // ------------------------------------
                 if(confirm("정말 수정 하시겠습니까??")==false) {return;}
-                
+                $("[name=upDel]").val("up");
+
+            }
+            // ------------------------------------------
+            // 매개변수로 들어온 upDel 에 "del" 이 저장되었으면
+            // 즉, 삭제 버튼을 눌렀으면 암호 확인하고 삭제 여부를 물어보기
+            // ------------------------------------------
+            else if (upDel=='del'){
+                if(confirm("정말 삭제 하시겠습니까??")==false) {return;}
+                $("[name=upDel]").val("del");
+
+            }   
+
+
                 alert( $("[name=boardUpDelForm]").serialize()  ); // serialize 확인용 테스트 
                 // --------------------------------------------
                 // 현재 화면에서 페이지 이동 없이(=비동기방식으로)
@@ -66,7 +79,7 @@
                 // ----------------------------------------------------------
                 // 서버쪽 호출 URL 주소 지정
                 // ----------------------------------------------------------
-                url       : "/boardRegProc.do"
+                url       : "/boardUpDelProc.do"
                 // ----------------------------------------------------------
                 // form 태그 안의 입력양식 데이터 즉, 파라미터값을 보내는 방법 지정
                 // ----------------------------------------------------------
@@ -85,11 +98,9 @@
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
                     var msg = $(responseHTML).filter(".msg").text();
-                    msg = $.trim(msg);
-                    if( msg!=null && msg.length>0 ){
-                        alert(msg);
-                        return;
-                    }
+                    var boardUpDelCnt = $(responseHTML).filter(".boardUpDelCnt").text();
+
+                   
                     
                     // location.replace("/boardRegProc.do") // boardRegProc.jsp 페이지 이동확인용.
                     alert(responseHTML) // boardRegProc.jsp 결과물 확인하기.  
@@ -102,23 +113,74 @@
                     // 게시판 글 입력 성공 행의 개수 꺼내기.
                     // 꺼낸 개수의 앞뒤 공백 제거하기
                     // ------------------------------------
-                    var boardRegCnt = $(responseHTML).filter(".boardRegCnt").text();
-                    boardRegCnt = $.trim(boardRegCnt);
-                    boardRegCnt = parseInt(boardRegCnt,10);  // 정석적으로는 이렇게 해야 숫자변환된다. 
-                    // ------------------------------------
-                    // 만약 게시판 글 입력 성공 행의 개수가 1이면, 즉, 입력이 성공했으면
-                    // ------------------------------------
-                    if( boardRegCnt == 1 ){
-                        alert("수정 성공!")	// 테스트용 확인.  
-                        location.replace("/boardList.do")
+                  
+                    if(upDel=="up"){   
+                        
+                        msg = $.trim(msg);
+                        if( msg!=null && msg.length>0 ){
+                            alert(msg);
+                            return;
+                        }
+
+                        boardUpDelCnt = $.trim(boardUpDelCnt);
+                        boardUpDelCnt = parseInt(boardUpDelCnt,10);  // 정석적으로는 이렇게 해야 숫자변환된다. 
+                    
+
+
+                        if( boardUpDelCnt==-1 ){
+                            alert("게시판 글이 삭제 되었습니다.");
+                        }
+                        else if( boardUpDelCnt==-2 ){
+                            alert("암호가 틀립니다.");
+                            $("[name=boardUpDelForm]").find(".pwd").val("");
+                            $("[name=boardUpDelForm]").find(".pwd").focus();
+
+                        }
+                        else if( boardUpDelCnt==1 ){
+                            alert("수정 성공.");
+
+                            if(confirm("목록화면으로 이동할까요?")==false) {return;}
+
+                            location.replace("/boardList.do")
+
+                        }
+                        else{
+                            alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm")
+                        }
                     }
-                    // ------------------------------------
-                    // 그렇지 않고, 즉, 입력이 실패했으면
-                    // ------------------------------------
-                    else{
-                        alert("수정 실패...");
-                    }
+                    else if(upDel=='del'){
+                        
+                        if( $("[name=pwd]").val() == "" ){
+                            alert("암호를 입력해야 삭제가 됩니다.");
+                        }
+                        else{
+                            if( boardUpDelCnt == 1 ){
+                                alert("삭제 성공!");
+                                location.replace("/boardList.do")
+
+                            }
+                            else if( boardUpDelCnt == -1 ){
+                                alert("게시판 글이 이미 삭제 되었습니다.");
+                                location.replace("/boardList.do")
+
+                            }
+                            else if( boardUpDelCnt == -2 ){
+                                alert("암호가 틀립니다.");
+                                $("[name=pwd]").val("");
+                                $("[name=pwd]").focus();
+
+                            }
+                            else if( boardUpDelCnt == -3 ){
+                                alert("댓글이 있어 삭제가 불가능 합니다.");
+                            }
+                            else{
+                                alert("서버 에러발생! 관리자게엑 문의하세요. : boardUpDelForm : del ")
+                            }
+                        }
+                    }   
                 }
+            
+
                 // ----------------------------------------------------------
                 // 서버의 응답을 못 받았을 경우 실행할 익명함수 설정
                 // ----------------------------------------------------------
@@ -126,7 +188,7 @@
                     alert("서버 접속 실패! 관리자에게 문의 바람!");
                 }
                 });
-            }
+            
             
         }
 	
@@ -158,7 +220,10 @@
     <!-- **************************************************** -->
     <!-- [게시판 글쓰기] 화면을 출력하는 form 태그 선언 -->
     <!-- **************************************************** -->
-    <form name="boardUpDelForm" method="POST" action="/boardUpDelProc.do">
+    <form name="boardUpDelForm">
+
+        <input type="hidden" name="b_no" value="<%=b_no%>">
+        <input type="hidden" name="upDel" value="">
     
         <table border="1" class="upDeltable" style="border-collapse:collapse" cellpadding=5>
             <caption>게시판 수정/삭제</caption>
@@ -222,6 +287,13 @@
         out.print("<script>alert('삭제된 글입니다.'); location.replace('/boardList.do');</script>");
     }
     %>
+
+    <!-- ****************************************************** -->
+    <!-- [게시판 수정/삭제] 화면으로 이동하는 form 태그 선언 -->
+    <!-- ****************************************************** -->
+    <form name="boardContentForm" method="POST" action="/boardContentForm.do">
+        <input type="hidden" name="b_no" value="<%=b_no%>">
+    </form>
 
     
 </body>
