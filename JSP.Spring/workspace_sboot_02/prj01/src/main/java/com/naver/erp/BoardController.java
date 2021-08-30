@@ -152,9 +152,8 @@ public class BoardController {
 
             msg = check_BoardDTO( boardDTO, bindingResult );  
 
-            System.out.println( "msg 값 확인 => " + msg );  
+            System.out.println( "/boardRegProc.do msg 값 확인 => " + msg );  
             
-
 
             // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
             if( msg.equals("") ){
