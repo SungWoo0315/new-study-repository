@@ -38,10 +38,28 @@
             ,#{content} <!-- BoardDTO 객체의 content 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
             ,#{pwd}     <!-- BoardDTO 객체의 pwd 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
             ,#{email}   <!-- BoardDTO 객체의 email 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            
+
+            <!-- ********************************************************************
+            만약에 자바의 BoardDTO 객체의 속성변수 b_no 가 0이면, 즉, 새글쓰기 모드면
+            그룹번호를 PK 값으로, 출력순서 번호와 들여쓰기 레벨은 0 으로 입력하기
+            ********************************************************************* -->
+            <if test="b_no==0">
             ,(select nvl(max(b_no),0)+1 from board)
             ,0
             ,0
-            
+            </if>
+
+            <!-- ********************************************************************
+            만약에 자바의 BoardDTO 객체의 속성변수 b_no 가 0보다 크면, 즉, 댓글쓰기 모드면
+            그룹번호를 엄마 PK 번호로, 출력순서 번호와 들여쓰기 레벨은
+            엄마꺼보다 1 더 큰 값으로 입력하기
+            ********************************************************************* -->
+            <if test="b_no>0">
+            , (select group_no from board where b_no=#{b_no}) 
+            , (select print_no + 1 from board where b_no=#{b_no}) 
+            , (select print_level + 1 from board where b_no=#{b_no}) 
+            </if>
 
         )
     
@@ -197,5 +215,17 @@
     </delete>
 
 
-    
+    <!-- ********************************************************************* -->
+    <!-- 게시판 글 출력 번호 1증가하는 update 문을 내포한 update 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <update id="updatePrintNo" parameterType="com.naver.erp.BoardDTO">
+
+        update board set print_no = print_no + 1
+        where 
+            group_no = (select group_no from board where b_no=#{b_no}) 
+            and
+            print_no > (select print_no from board where b_no=#{b_no}) 
+
+    </update>
+
 </mapper>

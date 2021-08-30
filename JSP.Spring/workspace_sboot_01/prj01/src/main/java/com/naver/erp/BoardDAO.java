@@ -57,5 +57,11 @@ public interface BoardDAO {
     int deleteBoard(BoardDTO boardDTO);
 
 
+    // ******************************************************
+    // [게시판 글 출력번호 1증가하고 수정 행의 개수] 리턴하는 메소드 선언
+    // ******************************************************
+    int updatePrintNo(BoardDTO boardDTO);
+
+
 
 }
