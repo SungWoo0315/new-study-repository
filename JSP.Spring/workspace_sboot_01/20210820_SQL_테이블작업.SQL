@@ -56,7 +56,7 @@ select * from board order by b_no -- 테이블 확인
 
 commit
 
-delete from board where b_no = 26
+delete from board where b_no = 27
 
 
 
@@ -78,3 +78,12 @@ where
     print_no=(select print_no+1 from board where b_no = 1)
     and
     print_level=(select print_level+1 from board where b_no =1)
+
+
+-- like 검색 조건
+select
+	*
+from
+	employee
+where
+	emp_name like '%김%'
