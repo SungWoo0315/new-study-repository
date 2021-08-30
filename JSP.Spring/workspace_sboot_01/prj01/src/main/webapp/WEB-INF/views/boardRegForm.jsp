@@ -28,7 +28,7 @@
 
             // writer subject email content pwd
             $(".writer").val("테스트");
-            $(".subject").val("테스트 제목을 쓰고있습니다.");
+            $(".subject").val("테스트 제목~~");
             $(".email").val("abc@naver.com");
             $(".content").val("테스트 내용을 쓰고있습니다.");
             $(".pwd").val("1234");
@@ -113,14 +113,39 @@
                     // 만약 게시판 글 입력 성공 행의 개수가 1이면, 즉, 입력이 성공했으면
                     // ------------------------------------
                     if( boardRegCnt == 1 ){
-                        alert("새글/댓글 쓰기 성공!")	// 테스트용 확인.  
+
+
+                        <% if( request.getParameter("b_no")==null) { %>
+                            
+                            alert("새글 쓰기 성공!")	// 테스트용 확인.  
+
+                        <% }else{ %>
+
+                            alert("댓글 쓰기 성공!")	// 테스트용 확인.  
+
+                        <% } %>    
+                        
+
                         location.replace("/boardList.do")
                     }
                     // ------------------------------------
                     // 그렇지 않고, 즉, 입력이 실패했으면
                     // ------------------------------------
                     else{
-                        alert("새글쓰기 실패...");
+
+                        <% if( request.getParameter("b_no")==null) { %>
+                            
+                            alert("새글쓰기 실패...");
+
+                        <% }else{ %>
+
+                            alert("댓글 쓰기 실패...")	// 테스트용 확인.  
+
+                        <% } %>    
+
+
+
+
                     }
 
 
