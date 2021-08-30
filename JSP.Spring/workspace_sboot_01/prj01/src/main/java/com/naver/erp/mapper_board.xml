@@ -85,7 +85,7 @@
             <!-- 만약 키워드가 null 이 아니고 길이가 0보다 크면 where 절에 참여하기 -->
             <!-- ============================================================== -->
             <if test="keyword1!=null and keyword1.length()>0">
-            and
+            and (
                 upper(subject) like upper('%${keyword1}%')
                 or
                 upper(content) like upper('%${keyword1}%')
@@ -95,6 +95,13 @@
                 upper(email) like upper('%${keyword1}%')
                 or
                 to_char(reg_date, 'YYYY-MM-DD') like '%${keyword1}%'
+                or
+                to_char(reg_date, 'YYYYMMDD') like '%${keyword1}%'
+                or
+                to_char(reg_date, 'YYYY/MM/DD') like '%${keyword1}%'
+                or
+                to_char(reg_date, 'YYYY,MM,DD') like '%${keyword1}%'
+            )
             </if>
 
         order by 
