@@ -68,6 +68,9 @@
             // 입력한 키워드 얻어오기
             // -----------------------------------------------
             var keyword1 = $(".keyword1").val();
+            if( keyword1==null ){
+                keyword1 = "";
+            }
             // -----------------------------------------------
             // 만약 키워드가 비어있거나 공백으로 구성되어 있으면 경고하고 비우고 함수 중단하기
             // -----------------------------------------------
@@ -86,13 +89,13 @@
             // 비동기 방식으로 웹서버에 접속하여 키워드를 만족하는
             // 검색 결과물을 응답받아 현 화면에 반영하기 
             // -----------------------------------------------
-            xxx();
+            searchExe();
 
-
+          
 
         }
 
-        function xxx(){
+        function searchExe(){
             // -----------------------------------------------
             // 현재 화면에서 페이지 이동 없이(=비동기 방식으로)
             // 서버쪽 /boardList.do 로 접속하여 키워드를 만족하는
@@ -122,9 +125,9 @@
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
                 
-                    var html = $(responseHTML).filter(".searchResult").html();
+                    var html = $(responseHTML).find(".searchResult").html();
 
-                    alert( html );
+                    $(".searchResult").html(html)
                 
                 
                 }
@@ -138,11 +141,20 @@
 
 
 
-            })
+            });
 
 
         }
 
+        function searchAll(){
+
+            $(".keyword1").val("");
+            searchExe();
+
+        }
+
+
+        
 
     </script>
 
@@ -164,14 +176,17 @@
     <!-- *********************************************************** -->
     <form name="boardListForm" method="post">
 
-            [키워드] : <input type="text" name="keyword1" class="keyword1">
+            [키워드] : <input type="text" name="keyword1" class="keyword1" 
+            onkeydown="if(event.keyCode==13) {searchExe();}">
             <input type="button" value="검색" class="contactSearch" onclick="search();">&nbsp;
             <input type="button" value="모두검색" class="contactSearchAll" onclick="searchAll();">&nbsp;
             <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
 
     </form>
-    <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
+    <div class="CNT" style="height: 10px;">검색 개수 : </div> <br><br><br><!-- 공백조절용 div 태그 -->
+
+    
 
     <center>
 
@@ -214,12 +229,14 @@
                     if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
                     out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
+                    
                 }
             }    
         %>
         </table>
     </div>
 
+    <span>검색결과 : <%=boardList.size()%></span>
 
 
     <hr> 
