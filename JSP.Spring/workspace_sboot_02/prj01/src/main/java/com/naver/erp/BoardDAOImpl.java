@@ -48,9 +48,9 @@ public class BoardDAOImpl implements BoardDAO {
             // ----------------------------------------------
             ,boardDTO                             
         );
+        System.out.println("게시판 글 입력 적용 행 개수 리턴 =>" + boardRegCnt);
 
-
-        return boardRegCnt;
+        return boardRegCnt;      
     }
     
     // ******************************************************
@@ -112,9 +112,9 @@ public class BoardDAOImpl implements BoardDAO {
             
             "com.naver.erp.BoardDAO.updateReadcount" // 실행할 SQL 구문의 위치 지정
             ,b_no                                    // 실행할 SQL 구문에서 사용할 데이터 지정
-
+   
         );
-        return updateCnt;
+        return updateCnt;   
 
 
     }
@@ -166,6 +166,8 @@ public class BoardDAOImpl implements BoardDAO {
                 "com.naver.erp.BoardDAO.updateBoard"  // 실행할 SQL 구문의 위치 지정
                 ,boardDTO							  // 실행할 SQL 구문에서 사용할 데이터 지정
         );
+
+        System.out.println(" BoardDAOImpl 에서, updateBoard() 메서드 리턴값 updateCnt 확인 =>  " + updateCnt);
         return updateCnt;
 
 
