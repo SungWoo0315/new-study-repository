@@ -172,6 +172,12 @@ public class BoardController {
 
         try{
 
+            /* 인위적 예외발생하기. 
+            if( boardDTO.getB_no()>0 ){
+                throw new Exception();
+            }
+            */ 
+
             System.out.println( "====================\r" );
             System.out.println( "BoardController 에서 받아오는 값 확인.\r" );
             System.out.println( "getB_no => " + boardDTO.getB_no() );
