@@ -60,6 +60,87 @@
             
         }
 
+        // *****************************************
+        // 키워드에 입력한 데이터를 가진 [게시판 목록]을 검색해서 그 결과를 보여주는 함수 선언
+        // *****************************************
+        function search(){
+            // -----------------------------------------------
+            // 입력한 키워드 얻어오기
+            // -----------------------------------------------
+            var keyword1 = $(".keyword1").val();
+            // -----------------------------------------------
+            // 만약 키워드가 비어있거나 공백으로 구성되어 있으면 경고하고 비우고 함수 중단하기
+            // -----------------------------------------------
+            if( keyword1==null || keyword1.split(" ").join("")=="" ){
+                
+                alert("[키워드] 가 비어 있어 검색 불가능합니다.")
+                $(".keyword1").val("");
+                return;
+
+            }
+            // -----------------------------------------------
+            // 입력한 키워드의 앞뒤 공백 제거하고 다시 넣어주기
+            // -----------------------------------------------
+            $(".keyword1").val(  $.trim(keyword1)  );
+            // -----------------------------------------------
+            // 비동기 방식으로 웹서버에 접속하여 키워드를 만족하는
+            // 검색 결과물을 응답받아 현 화면에 반영하기 
+            // -----------------------------------------------
+            xxx();
+
+
+
+        }
+
+        function xxx(){
+            // -----------------------------------------------
+            // 현재 화면에서 페이지 이동 없이(=비동기 방식으로)
+            // 서버쪽 /boardList.do 로 접속하여 키워드를 만족하는
+            // 검색 결과물을 응답받아 현 화면에 반영하기
+            // -----------------------------------------------
+            $.ajax({
+
+                // ----------------------------------------------------------
+                // 서버쪽 호출 URL 주소 지정
+                // ----------------------------------------------------------
+                url       : "/boardList.do"
+                // ----------------------------------------------------------
+                // form 태그 안의 입력양식 데이터 즉, 파라미터값을 보내는 방법 지정
+                // ----------------------------------------------------------
+                ,type     : "post"
+                // ----------------------------------------------------------
+                // 서버로 보낼 파라미터명과 파라미터값을 설정. 
+                // ----------------------------------------------------------
+                ,data     : $("[name=boardListForm]").serialize() 
+                    
+                ,dataType : "html"
+                // ----------------------------------------------------------
+                // 서버의 응답을 성공적으로 받았을 경우 실행할 익명함수 설정.
+                // 익명함수의 매개변수에는 서버가 보내온 html 소스가 문자열로 들어온다.
+                // 즉, 응답 메시지 안의 html 소스가 문자열로써 익명함수의 매개변수로 들어온다.  
+                // 응답 메시지 안의 html 소스는 boardList.jsp 의 실행 결과물이다.
+                // ----------------------------------------------------------
+                ,success  : function( responseHTML ){
+                
+                    var html = $(responseHTML).filter(".searchResult").html();
+                
+                
+                }
+                // ----------------------------------------------------------
+                // 서버의 응답을 못 받았을 경우 실행할 익명함수 설정
+                // ----------------------------------------------------------
+                ,error : function( ){
+                    alert("서버 접속 실패! 관리자에게 문의 바람!");
+                }
+
+
+
+
+            })
+
+
+        }
+
 
     </script>
 
@@ -75,53 +156,69 @@
 
         <hr>  
 
+
+    <!-- *********************************************************** -->
+    <!-- [게시판 검색 조건 입력 양식] 내포한 form 태그 선언 -->
+    <!-- *********************************************************** -->
+    <form name="boardListForm" method="post">
+
+            [키워드] : <input type="text" name="keyword1" class="keyword1">
+            <input type="button" value="검색" class="contactSearch" onclick="search();">&nbsp;
+            <input type="button" value="모두검색" class="contactSearchAll" onclick="searchAll();">&nbsp;
+            <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
+
+    </form>
+    <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
+
+
     <center>
-    <a href="javascript:goBoardRegForm( );">[새글쓰기]</a>
 
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
     
+    <div class="searchResult">
 
-    <table border="1" style="border-collapse:collapse" cellpadding=5>
-        <tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
-
-
-    
-
-    <%
-        List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
-
-        if( boardList!=null){
-
-            int totCnt = boardList.size();
-
-            for( int i=0; i<boardList.size(); i++ ){
-
-                Map<String,String> map = boardList.get(i);
+        <table border="1" style="border-collapse:collapse" cellpadding=5>
+            <tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
 
 
-                String b_no = map.get("b_no");
+        <%
+            List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
 
-                String subject = map.get("subject");
-                String writer = map.get("writer");
-                String readcount = map.get("readcount");
-                String reg_date = map.get("reg_date");
-                String print_level = map.get("print_level");
+            if( boardList!=null){
 
-                int print_level_int = Integer.parseInt(print_level,10);
+                int totCnt = boardList.size();
 
-                String xxx = "";
+                for( int i=0; i<boardList.size(); i++ ){
 
-                for( int j=0; j<print_level_int; j++){
+                    Map<String,String> map = boardList.get(i);
 
-                    xxx = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
+                    String b_no = map.get("b_no");
+
+                    String subject = map.get("subject");
+                    String writer = map.get("writer");
+                    String readcount = map.get("readcount");
+                    String reg_date = map.get("reg_date");
+                    String print_level = map.get("print_level");
+
+                    int print_level_int = Integer.parseInt(print_level,10);
+
+                    String xxx = "";
+
+                    for( int j=0; j<print_level_int; j++){
+
+                        xxx = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                    }
+                    if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
+                    out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+
                 }
-                if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
-                out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+            }    
+        %>
+        </table>
+    </div>
 
-            }
-        }    
-    %>
-    </table>
+
 
     <hr> 
     <input type="button" value="로그아웃" onclick="location.replace('/loginForm.do')">
