@@ -72,7 +72,7 @@ public class BoardDAOImpl implements BoardDAO {
 
         );
 
-        System.out.println("게시판 목록 List 값 확인 =>" + boardList);
+        System.out.println("BoardDAOImpl 게시판 목록 List 값 확인 =>" + boardList);
         
         return boardList;
     }
