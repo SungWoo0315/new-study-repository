@@ -331,17 +331,17 @@ public class BoardController {
         mav.setViewName("boardUpDelProc.jsp");
         mav.addObject("boardRegCnt", "boardUpDelProc.jsp 진입 성공!!");
 
-
+  
         // **********************************************
         // 만약 게시판 삭제 모드이면
         // **********************************************
         if( upDel.equals("del") ){
-
+    
             // 삭제 실행하고 삭제 적용행의 개수 얻기
             int boardUpDelCnt = this.boardService.deleteBoard(boardDTO);
-
+        
             System.out.println( "컨트롤러에서 boardUpDelCnt 확인 ==> " + boardUpDelCnt );
-
+         
             mav.addObject("boardUpDelCnt", boardUpDelCnt);        
 
         }
