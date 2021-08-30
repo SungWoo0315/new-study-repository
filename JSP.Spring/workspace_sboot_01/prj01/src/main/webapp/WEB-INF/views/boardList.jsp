@@ -236,8 +236,6 @@
         </table>
     </div>
 
-    <span>검색결과 : <%=boardList.size()%></span>
-
 
     <hr> 
     <input type="button" value="로그아웃" onclick="location.replace('/loginForm.do')">
