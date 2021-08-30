@@ -123,6 +123,8 @@
                 ,success  : function( responseHTML ){
                 
                     var html = $(responseHTML).filter(".searchResult").html();
+
+                    alert( html );
                 
                 
                 }

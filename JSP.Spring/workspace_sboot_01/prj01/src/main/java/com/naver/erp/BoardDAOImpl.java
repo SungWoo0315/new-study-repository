@@ -54,15 +54,21 @@ public class BoardDAOImpl implements BoardDAO {
         return boardRegCnt;
     }
 
+
+
+
+
+
     // ******************************************************
     // [검색한 게시판 목록] 리턴하는 메소드 선언
     // ******************************************************
-    public List<Map<String,String>>getBoardList(){
+    public List<Map<String,String>>getBoardList( BoardSearchDTO boardSearchDTO){
 
 
         List<Map<String,String>> boardList = this.sqlSession.selectList(
 
             "com.naver.erp.BoardDAO.getBoardList"  // 실행할 SQL 구문의 위치 지정  
+            , boardSearchDTO                       // 실행할 SQL 구문에서 사용할 데이터 지정
 
         );
 
@@ -70,6 +76,12 @@ public class BoardDAOImpl implements BoardDAO {
         
         return boardList;
     }
+
+
+
+
+
+
 
     // ******************************************************
     // [1개 게시판 글 정보] 리턴하는 메소드 선언

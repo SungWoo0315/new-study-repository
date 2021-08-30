@@ -48,17 +48,17 @@ public class BoardController {
     @RequestMapping( value = "/boardList.do" )
     public ModelAndView getBoardList(
 
+        // --------------------------------------------------
+        // 파라미터 값을 저장하고 있는 BoardSearchDTO 객체를 받아오는 매개변수 선언
+        // --------------------------------------------------
+        BoardSearchDTO boardSearchDTO
 
     ){
 
         // ***************************************
         // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
         // ***************************************
-        List<Map<String, String>> boardList = this.boardDAO.getBoardList(  );
-
-
-
-
+        List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
