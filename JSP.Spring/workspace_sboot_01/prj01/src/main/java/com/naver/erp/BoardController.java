@@ -74,6 +74,7 @@ public class BoardController {
         // ***************************************
         mav.addObject("boardList", boardList);
 
+        System.out.println("컨트롤러 /boardList.do 진행... ");
 
         // ***************************************
         // [ModelAndView 객체] 리턴하기
