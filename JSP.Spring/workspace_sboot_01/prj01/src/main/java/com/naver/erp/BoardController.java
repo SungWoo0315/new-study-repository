@@ -97,9 +97,13 @@ public class BoardController {
         // ---------------------------------------------------------------
         // 파라미터명이 b_no 인 파라미터값을 받아오는 매개변수 b_no 선언하기
         // ---------------------------------------------------------------
-        @RequestParam(value = "b_no", required = false, defaultValue = "0") int b_no 
+        @RequestParam(
+            value="b_no"            // 파라미터명 설정
+            , required = false      // 파라미터명, 값이 안들어와도 허용한다는 의미
+            , defaultValue = "0"    // 파라미터값 없으면 파라미터값을 0으로 저장
+            ) int b_no
 
-        HttpServletRequest request
+        // HttpServletRequest request
     
     ){
 

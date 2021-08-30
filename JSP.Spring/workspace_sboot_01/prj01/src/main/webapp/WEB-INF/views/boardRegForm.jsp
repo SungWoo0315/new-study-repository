@@ -7,6 +7,7 @@
     <!-- 모든 JSP 페이지 상단에는 무조건 아래 설정이 들어간다. -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -16,7 +17,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BoardList</title>
+<title>boardRegForm</title>
 
     <script>
 
@@ -159,7 +160,17 @@
     <form name="boardRegForm" method="POST" action="/boardRegProc.do">
     
         <table border="1" style="border-collapse:collapse" cellpadding=5>
-            <caption>새글쓰기</caption>
+
+            <% if( request.getParameter("b_no")==null) { %>
+
+                <caption>새글쓰기</caption>
+
+            <% }else{ %>
+
+                <caption>댓글쓰기</caption>
+
+            <% } %>    
+
             <tr>
                 <th bgcolor="lightgray">이  름</th>  
                 <td>
@@ -207,9 +218,22 @@
         <input type="button" value="목록보기" onclick="location.replace('/boardList.do')">
     
         
-        <!-- <input type="hidden" name="b_no" value="1"> -->
+        <!-- ------------------------------------------------- -->
+        <!-- 만약 파명 b_no 의 파값이 null 이면 name="b_no" 를 가진 hidden 태그의 value 에 0 입력하기 -->
+        <!-- 만약 파명 b_no 의 파값이 null 아니면 name="b_no" 를 가진 hidden 태그의 value 에 파값을 입력하기 -->
+        <!-- ------------------------------------------------- -->
+        <% if( request.getParameter("b_no")==null) { %>
+
+            <input type="hidden" name="b_no" value="0">
     
-    
+        <% }else{ %>
+
+            <input type="hidden" name="b_no" value="<%=request.getParameter("b_no")%>">
+
+        <% } %>    
+
+       
+
     </form>
 
 
