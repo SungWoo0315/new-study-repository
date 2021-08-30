@@ -53,12 +53,17 @@ public class BoardController {
         // --------------------------------------------------
         BoardSearchDTO boardSearchDTO
 
+        ,BoardDTO boardDTO
+
     ){
 
         // ***************************************
         // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
         // ***************************************
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
+
+
+        BoardDTO getBoardListCount = this.boardDAO.getBoardListCount(  );
 
         // ***************************************
         // [ModelAndView 객체] 생성하기

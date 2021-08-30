@@ -64,4 +64,9 @@ public interface BoardDAO {
 
 
 
+
+    int getBoardListCount(BoardDTO boardDTO);
+
+
+
 }

@@ -111,6 +111,43 @@
     </select>
 
 
+
+    <select id="getBoardListCount" parameterType="int" resultType="com.naver.erp.BoardDTO">
+        select
+            count(*)
+        from     
+             board
+        where 
+            1=1
+            <!-- ============================================================== -->
+            <!-- 만약 키워드가 null 이 아니고 길이가 0보다 크면 where 절에 참여하기 -->
+            <!-- ============================================================== -->
+            <if test="keyword1!=null and keyword1.length()>0">
+            and (
+                upper(subject) like upper('%${keyword1}%')
+                or
+                upper(content) like upper('%${keyword1}%')
+                or
+                upper(writer) like upper('%${keyword1}%')
+                or
+                upper(email) like upper('%${keyword1}%')
+                or
+                to_char(reg_date, 'YYYY-MM-DD') like '%${keyword1}%'
+                or
+                to_char(reg_date, 'YYYYMMDD') like '%${keyword1}%'
+                or
+                to_char(reg_date, 'YYYY/MM/DD') like '%${keyword1}%'
+                or
+                to_char(reg_date, 'YYYY,MM,DD') like '%${keyword1}%'
+            )
+            </if>
+
+        order by 
+            group_no desc
+            ,print_no asc
+    </select>
+
+
     <!-- ********************************************************************* -->
     <!-- 게시판 1개 글 검색하는 select 문을 내포한 select 태그 선언 -->
     <!-- ********************************************************************* -->
