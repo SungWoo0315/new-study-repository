@@ -94,9 +94,27 @@ public class BoardController {
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     @RequestMapping( value = "/boardRegForm.do" )
     public ModelAndView goBoardRegForm(
-    
+        // ---------------------------------------------------------------
+        // 파라미터명이 b_no 인 파라미터값을 받아오는 매개변수 b_no 선언하기
+        // ---------------------------------------------------------------
+        @RequestParam(value = "b_no", required = false, defaultValue = "0") int b_no 
+
+        HttpServletRequest request
     
     ){
+
+        System.out.println("BoardController 에서 댓글쓰기 부모 PK 값 확인 ==> " + b_no); // PK 파라미터값 확인.  
+
+        /*  HttpServletRequest request 썻을때의 조건 코드.  
+        String b_no = request.getParameter("b_no");
+        if( b_no == null){
+
+        }
+        else{
+
+        }
+        */
+
         // ***************************************
         // [ModelAndView 객체] 생성하기
         // ***************************************
@@ -111,6 +129,11 @@ public class BoardController {
         return mav;
 
     }
+
+
+
+
+
 
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
