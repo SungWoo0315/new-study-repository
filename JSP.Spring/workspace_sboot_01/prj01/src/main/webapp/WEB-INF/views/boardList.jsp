@@ -78,6 +78,7 @@
                 
                 alert("[키워드] 가 비어 있어 검색 불가능합니다.")
                 $(".keyword1").val("");
+                $(".keyword1").focus();
                 return;
 
             }
@@ -128,7 +129,13 @@
                     var html = $(responseHTML).find(".searchResult").html();
 
                     $(".searchResult").html(html)
-                
+
+                    
+                    var cnt = $(responseHTML).find(".CNT").text();
+					$(".CNT").text(cnt);
+
+
+
                 
                 }
                 // ----------------------------------------------------------
@@ -182,9 +189,11 @@
             <input type="button" value="모두검색" class="contactSearchAll" onclick="searchAll();">&nbsp;
             <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
 
+
+            <div class="CNT" style="height: 10px;">검색 개수 : <% out.print( (int)request.getAttribute("getBoardListCount") );%> 개</div> <br><br><br><!-- 공백조절용 div 태그 -->
+
     </form>
 
-    <div class="CNT" style="height: 10px;">검색 개수 : </div> <br><br><br><!-- 공백조절용 div 태그 -->
 
     
 
@@ -200,6 +209,7 @@
 
         <%
             List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
+
 
             if( boardList!=null){
 
@@ -229,7 +239,6 @@
                     if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
                     out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
-                    
                 }
             }    
         %>

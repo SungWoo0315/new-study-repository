@@ -112,7 +112,7 @@
 
 
 
-    <select id="getBoardListCount" parameterType="int" resultType="com.naver.erp.BoardDTO">
+    <select id="getBoardListCount" parameterType="com.naver.erp.BoardDTO" resultType="int">
         select
             count(*)
         from     

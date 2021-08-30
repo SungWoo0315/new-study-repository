@@ -63,7 +63,9 @@ public class BoardController {
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
 
 
-        BoardDTO getBoardListCount = this.boardDAO.getBoardListCount(  );
+        int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
+
+        System.out.println("컨트롤러에서 검색개수 확인 => " + getBoardListCount);
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
@@ -78,6 +80,10 @@ public class BoardController {
         // [ModelAndView 객체] 에 [게시판 목록 검색 결과]를 저장하기
         // ***************************************
         mav.addObject("boardList", boardList);
+
+        
+        mav.addObject("getBoardListCount", getBoardListCount);
+
 
         System.out.println("컨트롤러 /boardList.do 진행... ");
 

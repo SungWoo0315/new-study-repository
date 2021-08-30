@@ -79,13 +79,13 @@ public class BoardDAOImpl implements BoardDAO {
 
 
 
-    public BoardDTO getBoardListCount(int b_no){
+    public int getBoardListCount(BoardSearchDTO boardSearchDTO){
 
         // -------------------------------------------
         // [SqlSessionTemplate 객체]의 selectOne(~,~) 를 호출하여 [1개 게시판 글 정보] 얻기
         // selectOne 은 1행 m열의 select 결과를 얻을 때 사용하는 메소드이다.  
         // -------------------------------------------
-        BoardDTO getBoardListCount = this.sqlSession.selectOne(
+        int getBoardListCount = this.sqlSession.selectOne(
             //-----------------------------------------------
             // 실행할 SQL 구문의 위치를 지정하기.
             // 실행할 SQL 구문의 위치 문자열 패턴은 아래와 같다.
@@ -95,13 +95,18 @@ public class BoardDAOImpl implements BoardDAO {
             //-----------------------------------------------
             // 실행할 SQL구문에서 사용할 데이터 지정하기
             //-----------------------------------------------
-            , b_no
+            , boardSearchDTO
         );                       
 
         // -------------------------------------------
         // [1개 게시판 글 정보] 리턴하기
         // -------------------------------------------
+        
+        System.out.println("BoardDAOImpl 게시판 목록 검색개수 확인 =>" + getBoardListCount);
+        
         return getBoardListCount;
+
+
 
     }
 
