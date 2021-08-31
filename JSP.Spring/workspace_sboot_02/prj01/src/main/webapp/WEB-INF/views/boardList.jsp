@@ -132,13 +132,18 @@
 
 
 
-            })
+            });
 
 
         }
 
 
+        function searchAll(){
+      
+            $(".keyword1").val("");
+            xxx();
 
+        }
 
 
 
