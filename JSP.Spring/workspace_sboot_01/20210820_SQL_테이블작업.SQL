@@ -134,6 +134,10 @@ select * from ( select rownum RNUM, zxcvb.* from (
 		*
 	from
 		board
+	where
+		1=1
+		and
+		subject like '%얀%'
 	order by
 		group_no desc
 		,print_no asc
