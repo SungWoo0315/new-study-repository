@@ -125,12 +125,20 @@
                 // 응답 메시지 안의 html 소스는 boardList.jsp 의 실행 결과물이다.
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
-                
+                    // ----------------------------------------------------------
+                    // 매개변수 responseHTML 로 들어온 검색 결과물 html 소스 문자열에서 
+                    // class=searchResult 를 가진 태그 내부의 [검색 결과물 html 소스]를 얻어서
+                    // 아래 현 화면의 html 소스중에 class=searchResult 를 가진 태그 내부에 덮어씌우기  
+                    // ----------------------------------------------------------
                     var html = $(responseHTML).find(".searchResult").html();
 
                     $(".searchResult").html(html);
 
-                    
+                    // ----------------------------------------------------------
+                    // 매개변수 responseHTML 로 들어온 검색 결과물 html 소스 문자열에서 
+                    // class=boardListAllCnt 를 가진 태그 내부의 [총개수 문자열]을 얻어서
+                    // 아래 현 화면의 html 소스중에 class=boardListAllCnt 를 가진 태그 내부에 덮어씌우기  
+                    // ----------------------------------------------------------
                     var cnt = $(responseHTML).find(".boardListAllCnt").text();
 
                     $(".boardListAllCnt").text(cnt);
