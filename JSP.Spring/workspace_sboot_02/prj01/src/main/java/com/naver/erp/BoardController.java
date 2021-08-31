@@ -37,7 +37,7 @@ public class BoardController {
         // 단, @Autowired( required=false ) 로 선언하여 [인터페이스]를 구현할 [클래스]가 0개 이어도 에러없이 null 이 저장된다.    
     @Autowired
     private BoardDAO boardDAO;
-
+    
     
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 가상주소 /boardList.do 로 접근하면 호출되는 메소드 선언
@@ -46,8 +46,8 @@ public class BoardController {
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     @RequestMapping( value = "/boardList.do" )
     public ModelAndView getBoardList(
-
-
+    
+                    
     ){
 
         // ***************************************
@@ -84,7 +84,16 @@ public class BoardController {
     @RequestMapping( value = "/boardRegForm.do" )
     public ModelAndView goBoardRegForm(
     
-    
+        // ---------------------------------------------------------------
+        // 파라미터명이 b_no 인 파라미터값을 받아오는 매개변수 b_no 선언하기
+        // ---------------------------------------------------------------
+        @RequestParam(
+            value="b_no"            // 파라미터명 설정
+            , required = false      // 파라미터명, 값이 안들어와도 허용한다는 의미
+            , defaultValue = "0"    // 파라미터값 없으면 파라미터값을 0으로 저장
+            ) int b_no  
+
+       
     ){
         // ***************************************
         // [ModelAndView 객체] 생성하기

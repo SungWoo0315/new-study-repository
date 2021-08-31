@@ -36,6 +36,24 @@
             // -----------------------------------------
             document.boardUpDelForm.submit();
         }
+
+        // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+        // 게시판 댓글 화면으로 이동하는 함수 선언
+        // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+        function goBoardRegFrom(){
+
+        // alert("댓글쓰기 확인"); // 테스트용. 버튼 작동 확인.  
+
+        // -----------------------------------------
+        // name=boardRegForm 을 가진 form 태그의 action 값을 URL로 서버에 접속하라
+        // -----------------------------------------
+        document.boardRegForm.submit();
+
+
+
+        }
+
+
         
 	</script>
 
@@ -120,6 +138,12 @@
 
     <hr> 
 
+    <!-- ****************************************************** -->
+    <!-- [게시판 댓글쓰기] 화면으로 이동하는 form 태그 선언 -->
+    <!-- ****************************************************** -->
+    <form name="boardRegForm" method="POST" action="/boardRegForm.do">
+        <input type="hidden" name="b_no" value="<%=b_no%>">
+    </form>
 
 </body>
 </html>
