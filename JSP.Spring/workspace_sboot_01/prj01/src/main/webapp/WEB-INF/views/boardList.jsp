@@ -270,6 +270,7 @@
         </table>
     </div>
 
+    <!-- 페이지 번호 출력 -->
 
     <hr> 
     <input type="button" value="로그아웃" onclick="location.replace('/loginForm.do')">
