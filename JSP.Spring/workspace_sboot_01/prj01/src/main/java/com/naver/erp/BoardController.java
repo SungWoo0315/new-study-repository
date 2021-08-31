@@ -81,12 +81,17 @@ public class BoardController {
 
         // ***************************************
         // [ModelAndView 객체] 에 [게시판 목록 검색 결과]를 저장하기
+        // [ModelAndView 객체] 에 [게시판 목록의 총개수]를 저장하기
         // ***************************************
         mav.addObject("boardList", boardList);
-
         
         mav.addObject("getBoardListCount", getBoardListCount);
 
+        // ***************************************
+        // [ModelAndView 객체] 에 [현재 화면에 보여지는 페이지 번호의 최소 번호]를 저장하기
+        // [ModelAndView 객체] 에 [현재 화면에 보여지는 페이지 번호의 최대 번호]를 저장하기
+        // ***************************************
+        
 
         System.out.println("컨트롤러 /boardList.do 진행... ");
 
