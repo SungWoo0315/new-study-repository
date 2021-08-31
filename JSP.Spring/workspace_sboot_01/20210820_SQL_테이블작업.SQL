@@ -87,3 +87,66 @@ from
 	employee
 where
 	emp_name like '%김%'
+
+
+
+-- <패턴> n행~m행 까지 검색하는 select 패턴 정리1
+
+--직급서열대로 정렬.
+--11행부터 20행 까지 보여주는 쿼리.
+
+select * from ( select rownum RNUM, zxcvb.* from (
+
+	select
+		*
+	from
+		employee
+	order by
+		decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4, '주임', 5, '사원', 6, 7) asc
+
+
+) zxcvb where rownum<=20 ) where RNUM>=11;
+
+
+
+--<패턴> n행~m행 까지 검색하는 select 패턴 정리2
+
+select * from ( select rownum RNUM, zxcvb.* from (
+
+
+	select
+		*
+	from
+		employee
+	order by
+		decode(jikup, '사장', 1, '부장', 2, '과장', 3, '대리', 4, '주임', 5, '사원', 6, 7) asc
+
+
+
+) zxcvb) where RNUM>=11 and RNUM<=20 ;
+
+
+--------
+
+select * from ( select rownum RNUM, zxcvb.* from (
+
+	select
+		*
+	from
+		board
+	where
+		1=1
+		and
+		subject like '%얀%'
+	order by
+		group_no desc
+		,print_no asc
+
+) zxcvb where rownum<=10 ) where RNUM>=1;
+
+
+
+
+
+
+

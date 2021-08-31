@@ -52,17 +52,20 @@ public class BoardController {
         // 파라미터 값을 저장하고 있는 BoardSearchDTO 객체를 받아오는 매개변수 선언
         // --------------------------------------------------
         BoardSearchDTO boardSearchDTO
-
-        ,BoardDTO boardDTO
+        
 
     ){
 
         // ***************************************
         // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
+        // 검색 조건에 맞는 [게시판 목록] 얻기
         // ***************************************
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
 
 
+        // ***************************************
+        // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
+        // ***************************************
         int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
 
         System.out.println("컨트롤러에서 검색개수 확인 => " + getBoardListCount);
@@ -78,12 +81,20 @@ public class BoardController {
 
         // ***************************************
         // [ModelAndView 객체] 에 [게시판 목록 검색 결과]를 저장하기
+        // [ModelAndView 객체] 에 [게시판 목록의 총개수]를 저장하기
         // ***************************************
         mav.addObject("boardList", boardList);
-
         
         mav.addObject("getBoardListCount", getBoardListCount);
 
+        // ***************************************
+        // [ModelAndView 객체] 에 [현재 화면에 보여지는 페이지 번호의 최소 번호]를 저장하기
+        // [ModelAndView 객체] 에 [현재 화면에 보여지는 페이지 번호의 최대 번호]를 저장하기
+        // ***************************************
+        
+
+
+        
 
         System.out.println("컨트롤러 /boardList.do 진행... ");
 
