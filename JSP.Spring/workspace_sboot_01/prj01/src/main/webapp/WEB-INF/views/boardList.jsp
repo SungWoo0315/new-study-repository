@@ -128,10 +128,11 @@
                 
                     var html = $(responseHTML).find(".searchResult").html();
 
-                    $(".searchResult").html(html)
+                    $(".searchResult").html(html);
 
                     
                     var cnt = $(responseHTML).find(".boardListAllCnt").text();
+
                     $(".boardListAllCnt").text(cnt);
 
 
@@ -200,7 +201,7 @@
 
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
-    <div class="boardListAllCnt" style="height: 10px;">검색 개수 : <% out.print( (int)request.getAttribute("getBoardListCount") );%> 개</div> <br><br><br><!-- 공백조절용 div 태그 -->
+    <div class="boardListAllCnt" style="height: 10px;">총 <%=(Integer)request.getAttribute("getBoardListCount")%>개</div> <br><!-- 공백조절용 div 태그 -->
 
     <div class="searchResult">
 
