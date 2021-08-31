@@ -193,7 +193,19 @@
     <form name="boardListForm" method="post">
 
             [키워드] : <input type="text" name="keyword1" class="keyword1" 
-            onkeydown="if(event.keyCode==13) {searchExe();}">
+            onkeydown="if(event.keyCode==13) {search();}">
+
+
+            <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">  
+            <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
+                <option value="10">10</option>
+                <option value="10">15</option>
+                <option value="10">20</option>
+                <option value="10">25</option>
+                <option value="10">30</option>
+            </select> 행보기
+
+
             <input type="button" value="검색" class="contactSearch" onclick="search();">&nbsp;
             <input type="button" value="모두검색" class="contactSearchAll" onclick="searchAll();">&nbsp;
             <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
@@ -209,7 +221,9 @@
 
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
+    <!-- *********************************************************** -->
     <div class="boardListAllCnt" style="height: 10px;">총 <%=(Integer)request.getAttribute("getBoardListCount")%>개</div> <br><!-- 공백조절용 div 태그 -->
+    <!-- *********************************************************** -->
 
     <div class="searchResult">
 
@@ -308,6 +322,31 @@
         if( endRowNo>totCnt ){
             endRowNo = totCnt;
         }
+    }
+
+
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    공식 => [총개수], [페이지 당 보여줄 행의 개수], [선택된 페이지 번호]
+            [한 화면에 보여지는 페이지번호 개수]로 
+            [현재 화면에 보여지는 페이지 번호의 최소 번호]와
+            [현재 화면에 보여지는 페이지 번호의 최대 번호]를 구하는 공식
+            단, 변수는 아래와 같다.  
+    ---------------------------------------------------------------
+            totCnt             => 검색된 총 결과물 개수
+            rowCntPerPage      => 페이지 당 보여줄 행의 개수
+            selectPageNo       => 선택한 페이지 번호  
+            pageNoCntPerPage   => 페이지당 보여줄 페이지 번호의 개수
+            last_pageNo        => 마지막 페이지 번호의 개수
+            min_pageNo         => 현재 화면에 보여지는 페이지 번호의 최소 페이지 번호
+            max_pageNo         => 현재 화면에 보여지는 페이지 번호의 최대 페이지 번호
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    if( totCnt > 0 ){
+        int last_pageNo = totCnt/rowCntPerPage;
+            if( totCnt%rowCntPerPage > 0 ){last_pageNo++;}
+
+        int min_pageNo = (selectPageNo - 1)/pageNoCntPerPage * pageNoCntPerPage + 1;
+        int max_pageNo = min_pageNo + pageNoCntPerPage - 1;
+            if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
     }
 
 
