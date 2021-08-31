@@ -131,8 +131,8 @@
                     $(".searchResult").html(html)
 
                     
-                    var cnt = $(responseHTML).find(".CNT").text();
-					$(".CNT").text(cnt);
+                    var cnt = $(responseHTML).find(".boardListAllCnt").text();
+                    $(".boardListAllCnt").text(cnt);
 
 
 
@@ -190,7 +190,6 @@
             <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
 
 
-            <div class="CNT" style="height: 10px;">검색 개수 : <% out.print( (int)request.getAttribute("getBoardListCount") );%> 개</div> <br><br><br><!-- 공백조절용 div 태그 -->
 
     </form>
 
@@ -200,7 +199,9 @@
     <center>
 
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
-    
+
+    <div class="boardListAllCnt" style="height: 10px;">검색 개수 : <% out.print( (int)request.getAttribute("getBoardListCount") );%> 개</div> <br><br><br><!-- 공백조절용 div 태그 -->
+
     <div class="searchResult">
 
         <table border="1" style="border-collapse:collapse" cellpadding=5>

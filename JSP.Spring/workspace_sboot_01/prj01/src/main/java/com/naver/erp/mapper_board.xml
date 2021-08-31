@@ -112,11 +112,11 @@
 
 
 
-    <select id="getBoardListCount" parameterType="com.naver.erp.BoardDTO" resultType="int">
+    <select id="getBoardListCount" parameterType="com.naver.erp.BoardSearchDTO" resultType="int">
         select
             count(*)
         from     
-             board
+            board
         where 
             1=1
             <!-- ============================================================== -->
@@ -142,9 +142,6 @@
             )
             </if>
 
-        order by 
-            group_no desc
-            ,print_no asc
     </select>
 
 

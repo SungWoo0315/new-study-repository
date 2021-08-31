@@ -59,11 +59,16 @@ public class BoardController {
 
         // ***************************************
         // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
+        // 검색 조건에 맞는 [게시판 목록] 얻기
         // ***************************************
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
 
 
+        // ***************************************
+        // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
+        // ***************************************
         int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
+
 
         System.out.println("컨트롤러에서 검색개수 확인 => " + getBoardListCount);
 
