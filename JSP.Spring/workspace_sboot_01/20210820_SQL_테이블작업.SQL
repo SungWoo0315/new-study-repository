@@ -142,7 +142,6 @@ select * from ( select rownum RNUM, zxcvb.* from (
 		group_no desc
 		,print_no asc
 
-
 ) zxcvb where rownum<=10 ) where RNUM>=1;
 
 
