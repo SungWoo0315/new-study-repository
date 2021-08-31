@@ -54,8 +54,6 @@ public class BoardController {
         BoardSearchDTO boardSearchDTO
         
 
-        ,BoardDTO boardDTO
-
     ){
 
         // ***************************************
