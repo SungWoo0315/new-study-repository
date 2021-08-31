@@ -52,6 +52,7 @@ public class BoardController {
         // 파라미터 값을 저장하고 있는 BoardSearchDTO 객체를 받아오는 매개변수 선언
         // --------------------------------------------------
         BoardSearchDTO boardSearchDTO
+        
 
         ,BoardDTO boardDTO
 
@@ -68,7 +69,6 @@ public class BoardController {
         // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
         // ***************************************
         int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
-
 
         System.out.println("컨트롤러에서 검색개수 확인 => " + getBoardListCount);
 
