@@ -277,3 +277,38 @@
 </body>
 
 </html>
+
+
+
+
+<!-- 
+
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    공식 => [페이지 당 보여줄 행의 개수], [선택페이지번호], [총개수]로
+            검색 결과물의 [시작행 번호]과 검색 결과물의 [끝행 번호]를 구하는 공식
+            단 변수는 아래와 같다.
+    ------------------------------------------------------------------
+                totCnt        => 검색된 총 결과물 개수
+                rowCntPerPage => 페이지 당 보여줄 행의 개수
+                selectPageNo  => 선택한 페이지 번호
+                beginRowNo    => 검색된 총 결과물에서 가져올 범위의 시작행
+                endRowNo      => 검색된 총 결과물에서 가져올 범위의 끝행
+    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    if( totCnt>0){
+        int endRowNo = selectPageNo * rowCntPerPage;
+        int beginRowNo = endRowNo - rowCntPerPage + 1;
+        if( endRowNo>totCnt ){
+            endRowNo = totCnt;
+        }
+    }
+    ---------------------------------
+    if( totCnt>0){
+        int beginRowNo = selectPageNo * rowCntPerPage - rowCntPerPage + 1;
+        int endRowNo = beginRowNo + rowCntPerPage -1;
+        if( endRowNo>totCnt ){
+            endRowNo = totCnt;
+        }
+    }
+
+
+ -->
