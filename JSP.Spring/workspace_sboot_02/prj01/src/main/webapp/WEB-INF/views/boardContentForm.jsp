@@ -17,7 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Insert title here</title>
+<title>boardContentForm</title>
 
    
 	<script>	
@@ -62,7 +62,7 @@
 <body><center>
 	
     <span style="font-size:30px; font-weight: bold; color: rebeccapurple;">
-        boardRegForm.jsp 접속 성공!!
+        boardContentForm.jsp 접속 성공!!
     </span>
 
         <% System.out.println("============================"); %>
@@ -119,8 +119,7 @@
     <input type="button" value="수정/삭제" onclick="goBoardUpDelForm();">&nbsp;
     <input type="button" value="글 목록 보기" onclick="location.replace('/boardList.do')">
 
-    <hr> 
-    <input type="button" value="목록보기" onclick="location.replace('/boardList.do')">
+ 
    
     <%
     }
