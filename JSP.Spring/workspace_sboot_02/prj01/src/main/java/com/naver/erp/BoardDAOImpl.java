@@ -48,7 +48,7 @@ public class BoardDAOImpl implements BoardDAO {
             // ----------------------------------------------
             ,boardDTO                             
         );
-        System.out.println("게시판 글 입력 적용 행 개수 리턴 =>" + boardRegCnt);
+        System.out.println("BoardDAOImpl 에서, 게시판 글 입력 적용 행 개수 리턴 =>" + boardRegCnt);
 
         return boardRegCnt;      
     }
