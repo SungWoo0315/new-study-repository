@@ -93,6 +93,9 @@ public class BoardController {
         // ***************************************
         
 
+
+        
+
         System.out.println("컨트롤러 /boardList.do 진행... ");
 
         // ***************************************
