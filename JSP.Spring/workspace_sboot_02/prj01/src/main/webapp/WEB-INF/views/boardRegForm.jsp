@@ -105,14 +105,35 @@
                     // 만약 아이디, 암호의 존재가 1이면, 즉, 존재하면
                     // ------------------------------------
                     if( boardRegCnt == 1 ){
-                        alert("새글쓰기 성공!")	// 테스트용 확인.  
+
+                        <% if( request.getParameter("b_no")==null) { %>
+
+                            alert("새글쓰기 성공!")	// 테스트용 확인.  
+
+                        <% }else{ %>
+
+                            alert("댓글 쓰기 성공!")	// 테스트용 확인.  
+
+                        <% } %>    
+
                         location.replace("/boardList.do")
+
                     }
                     // ------------------------------------
                     // 그렇지 않으면, 즉, 아이디, 암호가 존재하지 않으면
                     // ------------------------------------
                     else{
-                        alert("새글쓰기 실패...")
+                        
+                        <% if( request.getParameter("b_no")==null) { %>
+
+                            alert("새글쓰기 실패...")
+
+                        <% }else{ %>
+
+                            alert("댓글 쓰기 실패...")	// 테스트용 확인.  
+
+                        <% } %>    
+
                     }
 
                 }
@@ -146,7 +167,15 @@
     <form name="boardRegForm" method="POST" action="/boardRegProc.do">
     
         <table border="1" style="border-collapse:collapse" cellpadding=5>
-            <caption>새글쓰기</caption>
+
+            <% if( request.getParameter("b_no")==null) { %>
+                <caption>새글쓰기</caption>
+            <% }else{ %>
+                <caption>댓글쓰기</caption>
+            <% } %>
+
+
+
             <tr>
                 <th bgcolor="lightgray">이  름</th>
                 <td>
@@ -194,6 +223,24 @@
         <input type="button" value="목록보기" onclick="location.replace('/boardList.do')">
         
         <!-- <input type="hidden" name="b_no" value="1"> -->
+
+
+        <!-- ------------------------------------------------- -->
+        <!-- 만약 파명 b_no 의 파값이 null 이면 name="b_no" 를 가진 hidden 태그의 value 에 0 입력하기 -->
+        <!-- 만약 파명 b_no 의 파값이 null 아니면 name="b_no" 를 가진 hidden 태그의 value 에 파값을 입력하기 -->
+        <!-- ------------------------------------------------- -->
+        <% if( request.getParameter("b_no")==null) { %>
+
+            <input type="hidden" name="b_no" value="0">
+    
+        <% }else{ %>
+
+            <input type="hidden" name="b_no" value="<%=request.getParameter("b_no")%>">
+
+        <% } %>     
+
+
+
 </form>
     
         

@@ -223,7 +223,31 @@ public class BoardDAOImpl implements BoardDAO {
     }
 
 
+    // ******************************************************
+    // [게시판 글 출력번호 1증가하고 수정 행의 개수] 리턴하는 메소드 선언
+    // ******************************************************
+    public int updatePrintNo(BoardDTO boardDTO){
 
+        System.out.println("BoardDAOImpl updatePrintNo 메서드 호출 ");
+
+        //-------------------------------------------------------
+        // [SqlSessionTemplate 객체]의 update(~,~) 를 호출하여 
+        // [게시판 글 출력번호 1증가하고 수정 행의 개수] 얻기
+        //-------------------------------------------------------
+        int updatePrintNoCnt = sqlSession.update(
+            
+            "com.naver.erp.BoardDAO.updatePrintNo"  // 실행할 SQL 구문의 위치 지정
+            ,boardDTO							    // 실행할 SQL 구문에서 사용할 데이터 지정
+
+        );
+
+        System.out.println("BoardDAOImpl 의 updatePrintNo 메서드 게시판 글 출력번호 수정행 => " + updatePrintNoCnt);
+        //-------------------------------------------------------
+        // [수정 행의 개수] 리턴하기
+        //-------------------------------------------------------
+        return updatePrintNoCnt;
+
+    }
 
 
 

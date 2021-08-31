@@ -93,7 +93,22 @@ public class BoardController {
             , defaultValue = "0"    // 파라미터값 없으면 파라미터값을 0으로 저장
             ) int b_no  
 
-       
+        // HttpServletRequest request 사용하여,
+        // ------------ 아래 방법도 있다.  
+        //   HttpServletRequest request
+
+        // ){
+
+        // String b_no = request.getParameter("b_no");
+        // if( b_no == null){
+
+        // }
+        // else{
+
+        // }
+
+
+
     ){
         // ***************************************
         // [ModelAndView 객체] 생성하기
