@@ -199,10 +199,11 @@
             <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">  
             <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
                 <option value="10">10</option>
-                <option value="10">15</option>
-                <option value="10">20</option>
-                <option value="10">25</option>
-                <option value="10">30</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="100">100</option>
             </select> 행보기
 
 
