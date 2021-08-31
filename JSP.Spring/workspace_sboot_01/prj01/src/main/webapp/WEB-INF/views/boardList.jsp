@@ -207,8 +207,8 @@
             </select> 행보기
 
 
-            <input type="button" value="검색" class="contactSearch" onclick="search();">&nbsp;
-            <input type="button" value="모두검색" class="contactSearchAll" onclick="searchAll();">&nbsp;
+            <input type="button" value="검색" class="boardSearch" onclick="search();">&nbsp;
+            <input type="button" value="모두검색" class="boardSearchAll" onclick="searchAll();">&nbsp;
             <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
 
 
