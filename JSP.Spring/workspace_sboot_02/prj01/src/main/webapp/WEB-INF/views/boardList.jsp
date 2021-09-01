@@ -68,9 +68,9 @@
             // -----------------------------------------------
             if( keyword1==null || keyword1.split(" ").join("")=="" ){
                 
-                alert("[키워드] 가 비어 있어 검색 불가능합니다.")
+                //alert("[키워드] 가 비어 있어 검색 불가능합니다.")
                 $(".keyword1").val("");
-                return;
+                //return;
 
             }
             // -----------------------------------------------
@@ -191,6 +191,7 @@
             <option value="20">20</option>
             <option value="25">25</option>
             <option value="30">30</option>
+            <option value="100">100</option>
         </select> 행보기
         
         
