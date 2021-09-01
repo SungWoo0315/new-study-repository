@@ -117,10 +117,22 @@
                 // 응답 메시지 안의 html 소스는 boardList.jsp 의 실행 결과물이다.
                 // ----------------------------------------------------------
                 ,success  : function( responseHTML ){
-                
+                    // ----------------------------------------------------------
+                    // 매개변수 responseHTML 로 들어온 검색 결과물 html 소스 문자열에서 
+                    // class=searchResult 를 가진 태그 내부의 [검색 결과물 html 소스]를 얻어서
+                    // 아래 현 화면의 html 소스중에 class=searchResult 를 가진 태그 내부에 덮어씌우기  
+                    // ----------------------------------------------------------
                     var html = $(responseHTML).find(".searchResult").html();
                 
                     $(".searchResult").html(html)
+                    // ----------------------------------------------------------
+                    // 매개변수 responseHTML 로 들어온 검색 결과물 html 소스 문자열에서 
+                    // class=boardListAllCnt 를 가진 태그 내부의 [총개수 문자열]을 얻어서
+                    // 아래 현 화면의 html 소스중에 class=boardListAllCnt 를 가진 태그 내부에 덮어씌우기  
+                    // ----------------------------------------------------------
+                    var cnt = $(responseHTML).find(".boardListAllCnt").text();
+
+                    $(".boardListAllCnt").text(cnt);
                 }
                 // ----------------------------------------------------------
                 // 서버의 응답을 못 받았을 경우 실행할 익명함수 설정
@@ -153,7 +165,7 @@
 
 </head>
 
-<body>
+<body onkeydown="if(event.keyCode==13) {search();}">
 
     <center>
     <span style="font-size:30px; font-weight: bold; color: orange;">
@@ -169,8 +181,22 @@
     <form name="boardListForm" method="post">
 
         [키워드] : <input type="text" name="keyword1" class="keyword1">
+        
+        
+        <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">  
+        
+        <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+        </select> 행보기
+        
+        
         <input type="button" value="검색" class="contactSearch" onclick="search();">&nbsp;
         <input type="button" value="모두검색" class="contactSearchAll" onclick="searchAll();">&nbsp;
+        
         <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
 
     </form>
@@ -178,7 +204,8 @@
 	
     <center>
 
-
+    <div class="boardListAllCnt" style="height: 10px;">총 <%=(Integer)request.getAttribute("getBoardListCount")%>개</div> <br><!-- 공백조절용 div 태그 -->
+    
     <div class="searchResult">
 
         <table border="1" style="border-collapse:collapse" cellpadding=5>

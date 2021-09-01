@@ -62,7 +62,11 @@ public interface BoardDAO {
     // ******************************************************
     int updatePrintNo(BoardDTO boardDTO);
 
-
+    
+    // ******************************************************
+    // [검색한 게시판 목록 총개수] 리턴하는 메소드 선언
+    // ******************************************************
+    int getBoardListCount(BoardSearchDTO boardSearchDTO);
 
 
 
