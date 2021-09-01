@@ -256,6 +256,127 @@
     <!-- *********************************************************** -->
     <div class="boardListAllCnt" style="height: 10px;">총 <%=getBoardListCount%>개</div> <br><!-- 공백조절용 div 태그 -->
     <!-- *********************************************************** -->
+    
+    <!-- ********************************************************* -->
+    <!-- 페이지 번호 출력하기 -->
+    <!-- ********************************************************* -->
+    <div class="pageNo">
+
+        <%
+            
+            if( getBoardListCount>0 ){
+
+            /*  페이지 번호 10개씩 넘어가는 기능. 
+                out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );
+            
+                if( min_pageNo > rowCntPerPage ){
+                    
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(min_pageNo-1)+");'>[[이전]]&nbsp;</span> " );
+
+
+                }
+
+                for( int i = min_pageNo; i<=max_pageNo; i++ ){
+                    if( i==selectPageNo ){
+
+                        out.print( "<span style='color:red;'>" + i + "</span> " );
+                    
+                    }else{
+
+                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
+
+                    }
+                }
+                if( last_pageNo > max_pageNo ){
+                    
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(max_pageNo+1)+");'>&nbsp;[[다음]]</span> " );
+
+
+                }
+            
+                out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
+            */
+
+            /*  페이지번호 하나씩 이동하는기능.
+                if( selectPageNo > 1 ){
+                
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );  
+
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>[[이전]]&nbsp;</span> " );
+                
+                }
+
+                for( int i = min_pageNo; i<=max_pageNo; i++ ){
+                    if( i==selectPageNo ){
+
+                        out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
+                    
+                    }else{
+
+                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
+
+                    }
+                }
+
+                if( selectPageNo < last_pageNo ){
+                        
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>[[다음]]&nbsp;</span> " );
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
+                
+                }
+            */
+
+                // 페이지번호 처음으로, 마지막으로 고정시켜서 이동안하게 하기   
+
+                if( selectPageNo > 1 ){
+                    
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );  
+
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>&nbsp;[[이전]]&nbsp;</span> " );
+                
+                }
+                else{
+                    
+                    out.print( "<span>[[처음으로]]&nbsp;</span>" );  
+
+                    out.print( "<span>&nbsp;[[이전]]&nbsp;</span> " );
+                
+                }
+
+                for( int i = min_pageNo; i<=max_pageNo; i++ ){
+                    if( i==selectPageNo ){
+
+                        out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
+                    
+                    }else{
+
+                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
+
+                    }
+                }
+
+                if( selectPageNo < last_pageNo ){
+                        
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>&nbsp;[[다음]]&nbsp;</span> " );
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
+                
+                }
+                else{
+                    
+                    out.print( "<span>&nbsp;[[다음]]&nbsp;</span>" );  
+
+                    out.print( "<span>&nbsp;[[마지막으로]]</span> " );
+                
+                }
+
+            }
+
+        %>
+
+    </div>
+
+    <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
+
 
     <div class="searchResult">
 
@@ -306,43 +427,6 @@
         </table>
     </div>
 
-    <!-- ********************************************************* -->
-    <!-- 페이지 번호 출력하기 -->
-    <!-- ********************************************************* -->
-    <div class="pageNo">
-
-        <%
-            
-            if( getBoardListCount>0 ){
-                if( min_pageNo > rowCntPerPage ){
-                    
-                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(min_pageNo-1)+");'>[[이전]]&nbsp;</span> " );
-
-
-                }
-
-                for( int i = min_pageNo; i<=max_pageNo; i++ ){
-                    if( i==selectPageNo ){
-
-                        out.print( "<span>" + i + "</span> " );
-                    
-                    }else{
-
-                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
-
-                    }
-                }
-                if( last_pageNo > max_pageNo ){
-                    
-                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(max_pageNo+1)+");'>&nbsp;[[다음]]</span> " );
-
-
-                }
-            }
-
-        %>
-
-    </div>
 
     <hr> 
     <input type="button" value="로그아웃" onclick="location.replace('/loginForm.do')">
