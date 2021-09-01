@@ -227,8 +227,9 @@
             [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
 
-            <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">  
-            <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
+            <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
+              
+            <select  name="rowCntPerPage" class="rowCntPerPage" onchange="$('.selectPageNo').val(<%=selectPageNo%>); search();">  
                 <option value="10">10</option>
                 <option value="15">15</option>
                 <option value="20">20</option>
