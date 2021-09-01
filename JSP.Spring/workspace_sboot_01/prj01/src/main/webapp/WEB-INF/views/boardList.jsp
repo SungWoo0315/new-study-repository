@@ -142,7 +142,10 @@
                     var cnt = $(responseHTML).find(".boardListAllCnt").text();
 
                     $(".boardListAllCnt").text(cnt);
+                    // ----------------------------------------------------------
+                    var pageNo = $(responseHTML).find(".pageNo").html();
 
+                    $(".pageNo").html(pageNo);
 
 
                 
@@ -271,11 +274,30 @@
     </div>
 
     <!-- 페이지 번호 출력 -->
+    <div class="pageNo">
 
-    <%=(Integer)request.getAttribute("last_pageNo")%> <br>
-    <%=(Integer)request.getAttribute("min_pageNo")%> <br>
-    <%=(Integer)request.getAttribute("max_pageNo")%> <br>
+        <%
+            int last_pageNo = (Integer)request.getAttribute("last_pageNo");
+            int min_pageNo = (Integer)request.getAttribute("min_pageNo");
+            int max_pageNo = (Integer)request.getAttribute("max_pageNo");
+            int getBoardListCount = (Integer)request.getAttribute("getBoardListCount");
+            int selectPageNo = (Integer)request.getAttribute("selectPageNo");
+            
+            if( getBoardListCount>0 ){
+                for( int i = min_pageNo; i<=max_pageNo; i++ ){
+                    if( i==selectPageNo ){
+                        out.print( "<span>" + i + "</span> " );
+                    
+                    }else{
+                        out.print( "<span>[" + i + "]</span> " );
 
+                    }
+                }
+            }
+
+        %>
+
+    </div>
 
     <hr> 
     <input type="button" value="로그아웃" onclick="location.replace('/loginForm.do')">
