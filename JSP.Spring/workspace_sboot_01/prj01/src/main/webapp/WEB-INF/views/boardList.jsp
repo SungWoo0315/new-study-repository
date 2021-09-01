@@ -272,6 +272,9 @@
 
                 int serialNo2 = getBoardListCount - ( selectPageNo * rowCntPerPage - rowCntPerPage + 1 ) + 1;
 
+                int serialNo3 = getBoardListCount - serialNo1 + 1;
+
+
                 for( int i=0; i<boardList.size(); i++ ){
 
                     Map<String,String> map = boardList.get(i);
@@ -295,7 +298,7 @@
                     }
                     if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
                     out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"
-                                    + (serialNo2--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+                                    + (serialNo3--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
                 }
             }    
