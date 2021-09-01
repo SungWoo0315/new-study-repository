@@ -222,7 +222,7 @@
     <!-- *********************************************************** -->
     <!-- [게시판 검색 조건 입력 양식] 내포한 form 태그 선언 -->
     <!-- *********************************************************** -->
-    <form name="boardListForm" method="post" onsubmit="return false">
+    <form name="boardListForm" method="post" onsubmit="return false;">
 
             [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
