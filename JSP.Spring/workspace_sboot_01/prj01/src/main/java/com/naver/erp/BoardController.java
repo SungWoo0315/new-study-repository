@@ -81,14 +81,17 @@ public class BoardController {
 
             last_pageNo = getBoardListCount/rowCntPerPage;
                 if( getBoardListCount%rowCntPerPage > 0 ){last_pageNo++;}
+
+                if( selectPageNo > last_pageNo ){
+                    selectPageNo = 1;
+                    boardSearchDTO.setSelectPageNo(selectPageNo);
+                }
+                
             min_pageNo = (selectPageNo - 1)/pageNoCntPerPage * pageNoCntPerPage + 1;
             max_pageNo = min_pageNo + pageNoCntPerPage - 1;
                 if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
         }
-        if( selectPageNo > last_pageNo ){
-            selectPageNo = 1;
-            boardSearchDTO.setSelectPageNo(selectPageNo);
-        }
+
 
         // int start_searial_no = 
 
