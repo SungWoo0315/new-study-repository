@@ -28,15 +28,27 @@
 
     <script>
         // *****************************************
+        // 페이지 번호를 클릭하면 호출되는 함수 선언
+        // *****************************************
+        function search_with_changePageNo( selectPageNo ){
+
+            $(".selectPageNo").val(selectPageNo);
+            search();
+
+        }
+
+
+
+        // *****************************************
         // [게시판 글쓰기 화면]으로 이동하는 함수 선언
         // *****************************************
         function goBoardRegForm( ){
 
             location.replace('/boardRegForm.do');
 
-            <% System.out.print("============================\r"); %>
-            <% System.out.print("boardList.jsp 접속 성공!!\r"); %>
-            <% System.out.print("============================\r"); %>
+            <% System.out.println("============================"); %>
+            <% System.out.println("boardList.jsp 접속 성공!!"); %>
+            <% System.out.println("============================"); %>
 
         }
 
@@ -76,10 +88,10 @@
             // -----------------------------------------------
             if( keyword1==null || keyword1.split(" ").join("")=="" ){
                 
-                alert("[키워드] 가 비어 있어 검색 불가능합니다.")
+                // alert("[키워드] 가 비어 있어 검색 불가능합니다.")
                 $(".keyword1").val("");
-                $(".keyword1").focus();
-                return;
+                // $(".keyword1").focus();
+                // return;
 
             }
             // -----------------------------------------------
@@ -179,7 +191,7 @@
 
 
 </head>
-<body>
+<body onkeydown="if(event.keyCode==13) {search();}">
 
     <center>
     <span style="font-size:30px; font-weight: bold; color: orange;">
@@ -193,10 +205,9 @@
     <!-- *********************************************************** -->
     <!-- [게시판 검색 조건 입력 양식] 내포한 form 태그 선언 -->
     <!-- *********************************************************** -->
-    <form name="boardListForm" method="post">
+    <form name="boardListForm" method="post" onsubmit="return false">
 
-            [키워드] : <input type="text" name="keyword1" class="keyword1" 
-            onkeydown="if(event.keyCode==13) {search();}">
+            [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
 
             <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">  
@@ -286,10 +297,12 @@
             if( getBoardListCount>0 ){
                 for( int i = min_pageNo; i<=max_pageNo; i++ ){
                     if( i==selectPageNo ){
+
                         out.print( "<span>" + i + "</span> " );
                     
                     }else{
-                        out.print( "<span>[" + i + "]</span> " );
+
+                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
 
                     }
                 }

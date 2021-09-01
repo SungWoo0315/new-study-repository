@@ -57,13 +57,6 @@ public class BoardController {
     ){
 
         // ***************************************
-        // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
-        // 검색 조건에 맞는 [게시판 목록] 얻기
-        // ***************************************
-        List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
-
-
-        // ***************************************
         // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
         // ***************************************
         int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
@@ -92,6 +85,17 @@ public class BoardController {
             max_pageNo = min_pageNo + pageNoCntPerPage - 1;
                 if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
         }
+        if( selectPageNo > last_pageNo ){
+            selectPageNo = 1;
+            boardSearchDTO.setSelectPageNo(selectPageNo);
+        }
+
+        // ***************************************
+        // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
+        // 검색 조건에 맞는 [게시판 목록] 얻기
+        // ***************************************
+        List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
+
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
