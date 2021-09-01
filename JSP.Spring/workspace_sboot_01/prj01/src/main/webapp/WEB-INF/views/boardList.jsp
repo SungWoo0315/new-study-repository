@@ -314,6 +314,13 @@
         <%
             
             if( getBoardListCount>0 ){
+                if( min_pageNo > rowCntPerPage ){
+                    
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(min_pageNo-1)+");'>[[이전]]&nbsp;</span> " );
+
+
+                }
+
                 for( int i = min_pageNo; i<=max_pageNo; i++ ){
                     if( i==selectPageNo ){
 
@@ -324,6 +331,12 @@
                         out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
 
                     }
+                }
+                if( last_pageNo > max_pageNo ){
+                    
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(max_pageNo+1)+");'>&nbsp;[[다음]]</span> " );
+
+
                 }
             }
 
