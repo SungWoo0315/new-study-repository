@@ -272,6 +272,11 @@
 
     <!-- 페이지 번호 출력 -->
 
+    <%=(Integer)request.getAttribute("last_pageNo")%> <br>
+    <%=(Integer)request.getAttribute("min_pageNo")%> <br>
+    <%=(Integer)request.getAttribute("max_pageNo")%> <br>
+
+
     <hr> 
     <input type="button" value="로그아웃" onclick="location.replace('/loginForm.do')">
 
