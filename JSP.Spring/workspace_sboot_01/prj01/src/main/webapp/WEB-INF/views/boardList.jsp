@@ -252,7 +252,13 @@
 
             if( boardList!=null){
 
-                int totCnt = boardList.size();
+                int serialNo1 = (Integer)request.getAttribute("selectPageNo") 
+                                * (Integer)request.getAttribute("rowCntPerPage")
+                                - (Integer)request.getAttribute("rowCntPerPage") 
+                                + 1;
+
+                int serialNo2 = (Integer)request.getAttribute("getBoardListCount") 
+                                - ( (Integer)request.getAttribute("selectPageNo") * 10 - 10 + 1 ) + 1;
 
                 for( int i=0; i<boardList.size(); i++ ){
 
@@ -276,7 +282,8 @@
                         xxx = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                     }
                     if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
-                    out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+                    out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"
+                                    + (serialNo2--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
                 }
             }    

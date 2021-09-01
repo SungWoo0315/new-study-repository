@@ -90,6 +90,8 @@ public class BoardController {
             boardSearchDTO.setSelectPageNo(selectPageNo);
         }
 
+        // int start_searial_no = 
+
         // ***************************************
         // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
         // 검색 조건에 맞는 [게시판 목록] 얻기
@@ -125,6 +127,7 @@ public class BoardController {
         mav.addObject("rowCntPerPage", rowCntPerPage);
         mav.addObject("pageNoCntPerPage", pageNoCntPerPage);
 
+        // mav.addObject("start_searial_no", start_searial_no);
         
 
         System.out.println("컨트롤러 /boardList.do 진행... ");
