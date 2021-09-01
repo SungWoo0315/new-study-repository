@@ -193,6 +193,23 @@
 </head>
 <body onkeydown="if(event.keyCode==13) {search();}">
 
+    <!-- *********************************************************** -->
+    <!-- [자바 변수 선언하고 검색 화면 구현에 필요한 데이터 저장하기] -->
+    <!-- *********************************************************** -->
+    <%
+        List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
+        int getBoardListCount = (Integer)request.getAttribute("getBoardListCount");
+
+        int selectPageNo = (Integer)request.getAttribute("selectPageNo"); 
+        int rowCntPerPage = (Integer)request.getAttribute("rowCntPerPage");
+
+        int last_pageNo = (Integer)request.getAttribute("last_pageNo");
+        int min_pageNo = (Integer)request.getAttribute("min_pageNo");
+        int max_pageNo = (Integer)request.getAttribute("max_pageNo");
+
+    %>
+
+
     <center>
     <span style="font-size:30px; font-weight: bold; color: orange;">
         boardList.jsp 접속 성공!!
@@ -237,7 +254,7 @@
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
     <!-- *********************************************************** -->
-    <div class="boardListAllCnt" style="height: 10px;">총 <%=(Integer)request.getAttribute("getBoardListCount")%>개</div> <br><!-- 공백조절용 div 태그 -->
+    <div class="boardListAllCnt" style="height: 10px;">총 <%=getBoardListCount%>개</div> <br><!-- 공백조절용 div 태그 -->
     <!-- *********************************************************** -->
 
     <div class="searchResult">
@@ -247,18 +264,13 @@
 
 
         <%
-            List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
 
 
             if( boardList!=null){
 
-                int serialNo1 = (Integer)request.getAttribute("selectPageNo") 
-                                * (Integer)request.getAttribute("rowCntPerPage")
-                                - (Integer)request.getAttribute("rowCntPerPage") 
-                                + 1;
+                int serialNo1 = selectPageNo * rowCntPerPage - rowCntPerPage + 1;
 
-                int serialNo2 = (Integer)request.getAttribute("getBoardListCount") 
-                                - ( (Integer)request.getAttribute("selectPageNo") * 10 - 10 + 1 ) + 1;
+                int serialNo2 = getBoardListCount - ( selectPageNo * rowCntPerPage - rowCntPerPage + 1 ) + 1;
 
                 for( int i=0; i<boardList.size(); i++ ){
 
@@ -291,15 +303,12 @@
         </table>
     </div>
 
-    <!-- 페이지 번호 출력 -->
+    <!-- ********************************************************* -->
+    <!-- 페이지 번호 출력하기 -->
+    <!-- ********************************************************* -->
     <div class="pageNo">
 
         <%
-            int last_pageNo = (Integer)request.getAttribute("last_pageNo");
-            int min_pageNo = (Integer)request.getAttribute("min_pageNo");
-            int max_pageNo = (Integer)request.getAttribute("max_pageNo");
-            int getBoardListCount = (Integer)request.getAttribute("getBoardListCount");
-            int selectPageNo = (Integer)request.getAttribute("selectPageNo");
             
             if( getBoardListCount>0 ){
                 for( int i = min_pageNo; i<=max_pageNo; i++ ){
