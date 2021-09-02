@@ -152,7 +152,15 @@ public class BoardController {
 
 
         System.out.println("컨트롤러 /boardList.do 들어온 체크박스 값 확인 => " + boardSearchDTO.getDay());
+
+        System.out.println("컨트롤러 /boardList.do 들어온 키워드1 값 확인 => " + boardSearchDTO.getKeyword1());
+
+        System.out.println("컨트롤러 /boardList.do 들어온 키워드2 값 확인 => " + boardSearchDTO.getKeyword2());
+
+
+        System.out.println("컨트롤러 /boardList.do 들어온 셀렉트 값 확인 => " + boardSearchDTO.getOr_and_option());
         
+
         System.out.println("컨트롤러 /boardList.do 진행...완료... ");
         System.out.println("====================================");
 
