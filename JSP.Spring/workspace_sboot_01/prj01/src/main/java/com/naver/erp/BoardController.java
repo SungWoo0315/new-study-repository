@@ -47,7 +47,7 @@ public class BoardController {
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     @RequestMapping( value = "/boardList.do" )
     public ModelAndView getBoardList(
-
+    
         // --------------------------------------------------
         // 파라미터 값을 저장하고 있는 BoardSearchDTO 객체를 받아오는 매개변수 선언
         // --------------------------------------------------
@@ -55,15 +55,15 @@ public class BoardController {
         
 
     ){
-
-        System.out.println("컨트롤러에서 들어온 체크박스 값 확인 => " + boardSearchDTO.getDay());
+        System.out.println("====================================");
+        System.out.println("컨트롤러 /boardList.do 진행...시작... ");
 
         // ***************************************
         // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
         // ***************************************
         int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
 
-        System.out.println("컨트롤러에서 검색개수 확인 => " + getBoardListCount);
+        System.out.println("컨트롤러 /boardList.do 게시판목록 검색개수 확인 => " + getBoardListCount + "개");
 
 
         // ***************************************
@@ -151,9 +151,10 @@ public class BoardController {
         // mav.addObject("start_searial_no", start_searial_no);
 
 
-        System.out.println("컨트롤러에서 들어온 체크박스 값 확인 => " + boardSearchDTO.getDay());
+        System.out.println("컨트롤러 /boardList.do 들어온 체크박스 값 확인 => " + boardSearchDTO.getDay());
         
-        System.out.println("컨트롤러 /boardList.do 진행... ");
+        System.out.println("컨트롤러 /boardList.do 진행...완료... ");
+        System.out.println("====================================");
 
         // ***************************************
         // [ModelAndView 객체] 리턴하기
@@ -194,7 +195,7 @@ public class BoardController {
     
     ){
 
-        System.out.println("BoardController 에서 댓글쓰기 부모 PK 값 확인 ==> " + b_no); // PK 파라미터값 확인.  
+        System.out.println("BoardController /boardRegForm.do 에서 댓글쓰기 부모 PK 값 확인 ==> " + b_no); // PK 파라미터값 확인.  
 
         /*  HttpServletRequest request 썻을때의 조건 코드.  
         String b_no = request.getParameter("b_no");
