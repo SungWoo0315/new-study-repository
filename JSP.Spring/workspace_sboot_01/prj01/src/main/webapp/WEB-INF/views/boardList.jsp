@@ -128,17 +128,32 @@
             // 비동기 방식으로 웹서버에 접속하여 키워드를 만족하는 searchExe() 함수 호출하기.
             // -----------------------------------------------
             searchExe();
-
         }
 
+
+        // *****************************************
+        // [모두 검색] 버튼 클릭하면 호출되는 함수선언
+        // *****************************************
+        function searchAll(){
+            // ---------------------------------
+            // 키워드 입력 양식에 "" 넣어주기
+            // ---------------------------------
+            $(".keyword1").val("");
+            // ---------------------------------
+            // 비동기 방식으로 웹서버에 접속하는 searchExe() 함수 호출하기
+            // ---------------------------------
+            searchExe();
+        }
+
+        // *****************************************
+        // 비동기 방식으로 웹서버에 접속하는 searchExe() 함수 선언하기
+        // *****************************************
         function searchExe(){
             // -----------------------------------------------
             // 현재 화면에서 페이지 이동 없이(=비동기 방식으로)
-            // 서버쪽 /boardList.do 로 접속하여 키워드를 만족하는
-            // 검색 결과물을 응답받아 현 화면에 반영하기
+            // 서버쪽 /boardList.do 로 접속하여 html 을 응답받아 현 화면에 반영하기
             // -----------------------------------------------
             $.ajax({
-
                 // ----------------------------------------------------------
                 // 서버쪽 호출 URL 주소 지정
                 // ----------------------------------------------------------
@@ -178,6 +193,10 @@
 
                     $(".boardListAllCnt").text(cnt);
                     // ----------------------------------------------------------
+                    // 매개변수 responseHTML 로 들어온 검색 결과물 html 소스 문자열에서 
+                    // class=pageNo 를 가진 태그 내부의 [총개수 문자열]을 얻어서
+                    // 아래 현 화면의 html 소스중에 class=pageNo 를 가진 태그 내부에 덮어씌우기  
+                    // ----------------------------------------------------------
                     var pageNo = $(responseHTML).find(".pageNo").html();
 
                     $(".pageNo").html(pageNo);
@@ -192,47 +211,51 @@
                     alert("서버 접속 실패! 관리자에게 문의 바람!");
                 }
 
-
-
-
             });
 
-
         }
-
-        function searchAll(){
-
-            $(".keyword1").val("");
-            searchExe();
-
-        }
-
-
-        
 
     </script>
 
-
 </head>
+
+<!-- ---------------------------------------------------- -->
+<!-- body 태그 선언하기 -->
+<!-- body 태그에 keydown 이벤트를 걸면 특정 태그에 가는 포커스 상관없이 
+    무조건 화면에서 키보드 누르면 자스코드를 실행하게 할 수 있다. -->
+<!-- ---------------------------------------------------- -->
 <body onkeydown="if(event.keyCode==13) {search();}">
 
     <!-- *********************************************************** -->
-    <!-- [자바 변수 선언하고 검색 화면 구현에 필요한 데이터 저장하기] -->
+    <!-- [자바 변수 선언하고 검색 화면 구현에 필요한 데이터 꺼내서 저장하기] -->
+    <!-- 검색 결과물, 검색된 총개수, 페이지번호에 관련된 데이터이다. -->
     <!-- *********************************************************** -->
     <%
+        // --------------------------------------------------------------
+        // HttpServletRequest 객체에 setAttribute 메소드로 "boardList" 라는 키값으로 저장된 데이터 꺼내기  
+        // --------------------------------------------------------------
+            // <참고> "/boardList.do" 로 접속하면 호출되는 메소드 안에서 ModelAndView 객체의 addObject 로 저장된 데이터는 
+            //         HttpServletRequest 객체의 setAttribute 메소드로도 저장된 효과를 본다.    
         List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
+        // --------------------------------------------------------------
+        // HttpServletRequest 객체에 setAttribute 메소드로 "getBoardListCount" 라는 키값으로 저장된 데이터 꺼내기  
+        // HttpServletRequest 객체에 setAttribute 메소드로 "selectPageNo" 라는 키값으로 저장된 데이터 꺼내기  
+        // HttpServletRequest 객체에 setAttribute 메소드로 "rowCntPerPage" 라는 키값으로 저장된 데이터 꺼내기  
+        // HttpServletRequest 객체에 setAttribute 메소드로 "last_pageNo" 라는 키값으로 저장된 데이터 꺼내기  
+        // HttpServletRequest 객체에 setAttribute 메소드로 "min_pageNo" 라는 키값으로 저장된 데이터 꺼내기  
+        // HttpServletRequest 객체에 setAttribute 메소드로 "max_pageNo" 라는 키값으로 저장된 데이터 꺼내기  
+        // --------------------------------------------------------------
         int getBoardListCount = (Integer)request.getAttribute("getBoardListCount");
-
         int selectPageNo = (Integer)request.getAttribute("selectPageNo"); 
         int rowCntPerPage = (Integer)request.getAttribute("rowCntPerPage");
-
         int last_pageNo = (Integer)request.getAttribute("last_pageNo");
         int min_pageNo = (Integer)request.getAttribute("min_pageNo");
         int max_pageNo = (Integer)request.getAttribute("max_pageNo");
-
     %>
 
 
+    <!-- *********************************************************** -->
+    <!-- 접속페이지 테스트 확인용. -->
     <center>
     <span style="font-size:30px; font-weight: bold; color: orange;">
         boardList.jsp 접속 성공!!
@@ -240,6 +263,7 @@
     <center>
 
         <hr>  
+    <!-- *********************************************************** -->
 
 
     <!-- *********************************************************** -->
@@ -247,11 +271,24 @@
     <!-- *********************************************************** -->
     <form name="boardListForm" method="post" onsubmit="return false;">
 
+            <!-- --------------------------------------------------- -->
+            <!-- 키워드 데이터 저장할 입력양식 선언 -->
+            <!-- --------------------------------------------------- -->
             [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
 
+            <input type="checkbox" name="today" value="오늘" > 오늘
+
+            <!-- --------------------------------------------------- -->
+            <!-- 선택한, 클릭한 페이지번호를 저장할 hidden 입력양식 선언 -->
+            <!-- 페이징 처리 관련 데이터이다. -->
+            <!-- --------------------------------------------------- -->
             <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
               
+            <!-- --------------------------------------------------- -->
+            <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
+            <!-- 페이징 처리 관련 데이터이다. -->
+            <!-- --------------------------------------------------- -->
             <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
                 <option value="10">10</option>
                 <option value="15">15</option>
@@ -261,10 +298,11 @@
                 <option value="100">100</option>
             </select> 행보기
 
-
+            <!-- --------------------------------------------------- -->
             <input type="button" value="검색" class="boardSearch" onclick="search();">&nbsp;
             <input type="button" value="모두검색" class="boardSearchAll" onclick="searchAll();">&nbsp;
             <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
+            <!-- --------------------------------------------------- -->
 
 
 
@@ -278,8 +316,9 @@
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
     <!-- *********************************************************** -->
-    <div class="boardListAllCnt" style="height: 10px;">총 <%=getBoardListCount%>개</div> <br><!-- 공백조절용 div 태그 -->
+    <!-- 검색된 목록의 총개수 출력하기 -->
     <!-- *********************************************************** -->
+    <div class="boardListAllCnt" style="height: 10px;">총 <%=getBoardListCount%>개</div> <br><!-- 공백조절용 div 태그 -->
     
     <!-- ********************************************************* -->
     <!-- 페이지 번호 출력하기 -->
@@ -287,7 +326,9 @@
     <div class="pageNo">
 
         <%
-            
+            //-----------------------------------------------------
+            // 만약 검색 결과물이 0보다 크면 즉, 검색 결과물이 있으면
+            //-----------------------------------------------------
             if( getBoardListCount>0 ){
 
             /*  페이지 번호 10개씩 넘어가는 기능. 
@@ -350,8 +391,12 @@
                 }
             */
 
-                // 페이지번호 처음으로, 마지막으로 고정시켜서 이동안하게 하기   
+                // 페이지번호 처음으로, 마지막으로 고정시켜서 이동안하게 하기
 
+                // -----------------------------------------------------
+                // 선택한 페이지 번호가 1보다 크면 [처음], [이전] 글씨 보이기. 
+                // 단, 클릭하면 함수 호출하도록 이벤트 걸기.    
+                // -----------------------------------------------------
                 if( selectPageNo > 1 ){
                     
                     out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );  
@@ -359,6 +404,10 @@
                     out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>&nbsp;[[이전]]&nbsp;</span> " );
                 
                 }
+                // -----------------------------------------------------
+                // 선택한 페이지 번호가 1 이면 [처음], [이전] 글씨 보이기.
+                // 단, 클릭하면 함수 호출하는 이벤트 걸지 말기.
+                // -----------------------------------------------------
                 else{
                     
                     out.print( "<span>[[처음으로]]&nbsp;</span>" );  
