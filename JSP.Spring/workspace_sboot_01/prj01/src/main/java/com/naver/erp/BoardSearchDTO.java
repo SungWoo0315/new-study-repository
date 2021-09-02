@@ -14,7 +14,7 @@ public class BoardSearchDTO {
 	private int selectPageNo=1;
 	private int rowCntPerPage=20;
 	
-	// private String[] day;  // 아래코드와 이 코드 방식 두가지로 체크박스르 담을 수 있다.  
+	// private String[] day;  // 배열로 받을수 있다. 아래코드와 이 코드 방식 두가지로 체크박스르 담을 수 있다.  
 	private List<String> day;
 	
 

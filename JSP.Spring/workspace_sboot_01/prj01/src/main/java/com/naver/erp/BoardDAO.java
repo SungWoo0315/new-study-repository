@@ -14,13 +14,6 @@ public interface BoardDAO {
     // [검색한 게시판 목록] 리턴하는 메소드 선언
     // ******************************************************
     List<Map<String,String>> getBoardList( BoardSearchDTO boardSearchDTO );
-
-
-
-
-    
-    List<String> getCheckBoardList( BoardSearchDTO boardSearchDTO );
-
     
 
 

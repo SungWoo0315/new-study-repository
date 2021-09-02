@@ -56,6 +56,8 @@ public class BoardController {
 
     ){
 
+        System.out.println("컨트롤러에서 들어온 체크박스 값 확인 => " + boardSearchDTO.getDay());
+
         // ***************************************
         // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
         // ***************************************
@@ -111,7 +113,6 @@ public class BoardController {
         // ***************************************
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
 
-        List<String> checkBoardList = this.boardDAO.getCheckBoardList( boardSearchDTO );
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
@@ -146,12 +147,14 @@ public class BoardController {
         mav.addObject("pageNoCntPerPage", pageNoCntPerPage);
 
 
-        mav.addObject("pageNoCntPerPage", checkBoardList);
 
         // mav.addObject("start_searial_no", start_searial_no);
 
-        System.out.println("컨트롤러 /boardList.do 진행... ");
+
+        System.out.println("컨트롤러에서 들어온 체크박스 값 확인 => " + boardSearchDTO.getDay());
         
+        System.out.println("컨트롤러 /boardList.do 진행... ");
+
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************

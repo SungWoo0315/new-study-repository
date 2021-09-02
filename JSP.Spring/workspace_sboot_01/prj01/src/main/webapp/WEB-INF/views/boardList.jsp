@@ -277,8 +277,8 @@
             [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
 
-            <input type="checkbox" name="day" class="today" value="today" > 오늘
-            <input type="checkbox" name="day" class="today" value="yesterday" > 어제
+            <input type="checkbox" name="day" class="day" value="today" > 오늘
+            <input type="checkbox" name="day" class="day" value="yesterday" > 어제
 
             <!-- --------------------------------------------------- -->
             <!-- 선택한, 클릭한 페이지번호를 저장할 hidden 입력양식 선언 -->
