@@ -10,7 +10,7 @@ public class BoardSearchDTO {
 	private String keyword1;
 
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	
 	
 	// -------------------------------------------------
