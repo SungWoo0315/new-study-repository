@@ -15,15 +15,17 @@
 <%@ page import="java.util.List"%>
 
 
+<!-- *********************************************************** -->
+<!-- JSP 기술의 한 종류인 [Include Directive]를 이용하여 -->
+<!-- common.jsp 파일 내의 소스를 삽입하기 -->
+<!-- *********************************************************** -->
+<%@include file="common.jsp"%>  
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<!-- --------------------------------------------------------------------- -->
-<!-- JQuery 라이브러리 수입하기 -->
-<!-- --------------------------------------------------------------------- -->
-<script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="/resources/common_func.js"></script>
-<script src="/resources/common_data.js"></script>
+
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -140,6 +142,10 @@
             // ---------------------------------
             $(".keyword1").val("");
             // ---------------------------------
+            // class=day 를 가진 입력 양식의 체크 풀기
+            // ---------------------------------
+            $(".day").prop("checked", false);
+            // ---------------------------------
             // 비동기 방식으로 웹서버에 접속하는 searchExe() 함수 호출하기
             // ---------------------------------
             searchExe();
@@ -226,17 +232,8 @@
 <!-- ---------------------------------------------------- -->
 <body onkeydown="if(event.keyCode==13) {search();}">
 
-    
-    <!-- *********************************************************** -->
-    <!-- JSP 기술의 한 종류인 [Include Directive]를 이용하여 -->
-    <!-- common.jsp 파일 내의 소스를 삽입하기 -->
-    <!-- *********************************************************** -->
-    <%@include file="common.jsp"%>
 
-    <!-- *********************************************************** -->
-    <!-- [자바 변수 선언하고 검색 화면 구현에 필요한 데이터 꺼내서 저장하기] -->
-    <!-- 검색 결과물, 검색된 총개수, 페이지번호에 관련된 데이터이다.  -->
-    <!-- *********************************************************** -->
+ 
 
 
 
@@ -290,11 +287,21 @@
             <!-- --------------------------------------------------- -->
             [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
+            <!-- 다음주 숙제 부분 -->
+            <!-- <select>
+                <option value="or">or</option>
+                <option value="and">and</option>
+            </select>
+
+            <input type="text" name="keyword2" class="keyword2" >  --> 
+            
+            <hr>
 
             <input type="checkbox" name="day" class="day" value="오늘" > 오늘
             <input type="checkbox" name="day" class="day" value="어제" > 어제
             <input type="checkbox" name="day" class="day" value="그제" > 그제
-            <input type="checkbox" name="day" class="day" value="최근7일" > 최근7일
+            <!-- 다음주 숙제 부분 -->
+            <!-- <input type="checkbox" name="day" class="day" value="최근7일" > 최근7일 -->
 
             <!-- --------------------------------------------------- -->
             <!-- 선택한, 클릭한 페이지번호를 저장할 hidden 입력양식 선언 -->
@@ -315,9 +322,12 @@
                 <option value="100">100</option>
             </select> 행보기
 
+            <hr>
+
             <!-- --------------------------------------------------- -->
             <input type="button" value="검색" class="boardSearch" onclick="search();">&nbsp;
             <input type="button" value="모두검색" class="boardSearchAll" onclick="searchAll();">&nbsp;
+            <hr>
             <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
             <!-- --------------------------------------------------- -->
 
@@ -335,8 +345,10 @@
     <!-- *********************************************************** -->
     <!-- 검색된 목록의 총개수 출력하기 -->
     <!-- *********************************************************** -->
-    <div class="boardListAllCnt" style="height: 10px;">총 <%=getBoardListCount%>개</div> <br><!-- 공백조절용 div 태그 -->
     
+    <!-- <div class="boardListAllCnt" style="height: 10px;">총 <%=getBoardListCount%>개</div> <br> -->
+    <div class="boardListAllCnt" style="height: 10px;">총 ${getBoardListCount}개</div> <br><!-- EL 예시. 위 코드랑 비교. -->
+
     <!-- ********************************************************* -->
     <!-- 페이지 번호 출력하기 -->
     <!-- ********************************************************* -->

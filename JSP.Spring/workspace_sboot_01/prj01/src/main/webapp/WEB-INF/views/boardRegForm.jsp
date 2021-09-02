@@ -7,13 +7,17 @@
     <!-- 모든 JSP 페이지 상단에는 무조건 아래 설정이 들어간다. -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- *********************************************************** -->
+<!-- JSP 기술의 한 종류인 [Include Directive]를 이용하여 -->
+<!-- common.jsp 파일 내의 소스를 삽입하기 -->
+<!-- *********************************************************** -->
+<%@include file="common.jsp"%>  
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="/resources/common_func.js"></script>
-<script src="/resources/common_data.js"></script>
+
+
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -258,7 +262,12 @@
         <% } %>    
 
        
-
+            <!-- *********************************************************** -->
+            <!-- JSP 기술의 한 종류인 [Include Directive]를 이용한 -->
+            <!-- common.jsp 파일 내의 소스 중 로그아웃 원하는 위치에 지정해주려면, -->
+            <!-- 아래와 같이 div 태그를 주고 class 값으로 위치 지정을 해주면 된다. -->
+            <!-- *********************************************************** -->
+            <div class="logout"></div>
     </form>
 
 
