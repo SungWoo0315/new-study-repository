@@ -146,6 +146,15 @@ select * from ( select rownum RNUM, zxcvb.* from (
 
 
 
+-- 입사일이 오늘인 사람 구하기
+
+select
+*
+from
+employee
+where
+	to_char(hire_date, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+
 
 
 
