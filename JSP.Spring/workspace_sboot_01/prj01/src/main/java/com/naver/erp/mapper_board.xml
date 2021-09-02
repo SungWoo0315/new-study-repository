@@ -11,11 +11,20 @@
 <!-- 게시판 글 목록 구할 때 사용할 where 절을 sql 태그 안에 선언하기 -->
 <!-- *********************************************************** -->
 <sql id="boardWhere">
+    
+   
+
+         
         <!-- ============================================================== -->
-        <!-- 만약 키워드가 null 이 아니고 길이가 0보다 크면 where 절에 참여하기 -->
+        <!-- 만약 키워드1가 null 이 아니고 길이가 0보다 크면 where 절에 참여하기 -->
         <!-- ============================================================== -->
+        and
+        <if test="keyword1!=null and keyword1.length()>0 and keyword2!=null and keyword2.length()>0">
+        ( 
+        </if>  
         <if test="keyword1!=null and keyword1.length()>0">
-            and (
+
+            (
                 upper(subject) like upper('%${keyword1}%')
                 or
                 upper(content) like upper('%${keyword1}%')
@@ -33,6 +42,42 @@
                 to_char(reg_date, 'YYYY,MM,DD') like '%${keyword1}%'
             )
         </if>
+
+        <if test="or_and_option.equals('and')"> and </if>
+        <if test="or_and_option.equals('or')"> or </if>
+        
+        <!-- ============================================================== -->
+        <!-- 만약 키워드2가 null 이 아니고 길이가 0보다 크면 where 절에 참여하기 -->
+        <!-- ============================================================== -->
+        <if test="keyword2!=null and keyword2.length()>0">
+            (
+                upper(subject) like upper('%${keyword2}%')
+                or
+                upper(content) like upper('%${keyword2}%')
+                or
+                upper(writer) like upper('%${keyword2}%')
+                or
+                upper(email) like upper('%${keyword2}%')
+                or
+                to_char(reg_date, 'YYYY-MM-DD') like '%${keyword2}%'
+                or
+                to_char(reg_date, 'YYYYMMDD') like '%${keyword2}%'
+                or
+                to_char(reg_date, 'YYYY/MM/DD') like '%${keyword2}%'
+                or
+                to_char(reg_date, 'YYYY,MM,DD') like '%${keyword2}%'
+            )
+        </if>
+        <if test="keyword1!=null and keyword1.length()>0 and keyword2!=null and keyword2.length()>0">
+        )
+        </if> 
+
+    
+
+
+
+    
+
         <!-- ====================================================== -->
         <!-- 만약 BoardSearchDTO 객체의 속성변수 day 가 null 아 아니고, 저장된 개수가 0보다 크면, -->
         <!-- ====================================================== -->
@@ -75,7 +120,28 @@
                 </if>   
 
                 <if test="day.equals('최근7일')">
-                    to_char(reg_date, 'YYYYMMDD') = btween to_number(to_char(sysdate, 'YYYYMMDD')) and to_number(to_char(sysdate-7, 'YYYYMMDD'))
+                    to_number(to_char(reg_date, 'YYYYMMDD')) 
+                    between 
+                        to_number(to_char(sysdate-6, 'YYYYMMDD')) 
+                        and 
+                        to_number(to_char(sysdate, 'YYYYMMDD'))
+
+
+                    <!-- 수동으로 이렇게 해주어도 나옴. -->
+                    <!-- to_char(reg_date, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+                    or
+                    to_char(reg_date, 'YYYYMMDD') = to_char(sysdate-1, 'YYYYMMDD')
+                    or
+                    to_char(reg_date, 'YYYYMMDD') = to_char(sysdate-2, 'YYYYMMDD')
+                    or
+                    to_char(reg_date, 'YYYYMMDD') = to_char(sysdate-3, 'YYYYMMDD')
+                    or
+                    to_char(reg_date, 'YYYYMMDD') = to_char(sysdate-4, 'YYYYMMDD')
+                    or
+                    to_char(reg_date, 'YYYYMMDD') = to_char(sysdate-5, 'YYYYMMDD')
+                    or
+                    to_char(reg_date, 'YYYYMMDD') = to_char(sysdate-6, 'YYYYMMDD') -->
+
                 </if>    
             </foreach>
         

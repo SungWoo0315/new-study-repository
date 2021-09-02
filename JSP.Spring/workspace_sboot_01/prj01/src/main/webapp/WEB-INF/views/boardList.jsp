@@ -118,7 +118,7 @@
                 // 개발 과정 중 테스트 코드.  
                 // alert("[키워드] 가 비어 있어 검색 불가능합니다.") // 경고 띄우기
                 // $(".keyword1").val(""); // 길이없는 데이터 입력양식값에 넣고
-                $(".keyword1").focus(); // 커서 들어가있게 하기
+                // $(".keyword1").focus(); // 커서 들어가있게 하기
                 // return;  // 함수 중단.  
 
             }
@@ -141,6 +141,8 @@
             // 키워드 입력 양식에 "" 넣어주기
             // ---------------------------------
             $(".keyword1").val("");
+            $(".keyword2").val("");
+
             // ---------------------------------
             // class=day 를 가진 입력 양식의 체크 풀기
             // ---------------------------------
@@ -288,12 +290,12 @@
             [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
             <!-- 다음주 숙제 부분 -->
-            <!-- <select>
-                <option value="or">or</option>
+            <select name="or_and_option" class="or_and_option">
+                <option value="or" selected>or</option>
                 <option value="and">and</option>
             </select>
 
-            <input type="text" name="keyword2" class="keyword2" >  --> 
+            <input type="text" name="keyword2" class="keyword2" >  
             
             <hr>
 
@@ -301,7 +303,7 @@
             <input type="checkbox" name="day" class="day" value="어제" > 어제
             <input type="checkbox" name="day" class="day" value="그제" > 그제
             <!-- 다음주 숙제 부분 -->
-            <!-- <input type="checkbox" name="day" class="day" value="최근7일" > 최근7일 -->
+            <input type="checkbox" name="day" class="day" value="최근7일" > 최근7일
 
             <!-- --------------------------------------------------- -->
             <!-- 선택한, 클릭한 페이지번호를 저장할 hidden 입력양식 선언 -->

@@ -10,6 +10,9 @@ public class BoardSearchDTO {
 	// 한 화면에 보여줄 [행의 개수]를 저장하는 속성변수 선언.
 	// -------------------------------------------------
 	private String keyword1;
+	private String keyword2;
+
+	private String or_and_option="or";
 
 	private int selectPageNo=1;
 	private int rowCntPerPage=20;
@@ -47,10 +50,29 @@ public class BoardSearchDTO {
 	public void setDay(List<String> day) {
 		this.day = day;
 	}
+	
+	
+	
+	public String getKeyword2() {
+		return keyword2;
+	}
+	public void setKeyword2(String keyword2) {
+		this.keyword2 = keyword2;
+	}
+	
+	
+	public String getOr_and_option() {
+		return or_and_option;
+	}
+	public void setOr_and_option(String or_and_option) {
+		this.or_and_option = or_and_option;
+	}
 
 	
 
 
+	
+	
 
 
 
