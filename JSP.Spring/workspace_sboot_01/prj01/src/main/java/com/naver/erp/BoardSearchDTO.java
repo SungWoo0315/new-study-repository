@@ -1,5 +1,7 @@
 package com.naver.erp;
 
+import java.util.List;
+
 public class BoardSearchDTO {
 
 	// -------------------------------------------------
@@ -12,7 +14,10 @@ public class BoardSearchDTO {
 	private int selectPageNo=1;
 	private int rowCntPerPage=20;
 	
+	// private String[] day;  // 아래코드와 이 코드 방식 두가지로 체크박스르 담을 수 있다.  
+	private List<String> day;
 	
+
 	// -------------------------------------------------
 	// getter, setter 메소드 선언
 	// -------------------------------------------------
@@ -36,7 +41,12 @@ public class BoardSearchDTO {
 	}
 
 	
-
+	public List<String> getDay() {
+		return day;
+	}
+	public void setDay(List<String> day) {
+		this.day = day;
+	}
 
 	
 

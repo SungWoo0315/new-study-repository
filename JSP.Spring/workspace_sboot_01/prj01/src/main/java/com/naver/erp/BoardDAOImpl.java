@@ -80,6 +80,27 @@ public class BoardDAOImpl implements BoardDAO {
 
 
 
+    public List<String>getCheckBoardList( BoardSearchDTO boardSearchDTO){
+
+
+        List<String> checkBoardList = this.sqlSession.selectList(
+
+            "com.naver.erp.BoardDAO.getCheckBoardList"  // 실행할 SQL 구문의 위치 지정  
+            , boardSearchDTO                       // 실행할 SQL 구문에서 사용할 데이터 지정
+
+        );
+
+        System.out.println("BoardDAOImpl 게시판 체크 검색 목록 List 값 확인 =>" + checkBoardList);
+        
+        return checkBoardList;
+    }
+
+
+
+    
+
+
+
 
 
 

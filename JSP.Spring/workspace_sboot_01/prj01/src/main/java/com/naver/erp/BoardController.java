@@ -68,26 +68,36 @@ public class BoardController {
         // 마자막 페이지 번호 구하기
         // 현 화면에 보여줄 최소 페이지 번호 구하기
         // 현 화면에 보여줄 최대 페이지 번호 구하기
+        // BoardSearchDTO 객체에 저장된 [선택 페이지 번호] 구하기
+        // BoardSearchDTO 객체에 저장된 [한 화면에 보여줄 행의 개수] 구하기
+        // [한 화면에 보여줄 페이지 번호의 개수] 구하기
         // ***************************************
         int last_pageNo = 0;
         int min_pageNo = 0;
         int max_pageNo = 0;
-
         int selectPageNo = boardSearchDTO.getSelectPageNo();
         int rowCntPerPage = boardSearchDTO.getRowCntPerPage();
         int pageNoCntPerPage = 10;
 
+        // ***************************************
+        // 만약 검색된 결과물의 개수가 0 보다 크면, 즉, 검색 결과물이 있으면.  
+        // ***************************************
         if( getBoardListCount > 0 ){
 
+            // 마지막 페이지 번호 구하기  
             last_pageNo = getBoardListCount/rowCntPerPage;
                 if( getBoardListCount%rowCntPerPage > 0 ){last_pageNo++;}
 
+                // 만약 선택한 페이지 번호가 마지막 페이지 번호보다 크면  
                 if( selectPageNo > last_pageNo ){
+                    // selectPageNo 변수에 1 저장하고,
                     selectPageNo = 1;
+                    // BoardSearchDTO 객체의 selectPageNo 속성변수에 1 저장하기.  
                     boardSearchDTO.setSelectPageNo(selectPageNo);
                 }
-                
+            // 한 화면에 보일 최소 페이지 번호 구하기  
             min_pageNo = (selectPageNo - 1)/pageNoCntPerPage * pageNoCntPerPage + 1;
+            // 한 화면에 보일 최대 페이지 번호 구하기  
             max_pageNo = min_pageNo + pageNoCntPerPage - 1;
                 if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
         }
@@ -101,6 +111,7 @@ public class BoardController {
         // ***************************************
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
 
+        List<String> checkBoardList = this.boardDAO.getCheckBoardList( boardSearchDTO );
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
@@ -114,12 +125,16 @@ public class BoardController {
         // ***************************************
         // [ModelAndView 객체] 에 [게시판 목록 검색 결과]를 저장하기
         // [ModelAndView 객체] 에 [게시판 목록의 총개수]를 저장하기
+        
         // [ModelAndView 객체] 에 [현재 화면에 보여지는 페이지 번호의 마지막 페이지 번호]를 저장하기
         // [ModelAndView 객체] 에 [현재 화면에 보여지는 페이지 번호의 최소 페이지 번호]를 저장하기
         // [ModelAndView 객체] 에 [현재 화면에 보여지는 페이지 번호의 최대 페이지 번호]를 저장하기
+        
+        // [ModelAndView 객체] 에 [선택한 페이지 번호]를 저장하기
+        // [ModelAndView 객체] 에 [한 화면에 보여줄 행의 개수]를 저장하기
+        // [ModelAndView 객체] 에 [한 화면에 보여줄 페이지번호의 개수]를 저장하기
         // ***************************************
         mav.addObject("boardList", boardList);
-        
         mav.addObject("getBoardListCount", getBoardListCount);
         
         mav.addObject("last_pageNo", last_pageNo);
@@ -130,8 +145,10 @@ public class BoardController {
         mav.addObject("rowCntPerPage", rowCntPerPage);
         mav.addObject("pageNoCntPerPage", pageNoCntPerPage);
 
+
+        mav.addObject("pageNoCntPerPage", checkBoardList);
+
         // mav.addObject("start_searial_no", start_searial_no);
-        
 
         System.out.println("컨트롤러 /boardList.do 진행... ");
         
@@ -140,8 +157,6 @@ public class BoardController {
         // ***************************************
         return mav;
     }
-
-
 
 
 

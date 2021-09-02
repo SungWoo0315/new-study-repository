@@ -135,6 +135,42 @@
 
 
 
+    <select id="getCheckBoardList" parameterType="com.naver.erp.BoardSearchDTO" resultType="java.util.HashMap">
+    
+        select * from ( select rownum RNUM, zxcvb.* from (
+
+            select 
+                b_no||''                         "b_no"
+                ,subject                         "subject"
+                ,writer                          "writer"
+                ,readcount||''                   "readcount"
+                ,to_char(reg_date, 'YY-MM-DD (dy)', 'NLS_DATE_LANGUAGE = Korean') "reg_date"
+                ,print_level||''                 "print_level"     
+            from
+                board
+            where 
+                1=1
+                and (
+                    to_char(reg_date, 'YYYY-MM-DD') like to_char(sysdate, 'YYYY-MM-DD')
+                )
+
+            order by 
+                group_no desc
+                ,print_no asc
+
+        ) zxcvb 
+        <![CDATA[   
+            where rownum <= ${selectPageNo*rowCntPerPage} ) 
+                    where RNUM >= ${selectPageNo*rowCntPerPage-rowCntPerPage+1}        
+        ]]>
+    
+    </select>
+
+
+
+
+
+
     <select id="getBoardListCount" parameterType="com.naver.erp.BoardSearchDTO" resultType="int">
       
       

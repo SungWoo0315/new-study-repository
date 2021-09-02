@@ -277,7 +277,8 @@
             [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
 
-            <input type="checkbox" name="today" value="오늘" > 오늘
+            <input type="checkbox" name="day" class="today" value="today" > 오늘
+            <input type="checkbox" name="day" class="today" value="yesterday" > 어제
 
             <!-- --------------------------------------------------- -->
             <!-- 선택한, 클릭한 페이지번호를 저장할 hidden 입력양식 선언 -->
@@ -416,24 +417,39 @@
                 
                 }
 
+                // -----------------------------------------------------
+                // 선택한 페이지 번호에 맞는 페이지 번호들을 출력하기
+                // -----------------------------------------------------
                 for( int i = min_pageNo; i<=max_pageNo; i++ ){
+
+                    // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하면 그냥 번호만 표현하기    
                     if( i==selectPageNo ){
 
                         out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
                     
-                    }else{
+                    }
+                    // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하지 않으면 클리하면 함수 호출하도록 클릭 이벤트 걸기    
+                    else{
 
                         out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
 
                     }
                 }
-
+                // -----------------------------------------------------
+                // 선택한 페이지 번호가 마지막 페이지 번호보다 작으면 [다음], [마지막] 문자 표현하기
+                // 단, 클릭하면 함수 호출하도록 클릭 이벤트 걸기.   
+                // -----------------------------------------------------
                 if( selectPageNo < last_pageNo ){
                         
                     out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>&nbsp;[[다음]]&nbsp;</span> " );
                     out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
                 
                 }
+
+                // -----------------------------------------------------
+                // 선택한 페이지 번호가 마지막 페이지 번호보다 같거나 크면 [다음], [마지막] 문자만 표현하기
+                // 단, 클릭하면 함수 호출하는 이벤트는 걸지 않기.     
+                // -----------------------------------------------------
                 else{
                     
                     out.print( "<span>&nbsp;[[다음]]&nbsp;</span>" );  
@@ -448,8 +464,13 @@
 
     </div>
 
+
+    <!-- ********************************************************* -->
+    <!-- div 태그를 이용하여 위아래 컨텐츠의 사이 여백 주기 -->
+    <!-- ********************************************************* -->
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
+    
 
     <div class="searchResult">
 
@@ -542,9 +563,8 @@
         <!-- ------------------------------------------------------ -->
         <input type="hidden" name="b_no">  
     
-    
-    
     </form>
+
 
     </center>
 
