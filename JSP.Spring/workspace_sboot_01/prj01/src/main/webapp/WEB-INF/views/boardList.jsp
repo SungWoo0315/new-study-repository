@@ -232,7 +232,7 @@
             <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
                 <option value="10">10</option>
                 <option value="15">15</option>
-                <option value="20">20</option>
+                <option value="20" selected>20</option>
                 <option value="25">25</option>
                 <option value="30">30</option>
                 <option value="100">100</option>
@@ -386,21 +386,46 @@
 
 
         <%
-
-
+            // ---------------------------------------------------------------------------
+            // boardList 가 null 이 아니면, 검색결과물이 있으면,   + boardList 에는 ListMap 객체가 들어있다.  
+            // ---------------------------------------------------------------------------
             if( boardList!=null){
 
-                int serialNo1 = selectPageNo * rowCntPerPage - rowCntPerPage + 1;
+                // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                // 정순번호 => serialNo1
+                // 역순번호 => serialNo2 , serialNo3 (페이지당 시작 역순번호)
+                // 역순번호 = 총개수 - ( 선택페이지번호 * 한화면의행의개수 - 한화면의행의개수 + 1 )-1;
+                // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                    // -----------------------------------------------
+                    // 선택한 페이지 번호에 맞는 검색결과물의 시작 정순번호 구하기
+                    // 선택한 페이지 번호에 맞는 검색결과물의 시작 역순번호 구하기
+                    // -----------------------------------------------
+                    int serialNo1 = selectPageNo * rowCntPerPage - rowCntPerPage + 1;
 
-                int serialNo2 = getBoardListCount - ( selectPageNo * rowCntPerPage - rowCntPerPage + 1 ) + 1;
+                    int serialNo2 = getBoardListCount - ( selectPageNo * rowCntPerPage - rowCntPerPage + 1 ) + 1;
 
-                int serialNo3 = getBoardListCount - serialNo1 + 1;
+                    int serialNo3 = getBoardListCount - serialNo1 + 1;
+
+                // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
 
+                // -----------------------------------------------
+                // 검색결과물을 HTML 태그로 출력하기
+                // boardList 안의 ArrayList 객체에 들어 있는 다량의 HashMap 객체를 꺼내어
+                // HashMap 객체 안의 키값에 대응하는 문자를 꺼내어 HTML 태그로 출력하기 
+                // -----------------------------------------------
                 for( int i=0; i<boardList.size(); i++ ){
-
+                    
+                    // i 번째 HashMap 객체를 꺼내기
+                    
                     Map<String,String> map = boardList.get(i);
 
+                    // i번째 HashMap 객체에 키값 b_no 에 대응하는 저장 문자열 꺼내기
+                    // i번째 HashMap 객체에 키값 subject 에 대응하는 저장 문자열 꺼내기
+                    // i번째 HashMap 객체에 키값 writer 에 대응하는 저장 문자열 꺼내기
+                    // i번째 HashMap 객체에 키값 readcount 에 대응하는 저장 문자열 꺼내기
+                    // i번째 HashMap 객체에 키값 reg_date 에 대응하는 저장 문자열 꺼내기
+                    // i번째 HashMap 객체에 키값 print_level 에 대응하는 저장 문자열 꺼내기
 
                     String b_no = map.get("b_no");
 
@@ -411,16 +436,20 @@
                     String print_level = map.get("print_level");
 
                     int print_level_int = Integer.parseInt(print_level,10);
-
+                    // 들여쓰기 단계 번호에 맞게 공백을 누적하고 들여쓰기 단계가 1 이상이면 ㄴ 자 붙이기  
                     String xxx = "";
 
+                    // 들여쓰기 단계 번호에 맞게 공백을 누적 시키기.   
+                    // 웹브라우저는 공백을 두칸밖에 인식 안하기 때문에 `&nbsp;` 사용한다.
                     for( int j=0; j<print_level_int; j++){
 
                         xxx = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                     }
                     if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
+                    // HTML 또는 문자열로 표현하기.  
                     out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"
-                                    + (serialNo3--) +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+                                    + (serialNo3--) 
+                                    +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
                 }
             }    
