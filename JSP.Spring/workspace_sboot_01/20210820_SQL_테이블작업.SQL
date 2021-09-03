@@ -56,10 +56,16 @@ select * from board order by b_no -- 테이블 확인
 
 commit
 
-delete from board where b_no = 27
+rollback
 
+delete from board where b_no = 213
 
+--------------------------------------------
+--●날짜 데이터는 '년-월-일'  로 입력 가능하게 하기
+--------------------------------------------
+alter session set nls_date_format = 'yyyy-mm-dd' ;
 
+insert into board values(213,'제목213', '작성자213', '내용213', '1234', 'a213@naver.com', '2021-09-02' , 0, 213, 0, 0);
 
 
 
