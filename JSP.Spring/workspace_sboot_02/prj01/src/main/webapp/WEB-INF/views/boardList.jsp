@@ -140,6 +140,11 @@
                     var pageNo = $(responseHTML).find(".pageNo").html();
 
                     $(".pageNo").html(pageNo);
+
+
+                    var test = $(responseHTML).find(".test").html();
+
+                    $(".test").html(test);
                 }
                 // ----------------------------------------------------------
                 // 서버의 응답을 못 받았을 경우 실행할 익명함수 설정
@@ -254,9 +259,12 @@
     <br>
 
     <!-- 테스트용 페이지 번호 출력 -->
-    마지막 페이지 번호 => <%=last_pageNo%> <br>
-    현재화면 최소페이지번호 => <%=min_pageNo%> <br>
-    현재화면 최대페이지번호 => <%=max_pageNo%> <br>
+    <div class="test" style="height: 10px;">
+        현재화면 페이지번호 => <%=selectPageNo%> 
+    </div> <br>
+        마지막 페이지 번호 => <%=last_pageNo%> <br>
+        현재화면 최소페이지번호 => <%=min_pageNo%> <br>
+        현재화면 최대페이지번호 => <%=max_pageNo%> <br>
 
     <hr>
 
