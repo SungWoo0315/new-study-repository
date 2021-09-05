@@ -96,6 +96,7 @@ public class BoardController {
                 if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
         }
         
+        System.out.println("컨트롤러 /boardList.do selectPageNo => " + selectPageNo);
       
 
         // ***************************************
