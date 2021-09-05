@@ -53,17 +53,57 @@ public class BoardController {
 		BoardSearchDTO boardSearchDTO
                     
     ){
+        System.out.println("컨트롤러 /boardList.do 진행... ");
+   
+
+
+        // ***************************************
+        // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
+        // ***************************************
+        int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
+
+
+        // ***************************************
+        // 자바 안에서 [마지막페이지번호, 
+        // 현재화면최소페이지번호, 현재화면최대페이지번호] 
+        // 구하는 식 
+        // 
+        // BoardSearchDTO 객체에 저장된 [선택 페이지 번호] 구하기
+        // BoardSearchDTO 객체에 저장된 [한 화면에 보여줄 행의 개수] 구하기
+        // [한 화면에 보여줄 페이지 번호의 개수] 구하기
+        // ***************************************
+        int last_pageNo = 0;
+        int min_pageNo = 0;
+        int max_pageNo = 0;
+
+        int selectPageNo = boardSearchDTO.getSelectPageNo();
+        int rowCntPerPage = boardSearchDTO.getRowCntPerPage();
+        int pageNoCntPerPage = 10;
+      
+        if( getBoardListCount > 0 ){      
+      
+      
+            last_pageNo = getBoardListCount/rowCntPerPage;
+                if( getBoardListCount%rowCntPerPage > 0 ){last_pageNo++;}
+
+                if( selectPageNo > last_pageNo ){
+                    selectPageNo = 1;
+                    boardSearchDTO.setSelectPageNo(selectPageNo);
+                }
+
+            min_pageNo = (selectPageNo - 1)/pageNoCntPerPage * pageNoCntPerPage + 1;
+            max_pageNo = min_pageNo + pageNoCntPerPage - 1;
+                if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
+        }
         
+      
 
         // ***************************************
         // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
         // ***************************************
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
 
-        // ***************************************
-        // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
-        // ***************************************
-        int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
+
 
         // ***************************************
         // [ModelAndView 객체] 생성하기
@@ -84,10 +124,53 @@ public class BoardController {
         // ***************************************
         mav.addObject("getBoardListCount", getBoardListCount);
 
+
+        // ***************************************
+        // [ModelAndView 객체] 에 [마지막페이지번호, 
+        // 현재화면최소페이지번호, 현재화면최대페이지번호]를 저장하기
+        // ***************************************
+        mav.addObject("last_pageNo", last_pageNo);
+        mav.addObject("min_pageNo", min_pageNo);
+        mav.addObject("max_pageNo", max_pageNo);  
+
+        // ***************************************
+        // [ModelAndView 객체] 에 [선택 페이지 번호] 
+        // [ModelAndView 객체] 에 [한 화면에 보여줄 행의 개수] 
+        // [ModelAndView 객체] 에 [한 화면에 보여줄 페이지 번호의 개수] 저장하기
+        // ***************************************
+        mav.addObject("selectPageNo", selectPageNo);
+        mav.addObject("rowCntPerPage", rowCntPerPage);
+        mav.addObject("pageNoCntPerPage", pageNoCntPerPage);  
+
+        
+        // ***************************************
+        // 콘솔 확인.
+        // ***************************************
+        System.out.println("컨트롤러 /boardList.do 진행...완료... ");
+
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
         return mav;
+
+
+
+
+
+
+
+        /* 페이지 번호 사용할 예정
+            if( totCnt > 0 ){
+                int last_pageNo = totCnt/rowCntPerPage;
+                    if( totCnt%rowCntPerPage > 0 ){last_pageNo++;}
+
+                int min_pageNo = (selectPageNo - 1)/pageNoCntPerPage * pageNoCntPerPage + 1;
+                int max_pageNo = min_pageNo + pageNoCntPerPage - 1;
+                    if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
+            }
+        */
+
+        // 위 코드를 사용해서 계산 한다.  
     }
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm

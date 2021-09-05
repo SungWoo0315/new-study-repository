@@ -68,9 +68,10 @@
             // -----------------------------------------------
             if( keyword1==null || keyword1.split(" ").join("")=="" ){
                 
-                //alert("[키워드] 가 비어 있어 검색 불가능합니다.")
+                //alert("[키워드] 가 비어 있어 검색 불가능합니다.") // 테스트 완료후 주석처리
                 $(".keyword1").val("");
-                //return;
+                // $(".keyword1").focus(); // 테스트 완료후 주석처리
+                //return;  // 테스트 완료후 주석처리
 
             }
             // -----------------------------------------------
@@ -133,6 +134,12 @@
                     var cnt = $(responseHTML).find(".boardListAllCnt").text();
 
                     $(".boardListAllCnt").text(cnt);
+
+
+
+                    var pageNo = $(responseHTML).find(".pageNo").html();
+
+                    $(".pageNo").html(pageNo);
                 }
                 // ----------------------------------------------------------
                 // 서버의 응답을 못 받았을 경우 실행할 익명함수 설정
@@ -157,6 +164,17 @@
 
         }
 
+        // *****************************************
+        // 페이지 번호를 클릭하면 호출되는 함수 선언
+        // *****************************************
+        function search_with_changePageNo( selectPageNo ){
+
+        $(".selectPageNo").val(selectPageNo);
+        search();
+
+        }
+
+
 
 
 
@@ -166,6 +184,30 @@
 </head>
 
 <body onkeydown="if(event.keyCode==13) {search();}">
+
+    <!-- *********************************************************** -->
+    <!-- [자바 변수 선언하고 검색 화면 구현에 필요한 데이터 저장하기] -->
+    <!-- *********************************************************** -->
+    <%
+
+    List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
+
+    int getBoardListCount = (Integer)request.getAttribute("getBoardListCount");
+        
+    int selectPageNo = (Integer)request.getAttribute("selectPageNo");
+    int rowCntPerPage = (Integer)request.getAttribute("rowCntPerPage");
+
+    int last_pageNo = (Integer)request.getAttribute("last_pageNo");
+    int min_pageNo = (Integer)request.getAttribute("min_pageNo");
+    int max_pageNo = (Integer)request.getAttribute("max_pageNo");
+
+
+    %>
+
+
+
+
+
 
     <center>
     <span style="font-size:30px; font-weight: bold; color: orange;">
@@ -178,7 +220,7 @@
     <!-- *********************************************************** -->
     <!-- [게시판 검색 조건 입력 양식] 내포한 form 태그 선언 -->
     <!-- *********************************************************** -->
-    <form name="boardListForm" method="post">
+    <form name="boardListForm" method="post" onsubmit="return false">
 
         [키워드] : <input type="text" name="keyword1" class="keyword1">
         
@@ -205,7 +247,109 @@
 	
     <center>
 
-    <div class="boardListAllCnt" style="height: 10px;">총 <%=(Integer)request.getAttribute("getBoardListCount")%>개</div> <br><!-- 공백조절용 div 태그 -->
+    <div class="boardListAllCnt" style="height: 10px;">
+        검색 개수 : <%=getBoardListCount%>개
+    </div> 
+    
+    <br>
+
+    <!-- 테스트용 페이지 번호 출력 -->
+    마지막 페이지 번호 => <%=last_pageNo%> <br>
+    현재화면 최소페이지번호 => <%=min_pageNo%> <br>
+    현재화면 최대페이지번호 => <%=max_pageNo%> <br>
+
+    <hr>
+
+
+    <div class="pageNo">
+
+        <%
+
+        // 10페이지 번호씩 넘어가는 코드.
+        /*
+            if( getBoardListCount>0 ){
+
+                out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );
+
+                if( min_pageNo > rowCntPerPage ){
+                
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(min_pageNo-1)+");'>[이전]</span> " );
+
+                }
+
+                for( int i = min_pageNo; i<=max_pageNo; i++ ){
+                    if( i==selectPageNo ){
+
+                        out.print( "<span>" + i + "</span> " );
+
+                    }else{
+                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> ");
+
+                    }
+                }
+
+                if( last_pageNo > max_pageNo ){
+                
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(max_pageNo+1)+");'>[다음]</span> " );
+
+                }
+
+                
+                out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
+            }
+        */
+
+        // 한페이지씩 넘어가는코드.  처음으로 마지막으로 고정되어 보이게 하는 if 문.  
+            if( selectPageNo > 1 ){
+        
+                out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );  
+        
+                out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>&nbsp;[[이전]]&nbsp;</span> " );
+            
+            }
+            else{
+                
+                out.print( "<span>[[처음으로]]&nbsp;</span>" );  
+        
+                out.print( "<span>&nbsp;[[이전]]&nbsp;</span> " );
+            
+            }
+        
+            for( int i = min_pageNo; i<=max_pageNo; i++ ){
+                if( i==selectPageNo ){
+        
+                    out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
+                
+                }else{
+        
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
+        
+                }
+            }
+        
+            if( selectPageNo < last_pageNo ){
+                    
+                out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>&nbsp;[[다음]]&nbsp;</span> " );
+                out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
+            
+            }
+            else{
+                
+                out.print( "<span>&nbsp;[[다음]]&nbsp;</span>" );  
+        
+                out.print( "<span>&nbsp;[[마지막으로]]</span> " );
+            
+            }
+
+        %>
+  
+    </div>
+    
+    <br>
+
+
+
+
     
     <div class="searchResult">
 
@@ -213,11 +357,21 @@
             <tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
 
         <%
-            List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
     
             if( boardList!=null){
 
-                int totCnt = boardList.size();
+                // 정순번호
+                int serialNo1 = selectPageNo 
+                * rowCntPerPage 
+                - rowCntPerPage  
+                + 1;
+
+                // 역순번호 1
+                int serialNo2 = getBoardListCount  
+                - ( selectPageNo * rowCntPerPage  - rowCntPerPage  + 1 ) + 1;
+                
+                // 역순번호 2
+                int serialNo3 = getBoardListCount - serialNo1 + 1;
 
 
 
@@ -240,7 +394,8 @@
                         xxx = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                     }
                     if( print_level_int > 0 ){xxx = xxx + " &#10551; "; }
-                    out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"+ (totCnt--) +"<td>" +  xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
+                    out.println("<tr style='cursor: pointer;' onclick='goBoardContentForm("+b_no+")'><td>"
+                        + (serialNo2--) +"<td>" +  xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
                 }
             }
         %>
