@@ -183,6 +183,7 @@ public class LoginController {
         // ----------------------------------------------------------
         ModelAndView mav = new ModelAndView();
         mav.setViewName("logout.jsp");
+        System.out.println("/logout.do 호출");
         return mav;
     } 
     // ********************************************
@@ -198,6 +199,7 @@ public class LoginController {
         // ----------------------------------------------------------
         ModelAndView mav = new ModelAndView();
         mav.setViewName("login_alert.jsp");
+        System.out.println("/login_alert.do 호출");
         return mav;
 
     } 

@@ -28,6 +28,8 @@ public class MvcConfiguration implements WebMvcConfigurer {
             ,"/longout.do"
             ,"/memRegForm.do"
             ,"/resources/**"
+            ,"/logout.do"
+            ,"/login_alert.do"
         );
 
     }
