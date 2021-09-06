@@ -349,9 +349,17 @@
     <!-- *********************************************************** -->
     <!-- 검색된 목록의 총개수 출력하기 -->
     <!-- *********************************************************** -->
-    
-    <!-- <div class="boardListAllCnt" style="height: 10px;">총 <%//=getBoardListCount%>개</div> <br> -->
+    <!-- EL(Expression Language) 을 사용하여 HttpServletRequest 객체에  -->
+    <!-- setAttribute 메소드로 저장된 키값 "getBoardListCount" 로 저장된 데이터를 꺼내서 표현하기 -->
+    <!-- <참고> EL 은 JSP 페이지에서 사용가능한 언어이다. -->
+    <!--        즉, EL 은 JSP 기술의 한 종류이다. -->
+    <!-- *********************************************************** -->
     <div class="boardListAllCnt" style="height: 10px;">총 ${requestScope.getBoardListCount}개</div> <br> <!-- EL 예시. 위 코드랑 비교. -->
+
+
+
+
+
 
     <!-- ********************************************************* -->
     <!-- 페이지 번호 출력하기 -->
@@ -434,7 +442,59 @@
             }
         */
         %>
+
+        <c:if test="${requestScope.getBoardListCount>0}">
+            
+            
+            <c:if test="${requestScope.selectPageNo>1}">
+                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("1");'>[[처음으로]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>&nbsp;[[이전]]&nbsp;</span>
+            </c:if>
+            
+            <c:if test="${requestScope.selectPageNo<=1}">
+                <span>[[처음으로]]&nbsp;</span>
+                <span>&nbsp;[[이전]]&nbsp;</span>
+            </c:if>
+            
+            
+ 
+
+
+            for( int i = min_pageNo; i<=max_pageNo; i++ ){
+
+                // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하면 그냥 번호만 표현하기    
+                if( i==selectPageNo ){
+
+                    out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
+                
+                }
+                // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하지 않으면 클리하면 함수 호출하도록 클릭 이벤트 걸기    
+                else{
+
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
+
+                }
+            }
+      
+
+
+            <c:if test="${requestScope.selectPageNo<requestScope.last_pageNo}">
+                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>&nbsp;[[다음]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span>
+            </c:if>
+
+            <c:if test="${requestScope.selectPageNo>requestScope.last_pageNo}">
+                <span>&nbsp;[[다음]]&nbsp;</span>
+                <span>&nbsp;[[마지막으로]]</span>
+            </c:if>
+
     
+
+
+
+        </c:if> 
+
+     
     </div>
 
 
