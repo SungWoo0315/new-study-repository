@@ -12,7 +12,7 @@
 
 <script>
 
-	alert("로그인하고 접속해야 합니다. \n로그인 하십시오!!!!!");
+	alert("로그아웃 성공!!");
 	location.replace("/loginForm.do")
 
 </script>

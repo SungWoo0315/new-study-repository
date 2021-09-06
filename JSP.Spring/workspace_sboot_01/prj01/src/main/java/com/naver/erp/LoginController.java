@@ -60,10 +60,9 @@ public class LoginController {
     // ********************************************
     @RequestMapping( value="/loginForm.do")
     public ModelAndView loginForm(
-        HttpSession session
+        
      ){
 
-        session.removeAttribute("login_id");
 
         System.out.print("==================================\r");  
 
@@ -164,6 +163,44 @@ public class LoginController {
         return mav;
     }
 
+    // ********************************************
+    // 가상주소 /logout.do 로 접근하면 호출되는 메소드 선언
+    // ********************************************
+    @RequestMapping( value="/logout.do")
+    public ModelAndView logout(
+        HttpSession session
+    ){
+        // ----------------------------------------------------------
+        // HttpSession 객체에 "login_id" 라는 키값으로 저장된 데이터 삭제하기
+        // HttpSession 객체에 로그인 성공 후 저장된 아이디값을 지우기  
+        // HttpSession 객체에 저장된, 즉, 로그인 정보를 삭제하기
+        // ----------------------------------------------------------
+        session.removeAttribute("login_id");
+        // ----------------------------------------------------------
+        // [ModelAndView 객체] 생성하기.
+        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // [ModelAndView 객체] 리턴하기.
+        // ----------------------------------------------------------
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("logout.jsp");
+        return mav;
+    } 
+    // ********************************************
+    // 가상주소 /login_alert.do 로 접근하면 호출되는 메소드 선언
+    // ********************************************
+    @RequestMapping( value="/login_alert.do")
+    public ModelAndView login_alert(){
+
+        // ----------------------------------------------------------
+        // [ModelAndView 객체] 생성하기.
+        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // [ModelAndView 객체] 리턴하기.
+        // ----------------------------------------------------------
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("login_alert.jsp");
+        return mav;
+
+    } 
 
 
 

@@ -8,18 +8,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
-<!-- --------------------------------------------------------------------- -->
-<!-- JQuery 라이브러리 수입하기 -->
-<!-- --------------------------------------------------------------------- -->
-<script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="/resources/common_func.js"></script>
-<script src="/resources/common_data.js"></script>
-
 <script>
-$(document).ready(function(){
-    $("body").prepend(    
-        "<center><div><span style='cursor:pointer' "
-           + "onclick='location.replace(\"/logout.do\");'>[로그아웃]</span></div></center>"
-    );
-});
+
+	alert("로그인하고 접속해야 합니다. \n로그인 하십시오!!!!! \n로그인 필요.");
+	location.replace("/loginForm.do")
+
 </script>
