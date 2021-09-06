@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,6 +42,44 @@ public class BoardController {
     @Autowired
     private BoardDAO boardDAO;
 
+    
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // @RequestMapping 이 붙은 메소드가 호출되기 전에 호출되는 메소드 선언  
+    // @ModelAttribute 가 붙은 메소드는 @RequestMapping 이 붙은 메소드가 호출되기 전에 호출되는 메소드이다.    
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @ModelAttribute
+    public void checkLogin(
+        HttpSession session
+    ){
+        // ***************************************
+        // 로그인 성공 여부 확인하기
+        // ***************************************
+        // HttpSession 객체 저장된 로그인 아이디를 꺼내기.  
+        String login_id = (String)session.getAttribute("login_id");
+        // 만약 login_id 변수 안에 null 이 저장되어 있으면  
+        // 즉, 만약 로그인에 성공한 적이 없으면  
+        if( login_id==null ){
+
+            throw new Exception();
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 가상주소 /boardList.do 로 접근하면 호출되는 메소드 선언
     //      @RequestMapping 내부에, method="RequestMethod.POST" 가 없으므로
@@ -53,8 +93,31 @@ public class BoardController {
         // --------------------------------------------------
         BoardSearchDTO boardSearchDTO
         
+        , HttpSession session
 
     ){
+
+    /* 비효율적인 중복코드 대신 다르게 작성하기위해 주석처리.  
+        // ***************************************
+        // 로그인 성공 여부 확인하기
+        // ***************************************
+        // HttpSession 객체 저장된 로그인 아이디를 꺼내기.  
+        String login_id = (String)session.getAttribute("login_id");
+        // 만약 login_id 변수 안에 null 이 저장되어 있으면  
+        // 즉, 만약 로그인에 성공한 적이 없으면  
+        if( login_id==null ){
+
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("logout.jsp");
+            return mav;
+
+        }
+    */
+
+
+
+
+
         System.out.println("====================================");
         System.out.println("컨트롤러 /boardList.do 진행...시작... ");
 

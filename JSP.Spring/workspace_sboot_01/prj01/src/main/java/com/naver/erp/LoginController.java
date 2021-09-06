@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,11 @@ public class LoginController {
         // "pwd" 라는 파라미터명에 해당하는 파라미터값을 꺼내서 매개변수 pwd 에 저장하고 들어온다.
         // ---------------------------------------
         ,@RequestParam( value="pwd" ) String pwd
+
+        // ---------------------------------------
+        // HttpSession 객체의 메위주를 저장하는 매개변수 session 선언하기
+        // ---------------------------------------
+        ,HttpSession session
     ){
         // --------------------------------------------------
         // HashMap 객체 생성하기
@@ -109,6 +115,24 @@ public class LoginController {
         System.out.println("LoginController.loginProc 해시맵 객체 => " + map);
 
         int login_idCnt = loginDAO.getLogin_idCnt(map);
+
+        // --------------------------------------------------
+        // 만약 login_idCnt q변수 안의 데이터가 1이면
+        // 즉, 만약 입력한 아이디 암호가 DB에 존재하면
+        // 즉, 만약 로그인이 성공했으면
+        // --------------------------------------------------
+        if( login_idCnt==1 ){
+            
+            // HttpSession 객체에 로그인 아이디 저장하기  
+            // HttpSession 객체에 로그인 아이디를 저장하면 재 접속 했을 때 다시 꺼내 볼 수 있다.  
+            // <참고> HttpSession 객체는 접속한 이우에도 제거되지 않고, 지정된 기간동안 살아 있는 객체이다.  
+            // <참고> HttpServlet Request,  HttpServlet Response 객체는 접속할때 생성되고, 응답이후 삭제되는 객체이다.
+            session.setAttribute( "login_id", login_id );
+
+        }
+
+
+
         System.out.println("LoginController.loginProc => " + 3);
         System.out.println("LoginController.loginProc login_idCnt 보기 => " + login_idCnt);
         
