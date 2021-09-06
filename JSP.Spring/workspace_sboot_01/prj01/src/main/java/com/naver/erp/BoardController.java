@@ -12,6 +12,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,9 @@ public class BoardController {
     @Autowired
     private BoardDAO boardDAO;
 
-    
+
+
+/* 여러개의 컨트롤러가 있을 경우 중복코딩 되므로 다른방식을 위해 주석 처리.  
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // @RequestMapping 이 붙은 메소드가 호출되기 전에 호출되는 메소드 선언  
     // @ModelAttribute 가 붙은 메소드는 @RequestMapping 이 붙은 메소드가 호출되기 전에 호출되는 메소드이다.    
@@ -50,7 +53,7 @@ public class BoardController {
     @ModelAttribute
     public void checkLogin(
         HttpSession session
-    ){
+    ) throws Exception{
         // ***************************************
         // 로그인 성공 여부 확인하기
         // ***************************************
@@ -59,15 +62,29 @@ public class BoardController {
         // 만약 login_id 변수 안에 null 이 저장되어 있으면  
         // 즉, 만약 로그인에 성공한 적이 없으면  
         if( login_id==null ){
-
+            // 코딩으로 예외를 발생시키기
+            // 예외를 관리하는 Exception 객체를 생성함으로써 예외가 발생 했음을 자바에게 알린다.  
             throw new Exception();
 
         }
     }
 
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 현재 이 [컨트롤러 클래스] 내의 메소드에서
+    // 예외 발생하면 호출되는 메소드 선언하기
+    // @ExceptionHandler(Exception.class)를 붙여야 한다.  
+    // @ExceptionHandler(Exception.class) 어노테이션이 붙은 메소드는
+    // 리턴되는 문자열은 호출 JSP 페이지명이다.  
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
+    @ExceptionHandler(Exception.class)
+    public String handleException(){
 
+        return "logout.jsp";
 
+    }
+
+*/
 
 
 
