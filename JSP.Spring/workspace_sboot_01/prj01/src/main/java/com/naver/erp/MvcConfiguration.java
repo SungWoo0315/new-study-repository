@@ -17,6 +17,18 @@ public class MvcConfiguration implements WebMvcConfigurer {
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     @Override
     public void addInterceptors(InterceptorRegistry registry){
+        // -----------------------------------------------
+        // InterceptorRegistry 객체의 addInterceptor 메소드를 호출하여 SessionInterceptor 객체를 인터셉터로 등록하고
+        // exludePathPatterns 메소드를 호출하여 예외되는 URL 주소 패턴을 등록한다.
+        // -----------------------------------------------
+        registry.addInterceptor(new SessionInterceptor()).excludePathPatterns(
+            "/loginForm.do"
+            ,"/loginProc.do"
+            ,"/loginProc2.do"
+            ,"/longout.do"
+            ,"/memRegForm.do"
+            ,"/resources/**"
+        );
 
     }
 

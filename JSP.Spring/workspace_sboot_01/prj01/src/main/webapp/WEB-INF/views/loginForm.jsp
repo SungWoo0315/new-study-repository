@@ -256,6 +256,12 @@
 
     </form>
     </center>
+
+    localhost:8081/boardList.do <br>
+    localhost:8081/boardRegForm.do <br>
+    localhost:8081/boardContentForm.do <br>
+    localhost:8081/boardUpDelForm.do <br>
+    
 </body>
 
 </html>

@@ -59,7 +59,11 @@ public class LoginController {
     // 가상주소 /loginForm.do 로 접근하면 호출되는 메소드 선언
     // ********************************************
     @RequestMapping( value="/loginForm.do")
-    public ModelAndView loginForm( ){
+    public ModelAndView loginForm(
+        HttpSession session
+     ){
+
+        session.removeAttribute("login_id");
 
         System.out.print("==================================\r");  
 
