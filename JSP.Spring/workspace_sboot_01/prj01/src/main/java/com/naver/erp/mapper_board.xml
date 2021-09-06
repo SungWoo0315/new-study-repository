@@ -13,16 +13,16 @@
 <sql id="boardWhere">
     
    
-
-         
         <!-- ============================================================== -->
         <!-- 만약 키워드1가 null 이 아니고 길이가 0보다 크면 where 절에 참여하기 -->
         <!-- ============================================================== -->
-        and
-        <if test="keyword1!=null and keyword1.length()>0 and keyword2!=null and keyword2.length()>0">
-        ( 
-        </if>  
+        
+        
         <if test="keyword1!=null and keyword1.length()>0">
+        and    
+            <if test="keyword1!=null and keyword1.length()>0 and keyword2!=null and keyword2.length()>0">
+            ( 
+            </if>  
 
             (
                 upper(subject) like upper('%${keyword1}%')
@@ -41,11 +41,18 @@
                 or
                 to_char(reg_date, 'YYYY,MM,DD') like '%${keyword1}%'
             )
+
         </if>
 
-        <if test="or_and_option.equals('and')"> and </if>
-        <if test="or_and_option.equals('or')"> or </if>
-        
+        <if test="keyword1!=null and keyword1.length()>0 and keyword2!=null and keyword2.length()>0">
+            <if test="or_and_option.equals('and')"> and </if>
+            <if test="or_and_option.equals('or')"> or </if>
+        </if>  
+
+        <if test="keyword1=='' and keyword2!=null and keyword2.length()>0">
+            and
+        </if>  
+
         <!-- ============================================================== -->
         <!-- 만약 키워드2가 null 이 아니고 길이가 0보다 크면 where 절에 참여하기 -->
         <!-- ============================================================== -->
