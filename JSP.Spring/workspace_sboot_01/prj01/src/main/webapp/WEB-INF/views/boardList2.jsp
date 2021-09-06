@@ -445,10 +445,9 @@
 
         <c:if test="${requestScope.getBoardListCount>0}">
             
-            
             <c:if test="${requestScope.selectPageNo>1}">
-                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("1");'>[[처음으로]]&nbsp;</span>
-                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>&nbsp;[[이전]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(1);'>[[처음으로]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}-1);'>&nbsp;[[이전]]&nbsp;</span>
             </c:if>
             
             <c:if test="${requestScope.selectPageNo<=1}">
@@ -457,40 +456,30 @@
             </c:if>
             
             
- 
 
-
-            for( int i = min_pageNo; i<=max_pageNo; i++ ){
-
-                // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하면 그냥 번호만 표현하기    
-                if( i==selectPageNo ){
-
-                    out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
+            <c:forEach var="i" begin="${requestScope.min_pageNo}" end="${requestScope.max_pageNo}">
                 
-                }
-                // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하지 않으면 클리하면 함수 호출하도록 클릭 이벤트 걸기    
-                else{
+                <c:if test="${i==requestScope.selectPageNo}">
+                    <span style='font-weight:bold; color:red;'>${i}</span>
+                </c:if>
 
-                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
+                <c:if test="${i!=requestScope.selectPageNo}">
+                    <span style='cursor: pointer;' onclick='search_with_changePageNo("${i}");'>[${i}]</span>
+                </c:if>
 
-                }
-            }
+            </c:forEach>
+
       
 
-
             <c:if test="${requestScope.selectPageNo<requestScope.last_pageNo}">
-                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>&nbsp;[[다음]]&nbsp;</span>
-                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span>
+                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}+1);'>&nbsp;[[다음]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(${requestScope.last_pageNo});'>&nbsp;[[마지막으로]]</span>
             </c:if>
 
-            <c:if test="${requestScope.selectPageNo>requestScope.last_pageNo}">
+            <c:if test="${requestScope.selectPageNo>=requestScope.last_pageNo}">
                 <span>&nbsp;[[다음]]&nbsp;</span>
                 <span>&nbsp;[[마지막으로]]</span>
             </c:if>
-
-    
-
-
 
         </c:if> 
 
