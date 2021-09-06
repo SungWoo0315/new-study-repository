@@ -7,12 +7,16 @@
 <%@ page import="java.util.List"%>
 
 
+<!-- *********************************************************** -->
+<!-- JSP 기술의 한 종류인 [Include Directive]를 이용하여 -->
+<!-- common.jsp 파일 내의 소스를 삽입하기 -->
+<!-- *********************************************************** -->
+<%@include file="common.jsp"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="/resources/common_func.js"></script>
-<script src="/resources/common_data.js"></script>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -82,14 +86,34 @@
             // 비동기 방식으로 웹서버에 접속하여 키워드를 만족하는
             // 검색 결과물을 응답받아 현 화면에 반영하기 
             // -----------------------------------------------
-            xxx();
+            searchExe();
 
 
 
         }
 
+        // *****************************************
+        // [모두 검색] 버튼 클릭하면 호출되는 함수선언
+        // *****************************************
+        function searchAll(){
+            // ---------------------------------
+            // 키워드 입력 양식에 "" 넣어주기
+            // ---------------------------------
+            $(".keyword1").val("");
+            // ---------------------------------
+            // class=day 를 가진 입력 양식의 체크 풀기
+            // ---------------------------------
+            $(".day").prop("checked", false);
+            // ---------------------------------
+            // 비동기 방식으로 웹서버에 접속하는 searchExe() 함수 호출하기
+            // ---------------------------------
+            searchExe();
+        }
 
-        function xxx(){
+
+
+
+        function searchExe(){
             // -----------------------------------------------
             // 현재 화면에서 페이지 이동 없이(=비동기 방식으로)
             // 서버쪽 /boardList.do 로 접속하여 키워드를 만족하는
@@ -162,12 +186,7 @@
         }
 
 
-        function searchAll(){
-      
-            $(".keyword1").val("");
-            xxx();
-
-        }
+   
 
         // *****************************************
         // 페이지 번호를 클릭하면 호출되는 함수 선언
@@ -229,23 +248,35 @@
 
         [키워드] : <input type="text" name="keyword1" class="keyword1">
         
-        
+        <hr>
+
+        <input type="checkbox" name="day" class="day" value="today" > 오늘
+        <input type="checkbox" name="day" class="day" value="yesterday" > 어제
+
         <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">  
         
+      
+
         <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
             <option value="10">10</option>
             <option value="15">15</option>
-            <option value="20">20</option>
+            <option value="20" selected>20</option>
             <option value="25">25</option>
             <option value="30">30</option>
             <option value="100">100</option>
         </select> 행보기
         
-        
+        <hr>
+
         <input type="button" value="검색" class="contactSearch" onclick="search();">&nbsp;
         <input type="button" value="모두검색" class="contactSearchAll" onclick="searchAll();">&nbsp;
         
+        <hr>
+
         <a href="javascript:goBoardRegForm();">[새글쓰기]</a>
+
+
+
 
     </form>
     <div style="height: 10px;"></div> <br> <!-- 공백조절용 div 태그 -->    
