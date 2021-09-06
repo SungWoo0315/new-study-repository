@@ -457,7 +457,7 @@
             
             
 
-            <c:forEach var="i" begin="${requestScope.min_pageNo}" end="${requestScope.max_pageNo}">
+            <c:forEach var="i" begin="${requestScope.min_pageNo}" end="${requestScope.max_pageNo}" step="1">
                 
                 <c:if test="${i==requestScope.selectPageNo}">
                     <span style='font-weight:bold; color:red;'>${i}</span>
@@ -498,6 +498,30 @@
 
         <table border="1" style="border-collapse:collapse" cellpadding=5>
             <tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
+
+
+            <c:if test="${requestScope.boardList!=null}">
+
+
+                ${var serialNo1} = (${requestScope.selectPageNo} * ${requestScope.rowCntPerPage} - ${requestScope.rowCntPerPage} + 1)
+               
+                ${var serialNo3} = ${requestScope.getBoardListCount} - ${serialNo1} + 1
+
+
+                <c:forEach var="i" begin="0" end="${requestScope.boardList.size}" step="1">
+            
+                    <c:if test="${requestScope.print_level_int>0}">
+                        ${var xxx} = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
+                        xxx = xxx + " &#10551; "; 
+                    </c:if> 
+                    
+                    <tr style='cursor: pointer;' onclick='goBoardContentForm("${requestScope.b_no}")'><td>" + ${serialNo3--} +"<td>" + ${xxx} + ${requestScope.subject} + "<td>"+${requestScope.writer}+"<td>"+${requestScope.readcount}+"<td>"+${requestScope.reg_date}
+            
+                </c:forEach>
+              
+            </c:if> 
+
 
 
         <%
