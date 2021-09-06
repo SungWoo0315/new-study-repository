@@ -502,22 +502,25 @@
 
             <c:if test="${requestScope.boardList!=null}">
 
+                <c:set var="serialNo1" value="${requestScope.selectPageNo*requestScope.rowCntPerPage-requestScope.rowCntPerPage+1}" />
 
-                ${var serialNo1} = (${requestScope.selectPageNo} * ${requestScope.rowCntPerPage} - ${requestScope.rowCntPerPage} + 1)
+                <c:set var="serialNo3" value="${requestScope.getBoardListCount-serialNo1+1}" />
+
+              
                
-                ${var serialNo3} = ${requestScope.getBoardListCount} - ${serialNo1} + 1
-
-
-                <c:forEach var="i" begin="0" end="${requestScope.boardList.size}" step="1">
+                <c:forEach var="boardList1" varStatus="status" items="${boardList}" begin="0" end="${requestScope.boardList.size()}" step="1">
+                    
+                    <c:forEach var="j" begin="0" end="${boardList1.print_level}" step="1">
+                        <c:set var="xxx" value="${xxx1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+                    </c:forEach>
             
-                    <c:if test="${requestScope.print_level_int>0}">
-                        ${var xxx} = xxx + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-
-                        xxx = xxx + " &#10551; "; 
+                    <c:if test="${boardList1.print_level>0}">
+                        <c:set var="xxx1" value="${xxx}&#10551;" />                       
                     </c:if> 
                     
-                    <tr style='cursor: pointer;' onclick='goBoardContentForm("${requestScope.b_no}")'><td>" + ${serialNo3--} +"<td>" + ${xxx} + ${requestScope.subject} + "<td>"+${requestScope.writer}+"<td>"+${requestScope.readcount}+"<td>"+${requestScope.reg_date}
-            
+                    <tr style='cursor: pointer;' onclick='goBoardContentForm("${boardList1.b_no}")'><td>${requestScope.getBoardListCount - ((requestScope.selectPageNo-1) * requestScope.rowCntPerPage + status.index) }</td><td>${xxx1}${boardList1.subject}</td><td>${boardList1.writer}</td><td>${boardList1.readcount}</td><td>${boardList1.reg_date}</td></tr>
+                    <!--역순번호===> 전체 레코드 수 - ( (현재 페이지 번호 - 1) * 한 페이지당 보여지는 레코드 수 + 현재 게시물 출력 순서 ) -->
+
                 </c:forEach>
               
             </c:if> 
