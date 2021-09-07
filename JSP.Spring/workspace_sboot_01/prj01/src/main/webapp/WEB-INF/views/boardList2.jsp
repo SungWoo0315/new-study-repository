@@ -380,11 +380,16 @@
         <!-- ********************************************************* -->
         <c:if test="${requestScope.getBoardListCount>0}">
             
+            <!-- ==================================================== -->
+            <!-- 선택한 페이지 번호가 1보다 크면 [처음], [이전] 글씨 보이기. 단, 클릭하면 함수 호출하도록 이벤트 걸기 -->
+            <!-- ==================================================== -->
             <c:if test="${requestScope.selectPageNo>1}">
                 <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(1);'>[[처음으로]]&nbsp;</span>
                 <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}-1);'>&nbsp;[[이전]]&nbsp;</span>
             </c:if>
-            
+            <!-- ==================================================== -->
+            <!-- 선택한 페이지 번호가 1이면 [처음], [이전] 글씨 보이기. 단 클릭하면 함수 호출하는 이벤트 걸지 말기 -->
+            <!-- ==================================================== -->
             <c:if test="${requestScope.selectPageNo<=1}">
                 <span>[[처음으로]]&nbsp;</span>
                 <span>&nbsp;[[이전]]&nbsp;</span>
@@ -430,13 +435,18 @@
 
       
 
-
-
+            <!-- ==================================================== -->
+            <!-- 선택한 페이지 번호가 마지막 페이지 번호보다 작으면 [다음], [마지막으로] 문자 표현하기 -->
+            <!-- 단, 클릭하면 함수 호출하도록 클릭 이벤트 걸기 -->
+            <!-- ==================================================== -->
             <c:if test="${requestScope.selectPageNo<requestScope.last_pageNo}">
                 <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}+1);'>&nbsp;[[다음]]&nbsp;</span>
                 <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(${requestScope.last_pageNo});'>&nbsp;[[마지막으로]]</span>
             </c:if>
-
+            <!-- ==================================================== -->
+            <!-- 선택한 페이지 번호가 마지막 페이지 번호보다 크거나 같으면 [다음], [마지막으로] 문자 표현하기 -->
+            <!-- 단, 클릭하면 함수 호출하는 이벤트는 걸지 않기 -->
+            <!-- ==================================================== -->
             <c:if test="${requestScope.selectPageNo>=requestScope.last_pageNo}">
                 <span>&nbsp;[[다음]]&nbsp;</span>
                 <span>&nbsp;[[마지막으로]]</span>
@@ -445,6 +455,7 @@
         </c:if> 
 
     </div>
+
 
 
     <!-- ********************************************************* -->
@@ -459,6 +470,50 @@
         <table border="1" style="border-collapse:collapse" cellpadding=5>
             <tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
 
+            <!-- 수업시간에 만든 커스텀태그 및 EL searchResult -->
+            <c:forEach var="board" items="${requestScope.boardList}" varStatus="loopTagStatus">
+
+                <tr style='cursor: pointer;' onclick='goBoardContentForm("${board.b_no}")'>
+
+                    <td><!-- 역순번호 출력 -->
+                        <!-- 보기 편하게 하기 위해서 requestScope. 은 생략 하였다. -->
+        
+                        <!-- 역순번호 -->
+                        ${getBoardListCount - (selectPageNo * rowCntPerPage - rowCntPerPage +1) +1 -loopTagStatus.index}
+        
+                        <!-- board.RNUM 을 사용한 역순번호 -->
+                        <%-- ${getBoardListCount - (selectPageNo * rowCntPerPage - rowCntPerPage +1) +1 -(board.RNUM-1)} --%>
+
+                        <!-- 정순번호 -->
+                        <%-- ${selectPageNo * rowCntPerPage - rowCntPerPage +1 +loopTagStatus.index} --%>
+
+                    </td>
+
+                    <td><!-- ㄴ으로 표현되는 들여쓰기 -->
+                        <c:if test="${board.print_level>0}">
+                            <c:forEach begin="1" end="${board.print_level}">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            </c:forEach>
+                            &#10551;                       
+                        </c:if>                         
+                        ${board.subject}
+                    </td>
+
+                    <td><!-- 작성자 출력 -->${board.writer}</td>
+                    <td><!-- readcount 출력 -->${board.readcount}</td>
+                    <td><!-- 등록일 출력 -->${board.reg_date}</td>
+
+                </tr>
+
+            </c:forEach> 
+
+
+
+
+
+
+        <%--
+            <!-- 내가 만들어본 커스텀태그 및 EL searchResult -->
 
             <c:if test="${requestScope.boardList!=null}">
 
@@ -490,11 +545,13 @@
                 </c:forEach>
               
             </c:if> 
-
+        --%>
 
 
         <%
         /*
+            // 자바로 뽑아낸 searchResult
+
             // ---------------------------------------------------------------------------
             // boardList 가 null 이 아니면, 검색결과물이 있으면,   + boardList 에는 ListMap 객체가 들어있다.  
             // ---------------------------------------------------------------------------
