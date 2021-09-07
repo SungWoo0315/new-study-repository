@@ -266,8 +266,8 @@
     <!-- 세션 테스트용. -->
     <a href="http://localhost:8081/boardList.do" style="cursor:pointer">localhost:8081/boardList.do</a> <br>
     <a href="http://localhost:8081/boardRegForm.do" style="cursor:pointer">localhost:8081/boardRegForm.do</a> <br>
-    <a href="http://localhost:8081/boardContentForm.do" style="cursor:pointer">localhost:8081/boardContentForm.do</a> <br>
-    <a href="http://localhost:8081/boardUpDelForm.do" style="cursor:pointer">localhost:8081/boardUpDelForm.do</a> <br>
+    <a href="http://localhost:8081/boardContentForm.do/?b_no=1" style="cursor:pointer">localhost:8081/boardContentForm.do</a> <br>
+    <a href="http://localhost:8081/boardUpDelForm.do/?b_no=1" style="cursor:pointer">localhost:8081/boardUpDelForm.do</a> <br>
     
 </body>
 
