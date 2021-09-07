@@ -201,7 +201,7 @@ public class BoardController {
         // ***************************************
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
         // ***************************************
-        mav.setViewName("boardList2.jsp");
+        mav.setViewName("employeeList.jsp");
 
         // ***************************************
         // [ModelAndView 객체] 에 [게시판 목록 검색 결과]를 저장하기
