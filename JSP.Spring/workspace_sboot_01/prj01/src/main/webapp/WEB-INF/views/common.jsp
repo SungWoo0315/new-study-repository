@@ -30,17 +30,14 @@
 
 
 
-
-
-
-
-
 <!-- --------------------------------------------------------------------- -->
 <!-- JQuery 라이브러리 수입하기 -->
 <!-- --------------------------------------------------------------------- -->
 <script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="/resources/common_func.js"></script>
 <script src="/resources/common_data.js"></script>
+
+<link href="/resources/common.css" rel="stylesheet" type="text/css">
 
 <script>
 $(document).ready(function(){

@@ -467,13 +467,16 @@
 
     <div class="searchResult">
 
-        <table border="1" style="border-collapse:collapse" cellpadding=5>
-            <tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
+        <table border="1" class="tbcss0" style="border-collapse:collapse" cellpadding=5>
+            <tr bgcolor="gray">
+                <th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
 
             <!-- 수업시간에 만든 커스텀태그 및 EL searchResult -->
             <c:forEach var="board" items="${requestScope.boardList}" varStatus="loopTagStatus">
 
-                <tr style='cursor: pointer;' onclick='goBoardContentForm("${board.b_no}")'>
+                <tr bgcolor="${loopTagStatus.index%2==0?'white':'lightgray'}" 
+                    style='cursor: pointer;' 
+                    onclick='goBoardContentForm("${board.b_no}")'>
 
                     <td><!-- 역순번호 출력 -->
                         <!-- 보기 편하게 하기 위해서 requestScope. 은 생략 하였다. -->
