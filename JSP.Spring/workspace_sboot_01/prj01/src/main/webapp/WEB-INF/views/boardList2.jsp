@@ -29,7 +29,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BoardList</title>
+<title>BoardList2</title>
 
     <script>
 
@@ -273,7 +273,7 @@
     <!-- 접속페이지 테스트 확인용. -->
     <center>
     <span style="font-size:30px; font-weight: bold; color: orange;">
-        boardList.jsp 접속 성공!!
+        boardList2.jsp 접속 성공!!
     </span>
     <center>
 

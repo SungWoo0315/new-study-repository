@@ -302,7 +302,7 @@ public class BoardController {
         // ***************************************
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
         // ***************************************
-        mav.setViewName("boardRegForm.jsp");
+        mav.setViewName("boardRegForm2.jsp");
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
@@ -517,7 +517,7 @@ public class BoardController {
         // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
         //*******************************************
         ModelAndView mav = new ModelAndView( );
-        mav.setViewName("boardUpDelForm.jsp");
+        mav.setViewName("boardUpDelForm2.jsp");
         mav.addObject("boardDTO", boardDTO);
         return mav;
     }
