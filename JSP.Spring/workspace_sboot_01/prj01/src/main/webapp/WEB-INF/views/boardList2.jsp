@@ -359,90 +359,25 @@
 
 
 
-
-
     <!-- ********************************************************* -->
     <!-- 페이지 번호 출력하기 -->
     <!-- ********************************************************* -->
     <div class="pageNo">
-    
-        <%
-        /*
-            //-----------------------------------------------------
-            // 만약 검색 결과물이 0보다 크면 즉, 검색 결과물이 있으면
-            //-----------------------------------------------------
-            if( getBoardListCount>0 ){
 
-                // 페이지번호 처음으로, 마지막으로 고정시켜서 이동안하게 하기
-
-                // -----------------------------------------------------
-                // 선택한 페이지 번호가 1보다 크면 [처음], [이전] 글씨 보이기. 
-                // 단, 클릭하면 함수 호출하도록 이벤트 걸기.    
-                // -----------------------------------------------------
-                if( selectPageNo > 1 ){
-                    
-                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );  
-
-                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>&nbsp;[[이전]]&nbsp;</span> " );
-                
-                }
-                // -----------------------------------------------------
-                // 선택한 페이지 번호가 1 이면 [처음], [이전] 글씨 보이기.
-                // 단, 클릭하면 함수 호출하는 이벤트 걸지 말기.
-                // -----------------------------------------------------
-                else{
-                    
-                    out.print( "<span>[[처음으로]]&nbsp;</span>" );  
-
-                    out.print( "<span>&nbsp;[[이전]]&nbsp;</span> " );
-                
-                }
-
-                // -----------------------------------------------------
-                // 선택한 페이지 번호에 맞는 페이지 번호들을 출력하기
-                // -----------------------------------------------------
-                for( int i = min_pageNo; i<=max_pageNo; i++ ){
-
-                    // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하면 그냥 번호만 표현하기    
-                    if( i==selectPageNo ){
-
-                        out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
-                    
-                    }
-                    // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하지 않으면 클리하면 함수 호출하도록 클릭 이벤트 걸기    
-                    else{
-
-                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
-
-                    }
-                }
-                // -----------------------------------------------------
-                // 선택한 페이지 번호가 마지막 페이지 번호보다 작으면 [다음], [마지막] 문자 표현하기
-                // 단, 클릭하면 함수 호출하도록 클릭 이벤트 걸기.   
-                // -----------------------------------------------------
-                if( selectPageNo < last_pageNo ){
-                        
-                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>&nbsp;[[다음]]&nbsp;</span> " );
-                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
-                
-                }
-
-                // -----------------------------------------------------
-                // 선택한 페이지 번호가 마지막 페이지 번호보다 같거나 크면 [다음], [마지막] 문자만 표현하기
-                // 단, 클릭하면 함수 호출하는 이벤트는 걸지 않기.     
-                // -----------------------------------------------------
-                else{
-                    
-                    out.print( "<span>&nbsp;[[다음]]&nbsp;</span>" );  
-
-                    out.print( "<span>&nbsp;[[마지막으로]]</span> " );
-                
-                }
-
-            }
-        */
-        %>
-
+        <!-- ********************************************************* -->  
+        <%-- 
+            ***************************************************************
+            JSTL 이란 커스텀 태그 중에 C코어 태그 중에 c:if 조건문을 사용하여
+            만약에 게시판 검색 개수가 0보다 크면
+            ***************************************************************
+            C코어 태그 중에 if 조건문 형식
+            --------------------------------------------
+            <c:if test="${EL조건식}">
+            
+            </c:if>
+            --------------------------------------------
+        --%>
+        <!-- ********************************************************* -->
         <c:if test="${requestScope.getBoardListCount>0}">
             
             <c:if test="${requestScope.selectPageNo>1}">
@@ -455,14 +390,38 @@
                 <span>&nbsp;[[이전]]&nbsp;</span>
             </c:if>
             
-            
 
+
+            <%-- 
+            ***************************************************************
+            JSTL 이란 커스텀 태그 중에 C코어 태그 중에 forEach 반복문을 사용하여
+            [최소 페이지번호] 부터 [최대 페이지 번호]를 표현하기   
+            ***************************************************************
+                --------------------------------------------
+                C코어 태그 중에 forEach 반복문을 형식1
+                --------------------------------------------
+                    <c:forEach var="반복문안에서사용할지역변수" begin="시작번호" end="끝번호" step="증감정수값">
+                        HTML 코딩  
+                    </c:forEach> 
+                --------------------------------------------
+                --------------------------------------------
+                C코어 태그 중에 forEach 반복문을 형식2
+                --------------------------------------------
+                    <c:forEach var="반복문안에서사용할지역번수" items="EL로표현되는ArrayList객체" varStatus="loopTagStatus객체저장변수명">
+                        HTML 코딩  
+                    </c:forEach> 
+                --------------------------------------------
+            --%>
             <c:forEach var="i" begin="${requestScope.min_pageNo}" end="${requestScope.max_pageNo}" step="1">
-                
+                <!-- ======================================== -->
+                <!-- 만약 출력되는 페이지번호와 선택한 페이지 번호가 일치하면 그냥 번호만 표현하기 -->
+                <!-- ======================================== -->
                 <c:if test="${i==requestScope.selectPageNo}">
                     <span style='font-weight:bold; color:red;'>${i}</span>
                 </c:if>
-
+                <!-- ======================================== -->
+                <!-- 만약 출력되는 페이지번호와 선택한 페이지 번호가 일치하지 않으면 클릭하면 함수호출하도록 클릭이벤트 걸기 -->
+                <!-- ======================================== -->
                 <c:if test="${i!=requestScope.selectPageNo}">
                     <span style='cursor: pointer;' onclick='search_with_changePageNo("${i}");'>[${i}]</span>
                 </c:if>
@@ -470,6 +429,8 @@
             </c:forEach>
 
       
+
+
 
             <c:if test="${requestScope.selectPageNo<requestScope.last_pageNo}">
                 <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}+1);'>&nbsp;[[다음]]&nbsp;</span>
@@ -483,7 +444,6 @@
 
         </c:if> 
 
-     
     </div>
 
 
@@ -507,18 +467,24 @@
                 <c:set var="serialNo3" value="${requestScope.getBoardListCount-serialNo1+1}" />
 
 
-                
+
                 <c:forEach var="boardList1" varStatus="status" items="${boardList}" begin="0" end="${requestScope.boardList.size()}" step="1">
-                    
-                    <c:forEach var="j" begin="0" end="${boardList1.print_level}" step="1">
-                        <c:set var="xxx" value="${xxx1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
-                    </c:forEach>
-            
-                    <c:if test="${boardList1.print_level>0}">
-                        <c:set var="xxx1" value="${xxx}&#10551;" />                       
-                    </c:if> 
-                    
-                    <tr style='cursor: pointer;' onclick='goBoardContentForm("${boardList1.b_no}")'><td>${requestScope.getBoardListCount - ((requestScope.selectPageNo-1) * requestScope.rowCntPerPage + status.index) }</td><td>${xxx1}${boardList1.subject}</td><td>${boardList1.writer}</td><td>${boardList1.readcount}</td><td>${boardList1.reg_date}</td></tr>
+                                       
+                    <tr style='cursor: pointer;' onclick='goBoardContentForm("${boardList1.b_no}")'>
+                        <td>${requestScope.getBoardListCount - ((requestScope.selectPageNo-1) * requestScope.rowCntPerPage + status.index) }</td>
+                        <td>       
+                            <c:forEach var="j" begin="1" end="${boardList1.print_level}" step="1">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            </c:forEach>
+                            <c:if test="${boardList1.print_level>0}">
+                                &#10551;                       
+                            </c:if> 
+                            
+                            ${boardList1.subject}</td>
+                        <td>${boardList1.writer}</td>
+                        <td>${boardList1.readcount}</td>
+                        <td>${boardList1.reg_date}</td>
+                    </tr>
                     <!--역순번호===> 전체 레코드 수 - ( (현재 페이지 번호 - 1) * 한 페이지당 보여지는 레코드 수 + 현재 게시물 출력 순서 ) -->
 
                 </c:forEach>
