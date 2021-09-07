@@ -467,7 +467,7 @@
 
     <div class="searchResult">
 
-        <table border="1" class="tbcss0" style="border-collapse:collapse" cellpadding=5>
+        <table border="1" class="tbcss0" style="border-collapse:collapse" cellpadding="4">
             <tr bgcolor="gray">
                 <th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
 
