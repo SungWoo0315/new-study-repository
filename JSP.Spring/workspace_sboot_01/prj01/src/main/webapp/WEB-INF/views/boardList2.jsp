@@ -483,11 +483,14 @@
         
                         <!-- board.RNUM 을 사용한 역순번호 -->    
                         ${getBoardListCount-board.RNUM+1}   
-                        +
-                        ${board.RNUM}
+
 
                         <!-- 정순번호 -->
                         <%-- ${selectPageNo * rowCntPerPage - rowCntPerPage +1 +loopTagStatus.index} --%>
+                        
+                        <!-- board.RNUM 을 사용한 정순번호 -->    
+                        <%-- ${board.RNUM} --%>
+
 
                     </td>
 
