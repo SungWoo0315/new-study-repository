@@ -344,7 +344,7 @@ public class BoardController {
 
     ){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("boardRegProc.jsp");
+        mav.setViewName("boardRegProc2.jsp");
 
         try{
 
@@ -551,7 +551,7 @@ public class BoardController {
         // [ModelAndView 객체] 리턴하기
         // ***************************************
         ModelAndView mav = new ModelAndView( );
-        mav.setViewName("boardUpDelProc.jsp");
+        mav.setViewName("boardUpDelProc2.jsp");
 
         // **********************************************
         // 만약 게시판 삭제 모드이면
