@@ -506,8 +506,8 @@
 
                 <c:set var="serialNo3" value="${requestScope.getBoardListCount-serialNo1+1}" />
 
-              
-               
+
+                
                 <c:forEach var="boardList1" varStatus="status" items="${boardList}" begin="0" end="${requestScope.boardList.size()}" step="1">
                     
                     <c:forEach var="j" begin="0" end="${boardList1.print_level}" step="1">
