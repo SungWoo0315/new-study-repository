@@ -487,7 +487,7 @@ public class BoardController {
         // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
         //*******************************************
         ModelAndView mav = new ModelAndView( );
-        mav.setViewName("boardContentForm.jsp");
+        mav.setViewName("boardContentForm2.jsp");
         mav.addObject("boardDTO", boardDTO);
 
         //*******************************************
