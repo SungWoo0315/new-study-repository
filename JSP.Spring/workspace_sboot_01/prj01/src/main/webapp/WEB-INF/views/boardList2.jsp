@@ -479,10 +479,12 @@
                         <!-- 보기 편하게 하기 위해서 requestScope. 은 생략 하였다. -->
         
                         <!-- 역순번호 -->
-                        ${getBoardListCount - (selectPageNo * rowCntPerPage - rowCntPerPage +1) +1 -loopTagStatus.index}
+                        <%-- ${getBoardListCount - (selectPageNo * rowCntPerPage - rowCntPerPage +1) +1 -loopTagStatus.index} --%>
         
-                        <!-- board.RNUM 을 사용한 역순번호 -->
-                        <%-- ${getBoardListCount - (selectPageNo * rowCntPerPage - rowCntPerPage +1) +1 -(board.RNUM-1)} --%>
+                        <!-- board.RNUM 을 사용한 역순번호 -->    
+                        ${getBoardListCount-board.RNUM+1}   
+                        +
+                        ${board.RNUM}
 
                         <!-- 정순번호 -->
                         <%-- ${selectPageNo * rowCntPerPage - rowCntPerPage +1 +loopTagStatus.index} --%>
