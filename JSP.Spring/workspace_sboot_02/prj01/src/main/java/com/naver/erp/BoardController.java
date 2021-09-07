@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;  //  @Autowired 어노테이션 사용으로 import
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,6 +40,50 @@ public class BoardController {
         // 단, @Autowired( required=false ) 로 선언하여 [인터페이스]를 구현할 [클래스]가 0개 이어도 에러없이 null 이 저장된다.    
     @Autowired
     private BoardDAO boardDAO;
+
+/*
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // @RequestMapping 이 붙은 메소드가 호출되기 전에 호출되는 메소드 선언  
+    // @ModelAttribute 가 붙은 메소드는 @RequestMapping 이 붙은 메소드가 호출되기 전에 호출되는 메소드이다.    
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @ModelAttribute
+    public void checkLogin(
+        HttpSession session
+    ) throws Exception{
+        // ***************************************
+        // 로그인 성공 여부 확인하기
+        // ***************************************
+        // HttpSession 객체 저장된 로그인 아이디를 꺼내기.  
+        String login_id = (String)session.getAttribute("login_id");
+        // 만약 login_id 변수 안에 null 이 저장되어 있으면  
+        // 즉, 만약 로그인에 성공한 적이 없으면  
+        if( login_id==null ){
+            // 코딩으로 예외를 발생시키기
+            // 예외를 관리하는 Exception 객체를 생성함으로써 예외가 발생 했음을 자바에게 알린다.  
+            throw new Exception();
+
+        }
+    }
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 현재 이 [컨트롤러 클래스] 내의 메소드에서
+    // 예외 발생하면 호출되는 메소드 선언하기
+    // @ExceptionHandler(Exception.class)를 붙여야 한다.  
+    // @ExceptionHandler(Exception.class) 어노테이션이 붙은 메소드는
+    // 리턴되는 문자열은 호출 JSP 페이지명이다.  
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+
+    @ExceptionHandler(Exception.class)
+    public String handleException(){
+
+        return "logout.jsp";
+
+    }
+*/
+
+
+
+    
     
     
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -51,10 +98,33 @@ public class BoardController {
         // 파라미터 값을 저장하고 있는 BoardSearchDTO 객체를 받아오는 매개변수 선언
         // --------------------------------------------------
 		BoardSearchDTO boardSearchDTO
+
+        , HttpSession session
                     
     ){
         System.out.println("컨트롤러 /boardList.do 진행... ");
    
+        
+
+
+    /*
+        // ***************************************
+        // 로그인 성공 여부 확인하기
+        // ***************************************
+        // HttpSession 객체 저장된 로그인 아이디를 꺼내기.  
+        String login_id = (String)session.getAttribute("login_id");
+        // 만약 login_id 변수 안에 null 이 저장되어 있으면  
+        // 즉, 만약 로그인에 성공한 적이 없으면  
+        if( login_id==null ){
+            
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("logout.jsp");
+            return mav;
+
+        }
+    */
+
+
 
 
         // ***************************************

@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;      //  @Autowired 어노테이션 사용으로 import
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 //---------------------------------------------------------------
@@ -52,7 +55,10 @@ public class LoginController {
     // 가상주소 /loginForm.do 로 접근하면 호출되는 메소드 선언
     // ********************************************
 	@RequestMapping( value = "/loginForm.do")
-	public ModelAndView loginForm() {
+	public ModelAndView loginForm(
+			
+	){
+		
 		
         System.out.println( "=================================");  
 		System.out.print("정상 작동, 로그인 화면 접속 성공..!\r");  
@@ -66,7 +72,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("loginForm.jsp");
 		return mav;
-	}
+    }
 
 
 
@@ -76,9 +82,25 @@ public class LoginController {
     // ********************************************
     @RequestMapping( value="/loginProc.do")
     public ModelAndView loginProc( 
+        // ---------------------------------------
+        // "login_id" 라는 파라미터명에 해당하는 파라미터값을 꺼내서 매개변수 login_id 에 저장하고 들어온다.
+        // ---------------------------------------
+        @RequestParam( value="login_id" ) String login_id 
+        // ---------------------------------------
+        // "pwd" 라는 파라미터명에 해당하는 파라미터값을 꺼내서 매개변수 pwd 에 저장하고 들어온다.
+        // ---------------------------------------
+        ,@RequestParam( value="pwd" ) String pwd
+
+        // ---------------------------------------
+        // HttpSession 객체의 메위주를 저장하는 매개변수 session 선언하기
+        // ---------------------------------------
+        , HttpSession session
+
+
+
         // 클라이언트가 보낸 요청 메시지를 관리하는 HttpServletRequest 객체가 매개변수로 들어온다.
         // HttpServletRequest 객체의 메소드를 이용하면 파라미터값을 얻을 수 있다.
-        HttpServletRequest request
+        ,HttpServletRequest request
     ){
 
         // ------------------------------------------------------
@@ -97,8 +119,8 @@ public class LoginController {
         // 클라이언트가 보낸 요청 메시지 안의 "pwd" 라는 파라미터명의 파라미터값 꺼내기
         // 클라이언트가 보낸 암호를 꺼내라
         // --------------------------------------------------
-        String login_id = request.getParameter("login_id");
-        String pwd = request.getParameter("pwd");
+        // String login_id = request.getParameter("login_id");
+        // String pwd = request.getParameter("pwd");
 
 
         // ------------------------------------------------------
@@ -128,6 +150,24 @@ public class LoginController {
 
         int login_idCnt = loginDAO.getLogin_idCnt(map);
         
+        // --------------------------------------------------
+        // 만약 login_idCnt q변수 안의 데이터가 1이면
+        // 즉, 만약 입력한 아이디 암호가 DB에 존재하면
+        // 즉, 만약 로그인이 성공했으면
+        // --------------------------------------------------
+        if( login_idCnt==1 ){
+            
+            // HttpSession 객체에 로그인 아이디 저장하기  
+            // HttpSession 객체에 로그인 아이디를 저장하면 재 접속 했을 때 다시 꺼내 볼 수 있다.  
+            // <참고> HttpSession 객체는 접속한 이우에도 제거되지 않고, 지정된 기간동안 살아 있는 객체이다.  
+            // <참고> HttpServlet Request,  HttpServlet Response 객체는 접속할때 생성되고, 응답이후 삭제되는 객체이다.
+            session.setAttribute( "login_id", login_id );
+
+        }
+
+
+
+
         // ------------------------------------------------------
         // 진행과정 콘솔 확인용.  
 		// ------------------------------------------------------
@@ -169,5 +209,48 @@ public class LoginController {
         return mav;
 
     }
+    
+    // ********************************************
+	 // 가상주소 /logout.do 로 접근하면 호출되는 메소드 선언
+	 // ********************************************
+	 @RequestMapping( value="/logout.do")
+	 public ModelAndView logout(
+	     HttpSession session
+	 ){
+	     // ----------------------------------------------------------
+	     // HttpSession 객체에 "login_id" 라는 키값으로 저장된 데이터 삭제하기
+	     // HttpSession 객체에 로그인 성공 후 저장된 아이디값을 지우기  
+	     // HttpSession 객체에 저장된, 즉, 로그인 정보를 삭제하기
+	     // ----------------------------------------------------------
+	     session.removeAttribute("login_id");
+	     // ----------------------------------------------------------
+	     // [ModelAndView 객체] 생성하기.
+	     // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+	     // [ModelAndView 객체] 리턴하기.
+	     // ----------------------------------------------------------
+	     ModelAndView mav = new ModelAndView();
+	     mav.setViewName("logout.jsp");
+	     return mav;
+	 } 
+	 // ********************************************
+	 // 가상주소 /login_alert.do 로 접근하면 호출되는 메소드 선언
+	 // ********************************************
+	 @RequestMapping( value="/login_alert.do")
+	 public ModelAndView login_alert(){
+
+        // ----------------------------------------------------------
+        // [ModelAndView 객체] 생성하기.
+        // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+        // [ModelAndView 객체] 리턴하기.
+        // ----------------------------------------------------------
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("login_alert.jsp");
+        System.out.println("/login_alert.do 호출");
+        return mav;
+	
+	 } 
+    
+    
+	
 	
 }

@@ -283,8 +283,18 @@
 	
     <center>
 
+
+	<!-- *********************************************************** -->
+	<!-- EL(Expression Language) 을 사용하여 HttpServletRequest 객체에  -->
+	<!-- setAttribute 메소드로 저장된 키값 "getBoardListCount" 로 저장된 데이터를 꺼내서 표현하기 -->
+	
+	<!-- <%-- ${requestScope.키값} --%> --> 
+	
+	<!-- <참고> EL 은 JSP 페이지에서 사용가능한 언어이다. -->
+	<!--        즉, EL 은 JSP 기술의 한 종류이다. -->
+	<!-- *********************************************************** -->
     <div class="boardListAllCnt" style="height: 10px;">
-        검색 개수 : <%=getBoardListCount%>개
+        검색 개수 : ${requestScope.getBoardListCount}개
     </div> 
     
     <br>
@@ -338,6 +348,7 @@
             }
         */
 
+        /* EL 을 위한 주석처리
         // 한페이지씩 넘어가는코드.  처음으로 마지막으로 고정되어 보이게 하는 if 문.  
             if( selectPageNo > 1 ){
         
@@ -379,9 +390,53 @@
                 out.print( "<span>&nbsp;[[마지막으로]]</span> " );
             
             }
-
+            */
         %>
   
+        <c:if test="${requestScope.getBoardListCount>0}">
+            
+            
+            <c:if test="${requestScope.selectPageNo>1}">
+                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(1);'>[[처음으로]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}-1);'>&nbsp;[[이전]]&nbsp;</span>
+            </c:if>
+            
+            <c:if test="${requestScope.selectPageNo<=1}">
+                <span>[[처음으로]]&nbsp;</span>
+                <span>&nbsp;[[이전]]&nbsp;</span>
+            </c:if>
+            
+            
+
+            <c:forEach var="a" begin="${requestScope.min_pageNo}" end="${requestScope.max_pageNo}">
+                
+                <c:if test="${a==requestScope.selectPageNo}">
+                    <span style='font-weight:bold; color:red;'>${a}</span>
+                </c:if>
+
+
+                <c:if test="${a!=requestScope.selectPageNo}">
+                    <span style='cursor: pointer;' onclick='search_with_changePageNo("${a}");'>[${a}]</span>
+                </c:if>
+
+            </c:forEach>
+
+
+
+            <c:if test="${requestScope.selectPageNo<requestScope.last_pageNo}">
+                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}+1);'>&nbsp;[[다음]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(${requestScope.last_pageNo});'>&nbsp;[[마지막으로]]</span>
+            </c:if>
+
+            <c:if test="${requestScope.selectPageNo>=requestScope.last_pageNo}">
+                <span>&nbsp;[[다음]]&nbsp;</span>
+                <span>&nbsp;[[마지막으로]]</span>
+            </c:if>
+
+
+        </c:if> 
+
+
     </div>
     
     <br>
