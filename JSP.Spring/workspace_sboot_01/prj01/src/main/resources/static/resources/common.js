@@ -1,6 +1,6 @@
 
 
-function setTrBgcolor( tableClassV, headBgcolor, oddTrBgcolor, evenTrBgcolor ){
+function setTrBgcolor( tableClassV, headBgcolor, oddTrBgcolor, evenTrBgcolor, mouseOverBgcolor ){
 
 	// alert("공용함수 테스트");
 	// return;
@@ -17,11 +17,40 @@ function setTrBgcolor( tableClassV, headBgcolor, oddTrBgcolor, evenTrBgcolor ){
 		firstTrObj.attr("bgColor", headBgcolor);
 		oddTrObj.attr("bgColor", oddTrBgcolor);
 		evenTrObj.attr("bgColor", evenTrBgcolor);
+
+
+
+		// 글자색 조절 하는 메소드 css
+		// 글자를 끌어안는 td, th 태그를 지칭해야 한다.  
+		oddTrObj.find("td,th").css("color", "#800080");	
+		evenTrObj.find("td,th").css("color", "#FF8200");
+
+
+
+
+		oddTrObj.hover(
+			function(){
+				$(this).attr("bgColor",mouseOverBgcolor);
+			}
+			,function(){
+				$(this).attr("bgColor",oddTrBgcolor);
+			}
+		);
+		evenTrObj.hover(
+			function(){
+				$(this).attr("bgColor",mouseOverBgcolor);
+			}
+			,function(){
+				$(this).attr("bgColor",evenTrBgcolor);
+			}
+		);
+
 	}
 	catch(e){
 		alert("setTrBgcolor 함수 호출 시 예외발생!" + e.message);
 	}
 }
+
 
 
 
