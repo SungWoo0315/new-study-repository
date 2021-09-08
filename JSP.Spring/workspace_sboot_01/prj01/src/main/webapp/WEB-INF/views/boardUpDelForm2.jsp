@@ -263,7 +263,7 @@
             <input type="hidden" name="b_no" value="${requestScope.boardDTO.b_no}">
             <input type="hidden" name="upDel" value="">
         
-            <table border="1" class="upDeltable" style="border-collapse:collapse" cellpadding=5>
+            <table class="tbcss2" border="1" class="upDeltable" style="border-collapse:collapse" cellpadding=5>
                 <caption>게시판 수정/삭제</caption>
                 
                 <tr>

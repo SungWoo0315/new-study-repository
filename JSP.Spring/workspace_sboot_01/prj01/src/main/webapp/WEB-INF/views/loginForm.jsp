@@ -10,15 +10,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<!-- *********************************************************** -->
-<!-- JSP 기술의 한 종류인 [Include Directive]를 이용하여 -->
-<!-- common.jsp 파일 내의 소스를 삽입하기 -->
-<!-- *********************************************************** -->
-<%@include file="common.jsp"%>  
-
+<!-- --------------------------------------------------------------------- -->
+<!-- JQuery 라이브러리 수입하기 -->
+<!-- --------------------------------------------------------------------- -->
 <script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="/resources/common_func.js"></script>
 <script src="/resources/common_data.js"></script>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- CSS 파일 수입하기 -->
+<!-- --------------------------------------------------------------------- -->
+<link href="/resources/common.css" rel="stylesheet" type="text/css">
+
+
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -237,7 +241,7 @@
     <!-- *************************************************** -->
     <form name="loginForm" method="post">
         
-        <table border=1 style="border-collapse:collapse" cellpadding=5 >
+        <table class="tbcss2" border=1 style="border-collapse:collapse" cellpadding=5 >
             <caption><b>[로그인]</b></caption>
             <tr>
                 <th bgcolor="lightgray" align="center">아이디</th>

@@ -17,9 +17,9 @@ body,form,td,th,pre {
 } 
 
 /*MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM*/ 
-/* input 태그 설정. */ 
+/* input 태그, select 태그 설정. */ 
 /*MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM*/ 
-input { 
+input, select { 
 	font-size: 9pt; 
 	color:black; 
 	font-family: 굴림,tahoma,돋움,verdana; 
@@ -29,6 +29,14 @@ a:link {text-decoration:none;color:#696969}
 a:hover{text-decoration:none;color:#66ccff} 
 a:visited {text-decoration:none;color:#330066} 
 
+/*MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM*/ 
+/* textarea 태그 설정. */ 
+/*MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM*/ 
+textarea{ 
+	font-size: 9pt; 
+	color:black; 
+	font-family: 굴림,tahoma,돋움,verdana; 
+}
 
 
 

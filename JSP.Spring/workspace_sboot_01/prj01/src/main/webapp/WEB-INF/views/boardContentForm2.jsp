@@ -101,7 +101,7 @@
         <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
         <!-- 아래는 requestScope. 을 생략한 키값 EL 을 작성함 -->
-        <table border="1" style="border-collapse:collapse" cellpadding=5>
+        <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding=5>
             <tr align="center">
                 <th bgcolor="lightgray">글번호</th>
                 <td>${boardDTO.b_no}</td>
