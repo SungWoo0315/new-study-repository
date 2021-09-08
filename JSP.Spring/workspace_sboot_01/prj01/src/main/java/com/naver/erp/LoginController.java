@@ -3,6 +3,7 @@ package com.naver.erp;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -97,6 +98,13 @@ public class LoginController {
         ,@RequestParam( value="pwd" ) String pwd
 
         // ---------------------------------------
+        // "is_login" 라는 파라미터명에 해당하는 파라미터값을 꺼내서 매개변수 is_login 에 저장하고 들어온다.
+        // ---------------------------------------
+        ,@RequestParam( value="is_login", required = false ) String is_login
+
+
+
+        // ---------------------------------------
         // HttpSession 객체의 메위주를 저장하는 매개변수 session 선언하기
         // ---------------------------------------
         ,HttpSession session
@@ -131,6 +139,18 @@ public class LoginController {
             // <참고> HttpSession 객체는 접속한 이우에도 제거되지 않고, 지정된 기간동안 살아 있는 객체이다.  
             // <참고> HttpServlet Request,  HttpServlet Response 객체는 접속할때 생성되고, 응답이후 삭제되는 객체이다.
             session.setAttribute( "login_id", login_id );
+            
+            if(is_login==null){
+
+            } 
+            // -------------------------------------------
+            // 매개변수 is_login 에 "yes" 가 저장되어 있으면(=[아이디, 암호 자동입력]의사 있을 경우)
+            // -------------------------------------------
+            else{
+                // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["login_id"-"입력아이디"]로 하기
+                Cookie cookie1 = new Cookie("login_id",login_id);
+
+            }
 
         }
 

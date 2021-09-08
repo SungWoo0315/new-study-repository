@@ -49,8 +49,8 @@
 
 
             // 테스트용 자동입력
-            $('.login_id').val("abc");
-            $('.pwd').val("123");
+            // $('.login_id').val("abc");
+            // $('.pwd').val("123");
 
         });
         // ***************************************************
@@ -253,12 +253,15 @@
             </tr>
         </table>
         <table cellpadding=3>
-            <tr>
-                <td align=center><input type="button" value="로그인" class="login">
+            <tr align=center>
+                <td>
+                    <input type="button" value="로그인" class="login">
+                    <input type="checkbox" name="is_login" value="yes">아이디/암호 기억
+
             </tr>
             <tr align=center>
                 <td>
-                    <!--<input type="checkbox" name="is_login" value="y"> 아이디,암호 기억-->
+                    <!-- <input type="checkbox" name="is_login" value="y"> 아이디,암호 기억 -->
                     <span style="cursor:pointer" onClick="location.replace('/memRegForm.do')">[회원가입]</span>
             </tr>
         </table>
