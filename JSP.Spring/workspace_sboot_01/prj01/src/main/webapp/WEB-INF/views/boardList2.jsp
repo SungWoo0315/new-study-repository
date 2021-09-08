@@ -33,7 +33,14 @@
 
     <script>
 
+        // *****************************************
+        // body 태그 안의 내용을 모두 읽어들인 이후 실행할 자스 코드 설정하기  
+        // *****************************************
         $(document).ready(function(){
+            setTrBgcolor( tableClassV, headBgcolor, oddTrBgcolor, evenTrBgcolor );
+
+
+
 
         });
 
