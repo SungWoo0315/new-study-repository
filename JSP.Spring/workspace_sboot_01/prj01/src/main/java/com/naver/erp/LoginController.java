@@ -5,8 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Response;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -103,11 +105,14 @@ public class LoginController {
         ,@RequestParam( value="is_login", required = false ) String is_login
 
 
-
         // ---------------------------------------
         // HttpSession 객체의 메위주를 저장하는 매개변수 session 선언하기
         // ---------------------------------------
         ,HttpSession session
+        // ---------------------------------------
+        // [HttpServletResponse객체] 가 들어올 매개변수 선언
+        // ---------------------------------------
+        ,HttpServletResponse response
     ){
         // --------------------------------------------------
         // HashMap 객체 생성하기
@@ -139,16 +144,40 @@ public class LoginController {
             // <참고> HttpSession 객체는 접속한 이우에도 제거되지 않고, 지정된 기간동안 살아 있는 객체이다.  
             // <참고> HttpServlet Request,  HttpServlet Response 객체는 접속할때 생성되고, 응답이후 삭제되는 객체이다.
             session.setAttribute( "login_id", login_id );
-            
+
+            // -------------------------------------------
+            // 매개변수 is_login 에 null 이 저장되어 있으면 (+ [아이디,암호 자동입력]의사 없을 경우 )
+            // -------------------------------------------
             if(is_login==null){
+                // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["login_id"-null]로 하기
+                Cookie cookie1 = new Cookie("login_id",null);
+                // Cookie 객체 저장된 쿠키의 수명은 0으로 하기
+                cookie1.setMaxAge(0);  
+
+
+
 
             } 
             // -------------------------------------------
             // 매개변수 is_login 에 "yes" 가 저장되어 있으면(=[아이디, 암호 자동입력]의사 있을 경우)
             // -------------------------------------------
             else{
+                // -------------------------------------------
+                // 클라이언트가 보낸 아이디, 암호를 응답메시지에 쿠키명-쿠키값으로 저장하기. 
+                // -------------------------------------------
                 // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["login_id"-"입력아이디"]로 하기
                 Cookie cookie1 = new Cookie("login_id",login_id);
+                // Cookie 객체에 저장된 쿠키의 수명은 60*60*24 로 하기.(하루)
+                cookie1.setMaxAge(60*60*24);  
+
+                // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["pwd"-"입력암호"]로 하기
+                Cookie cookie2 = new Cookie("pwd",pwd);
+                // Cookie 객체에 저장된 쿠키의 수명은 60*60*24 로 하기.(하루)
+                cookie2.setMaxAge(60*60*24);  
+
+                // Cookie 객체가 소유한 쿠키를 응답메시지에 저장하기.  
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
 
             }
 
