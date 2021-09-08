@@ -245,18 +245,18 @@
             <caption><b>[로그인]</b></caption>
             <tr>
                 <th bgcolor="lightgray" align="center">아이디</th>
-                <td><input type="text" name="login_id" class="login_id" size="20"></td>
+                <td><input type="text" name="login_id" class="login_id" size="20" value="${cookie.login_id.value}"></td>
             </tr>	
             <tr>
                 <th bgcolor="lightgray" align="center">암호</th>
-                <td><input type="password" name="pwd" class="pwd" size="20"></td>
+                <td><input type="password" name="pwd" class="pwd" size="20" value="${cookie.pwd.value}"></td>
             </tr>
         </table>
         <table cellpadding=3>
             <tr align=center>
                 <td>
                     <input type="button" value="로그인" class="login">
-                    <input type="checkbox" name="is_login" value="yes">아이디/암호 기억
+                    <input type="checkbox" name="is_login" value="yes" ${empty cookie.login_id.value?'':'checked'}>아이디/암호 기억
 
             </tr>
             <tr align=center>
@@ -276,6 +276,9 @@
     <a href="http://localhost:8081/boardContentForm.do/?b_no=1" style="cursor:pointer">localhost:8081/boardContentForm.do</a> <br>
     <a href="http://localhost:8081/boardUpDelForm.do/?b_no=1" style="cursor:pointer">localhost:8081/boardUpDelForm.do</a> <br>
     
+    <hr>
+
+    <span style="cursor: pointer;" onclick="location.replace('/boardList.do')">localhost:8081/boardList.do</span><br>
 </body>
 
 </html>

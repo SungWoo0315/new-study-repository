@@ -153,9 +153,16 @@ public class LoginController {
                 Cookie cookie1 = new Cookie("login_id",null);
                 // Cookie 객체 저장된 쿠키의 수명은 0으로 하기
                 cookie1.setMaxAge(0);  
+                // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["pwd"-null]로 하기
+                Cookie cookie2 = new Cookie("pwd",null);
+                // Cookie 객체 저장된 쿠키의 수명은 0으로 하기
+                cookie2.setMaxAge(0); 
 
-
-
+                // Cookie 객체가 소유한 쿠키를 응답메시지에 저장하기.  
+                // 결국 Cookie 객체가 소유한 쿠키명-쿠키값이 응답메시지에 저장되는 셈이다.
+                // 응답메시지에 저장된 쿠키는 클라이언튼쪽으로 전송되어 클라이언트쪽에 저장된다.  
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
 
             } 
             // -------------------------------------------
