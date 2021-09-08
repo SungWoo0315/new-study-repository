@@ -37,12 +37,13 @@
         // body 태그 안의 내용을 모두 읽어들인 이후 실행할 자스 코드 설정하기  
         // *****************************************
         $(document).ready(function(){
-            setTrBgcolor( tableClassV, headBgcolor, oddTrBgcolor, evenTrBgcolor );
 
-
+            changeBgColor(); //common.jsp 파일에서 수입하는 함수.
 
 
         });
+
+
 
 
         // *****************************************
@@ -217,6 +218,7 @@
                     $(".pageNo").html(pageNo);
 
 
+                    changeBgColor();
                 
                 }
                 // ----------------------------------------------------------
@@ -481,7 +483,7 @@
             <!-- 수업시간에 만든 커스텀태그 및 EL searchResult -->
             <c:forEach var="board" items="${requestScope.boardList}" varStatus="loopTagStatus">
 
-                <tr bgcolor="${loopTagStatus.index%2==0?'white':'lightgray'}" 
+                <tr <%--bgcolor="${loopTagStatus.index%2==0?'white':'lightgray'}"--%> 
                     style='cursor: pointer;' 
                     onclick='goBoardContentForm("${board.b_no}")'>
 
