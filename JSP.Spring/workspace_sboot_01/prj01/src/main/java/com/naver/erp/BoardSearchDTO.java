@@ -13,7 +13,7 @@ public class BoardSearchDTO {
 	private String keyword2;
 
 
-	private String or_and_option="or";
+	private String orAnd;
 
 	private int selectPageNo=1;
 	private int rowCntPerPage=20;
@@ -22,15 +22,31 @@ public class BoardSearchDTO {
 	private List<String> day;
 	private String sort;
 	
+	
+	
+	
 
 	// -------------------------------------------------
 	// getter, setter 메소드 선언
 	// -------------------------------------------------
+	
 	public String getKeyword1() {
 		return keyword1;
 	}
 	public void setKeyword1(String keyword1) {
 		this.keyword1 = keyword1;
+	}
+	public String getKeyword2() {
+		return keyword2;
+	}
+	public void setKeyword2(String keyword2) {
+		this.keyword2 = keyword2;
+	}
+	public String getOrAnd() {
+		return orAnd;
+	}
+	public void setOrAnd(String orAnd) {
+		this.orAnd = orAnd;
 	}
 	public int getSelectPageNo() {
 		return selectPageNo;
@@ -44,42 +60,18 @@ public class BoardSearchDTO {
 	public void setRowCntPerPage(int rowCntPerPage) {
 		this.rowCntPerPage = rowCntPerPage;
 	}
-
-	
 	public List<String> getDay() {
 		return day;
 	}
 	public void setDay(List<String> day) {
 		this.day = day;
 	}
-	
-	
-	
-	public String getKeyword2() {
-		return keyword2;
-	}
-	public void setKeyword2(String keyword2) {
-		this.keyword2 = keyword2;
-	}
-	
-	
-	public String getOr_and_option() {
-		return or_and_option;
-	}
-	public void setOr_and_option(String or_and_option) {
-		this.or_and_option = or_and_option;
-	}
-	
-	
-	
-	
 	public String getSort() {
 		return sort;
 	}
 	public void setSort(String sort) {
 		this.sort = sort;
 	}
-
 	
 
 

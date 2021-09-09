@@ -49,7 +49,7 @@
 <script>
 $(document).ready(function(){
     $("body").prepend(    
-        "<center><div><span style='cursor:pointer' "
+        "<center><div><span style='cursor:pointer font-weight:bold; color:#9400D3;' "
            + "onclick='location.replace(\"/logout.do\");'>[로그아웃]</span></div></center>"
     );
 });

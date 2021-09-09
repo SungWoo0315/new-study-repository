@@ -238,7 +238,7 @@ public class BoardController {
         System.out.println("컨트롤러 /boardList.do 들어온 키워드2 값 확인 => " + boardSearchDTO.getKeyword2());
 
 
-        System.out.println("컨트롤러 /boardList.do 들어온 셀렉트 값 확인 => " + boardSearchDTO.getOr_and_option());
+        System.out.println("컨트롤러 /boardList.do 들어온 셀렉트 값 확인 => " + boardSearchDTO.getOrAnd());
         
 
         System.out.println("컨트롤러 /boardList.do 진행...완료... ");
