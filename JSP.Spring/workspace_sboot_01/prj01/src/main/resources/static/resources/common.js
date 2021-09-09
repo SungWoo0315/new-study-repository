@@ -23,7 +23,7 @@ function setTrBgcolor( tableClassV, headBgcolor, oddTrBgcolor, evenTrBgcolor, mo
 		// 글자색 조절 하는 메소드 css
 		// 글자를 끌어안는 td, th 태그를 지칭해야 한다.  
 		oddTrObj.find("td,th").css("color", "#800080");	
-		evenTrObj.find("td,th").css("color", "#FF8200");
+		evenTrObj.find("td,th").css("color", "black");
 
 
 
