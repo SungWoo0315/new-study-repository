@@ -32,14 +32,15 @@
 
 
 
-
-
-
-
+        <!-- ============================================================== -->
+        <!-- 만약 BoardSearchDTO 객체의 속성변수 keyword1 에 문자열이 있거나 속성변수 keyword2 에 문자열 이 있으면, -->
+        <!-- ============================================================== -->
         <if test="keyword1!=null and keyword1.length()>0 or keyword2!=null and keyword2.length()>0">
             and(
         </if>  
-
+            <!-- ============================================================== -->
+            <!-- 만약 BoardSearchDTO 객체의 속성변수 keyword1 에 문자열이 있으면 -->
+            <!-- ============================================================== -->
             <if test="keyword1!=null and keyword1.length()>0">
                 (       
                     upper(subject) like upper('%${keyword1}%')
@@ -52,12 +53,17 @@
                     or to_char(reg_date, 'YYYY,MM,DD') like '%${keyword1}%'
                 )
             </if>  
-
+        <!-- ============================================================== -->
+        <!-- 만약 BoardSearchDTO 객체의 속성변수 keyword1 에 문자열이 있고 속성변수 keyword2 에 문자열 이 있으면, -->
+        <!-- BoardSearchDTO 객체의 속성변수 orAnd 에 문자열을 싱글쿼트 안붙이고 그대로 표현하기. -->
+        <!-- ============================================================== -->
         <if test="keyword1!=null and keyword1.length()>0 and keyword2!=null and keyword2.length()>0">
             ${orAnd}
         </if>  
 
-
+            <!-- ============================================================== -->
+            <!-- 만약 BoardSearchDTO 객체의 속성변수 keyword2 에 문자열이 있으면 -->
+            <!-- ============================================================== -->
             <if test="keyword2!=null and keyword2.length()>0">
                 (
                     upper(subject) like upper('%${keyword2}%')
@@ -70,7 +76,9 @@
                     or to_char(reg_date, 'YYYY,MM,DD') like '%${keyword2}%'
                 )
             </if>  
-
+        <!-- ============================================================== -->
+        <!-- 만약 BoardSearchDTO 객체의 속성변수 keyword1 에 문자열이 있거나 속성변수 keyword2 에 문자열 이 있으면, -->
+        <!-- ============================================================== -->
         <if test="keyword1!=null and keyword1.length()>0 or keyword2!=null and keyword2.length()>0">
             )
         </if>  
