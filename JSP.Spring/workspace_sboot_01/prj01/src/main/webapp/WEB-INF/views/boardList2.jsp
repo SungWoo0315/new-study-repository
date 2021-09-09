@@ -38,11 +38,11 @@
         // *****************************************
         $(document).ready(function(){
 
-            changeBgColor(); //common.jsp 파일에서 수입하는 함수.
+            changeBgColor(); // common.jsp 파일에서 수입하는 함수.  
 
 
             // --------------------------------------------
-            reg_date_sort();
+            reg_date_sort(); // 헤더 정렬하는 함수.  
             // --------------------------------------------
 
 
@@ -50,33 +50,44 @@
 
         });
 
-
+        // *****************************************
+        // 헤더 중에 등록일 문자열에 클릭했을 때 일어나는 일 설정하기.  
+        // *****************************************
         function reg_date_sort(){
-
+            // class=reg_date 를 가진 태그에 마우스 대면 손모양 보이게 하기. 
             $(".reg_date").css("cursor", "pointer");
-
+            // class=reg_date 를 가진 태그에 클릭하면 hidden 태그에 [정렬 기준 문자열] 삽입하기.
             $(".reg_date").click(function(){
-
                 // alert("등록일 정렬 클릭 테스트 확인!");
-
+                
+                // 클릭한 태그를 관리하는 JQuery 객체 메위주 얻기
                 var obj = $(this); 
+                // 클릭한 태그가 안고 있는 문자열 얻기
                 var text = obj.text();  
+                // 문자열에서 공백 제거하고 다시 얻기  
                 text = $.trim(text); 
 
-
+                // 만약, 문자열에 ▲ 가 있으면,
                 if( text.indexOf("▲")>=0 ){
+                    // class=sort 를 가진 태그에 value 값으로 ""를 삽입하기  
                     $(".sort").val(""); // 쿼리 일부가 들어감.  
                 }
+                // 만약, 문자열에 ▼ 가 있으면,
                 else if( text.indexOf("▼")>=0 ){
+                    // class=sort 를 가진 태그에 value 값으로 "reg_date asc"를 삽입하기  
                     $(".sort").val("reg_date asc"); // 쿼리 일부가 들어감.  
                 }
-                else{
+                // 만약, 문자열에 ▼ 도 없고 ▲ 도 없으면,
+                else{  // else if(text.indexOf("▲")<0 && text.indexOf("▼")<0) // else if 로 표현한 같은 방식.
                     // alert("else 에 걸림.")
+                    // class=sort 를 가진 태그에 value 값으로 "reg_date desc"를 삽입하기  
                     $(".sort").val("reg_date desc"); // 쿼리 일부가 들어감.  
                     // obj.append("▼")
                 }
 
+                // search 함수 호출하기.
                 search();
+
             });
         }
 
@@ -255,17 +266,37 @@
                     $(".pageNo").html(pageNo);
 
                     
-                    
+                    // ----------------------------------------------------------
+                    // changeBgColor() 함수 호출로 짝수행, 홀수행, 헤더에 배경색 주기
+                    // ----------------------------------------------------------
                     changeBgColor();
-
+                    // ----------------------------------------------------------
+                    // reg_date_sort() 함수 호출로 등록일 클릭 했을 때 일 설정하기  
+                    // ----------------------------------------------------------
                     reg_date_sort();
+                    
+                    // ----------------------------------------------------------
+                    // class=sort 가진 태그의 현재 value 값 얻기  
+                    // ----------------------------------------------------------
                     var sort = $(".sort").val();
+                    // ----------------------------------------------------------
+                    // 만약에, class=sort 가진 태그의 value 값이 "reg_date asc" 면
+                    // class=reg_date 가진 태그의 내부의 마지막에 ▲ 추가하기  
+                    // ----------------------------------------------------------
                     if(sort=="reg_date asc"){
                         $(".reg_date").append("▲");
                     }
+                    // ----------------------------------------------------------
+                    // 만약에, class=sort 가진 태그의 value 값이 "reg_date desc" 면
+                    // class=reg_date 가진 태그의 내부의 마지막에 ▼ 추가하기  
+                    // ----------------------------------------------------------
                     else if(sort=="reg_date desc"){
                         $(".reg_date").append("▼");
                     }
+                    // ----------------------------------------------------------
+                    // 그 이외의 경우엔,
+                    // class=reg_date 가진 태그의 내부의 마지막에 "" 추가하기  
+                    // ----------------------------------------------------------
                     else{
                         $(".reg_date").append("");
                     }
@@ -356,6 +387,7 @@
                 <option value="and">and</option>
             </select>
 
+            <!-- 쌍키워드 -->
             <input type="text" name="keyword2" class="keyword2" >  
             
             <hr>
@@ -374,21 +406,7 @@
             <input type="hidden" name="sort" class="sort" value="">
               
             <!-- --------------------------------------------------- -->
-            <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
-            <!-- 페이징 처리 관련 데이터이다. -->
-            <!-- --------------------------------------------------- -->
-            <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20" selected>20</option>
-                <option value="25">25</option>
-                <option value="30">30</option>
-                <option value="100">100</option>
-            </select> 행보기
-
-            <hr>
-
-            <!-- --------------------------------------------------- -->
+            <div style="height: 3px;"></div> <!-- 공백 조절 -->
             <input type="button" value="검색" class="boardSearch" onclick="search();">&nbsp;
             <input type="button" value="모두검색" class="boardSearchAll" onclick="searchAll();">&nbsp;
             <hr>
@@ -397,11 +415,7 @@
 
 
 
-    </form>
-
-
     
-
     <center>
 
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
@@ -414,10 +428,22 @@
     <!-- <참고> EL 은 JSP 페이지에서 사용가능한 언어이다. -->
     <!--        즉, EL 은 JSP 기술의 한 종류이다. -->
     <!-- *********************************************************** -->
-    <div class="boardListAllCnt" style="height: 10px;">총 ${requestScope.getBoardListCount}개</div> <br> <!-- EL 예시. 위 코드랑 비교. -->
+    <span class="boardListAllCnt" style="height: 10px;">총 ${requestScope.getBoardListCount}개</span> <!-- EL 예시. 위 코드랑 비교. -->
 
+        <!-- --------------------------------------------------- -->
+        <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
+        <!-- 페이징 처리 관련 데이터이다. -->
+        <!-- --------------------------------------------------- -->
+        <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20" selected>20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="100">100</option>
+        </select> 행보기
 
-
+    </form>
 
     <!-- ********************************************************* -->
     <!-- 페이지 번호 출력하기 -->
