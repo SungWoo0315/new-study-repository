@@ -103,23 +103,23 @@
         <!-- 아래는 requestScope. 을 생략한 키값 EL 을 작성함 -->
         <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding=5>
             <tr align="center">
-                <th bgcolor="lightgray">글번호</th>
+                <th bgcolor="${requestScope.thBgColor}">글번호</th>
                 <td>${boardDTO.b_no}</td>
-                <th bgcolor="lightgray">조회수</th>
+                <th bgcolor="${thBgColor}">조회수</th>
                 <td>${boardDTO.readcount}</td>
             </tr>
             <tr align="center">
-                <th bgcolor="lightgray">작성자</th>
+                <th bgcolor="${thBgColor}">작성자</th>
                 <td>${boardDTO.writer}</td>
-                <th bgcolor="lightgray">작성일</th>
+                <th bgcolor="${thBgColor}">작성일</th>
                 <td>${boardDTO.reg_date}</td>
             </tr>
             <tr align="center">
-                <th bgcolor="lightgray">글제목</th>
+                <th bgcolor="${thBgColor}">글제목</th>
                 <td colspan="3">${boardDTO.subject}</td>
             </tr>
             <tr align="center">
-                <th bgcolor="lightgray">글내용</th>
+                <th bgcolor="${thBgColor}">글내용</th>
                 <td colspan="3">
                     <textarea name="content" rows="13" cols="45" style="border: 0;" readonly>${boardDTO.content}</textarea></td>
             </tr>

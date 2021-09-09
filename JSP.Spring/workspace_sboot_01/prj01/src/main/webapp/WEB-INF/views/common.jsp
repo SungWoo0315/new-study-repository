@@ -28,6 +28,31 @@
 
 	-->
 
+<!-- --------------------------------------------------------------------- -->
+<!-- 공용 변수 만들기(자바코드) -->
+<!-- --------------------------------------------------------------------- -->
+<%
+// String thBgColor = "lightblue";
+%>
+
+<!-- --------------------------------------------------------------------- -->
+<!-- JSTL 이란 커스텀 태그의 C 코어 태그를 사용하여 -->
+<!-- HttpServletRequest 객체 키값-데이터 저장하기 -->
+
+<!-- 공용 변수 만들기(JSTL 커스텀 태그 c 코어태그) -->
+<!-- --------------------------------------------------------------------- -->
+<c:set var="thBgColor" value="#D2D2FF" scope="request"/>
+
+
+<!-- 위 코드는 아래 자바 코드와 동일한 기능을 가진다. -->
+<%
+// request.setAttribute("thBgColor", "lightblue");
+%>
+
+<!-- body 태그 색상지정. -->
+<c:set var="bodyColor" value="#F0F8FF" scope="request"/>
+
+
 
 
 <!-- --------------------------------------------------------------------- -->
@@ -35,16 +60,20 @@
 <!-- --------------------------------------------------------------------- -->
 <script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
 
+
 <!-- --------------------------------------------------------------------- -->
 <!-- 공용함수 수입하기 -->
 <!-- --------------------------------------------------------------------- -->
 <script src="/resources/common_func.js"></script>
 <script src="/resources/common.js"></script>
 
+
 <!-- --------------------------------------------------------------------- -->
 <!-- CSS 파일 수입하기 -->
 <!-- --------------------------------------------------------------------- -->
 <link href="/resources/common.css" rel="stylesheet" type="text/css">
+
+
 
 <script>
 $(document).ready(function(){
@@ -52,6 +81,8 @@ $(document).ready(function(){
         "<center><div><span style='cursor:pointer font-weight:bold; color:#9400D3;' "
            + "onclick='location.replace(\"/logout.do\");'>[로그아웃]</span></div></center>"
     );
+
+	$("body").attr("bgcolor","${bodyColor}")
 });
 
 
@@ -74,7 +105,10 @@ function changeBgColor(  ){
 		, "lightyellow"   //mouseOverBgcolor//마우스 댔을 때 배경색값
 	);
 }
-
-
-
 </script>
+
+
+
+
+
+

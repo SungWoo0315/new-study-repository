@@ -199,7 +199,7 @@
 
 
             <tr>
-                <th bgcolor="lightgray">이  름</th>  
+                <th bgcolor="${thBgColor}">이  름</th>  
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="10" name="writer" class="writer" maxlength="10">
@@ -207,7 +207,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">제  목</th>
+                <th bgcolor="${thBgColor}">제  목</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="40" name="subject" class="subject" maxlength="20">
@@ -215,7 +215,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">이메일</th>
+                <th bgcolor="${thBgColor}">이메일</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="40" name="email" class="email" maxlength="30">
@@ -223,7 +223,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">내용</th>
+                <th bgcolor="${thBgColor}">내용</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <textarea name="content" class="content" rows="13" cols="40"  maxlength="300"></textarea>
@@ -231,7 +231,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">비밀번호</th>
+                <th bgcolor="${thBgColor}">비밀번호</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="password" size="8" name="pwd" class="pwd" maxlength="4">
