@@ -36,7 +36,8 @@ public class Util {
         return str==null || str.length()==0;
     }
     // --------------------------------------------
-    // 페이징 처리 관련 데이터를 구하고 Map<String,Integer> 객체에 저장하여 Map<String,Integer> 객체 메소드 선언  
+    // 페이징 처리 관련 데이터를 구하고 Map<String,Integer> 객체에 저장하여 
+    // Map<String,Integer> 객체 메소드 선언  
     // --------------------------------------------
     public static Map<String,Integer> getPagingNos(
         int totCnt
@@ -55,7 +56,7 @@ public class Util {
 
         // ???
 
-        
+
         return map;
     }
 
