@@ -12,6 +12,7 @@ public class BoardSearchDTO {
 	private String keyword1;
 	private String keyword2;
 
+
 	private String or_and_option="or";
 
 	private int selectPageNo=1;
@@ -19,6 +20,7 @@ public class BoardSearchDTO {
 	
 	// private String[] day;  // 배열로 받을수 있다. 아래코드와 이 코드 방식 두가지로 체크박스르 담을 수 있다.  
 	private List<String> day;
+	private String sort;
 	
 
 	// -------------------------------------------------
@@ -67,10 +69,23 @@ public class BoardSearchDTO {
 	public void setOr_and_option(String or_and_option) {
 		this.or_and_option = or_and_option;
 	}
+	
+	
+	
+	
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
 
 	
 
 
+	
+	
+	
 	
 	
 

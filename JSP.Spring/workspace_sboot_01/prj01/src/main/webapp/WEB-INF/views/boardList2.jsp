@@ -41,8 +41,20 @@
             changeBgColor(); //common.jsp 파일에서 수입하는 함수.
 
 
-            $(".reg_date").css("cursor", "pointer");
             // --------------------------------------------
+            reg_date_sort();
+            // --------------------------------------------
+
+
+
+
+        });
+
+
+        function reg_date_sort(){
+
+            $(".reg_date").css("cursor", "pointer");
+
             $(".reg_date").click(function(){
 
                 // alert("등록일 정렬 클릭 테스트 확인!");
@@ -50,28 +62,23 @@
                 var obj = $(this); 
                 var text = obj.text();  
                 text = $.trim(text); 
+
+
                 if( text.indexOf("▲")>=0 ){
                     $(".sort").val(""); // 쿼리 일부가 들어감.  
-
                 }
                 else if( text.indexOf("▼")>=0 ){
                     $(".sort").val("reg_date asc"); // 쿼리 일부가 들어감.  
-
-
                 }
                 else{
                     // alert("else 에 걸림.")
                     $(".sort").val("reg_date desc"); // 쿼리 일부가 들어감.  
                     // obj.append("▼")
-
                 }
+
+                search();
             });
-            // --------------------------------------------
-
-
-
-
-        });
+        }
 
 
 
@@ -247,8 +254,21 @@
 
                     $(".pageNo").html(pageNo);
 
-
+                    
+                    
                     changeBgColor();
+
+                    reg_date_sort();
+                    var sort = $(".sort").val();
+                    if(sort=="reg_date asc"){
+                        $(".reg_date").append("▲");
+                    }
+                    else if(sort=="reg_date desc"){
+                        $(".reg_date").append("▼");
+                    }
+                    else{
+                        $(".reg_date").append("");
+                    }
                 
                 }
                 // ----------------------------------------------------------

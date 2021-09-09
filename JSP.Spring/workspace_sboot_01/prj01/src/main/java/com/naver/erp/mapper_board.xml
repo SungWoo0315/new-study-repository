@@ -242,9 +242,13 @@
                 <include refid="boardWhere"/>
 
             order by 
-                group_no desc
-                ,print_no asc
-
+                <if test="sort==null or sort.length()==0">
+                    group_no desc
+                    ,print_no asc
+                </if>
+                <if test="sort!=null and sort.length()>0">
+                    ${sort}
+                </if>
         ) zxcvb 
         <![CDATA[   
             where rownum <= ${selectPageNo*rowCntPerPage} ) 
