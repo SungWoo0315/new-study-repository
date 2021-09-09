@@ -149,6 +149,8 @@ public class LoginController {
             // 매개변수 is_login 에 null 이 저장되어 있으면 (+ [아이디,암호 자동입력]의사 없을 경우 )
             // -------------------------------------------
             if(is_login==null){
+
+                /* 공용함수로 인해서 주석처리.
                 // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["login_id"-null]로 하기
                 Cookie cookie1 = new Cookie("login_id",null);
                 // Cookie 객체 저장된 쿠키의 수명은 0으로 하기
@@ -163,12 +165,30 @@ public class LoginController {
                 // 응답메시지에 저장된 쿠키는 클라이언튼쪽으로 전송되어 클라이언트쪽에 저장된다.  
                 response.addCookie(cookie1);
                 response.addCookie(cookie2);
+                */
+
+                // Util.java 에서 함수 호출해서 사용.  
+                Util.addCookie(
+                    "login_id"
+                    ,null
+                    ,0
+                    ,response
+                );
+                Util.addCookie(
+                    "pwd"
+                    ,null
+                    ,0
+                    ,response
+                );
+                
 
             } 
             // -------------------------------------------
             // 매개변수 is_login 에 "yes" 가 저장되어 있으면(=[아이디, 암호 자동입력]의사 있을 경우)
             // -------------------------------------------
             else{
+
+                /* 공용함수로 인한 주석처리.
                 // -------------------------------------------
                 // 클라이언트가 보낸 아이디, 암호를 응답메시지에 쿠키명-쿠키값으로 저장하기. 
                 // -------------------------------------------
@@ -185,7 +205,21 @@ public class LoginController {
                 // Cookie 객체가 소유한 쿠키를 응답메시지에 저장하기.  
                 response.addCookie(cookie1);
                 response.addCookie(cookie2);
+                */
 
+                // Util.java 에서 함수 호출해서 사용.  
+                Util.addCookie(
+                    "login_id"
+                    ,login_id
+                    ,60*60*24
+                    ,response
+                );
+                Util.addCookie(
+                    "pwd"
+                    ,pwd
+                    ,60*60*24
+                    ,response
+                );
             }
 
         }

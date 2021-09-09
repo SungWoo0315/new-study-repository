@@ -226,6 +226,11 @@ public class BoardController {
         mav.addObject("rowCntPerPage", rowCntPerPage);
         mav.addObject("pageNoCntPerPage", pageNoCntPerPage);
 
+        
+        // 공용함수처리, 페이징 예시...
+        // mav.addObject( "pagingNos", Uti.getPagingNos(~~~~) );
+
+
 
 
         // mav.addObject("start_searial_no", start_searial_no);
