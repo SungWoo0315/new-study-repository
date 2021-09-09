@@ -226,9 +226,16 @@ public class BoardController {
         mav.addObject("rowCntPerPage", rowCntPerPage);
         mav.addObject("pageNoCntPerPage", pageNoCntPerPage);
 
-        
+
         // 공용함수처리, 페이징 예시...
         // mav.addObject( "pagingNos", Uti.getPagingNos(~~~~) );
+
+        /*
+            Map<String,integer>map = Util.getPagingNos(~~~~~);
+            boardSearchDTO.setSelectPageNo(map.get("selectPageNo"));
+            List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
+        */
+
 
 
 
