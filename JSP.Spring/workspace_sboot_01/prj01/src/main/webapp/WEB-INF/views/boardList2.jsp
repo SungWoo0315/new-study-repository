@@ -41,6 +41,36 @@
             changeBgColor(); //common.jsp 파일에서 수입하는 함수.
 
 
+            $(".reg_date").css("cursor", "pointer");
+            // --------------------------------------------
+            $(".reg_date").click(function(){
+
+                // alert("등록일 정렬 클릭 테스트 확인!");
+
+                var obj = $(this); 
+                var text = obj.text();  
+                text = $.trim(text); 
+                if( text.indexOf("▲")>=0 ){
+                    $(".sort").val(""); // 쿼리 일부가 들어감.  
+
+                }
+                else if( text.indexOf("▼")>=0 ){
+                    $(".sort").val("reg_date asc"); // 쿼리 일부가 들어감.  
+
+
+                }
+                else{
+                    // alert("else 에 걸림.")
+                    $(".sort").val("reg_date desc"); // 쿼리 일부가 들어감.  
+                    // obj.append("▼")
+
+                }
+            });
+            // --------------------------------------------
+
+
+
+
         });
 
 
@@ -321,6 +351,7 @@
             <!-- 페이징 처리 관련 데이터이다. -->
             <!-- --------------------------------------------------- -->
             <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
+            <input type="hidden" name="sort" class="sort" value="">
               
             <!-- --------------------------------------------------- -->
             <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
@@ -478,7 +509,7 @@
 
         <table border="1" class="tbcss0" style="border-collapse:collapse" cellpadding="4">
             <tr bgcolor="gray">
-                <th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
+                <th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th><span class="reg_date" >등록일</span></th></tr>
 
             <!-- 수업시간에 만든 커스텀태그 및 EL searchResult -->
             <c:forEach var="board" items="${requestScope.boardList}" varStatus="loopTagStatus">
