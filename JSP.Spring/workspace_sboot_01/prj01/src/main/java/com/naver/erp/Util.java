@@ -36,27 +36,64 @@ public class Util {
         return str==null || str.length()==0;
     }
     // --------------------------------------------
-    // 페이징 처리 관련 데이터를 구하고 Map<String,Integer> 객체에 저장하여 
+    // 페이징 처리 관련 정수 데이터를 구하고 Map<String,Integer> 객체에 저장하여 
     // Map<String,Integer> 객체 메소드 선언  
     // --------------------------------------------
     public static Map<String,Integer> getPagingNos(
-        int totCnt
-        ,int selectPageNo
-        ,int rowCntPerPage
-        ,int pageNoCntPerPage
-    ){
+        int totCnt              // 검색 결과물에 총 개수.  
+        ,int selectPageNo       // 유저가 선택한 페이지 번호
+        ,int rowCntPerPage      // 한 화면에 보여줄 [행]의 개수  
+        ,int pageNoCntPerPage   // 한 화면에 보여줄 [페이지번호]의 개수   
+    ) { // 예외처리.  
+        // **********************************
+        // [마지막 페이지번호] 저장 변수선언
+        // 현재 페이지에서 보여줄 [최소 페이지 번호]
+        // 현재 페이지에서 보여줄 [최대 페이지 번호]
+        // **********************************
+        int last_pageNo = 0;  
+        int min_pageNo = 0;  
+        int max_pageNo = 0;  
+        // ----------------------------------
+        // 검색 결과물의 총개수가 0보다 크면   
+        // ----------------------------------
+        if( totCnt>0 ){
+            // 마지막 페이지 번호 구하기  
+            last_pageNo = totCnt/rowCntPerPage;
+                if( totCnt%rowCntPerPage > 0 ){last_pageNo++;}
+      
+                // 만약 선택한 페이지 번호가 마지막 페이지 번호보다 크면 선택한 페이지 번호를 1로 보정하기.    
+                if( selectPageNo > last_pageNo ){
+                    // selectPageNo 변수에 1 저장하고,
+                    selectPageNo = 1;
+                }
+            // 현재 페이지에서 보여줄 [최소 페이지 번호] 구하기  
+            min_pageNo = (selectPageNo - 1)/pageNoCntPerPage * pageNoCntPerPage + 1;
+            // 현재 페이지에서 보여줄 [최대 페이지 번호] 구하기  
+            max_pageNo = min_pageNo + pageNoCntPerPage - 1;
+                if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
+      
+        }
+        // ----------------------------------
+        // HashMap 객체 생성하기
+        // ----------------------------------
         Map<String,Integer> map = new HashMap<String,Integer>();
+        // ----------------------------------
+        // HashMap 객체에 마지막 페이지 번호 저장하기
+        // HashMap 객체에 현재 페이지에서 보여줄 [최소 페이지 번호]
+        // HashMap 객체에 현재 페이지에서 보여줄 [최대 페이지 번호]
+        // HashMap 객체에 선택한 페이지 번호 저장하기
+        // HashMap 객체에 한 화면에 보여줄 [행]의 개수 저장하기
+        // HashMap 객체에 한 화면에 보여줄 [페이지 번호]의 개수 저장하기
+        // ----------------------------------
         map.put("last_pageNo", 0);
         map.put("min_pageNo", 0);
         map.put("max_pageNo", 0);
-        
         map.put("selectPageNo", 0);
         map.put("rowCntPerPage", 0);
         map.put("pageNoCntPerPage", 0);
-
-        // ???
-
-
+        // ----------------------------------
+        // HashMap 객체 리턴하기
+        // ----------------------------------
         return map;
     }
 

@@ -146,6 +146,7 @@ public class BoardController {
         System.out.println("컨트롤러 /boardList.do 게시판목록 검색개수 확인 => " + getBoardListCount + "개");
 
 
+        // `Util.java` 에서 공용처리 하였다.  
         // ***************************************
         // 마자막 페이지 번호 구하기
         // 현 화면에 보여줄 최소 페이지 번호 구하기
@@ -274,6 +275,52 @@ public class BoardController {
             if( max_pageNo > last_pageNo ) { max_pageNo = last_pageNo; }
     }
 */
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 공용함수 Util.java 꺼내서 쓰는법. 
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    public ModelAndView getBoardList2(
+        // --------------------------------------------------
+        // 파라미터 값을 저장하고 있는 BoardSearchDTO 객체를 받아오는 매개변수 선언
+        // --------------------------------------------------
+        BoardSearchDTO boardSearchDTO
+    ){
+
+        // ***************************************
+        // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
+        // ***************************************
+        int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
+        int selectPageNo = boardSearchDTO.getSelectPageNo();
+        int rowCntPerPage = boardSearchDTO.getRowCntPerPage();
+        int pageNoCntPerPage = 10;
+        // ***************************************
+        Map<String,Integer> map = Util.getPagingNos(
+        getBoardListCount              // 검색 결과물에 총 개수.  
+        ,selectPageNo       // 유저가 선택한 페이지 번호
+        ,rowCntPerPage      // 한 화면에 보여줄 [행]의 개수  
+        ,pageNoCntPerPage   // 한 화면에 보여줄 [페이지번호]의 개수   
+        );
+        boardSearchDTO.setSelectPageNo(map.get("selectPageNo"));
+        // ***************************************
+        // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
+        // 검색 조건에 맞는 [게시판 목록] 얻기
+        // ***************************************
+        List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
+        // ***************************************
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("boardList2.jsp");
+        mav.addObject("boardList", boardList);
+        mav.addObject("getBoardListCount", getBoardListCount);
+        mav.addObject("pagingNos", map);  
+        // 해시맵 객체로 저장. EL로 꺼내려면. ${pagingNos.selectPageNo}, ${pagingNos.min_pageNo}
+       
+        // ***************************************
+        // [ModelAndView 객체] 리턴하기
+        // ***************************************
+        return mav;
+    }
+
+
 
 
 
