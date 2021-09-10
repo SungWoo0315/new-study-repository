@@ -14,8 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 // ---------------------------------------------------------------
@@ -309,7 +312,7 @@ public class BoardController {
         // [ModelAndView 객체] 리턴하기
         // ***************************************
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("boardList2.jsp");
+        mav.setViewName("boardList.jsp");
         mav.addObject("boardList", boardList);
         mav.addObject("getBoardListCount", getBoardListCount);
         mav.addObject("pagingNos", map);  
@@ -357,7 +360,7 @@ public class BoardController {
         // ***************************************
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
         // ***************************************
-        mav.setViewName("boardRegForm2.jsp");
+        mav.setViewName("boardRegForm.jsp");
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
@@ -368,14 +371,21 @@ public class BoardController {
 
 
 
-
-
-
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-    // 가상주소 /boardRegProc.do 로 접근하면 호출되는 메소드 선언
+    // 가상주소 /boardRegProc.do 로 접근하면 호출되는 메소드 선언하기
+    // 메소드 앞에 
+    // @RequestMapping(~,~,produces = "application/json;charset=UTF8") 하고
+    // @ResponseBody 가 붙으면 리턴하는 데이터가 클라이언트에게 전송된다.  
+    // ModelAndView 객체를 리턴하면 JSP 를 호출하고 그 JSP 페이지의 실행결과인 HTML 문서가 응답 메시지에 저장되어 전송되지만  
+    // @RequestMapping(~) 와 @ResponseBody 가 붙으면 리턴하는 데이터가 JSON 형태로 응답메시지에 저장되어 전송된다.  
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-    @RequestMapping( value="/boardRegProc.do")
-    public ModelAndView insertBoard( 
+    @RequestMapping( 
+        value="/boardRegProc.do"
+        ,method = RequestMethod.POST
+        ,produces = "application/json;charset=UTF8"
+    )
+    @ResponseBody
+    public Map<String, String> insertBoard( 
         // **********************************************
         // 파라미터값을 저장할 [BoardDTO 객체]를 매개변수로 선언
         // **********************************************
@@ -398,9 +408,12 @@ public class BoardController {
 
 
     ){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("boardRegProc2.jsp");
-
+        // *********************************************
+        // 게시판 등록 성공여부가 저장된 변수 선언. 1이 저장되면 성공했다는 의미
+        // 유효성 체크 에러 메시지 저장할 변수 msg 선언
+        // *********************************************
+        int boardRegCnt = 0;
+        String msg = "";
         try{
 
             /* 인위적 예외발생하기. 
@@ -418,63 +431,42 @@ public class BoardController {
             System.out.println( "getPwd => " + boardDTO.getPwd() );
             System.out.println( "====================\r" );
 
-
             // *********************************************
             // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
             // *********************************************
-            // 유효성 체크 에러 메시지 저장할 변수 선언
-            String msg = "";
             // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 [에러 메시지] 문자 얻기
-
             msg = check_BoardDTO( boardDTO, bindingResult );  
-
+            // *********************************************
             // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
+            // *********************************************
             if( msg.equals("") ){
-
                 // *********************************************
                 // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
                 // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
                 // *********************************************
-                int boardRegCnt = this.boardService.insertBoard(boardDTO); 
+                boardRegCnt = this.boardService.insertBoard(boardDTO); 
 
                 System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
-
-
-                // ***************************************
-                // [ModelAndView 객체] 생성하기
-                // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
-                // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
-                // [ModelAndView 객체] 에 [유효성 체크 에러 메시지] 저장하기  
-                // ***************************************
-                mav.addObject("boardRegCnt", boardRegCnt);        
-                mav.addObject("msg", msg);        
-            
             }
-            // 만약 msg 안에 "" 가 저장되어 있지 않으면, 즉, 유효성 체크를 통과 못했으면
-            else{
-                
-                mav.addObject("boardRegCnt", 0);        
-                mav.addObject("msg", msg); 
-
-            }
-
-            // ***************************************
-            // [ModelAndView 객체] 리턴하기
-            // ***************************************
-            
             System.out.println("BoardController. insertBoard() 메서드 수행완료");
+
         }catch(Exception ex){
-            
+            boardRegCnt = -1;
+            msg = "서버에서 문제 발생! 서버 관리자에게 문의 하세요.";
             System.out.println("예외처리 발생, 조치바람!!");
-
-            mav.addObject("boardRegCnt", -1); 
-            mav.addObject("msg", "서버에서 문제 발생! 서버 관리자에게 문의 하세요."); 
-            
         }    
-        return mav;
-
-
+        // *********************************************
+        // HashMap<String, String> 객체 생성하기
+        // HashMap<String, String> 객체에 게시판 입력 성공행의 개수 저장하기
+        // HashMap<String, String> 객체에 유효성 체크 시 메시지 저장하기
+        // HashMap<String, String> 객체리턴하기
+        // *********************************************
+        Map<String, String> map = new HashMap<String,String>();
+        map.put("boardRegCnt", boardRegCnt+"");
+        map.put("msg", msg);
+        return map;
     }
+
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -542,7 +534,7 @@ public class BoardController {
         // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
         //*******************************************
         ModelAndView mav = new ModelAndView( );
-        mav.setViewName("boardContentForm2.jsp");
+        mav.setViewName("boardContentForm.jsp");
         mav.addObject("boardDTO", boardDTO);
 
         //*******************************************
@@ -572,11 +564,220 @@ public class BoardController {
         // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
         //*******************************************
         ModelAndView mav = new ModelAndView( );
-        mav.setViewName("boardUpDelForm2.jsp");
+        mav.setViewName("boardUpDelForm.jsp");
         mav.addObject("boardDTO", boardDTO);
         return mav;
     }
 
+
+
+
+
+
+
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // /boardUpDelProc.do 접속 시 호출되는 메소드 선언
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 가상주소 /boardUpDelProc.do 로 접근하면 호출되는 메소드 선언하기
+    // 메소드 앞에 
+    // @RequestMapping(~,~,produces = "application/json;charset=UTF8") 하고
+    // @ResponseBody 가 붙으면 리턴하는 데이터가 클라이언트에게 전송된다.  
+    // ModelAndView 객체를 리턴하면 JSP 를 호출하고 그 JSP 페이지의 실행결과인 HTML 문서가 응답 메시지에 저장되어 전송되지만  
+    // @RequestMapping(~) 와 @ResponseBody 가 붙으면 리턴하는 데이터가 JSON 형태로 응답메시지에 저장되어 전송된다.  
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @RequestMapping( 
+        value="/boardUpDelProc.do"
+        ,method = RequestMethod.POST
+        ,produces = "application/json;charset=UTF8"
+    )
+    @ResponseBody
+    public Map<String,String> boardUpDelProc( 
+        // ***********************************************
+        // 파라미터값을 저장할 [BoardDTO 객체]를 매개변수로 선언
+        // ***********************************************
+        BoardDTO boardDTO
+        // ***********************************************
+        // "upDel" 라는 파라미터명의 파라미터값이 저장된 매개변수 b_no 선언
+        // ***********************************************
+        ,@RequestParam(value = "upDel") String upDel
+        // **********************************************
+        // Error 객체를 관리하는 BindingResult 객체가 저장되어 들어오는 매개변수 bindingResult 선언
+        // 유효성 검사결과를 관리
+        // **********************************************
+        , BindingResult bindingResult
+    ){
+
+        int boardUpDelCnt = 0;
+        String msg ="";
+        // **********************************************
+        // 만약 게시판 삭제 모드이면
+        // **********************************************
+        if( upDel.equals("del") ){
+            // 삭제 실행하고 삭제 적용행의 개수 얻기
+            boardUpDelCnt = this.boardService.deleteBoard(boardDTO);
+
+            System.out.println( "====================" );
+            System.out.println( "BoardController 에서 /boardUpDelProc.do 접속." );
+            System.out.println( "삭제할 PK 번호 호출 getB_no => " + boardDTO.getB_no() );
+        }
+
+        // **********************************************
+        // 만약 게시판 수정 모드이면 수정 실행하고 수정 적용행의 개수 얻기
+        // **********************************************
+        else if(upDel.equals("up")){
+
+            // *********************************************
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
+            // *********************************************
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 [에러 메시지] 문자 얻기
+            msg = check_BoardDTO( boardDTO, bindingResult );  
+            // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
+            if( msg.equals("") ){
+                // -----------------------------------------
+                // BoardServiceImpl 객체의 updateBoard 라는 메소드 호출로
+                // 게시판 수정 실행하고 수정 적용행의 개수 얻기
+                // -----------------------------------------
+                boardUpDelCnt = this.boardService.updateBoard(boardDTO);
+ 
+                System.out.println( "유효성체크 통과." );
+            }
+        }
+        //*******************************************
+        // HashMap<String,String> 객체 생성하기
+        // HashMap<String,String> 객체에 게시판 수정.삭제 성공행의 개수 저장하기
+        // HashMap<String,String> 객체에 유효성 체크 시 메시지 저장하기
+        // HashMap<String,String> 객체 리턴하기
+        //*******************************************
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("boardUpDelCnt", boardUpDelCnt+"");
+        map.put("msg", msg);
+        System.out.println( "유효성체크 확인 => " + msg );
+
+        return map;
+    }
+
+}
+
+
+
+// 코드 정리.
+/*
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 가상주소 /boardRegProc.do 로 접근하면 호출되는 메소드 선언
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    @RequestMapping( value="/boardRegProc.do")
+    public ModelAndView insertBoard( 
+        // **********************************************
+        // 파라미터값을 저장할 [BoardDTO 객체]를 매개변수로 선언
+        // **********************************************
+            // [파라미터명]과 [BoardDTO 객체]의 [속성변수명]이 같으면
+            // setter 메소드가 작동되어 [파라미터값]이 [속성변수]에 저장된다.
+            // [속성변수명]에 대응하는 [파라미터명]이 없으면 setter 메소드가 작동되지 않는다.
+            // [속성변수명]에 대응하는 [파라미터명]이 있는데 [파라미터값]이 없으면
+            // [속성변수]의 자료형에 관계없이 무조건 null 값이 저장된다.
+            // 이때 [속성변수]의 자료형이 기본형일 경우 null 값이 저장될 수 없어 에러가 발생한다. 
+            // 이런 에러를 피하려면 파라미터값이 기본형이거나 속성변수의 자료형을 String 으로 해야한다.
+            // 이런 에러가 발생하면 메소드안의 실행구문은 하나도 실행되지 않음에 주의한다.
+            // 매개변수로 들어온 [DTO 객체]는 이 메소드가 끝난 후 호출되는 JSP 페이지로 그대로 이동한다.
+            // 즉, HttpServletRequest 객체에 boardDTO 라는 키값명으로 저장된다.  
+
+        BoardDTO boardDTO
+        // **********************************************
+        // Error 객체를 관리하는 BindingResult 객체가 저장되어 들어오는 매개변수 bindingResult 선언
+        // **********************************************
+        , BindingResult bindingResult
+
+
+    ){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("boardRegProc2.jsp");
+
+        try{
+
+            //  인위적 예외발생하기. 
+            // if( boardDTO.getB_no()>0 ){
+            //     throw new Exception();
+            // }
+             
+
+            System.out.println( "====================\r" );
+            System.out.println( "BoardController 에서 받아오는 값 확인.\r" );
+            System.out.println( "getB_no => " + boardDTO.getB_no() );
+            System.out.println( "getSubject => " + boardDTO.getSubject() );
+            System.out.println( "getWriter => " + boardDTO.getWriter() );
+            System.out.println( "getContent => " + boardDTO.getContent() );
+            System.out.println( "getPwd => " + boardDTO.getPwd() );
+            System.out.println( "====================\r" );
+
+
+            // *********************************************
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 경고문자 얻기
+            // *********************************************
+            // 유효성 체크 에러 메시지 저장할 변수 선언
+            String msg = "";
+            // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 [에러 메시지] 문자 얻기
+
+            msg = check_BoardDTO( boardDTO, bindingResult );  
+
+            // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
+            if( msg.equals("") ){
+
+                // *********************************************
+                // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
+                // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
+                // *********************************************
+                int boardRegCnt = this.boardService.insertBoard(boardDTO); 
+
+                System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
+
+
+                // ***************************************
+                // [ModelAndView 객체] 생성하기
+                // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
+                // [ModelAndView 객체] 에 [게시판 입력 적용행의 개수] 저장하기  
+                // [ModelAndView 객체] 에 [유효성 체크 에러 메시지] 저장하기  
+                // ***************************************
+                mav.addObject("boardRegCnt", boardRegCnt);        
+                mav.addObject("msg", msg);        
+            
+            }
+            // 만약 msg 안에 "" 가 저장되어 있지 않으면, 즉, 유효성 체크를 통과 못했으면
+            else{
+                
+                mav.addObject("boardRegCnt", 0);        
+                mav.addObject("msg", msg); 
+
+            }
+
+            // ***************************************
+            // [ModelAndView 객체] 리턴하기
+            // ***************************************
+            
+            System.out.println("BoardController. insertBoard() 메서드 수행완료");
+        }catch(Exception ex){
+            
+            System.out.println("예외처리 발생, 조치바람!!");
+
+            mav.addObject("boardRegCnt", -1); 
+            mav.addObject("msg", "서버에서 문제 발생! 서버 관리자에게 문의 하세요."); 
+            
+        }    
+        return mav;
+
+
+    }
+*/
+
+
+
+// 코드정리  
+
+/*
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // /boardUpDelProc.do 접속 시 호출되는 메소드 선언
@@ -677,5 +878,4 @@ public class BoardController {
 
 
     }
-
-}
+*/

@@ -24,13 +24,10 @@ public class MvcConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(new SessionInterceptor()).excludePathPatterns(
             "/loginForm.do"
             ,"/loginProc.do"
-            ,"/loginProc2.do"
-            ,"/loginProc3.do"
-            ,"/longout.do"
-            ,"/memRegForm.do"
-            ,"/resources/**"
             ,"/logout.do"
             ,"/login_alert.do"
+            ,"/memRegForm.do"
+            ,"/resources/**"
         );
 
     }

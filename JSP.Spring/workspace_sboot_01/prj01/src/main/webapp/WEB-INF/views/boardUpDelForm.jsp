@@ -24,12 +24,16 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>boardUpDelForm</title>
+<title>boardUpDelForm2</title>
 
     <script>
 
 
         $(document).ready(function(){
+
+
+            $(".subject").val("${boardDTO.subject}");
+
 
             // 리셋버튼으로 내용물 비우는 JQuery 만들어보기.  
             $(".reset").click(function(){
@@ -92,20 +96,20 @@
                 // 서버로 보낼 파라미터명과 파라미터값을 설정. 
                 // ----------------------------------------------------------
                 ,data     : $("[name=boardUpDelForm]").serialize() 
-                    
-                ,dataType : "html"
                 // ----------------------------------------------------------
                 // 서버의 응답을 성공적으로 받았을 경우 실행할 익명함수 설정.
-                // 익명함수의 매개변수에는 서버가 보내온 html 소스가 문자열로 들어온다.
+                // 익명함수의 매개변수에는 서버가 보내온 Map<String,String> 객체가 json 객체로 바뀌어 들어온다.
                 // 즉, 응답 메시지 안의 html 소스가 문자열로써 익명함수의 매개변수로 들어온다.  
                 // 응답 메시지 안의 html 소스는 boardUpDelProc.jsp 의 실행 결과물이다.
                 // ----------------------------------------------------------
-                ,success  : function( responseHTML ){
+                ,success  : function(json){
                     // -----------------------------------------
-                    var msg = $(responseHTML).filter(".msg").text();
-                    var boardUpDelCnt = $(responseHTML).filter(".boardUpDelCnt").text();                   
+                    // JSON 객체에서 유효성 체크 문자열 꺼내기
+                    // JSON 객체에서 수정/삭제 성공 행의 개수 꺼내기
                     // -----------------------------------------
-                    
+                    var msg = json.msg;
+                    var boardUpDelCnt = json.boardUpDelCnt;              
+                    // -----------------------------------------
                     if(upDel=="up"){
 
                         msg = $.trim(msg);
@@ -219,22 +223,8 @@
 
                 });
 
-
-            
-
-
-
-
-            
-
         }
-        
-        
-        
-  
-
-
-
+    
     </script>
 
 
@@ -243,13 +233,14 @@
 
     
     <span style="font-size:30px; font-weight: bold; color: rebeccapurple;">
-        boardUpDelForm.jsp 접속 성공!!
+        boardUpDelForm2.jsp 접속 성공!!
     </span>
     
 
         <hr> 
 
     <%
+    /*
         BoardDTO boardDTO = (BoardDTO)request.getAttribute("boardDTO");
         int b_no = 0;
         if( boardDTO!=null ){
@@ -260,78 +251,90 @@
             String content = boardDTO.getContent();
             int readcount = boardDTO.getReadcount();
             String email = boardDTO.getEmail();
+    */
     %>
+    <c:if test="${!empty boardDTO}">
 
+        <!-- **************************************************** -->
+        <!-- [게시판 글쓰기] 화면을 출력하는 form 태그 선언 -->
+        <!-- **************************************************** -->
+        <form name="boardUpDelForm">
 
+            <input type="hidden" name="b_no" value="${requestScope.boardDTO.b_no}">
+            <input type="hidden" name="upDel" value="">
+        
+            <table class="tbcss2" border="1" class="upDeltable" style="border-collapse:collapse" cellpadding=5>
+                <caption>게시판 수정/삭제</caption>
+                
+                <tr>
+                    <th bgcolor="${thBgColor}">이  름</th>  
+                    <td>
+                    <!-- ------------------------------------------------- -->
+                    <input type="text" size="10" name="writer" class="writer" maxlength="10" value="${boardDTO.writer}">
+                    <!-- ------------------------------------------------- -->
+                    </td>
+                </tr>
+                <tr>
+                    <th bgcolor="${thBgColor}">제  목</th>
+                    <td>
+                    <!-- ------------------------------------------------- -->
+                    <input type="text" size="40" name="subject" class="subject" maxlength="20" value="">
+                    <!-- ------------------------------------------------- -->
+                    </td>
+                </tr>
+                <tr>
+                    <th bgcolor="${thBgColor}">이메일</th>
+                    <td>
+                    <!-- ------------------------------------------------- -->
+                    <input type="text" size="40" name="email" class="email" maxlength="30" value="${boardDTO.email}">
+                    <!-- ------------------------------------------------- -->
+                    </td>
+                </tr>
+                <tr>
+                    <th bgcolor="${thBgColor}">내용</th>
+                    <td>
+                    <!-- ------------------------------------------------- -->
+                    <textarea name="content" class="content" rows="13" cols="40"  maxlength="300">${boardDTO.content}</textarea>
+                    <!-- ------------------------------------------------- -->
+                    </td>
+                </tr>
+                <tr>
+                    <th bgcolor="${thBgColor}">비밀번호</th>
+                    <td>
+                    <!-- ------------------------------------------------- -->
+                    <input type="password" size="8" name="pwd" class="pwd" maxlength="4">
+                    <!-- ------------------------------------------------- -->
+                    </td>
+                </tr>
+            </table>
 
-    <!-- **************************************************** -->
-    <!-- [게시판 글쓰기] 화면을 출력하는 form 태그 선언 -->
-    <!-- **************************************************** -->
-    <form name="boardUpDelForm">
-
-        <input type="hidden" name="b_no" value="<%=b_no%>">
-        <input type="hidden" name="upDel" value="">
-    
-        <table border="1" class="upDeltable" style="border-collapse:collapse" cellpadding=5>
-            <caption>게시판 수정/삭제</caption>
+            <div style="height: 6px;"></div> <!-- 공백조절용 div 태그 -->
             
-            <tr>
-                <th bgcolor="lightgray">이  름</th>  
-                <td>
-                <!-- ------------------------------------------------- -->
-                <input type="text" size="10" name="writer" class="writer" maxlength="10" value="<%=writer%>">
-                <!-- ------------------------------------------------- -->
-                </td>
-            </tr>
-            <tr>
-                <th bgcolor="lightgray">제  목</th>
-                <td>
-                <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="subject" class="subject" maxlength="20" value="<%=subject%>">
-                <!-- ------------------------------------------------- -->
-                </td>
-            </tr>
-            <tr>
-                <th bgcolor="lightgray">이메일</th>
-                <td>
-                <!-- ------------------------------------------------- -->
-                <input type="text" size="40" name="email" class="email" maxlength="30" value="<%=email%>">
-                <!-- ------------------------------------------------- -->
-                </td>
-            </tr>
-            <tr>
-                <th bgcolor="lightgray">내용</th>
-                <td>
-                <!-- ------------------------------------------------- -->
-                <textarea name="content" class="content" rows="13" cols="40"  maxlength="300"><%=content%></textarea>
-                <!-- ------------------------------------------------- -->
-                </td>
-            </tr>
-            <tr>
-                <th bgcolor="lightgray">비밀번호</th>
-                <td>
-                <!-- ------------------------------------------------- -->
-                <input type="password" size="8" name="pwd" class="pwd" maxlength="4">
-                <!-- ------------------------------------------------- -->
-                </td>
-            </tr>
-        </table>
-        <div style="height: 6px;"></div> <!-- 공백조절용 div 태그 -->
-        <input type="button" value="수정" onclick="checkBoardUpDelForm('up')">
-        <input type="button" value="삭제" onclick="checkBoardUpDelForm('del')">
-        <input type="button" value="목록보기" onclick="location.replace('/boardList.do');">
-    
-        <br>
-        <hr>
-        <input type="button" class="reset" value="내용삭제">
-    
-    </form>
+            <input type="button" value="수정" onclick="checkBoardUpDelForm('up')">
+            <input type="button" value="삭제" onclick="checkBoardUpDelForm('del')">
+            <input type="button" value="목록보기" onclick="location.replace('/boardList.do');">
+        
+            <br>
+            <hr>
+            <input type="button" class="reset" value="내용삭제">
+        
+        </form>
+
+    </c:if>
+
+    <c:if test="${empty boardDTO}">
+        <script>
+            alert('삭제된 글입니다.'); location.replace('/boardList.do');
+        </script>
+    </c:if>
 
     <%
+    /*
     }
     else{
         out.print("<script>alert('삭제된 글입니다.'); location.replace('/boardList.do');</script>");
     }
+    */
     %>
 
 
@@ -339,7 +342,7 @@
     <!-- [게시판 수정/삭제] 화면으로 이동하는 form 태그 선언 -->
     <!-- ****************************************************** -->
     <form name="boardContentForm" method="POST" action="/boardContentForm.do">
-        <input type="hidden" name="b_no" value="<%=b_no%>">
+        <input type="hidden" name="b_no" value="${boardDTO.b_no}">
     </form>
 
 

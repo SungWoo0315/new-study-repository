@@ -21,7 +21,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>boardRegForm</title>
+<title>boardRegForm2</title>
 
     <script>
 
@@ -76,91 +76,57 @@
                 // 서버로 보낼 파라미터명과 파라미터값을 설정. 
                 // ----------------------------------------------------------
                 ,data     : $("[name=boardRegForm]").serialize() 
-                    
-                ,dataType : "html"
                 // ----------------------------------------------------------
                 // 서버의 응답을 성공적으로 받았을 경우 실행할 익명함수 설정.
-                // 익명함수의 매개변수에는 서버가 보내온 html 소스가 문자열로 들어온다.
-                // 즉, 응답 메시지 안의 html 소스가 문자열로써 익명함수의 매개변수로 들어온다.  
-                // 응답 메시지 안의 html 소스는 loginProc.jsp 의 실행 결과물이다.
+                // 익명함수의 매개변수에는 서버가 보내온 Map<String,String> 를 JSON 객체로 바뀌어 들어온다.
                 // ----------------------------------------------------------
-                ,success  : function( responseHTML ){
-
-                    var msg = $(responseHTML).filter(".msg").text();
-                    msg = $.trim(msg);
-
+                ,success  : function( json ){
+                    // ----------------------------------------------------------
+                    // 매개변수로 들어온 JSON 객체에서 게시판 입력 성공행의 개수 꺼내서 지역변수 boardRegCnt 에 저장하기  
+                    // 매개변수로 들어온 JSON 객체에서 유효성체크 결과문자열을 지역변수 msg 에 저장하기  
+                    // ----------------------------------------------------------
+                    
+                    var boardRegCnt = json.boardRegCnt;
+                    var msg = json.msg
+                    // ----------------------------------------------------------
+                    // 만약 유효성 체크 결과 문자열이 있으면 경고하고 함수 중단하기   
+                    // ----------------------------------------------------------
                     if( msg!=null && msg.length>0 ){
                         alert(msg);
                         return;
-                    }
-                    
-
-                    // location.replace("/boardRegProc.do") // boardRegProc.jsp 페이지 이동확인용.
-
-                    alert(responseHTML) // boardRegProc.jsp 결과물 확인하기.  
-
-
-                    // 매개변수 responseHTML 안의 HTML 소스 문자열에 DB 연동 결과물을 뽑아
-                    // 현재 화면에 반영하는 등의 소스가 나온다.
-                    
-                    // alert(responseHTML);  // 테스트용 확인.
-
-                    // ------------------------------------
-                    // 매개변수로 들어온 html 소스에서 class="idCnt" 를 가진 태그가 끌어안고 있는 숫자 꺼내기.
-                    // 게시판 글 입력 성공 행의 개수 꺼내기.
-                    // 꺼낸 개수의 앞뒤 공백 제거하기
-                    // ------------------------------------
-                    var boardRegCnt = $(responseHTML).filter(".boardRegCnt").text();
-                    boardRegCnt = $.trim(boardRegCnt);
-                    boardRegCnt = parseInt(boardRegCnt,10);  // 정석적으로는 이렇게 해야 숫자변환된다. 
+                     }
                     // ------------------------------------
                     // 만약 게시판 글 입력 성공 행의 개수가 1이면, 즉, 입력이 성공했으면
                     // ------------------------------------
-                    if( boardRegCnt == 1 ){
+                    if( boardRegCnt==1 ){
+                        <c:if test="${empty param.b_no}">
+                            alert("새글 쓰기 성공!")  
+                        </c:if>
 
-
-                        <% if( request.getParameter("b_no")==null) { %>
-                            
-                            alert("새글 쓰기 성공!")	// 테스트용 확인.  
-
-                        <% }else{ %>
-
-                            alert("댓글 쓰기 성공!")	// 테스트용 확인.  
-
-                        <% } %>    
-                        
+                        <c:if test="${!empty param.b_no}">
+                            alert("댓글 쓰기 성공!")
+                        </c:if>
 
                         location.replace("/boardList.do")
-                    }
-                    // ------------------------------------
-                    // 그렇지 않고, 즉, 입력이 실패했으면
-                    // ------------------------------------
+                    } 
                     else{
+                        <c:if test="${empty param.b_no}">
+                            alert("새글쓰기 실패...")
+                        </c:if>
 
-                        <% if( request.getParameter("b_no")==null) { %>
-                            
-                            alert("새글쓰기 실패...");
-
-                        <% }else{ %>
-
-                            alert("댓글 쓰기 실패...")	// 테스트용 확인.  
-
-                        <% } %>    
-
-
-
+                        <c:if test="${!empty param.b_no}">
+                            alert("댓글 쓰기 실패...")
+                        </c:if>
 
                     }
-
-
-
-
+                        
+       
                 }
                 // ----------------------------------------------------------
                 // 서버의 응답을 못 받았을 경우 실행할 익명함수 설정
                 // ----------------------------------------------------------
                 ,error : function( ){
-                    alert("서버 접속 실패! 관리자에게 문의 바람!");
+                    alert("error : 서버 접속 실패! 관리자에게 문의 바람!!!!!!!!");
                 }
 
 
@@ -177,7 +143,7 @@
 
     
     <span style="font-size:30px; font-weight: bold; color: rebeccapurple;">
-        boardRegForm.jsp 접속 성공!!
+        boardRegForm2.jsp 접속 성공!!
     </span>
     
 
@@ -188,20 +154,33 @@
     <!-- **************************************************** -->
     <form name="boardRegForm" method="POST" action="/boardRegProc.do">
     
-        <table border="1" style="border-collapse:collapse" cellpadding=5>
+        <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding=5>
 
-            <% if( request.getParameter("b_no")==null) { %>
+        <%-- if문 두종류가 있다. 아래의 choose when 보면서 비교하기.  
+            <c:if test="${empty param.b_no}">
+                <caption>[새글쓰기]</caption>
+            </c:if>
 
-                <caption>새글쓰기</caption>
+            <c:if test="${!empty param.b_no}">
+                <caption>[댓글쓰기]</caption>
+            </c:if> 
+        --%>
 
-            <% }else{ %>
+            <c:choose>
+                <c:when test="${empty param.b_no}">
+                    <caption>[[새글쓰기]]</caption>
+                </c:when>
+                <c:otherwise>
+                    <caption>[[댓글쓰기]]</caption>
+                </c:otherwise>
+            </c:choose>
 
-                <caption>댓글쓰기</caption>
 
-            <% } %>    
+
+
 
             <tr>
-                <th bgcolor="lightgray">이  름</th>  
+                <th bgcolor="${thBgColor}">이  름</th>  
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="10" name="writer" class="writer" maxlength="10">
@@ -209,7 +188,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">제  목</th>
+                <th bgcolor="${thBgColor}">제  목</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="40" name="subject" class="subject" maxlength="20">
@@ -217,7 +196,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">이메일</th>
+                <th bgcolor="${thBgColor}">이메일</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="40" name="email" class="email" maxlength="30">
@@ -225,7 +204,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">내용</th>
+                <th bgcolor="${thBgColor}">내용</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <textarea name="content" class="content" rows="13" cols="40"  maxlength="300"></textarea>
@@ -233,7 +212,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="lightgray">비밀번호</th>
+                <th bgcolor="${thBgColor}">비밀번호</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="password" size="8" name="pwd" class="pwd" maxlength="4">
@@ -251,15 +230,15 @@
         <!-- 만약 파명 b_no 의 파값이 null 이면 name="b_no" 를 가진 hidden 태그의 value 에 0 입력하기 -->
         <!-- 만약 파명 b_no 의 파값이 null 아니면 name="b_no" 를 가진 hidden 태그의 value 에 파값을 입력하기 -->
         <!-- ------------------------------------------------- -->
-        <% if( request.getParameter("b_no")==null) { %>
-
+        <c:if test="${empty param.b_no}">
             <input type="hidden" name="b_no" value="0">
-    
-        <% }else{ %>
+        </c:if> 
 
-            <input type="hidden" name="b_no" value="<%=request.getParameter("b_no")%>">
+        <c:if test="${!empty param.b_no}">
+            <input type="hidden" name="b_no" value="${param.b_no}">
+        </c:if> 
 
-        <% } %>    
+
 
        
             <!-- *********************************************************** -->

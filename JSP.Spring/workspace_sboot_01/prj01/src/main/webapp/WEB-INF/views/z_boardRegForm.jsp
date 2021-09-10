@@ -21,7 +21,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>boardRegForm2</title>
+<title>boardRegForm</title>
 
     <script>
 
@@ -116,30 +116,45 @@
                     // ------------------------------------
                     // 만약 게시판 글 입력 성공 행의 개수가 1이면, 즉, 입력이 성공했으면
                     // ------------------------------------
-                    if( boardRegCnt==1 ){
+                    if( boardRegCnt == 1 ){
 
-                        <c:if test="${empty param.b_no}">
-                            alert("새글 쓰기 성공!")  
-                        </c:if>
 
-                        <c:if test="${!empty param.b_no}">
-                            alert("댓글 쓰기 성공!")
-                        </c:if>
+                        <% if( request.getParameter("b_no")==null) { %>
+                            
+                            alert("새글 쓰기 성공!")	// 테스트용 확인.  
+
+                        <% }else{ %>
+
+                            alert("댓글 쓰기 성공!")	// 테스트용 확인.  
+
+                        <% } %>    
+                        
 
                         location.replace("/boardList.do")
-                    } 
+                    }
+                    // ------------------------------------
+                    // 그렇지 않고, 즉, 입력이 실패했으면
+                    // ------------------------------------
                     else{
-                        <c:if test="${empty param.b_no}">
-                            alert("새글쓰기 실패...")
-                        </c:if>
 
-                        <c:if test="${!empty param.b_no}">
-                            alert("댓글 쓰기 실패...")
-                        </c:if>
+                        <% if( request.getParameter("b_no")==null) { %>
+                            
+                            alert("새글쓰기 실패...");
+
+                        <% }else{ %>
+
+                            alert("댓글 쓰기 실패...")	// 테스트용 확인.  
+
+                        <% } %>    
+
+
+
 
                     }
-                        
-       
+
+
+
+
                 }
                 // ----------------------------------------------------------
                 // 서버의 응답을 못 받았을 경우 실행할 익명함수 설정
@@ -162,7 +177,7 @@
 
     
     <span style="font-size:30px; font-weight: bold; color: rebeccapurple;">
-        boardRegForm2.jsp 접속 성공!!
+        boardRegForm.jsp 접속 성공!!
     </span>
     
 
@@ -173,33 +188,20 @@
     <!-- **************************************************** -->
     <form name="boardRegForm" method="POST" action="/boardRegProc.do">
     
-        <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding=5>
+        <table border="1" style="border-collapse:collapse" cellpadding=5>
 
-        <%-- if문 두종류가 있다. 아래의 choose when 보면서 비교하기.  
-            <c:if test="${empty param.b_no}">
-                <caption>[새글쓰기]</caption>
-            </c:if>
+            <% if( request.getParameter("b_no")==null) { %>
 
-            <c:if test="${!empty param.b_no}">
-                <caption>[댓글쓰기]</caption>
-            </c:if> 
-        --%>
+                <caption>새글쓰기</caption>
 
-            <c:choose>
-                <c:when test="${empty param.b_no}">
-                    <caption>[[새글쓰기]]</caption>
-                </c:when>
-                <c:otherwise>
-                    <caption>[[댓글쓰기]]</caption>
-                </c:otherwise>
-            </c:choose>
+            <% }else{ %>
 
+                <caption>댓글쓰기</caption>
 
-
-
+            <% } %>    
 
             <tr>
-                <th bgcolor="${thBgColor}">이  름</th>  
+                <th bgcolor="lightgray">이  름</th>  
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="10" name="writer" class="writer" maxlength="10">
@@ -207,7 +209,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="${thBgColor}">제  목</th>
+                <th bgcolor="lightgray">제  목</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="40" name="subject" class="subject" maxlength="20">
@@ -215,7 +217,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="${thBgColor}">이메일</th>
+                <th bgcolor="lightgray">이메일</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="text" size="40" name="email" class="email" maxlength="30">
@@ -223,7 +225,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="${thBgColor}">내용</th>
+                <th bgcolor="lightgray">내용</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <textarea name="content" class="content" rows="13" cols="40"  maxlength="300"></textarea>
@@ -231,7 +233,7 @@
                 </td>
             </tr>
             <tr>
-                <th bgcolor="${thBgColor}">비밀번호</th>
+                <th bgcolor="lightgray">비밀번호</th>
                 <td>
                 <!-- ------------------------------------------------- -->
                 <input type="password" size="8" name="pwd" class="pwd" maxlength="4">
@@ -249,15 +251,15 @@
         <!-- 만약 파명 b_no 의 파값이 null 이면 name="b_no" 를 가진 hidden 태그의 value 에 0 입력하기 -->
         <!-- 만약 파명 b_no 의 파값이 null 아니면 name="b_no" 를 가진 hidden 태그의 value 에 파값을 입력하기 -->
         <!-- ------------------------------------------------- -->
-        <c:if test="${empty param.b_no}">
+        <% if( request.getParameter("b_no")==null) { %>
+
             <input type="hidden" name="b_no" value="0">
-        </c:if> 
+    
+        <% }else{ %>
 
-        <c:if test="${!empty param.b_no}">
-            <input type="hidden" name="b_no" value="${param.b_no}">
-        </c:if> 
+            <input type="hidden" name="b_no" value="<%=request.getParameter("b_no")%>">
 
-
+        <% } %>    
 
        
             <!-- *********************************************************** -->

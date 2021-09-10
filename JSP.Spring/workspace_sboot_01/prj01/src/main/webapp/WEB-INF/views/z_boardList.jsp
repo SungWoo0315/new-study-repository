@@ -29,69 +29,13 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BoardList2</title>
+<title>BoardList</title>
 
     <script>
 
-        // *****************************************
-        // body 태그 안의 내용을 모두 읽어들인 이후 실행할 자스 코드 설정하기  
-        // *****************************************
         $(document).ready(function(){
 
-            changeBgColor(); // common.jsp 파일에서 수입하는 함수.  
-
-
-            // --------------------------------------------
-            reg_date_sort(); // 헤더 정렬하는 함수.  
-            // --------------------------------------------
-
-
-
-
         });
-
-        // *****************************************
-        // 헤더 중에 등록일 문자열에 클릭했을 때 일어나는 일 설정하기.  
-        // *****************************************
-        function reg_date_sort(){
-            // class=reg_date 를 가진 태그에 마우스 대면 손모양 보이게 하기. 
-            $(".reg_date").css("cursor", "pointer");
-            // class=reg_date 를 가진 태그에 클릭하면 hidden 태그에 [정렬 기준 문자열] 삽입하기.
-            $(".reg_date").click(function(){
-                // alert("등록일 정렬 클릭 테스트 확인!");
-                
-                // 클릭한 태그를 관리하는 JQuery 객체 메위주 얻기
-                var obj = $(this); 
-                // 클릭한 태그가 안고 있는 문자열 얻기
-                var text = obj.text();  
-                // 문자열에서 공백 제거하고 다시 얻기  
-                text = $.trim(text); 
-
-                // 만약, 문자열에 ▲ 가 있으면,
-                if( text.indexOf("▲")>=0 ){
-                    // class=sort 를 가진 태그에 value 값으로 ""를 삽입하기  
-                    $(".sort").val(""); // 쿼리 일부가 들어감.  
-                }
-                // 만약, 문자열에 ▼ 가 있으면,
-                else if( text.indexOf("▼")>=0 ){
-                    // class=sort 를 가진 태그에 value 값으로 "reg_date asc"를 삽입하기  
-                    $(".sort").val("reg_date asc"); // 쿼리 일부가 들어감.  
-                }
-                // 만약, 문자열에 ▼ 도 없고 ▲ 도 없으면,
-                else{  // else if(text.indexOf("▲")<0 && text.indexOf("▼")<0) // else if 로 표현한 같은 방식.
-                    // alert("else 에 걸림.")
-                    // class=sort 를 가진 태그에 value 값으로 "reg_date desc"를 삽입하기  
-                    $(".sort").val("reg_date desc"); // 쿼리 일부가 들어감.  
-                    // obj.append("▼")
-                }
-
-                // search 함수 호출하기.
-                search();
-
-            });
-        }
-
-
 
 
         // *****************************************
@@ -162,11 +106,11 @@
         function search(){
             // -----------------------------------------------
             // 입력한 키워드 얻어오기
-            // 만약 키워드가 비어있거나 공백으로 구성되어 있으면 "" 로 대체하기
-            // 입력한 키워드의 앞뒤 공백 제거하고 다시 입력 양식에 넣어주기
             // -----------------------------------------------
             var keyword1 = $(".keyword1").val();
-
+            // -----------------------------------------------
+            // 만약 키워드가 비어있거나 공백으로 구성되어 있으면 "" 로 대체하기
+            // -----------------------------------------------
             if( keyword1==null || keyword1.split(" ").join("")=="" ){
 
                 keyword1 = "";
@@ -178,36 +122,10 @@
                 // return;  // 함수 중단.  
 
             }
-            $(".keyword1").val(  $.trim(keyword1)  );
-
-
-
-
             // -----------------------------------------------
-            // 입력한 키워드 얻어오기
-            // 만약 키워드가 비어있거나 공백으로 구성되어 있으면 "" 로 대체하기
             // 입력한 키워드의 앞뒤 공백 제거하고 다시 입력 양식에 넣어주기
             // -----------------------------------------------
-            var keyword2 = $(".keyword2").val();
-            
-            if( keyword2==null || keyword2.split(" ").join("")=="" ){
-
-                keyword2 = "";
-                
-                // 개발 과정 중 테스트 코드.  
-                // alert("[키워드] 가 비어 있어 검색 불가능합니다.") // 경고 띄우기
-                // $(".keyword2").val(""); // 길이없는 데이터 입력양식값에 넣고
-                // $(".keyword2").focus(); // 커서 들어가있게 하기
-                // return;  // 함수 중단.  
-
-            }
-            $(".keyword2").val(  $.trim(keyword2)  );
-
-
-
-
-
-            
+            $(".keyword1").val(  $.trim(keyword1)  );
             // -----------------------------------------------
             // 비동기 방식으로 웹서버에 접속하여 키워드를 만족하는 searchExe() 함수 호출하기.
             // -----------------------------------------------
@@ -220,12 +138,14 @@
         // *****************************************
         function searchAll(){
             // ---------------------------------
-            // 키워드1 입력 양식에 "" 넣어주기
-            // 키워드2 입력 양식에 "" 넣어주기
-            // class=day 를 가진 입력 양식의 체크 풀기
+            // 키워드 입력 양식에 "" 넣어주기
             // ---------------------------------
             $(".keyword1").val("");
             $(".keyword2").val("");
+
+            // ---------------------------------
+            // class=day 를 가진 입력 양식의 체크 풀기
+            // ---------------------------------
             $(".day").prop("checked", false);
             // ---------------------------------
             // 비동기 방식으로 웹서버에 접속하는 searchExe() 함수 호출하기
@@ -289,41 +209,7 @@
 
                     $(".pageNo").html(pageNo);
 
-                    
-                    // ----------------------------------------------------------
-                    // changeBgColor() 함수 호출로 짝수행, 홀수행, 헤더에 배경색 주기
-                    // ----------------------------------------------------------
-                    changeBgColor();
-                    // ----------------------------------------------------------
-                    // reg_date_sort() 함수 호출로 등록일 클릭 했을 때 일 설정하기  
-                    // ----------------------------------------------------------
-                    reg_date_sort();
-                    
-                    // ----------------------------------------------------------
-                    // class=sort 가진 태그의 현재 value 값 얻기  
-                    // ----------------------------------------------------------
-                    var sort = $(".sort").val();
-                    // ----------------------------------------------------------
-                    // 만약에, class=sort 가진 태그의 value 값이 "reg_date asc" 면
-                    // class=reg_date 가진 태그의 내부의 마지막에 ▲ 추가하기  
-                    // ----------------------------------------------------------
-                    if(sort=="reg_date asc"){
-                        $(".reg_date").append("▲");
-                    }
-                    // ----------------------------------------------------------
-                    // 만약에, class=sort 가진 태그의 value 값이 "reg_date desc" 면
-                    // class=reg_date 가진 태그의 내부의 마지막에 ▼ 추가하기  
-                    // ----------------------------------------------------------
-                    else if(sort=="reg_date desc"){
-                        $(".reg_date").append("▼");
-                    }
-                    // ----------------------------------------------------------
-                    // 그 이외의 경우엔,
-                    // class=reg_date 가진 태그의 내부의 마지막에 "" 추가하기  
-                    // ----------------------------------------------------------
-                    else{
-                        $(".reg_date").append("");
-                    }
+
                 
                 }
                 // ----------------------------------------------------------
@@ -358,7 +244,6 @@
     <!-- 검색 결과물, 검색된 총개수, 페이지번호에 관련된 데이터이다. -->
     <!-- *********************************************************** -->
     <%
-        /*
         // --------------------------------------------------------------
         // HttpServletRequest 객체에 setAttribute 메소드로 "boardList" 라는 키값으로 저장된 데이터 꺼내기  
         // --------------------------------------------------------------
@@ -379,7 +264,6 @@
         int last_pageNo = (Integer)request.getAttribute("last_pageNo");
         int min_pageNo = (Integer)request.getAttribute("min_pageNo");
         int max_pageNo = (Integer)request.getAttribute("max_pageNo");
-        */
     %>
 
 
@@ -387,7 +271,7 @@
     <!-- 접속페이지 테스트 확인용. -->
     <center>
     <span style="font-size:30px; font-weight: bold; color: orange;">
-        boardList2.jsp 접속 성공!!
+        boardList.jsp 접속 성공!!
     </span>
     <center>
 
@@ -405,13 +289,12 @@
             <!-- --------------------------------------------------- -->
             [키워드] : <input type="text" name="keyword1" class="keyword1" >
 
-            <!-- 쌍키워드 연결자 -->
-            <select name="orAnd" class="orAnd">
+            <!-- 다음주 숙제 부분 -->
+            <select name="or_and_option" class="or_and_option">
                 <option value="or" selected>or</option>
                 <option value="and">and</option>
             </select>
 
-            <!-- 쌍키워드 -->
             <input type="text" name="keyword2" class="keyword2" >  
             
             <hr>
@@ -427,10 +310,23 @@
             <!-- 페이징 처리 관련 데이터이다. -->
             <!-- --------------------------------------------------- -->
             <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
-            <input type="hidden" name="sort" class="sort" value="">
               
             <!-- --------------------------------------------------- -->
-            <div style="height: 3px;"></div> <!-- 공백 조절 -->
+            <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
+            <!-- 페이징 처리 관련 데이터이다. -->
+            <!-- --------------------------------------------------- -->
+            <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20" selected>20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="100">100</option>
+            </select> 행보기
+
+            <hr>
+
+            <!-- --------------------------------------------------- -->
             <input type="button" value="검색" class="boardSearch" onclick="search();">&nbsp;
             <input type="button" value="모두검색" class="boardSearchAll" onclick="searchAll();">&nbsp;
             <hr>
@@ -439,7 +335,11 @@
 
 
 
+    </form>
+
+
     
+
     <center>
 
     <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
@@ -447,125 +347,152 @@
     <!-- *********************************************************** -->
     <!-- 검색된 목록의 총개수 출력하기 -->
     <!-- *********************************************************** -->
-    <!-- EL(Expression Language) 을 사용하여 HttpServletRequest 객체에  -->
-    <!-- setAttribute 메소드로 저장된 키값 "getBoardListCount" 로 저장된 데이터를 꺼내서 표현하기 -->
-    <!-- <참고> EL 은 JSP 페이지에서 사용가능한 언어이다. -->
-    <!--        즉, EL 은 JSP 기술의 한 종류이다. -->
-    <!-- *********************************************************** -->
-    <span class="boardListAllCnt" style="height: 10px;">총 ${requestScope.getBoardListCount}개</span> <!-- EL 예시. 위 코드랑 비교. -->
-
-        <!-- --------------------------------------------------- -->
-        <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
-        <!-- 페이징 처리 관련 데이터이다. -->
-        <!-- --------------------------------------------------- -->
-        <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20" selected>20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-            <option value="100">100</option>
-        </select> 행보기
-
-    </form>
+    
+    <!-- <div class="boardListAllCnt" style="height: 10px;">총 <%=getBoardListCount%>개</div> <br> -->
+    <div class="boardListAllCnt" style="height: 10px;">총 ${getBoardListCount}개</div> <br><!-- EL 예시. 위 코드랑 비교. -->
 
     <!-- ********************************************************* -->
     <!-- 페이지 번호 출력하기 -->
     <!-- ********************************************************* -->
     <div class="pageNo">
 
-        <!-- ********************************************************* -->  
-        <%-- 
-            ***************************************************************
-            JSTL 이란 커스텀 태그 중에 C코어 태그 중에 c:if 조건문을 사용하여
-            만약에 게시판 검색 개수가 0보다 크면
-            ***************************************************************
-            C코어 태그 중에 if 조건문 형식
-            --------------------------------------------
-            <c:if test="${EL조건식}">
+        <%
+            //-----------------------------------------------------
+            // 만약 검색 결과물이 0보다 크면 즉, 검색 결과물이 있으면
+            //-----------------------------------------------------
+            if( getBoardListCount>0 ){
+
+            /*  페이지 번호 10개씩 넘어가는 기능. 
+                out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );
             
-            </c:if>
-            --------------------------------------------
-        --%>
-        <!-- ********************************************************* -->
-        <c:if test="${requestScope.getBoardListCount>0}">
+                if( min_pageNo > rowCntPerPage ){
+                    
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(min_pageNo-1)+");'>[[이전]]&nbsp;</span> " );
+
+
+                }
+
+                for( int i = min_pageNo; i<=max_pageNo; i++ ){
+                    if( i==selectPageNo ){
+
+                        out.print( "<span style='color:red;'>" + i + "</span> " );
+                    
+                    }else{
+
+                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
+
+                    }
+                }
+                if( last_pageNo > max_pageNo ){
+                    
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(max_pageNo+1)+");'>&nbsp;[[다음]]</span> " );
+
+
+                }
             
-            <!-- ==================================================== -->
-            <!-- 선택한 페이지 번호가 1보다 크면 [처음], [이전] 글씨 보이기. 단, 클릭하면 함수 호출하도록 이벤트 걸기 -->
-            <!-- ==================================================== -->
-            <c:if test="${requestScope.pagingNos.selectPageNo>1}">
-                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(1);'>[[처음으로]]&nbsp;</span>
-                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${pagingNos.selectPageNo}-1);'>&nbsp;[[이전]]&nbsp;</span>
-            </c:if>
-            <!-- ==================================================== -->
-            <!-- 선택한 페이지 번호가 1이면 [처음], [이전] 글씨 보이기. 단 클릭하면 함수 호출하는 이벤트 걸지 말기 -->
-            <!-- ==================================================== -->
-            <c:if test="${requestScope.pagingNos.selectPageNo<=1}">
-                <span>[[처음으로]]&nbsp;</span>
-                <span>&nbsp;[[이전]]&nbsp;</span>
-            </c:if>
-            
+                out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
+            */
 
+            /*  페이지번호 하나씩 이동하는기능.
+                if( selectPageNo > 1 ){
+                
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );  
 
-            <%-- 
-            ***************************************************************
-            JSTL 이란 커스텀 태그 중에 C코어 태그 중에 forEach 반복문을 사용하여
-            [최소 페이지번호] 부터 [최대 페이지 번호]를 표현하기   
-            ***************************************************************
-                --------------------------------------------
-                C코어 태그 중에 forEach 반복문을 형식1
-                --------------------------------------------
-                    <c:forEach var="반복문안에서사용할지역변수" begin="시작번호" end="끝번호" step="증감정수값">
-                        HTML 코딩  
-                    </c:forEach> 
-                --------------------------------------------
-                --------------------------------------------
-                C코어 태그 중에 forEach 반복문을 형식2
-                --------------------------------------------
-                    <c:forEach var="반복문안에서사용할지역번수" items="EL로표현되는ArrayList객체" varStatus="loopTagStatus객체저장변수명">
-                        HTML 코딩  
-                    </c:forEach> 
-                --------------------------------------------
-            --%>
-            <c:forEach var="i" begin="${requestScope.pagingNos.min_pageNo}" end="${requestScope.pagingNos.max_pageNo}" step="1">
-                <!-- ======================================== -->
-                <!-- 만약 출력되는 페이지번호와 선택한 페이지 번호가 일치하면 그냥 번호만 표현하기 -->
-                <!-- ======================================== -->
-                <c:if test="${i==requestScope.pagingNos.selectPageNo}">
-                    <span style='font-weight:bold; color:red;'>${i}</span>
-                </c:if>
-                <!-- ======================================== -->
-                <!-- 만약 출력되는 페이지번호와 선택한 페이지 번호가 일치하지 않으면 클릭하면 함수호출하도록 클릭이벤트 걸기 -->
-                <!-- ======================================== -->
-                <c:if test="${i!=requestScope.pagingNos.selectPageNo}">
-                    <span style='cursor: pointer;' onclick='search_with_changePageNo("${i}");'>[${i}]</span>
-                </c:if>
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>[[이전]]&nbsp;</span> " );
+                
+                }
 
-            </c:forEach>
+                for( int i = min_pageNo; i<=max_pageNo; i++ ){
+                    if( i==selectPageNo ){
 
-      
+                        out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
+                    
+                    }else{
 
-            <!-- ==================================================== -->
-            <!-- 선택한 페이지 번호가 마지막 페이지 번호보다 작으면 [다음], [마지막으로] 문자 표현하기 -->
-            <!-- 단, 클릭하면 함수 호출하도록 클릭 이벤트 걸기 -->
-            <!-- ==================================================== -->
-            <c:if test="${requestScope.pagingNos.selectPageNo<requestScope.pagingNos.last_pageNo}">
-                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.pagingNos.selectPageNo}+1);'>&nbsp;[[다음]]&nbsp;</span>
-                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(${requestScope.pagingNos.last_pageNo});'>&nbsp;[[마지막으로]]</span>
-            </c:if>
-            <!-- ==================================================== -->
-            <!-- 선택한 페이지 번호가 마지막 페이지 번호보다 크거나 같으면 [다음], [마지막으로] 문자 표현하기 -->
-            <!-- 단, 클릭하면 함수 호출하는 이벤트는 걸지 않기 -->
-            <!-- ==================================================== -->
-            <c:if test="${requestScope.pagingNos.selectPageNo>=requestScope.pagingNos.last_pageNo}">
-                <span>&nbsp;[[다음]]&nbsp;</span>
-                <span>&nbsp;[[마지막으로]]</span>
-            </c:if>
+                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
 
-        </c:if> 
+                    }
+                }
+
+                if( selectPageNo < last_pageNo ){
+                        
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>[[다음]]&nbsp;</span> " );
+                    out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
+                
+                }
+            */
+
+                // 페이지번호 처음으로, 마지막으로 고정시켜서 이동안하게 하기
+
+                // -----------------------------------------------------
+                // 선택한 페이지 번호가 1보다 크면 [처음], [이전] 글씨 보이기. 
+                // 단, 클릭하면 함수 호출하도록 이벤트 걸기.    
+                // -----------------------------------------------------
+                if( selectPageNo > 1 ){
+                    
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(1)+");'>[[처음으로]]&nbsp;</span> " );  
+
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo-1)+");'>&nbsp;[[이전]]&nbsp;</span> " );
+                
+                }
+                // -----------------------------------------------------
+                // 선택한 페이지 번호가 1 이면 [처음], [이전] 글씨 보이기.
+                // 단, 클릭하면 함수 호출하는 이벤트 걸지 말기.
+                // -----------------------------------------------------
+                else{
+                    
+                    out.print( "<span>[[처음으로]]&nbsp;</span>" );  
+
+                    out.print( "<span>&nbsp;[[이전]]&nbsp;</span> " );
+                
+                }
+
+                // -----------------------------------------------------
+                // 선택한 페이지 번호에 맞는 페이지 번호들을 출력하기
+                // -----------------------------------------------------
+                for( int i = min_pageNo; i<=max_pageNo; i++ ){
+
+                    // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하면 그냥 번호만 표현하기    
+                    if( i==selectPageNo ){
+
+                        out.print( "<span style='font-weight:bold; color:red;'>" + i + "</span> " );
+                    
+                    }
+                    // 만약 출력되는 페이지번호와 선택한 페이지번호가 일치하지 않으면 클리하면 함수 호출하도록 클릭 이벤트 걸기    
+                    else{
+
+                        out.print( "<span style='cursor: pointer;' onclick='search_with_changePageNo("+i+");'>[" + i + "]</span> " );
+
+                    }
+                }
+                // -----------------------------------------------------
+                // 선택한 페이지 번호가 마지막 페이지 번호보다 작으면 [다음], [마지막] 문자 표현하기
+                // 단, 클릭하면 함수 호출하도록 클릭 이벤트 걸기.   
+                // -----------------------------------------------------
+                if( selectPageNo < last_pageNo ){
+                        
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo("+(selectPageNo+1)+");'>&nbsp;[[다음]]&nbsp;</span> " );
+                    out.print( "<span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo("+(last_pageNo)+");'>&nbsp;[[마지막으로]]</span> " );
+                
+                }
+
+                // -----------------------------------------------------
+                // 선택한 페이지 번호가 마지막 페이지 번호보다 같거나 크면 [다음], [마지막] 문자만 표현하기
+                // 단, 클릭하면 함수 호출하는 이벤트는 걸지 않기.     
+                // -----------------------------------------------------
+                else{
+                    
+                    out.print( "<span>&nbsp;[[다음]]&nbsp;</span>" );  
+
+                    out.print( "<span>&nbsp;[[마지막으로]]</span> " );
+                
+                }
+
+            }
+
+        %>
 
     </div>
-
 
 
     <!-- ********************************************************* -->
@@ -577,99 +504,11 @@
 
     <div class="searchResult">
 
-        <table border="1" class="tbcss0" style="border-collapse:collapse" cellpadding="4">
-            <tr bgcolor="gray">
-                <th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th><span class="reg_date" >등록일</span></th></tr>
-
-            <!-- 수업시간에 만든 커스텀태그 및 EL searchResult -->
-            <c:forEach var="board" items="${requestScope.boardList}" varStatus="loopTagStatus">
-
-                <tr <%--bgcolor="${loopTagStatus.index%2==0?'white':'lightgray'}"--%> 
-                    style='cursor: pointer;' 
-                    onclick='goBoardContentForm("${board.b_no}")'>
-
-                    <td><!-- 역순번호 출력 -->
-                        <!-- 보기 편하게 하기 위해서 requestScope. 은 생략 하였다. -->
-        
-                        <!-- 역순번호 -->
-                        <%-- ${getBoardListCount - (selectPageNo * rowCntPerPage - rowCntPerPage +1) +1 -loopTagStatus.index} --%>
-        
-                        <!-- board.RNUM 을 사용한 역순번호 -->    
-                        ${getBoardListCount-board.RNUM+1}   
-
-
-                        <!-- 정순번호 -->
-                        <%-- ${selectPageNo * rowCntPerPage - rowCntPerPage +1 +loopTagStatus.index} --%>
-                        
-                        <!-- board.RNUM 을 사용한 정순번호 -->    
-                        <%-- ${board.RNUM} --%>
-
-
-                    </td>
-
-                    <td><!-- ㄴ으로 표현되는 들여쓰기 -->
-                        <c:if test="${board.print_level>0}">
-                            <c:forEach begin="1" end="${board.print_level}">
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                            </c:forEach>
-                            &#10551;                       
-                        </c:if>                         
-                        ${board.subject}
-                    </td>
-
-                    <td><!-- 작성자 출력 -->${board.writer}</td>
-                    <td><!-- readcount 출력 -->${board.readcount}</td>
-                    <td><!-- 등록일 출력 -->${board.reg_date}</td>
-
-                </tr>
-
-            </c:forEach> 
-
-
-
-
-
-
-        <%--
-            <!-- 내가 만들어본 커스텀태그 및 EL searchResult -->
-
-            <c:if test="${requestScope.boardList!=null}">
-
-                <c:set var="serialNo1" value="${requestScope.selectPageNo*requestScope.rowCntPerPage-requestScope.rowCntPerPage+1}" />
-
-                <c:set var="serialNo3" value="${requestScope.getBoardListCount-serialNo1+1}" />
-
-
-
-                <c:forEach var="boardList1" varStatus="status" items="${boardList}" begin="0" end="${requestScope.boardList.size()}" step="1">
-                                       
-                    <tr style='cursor: pointer;' onclick='goBoardContentForm("${boardList1.b_no}")'>
-                        <td>${requestScope.getBoardListCount - ((requestScope.selectPageNo-1) * requestScope.rowCntPerPage + status.index) }</td>
-                        <td>       
-                            <c:forEach var="j" begin="1" end="${boardList1.print_level}" step="1">
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                            </c:forEach>
-                            <c:if test="${boardList1.print_level>0}">
-                                &#10551;                       
-                            </c:if> 
-                            
-                            ${boardList1.subject}</td>
-                        <td>${boardList1.writer}</td>
-                        <td>${boardList1.readcount}</td>
-                        <td>${boardList1.reg_date}</td>
-                    </tr>
-                    <!--역순번호===> 전체 레코드 수 - ( (현재 페이지 번호 - 1) * 한 페이지당 보여지는 레코드 수 + 현재 게시물 출력 순서 ) -->
-
-                </c:forEach>
-              
-            </c:if> 
-        --%>
+        <table border="1" style="border-collapse:collapse" cellpadding=5>
+            <tr><th>번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>등록일</th></tr>
 
 
         <%
-        /*
-            // 자바로 뽑아낸 searchResult
-
             // ---------------------------------------------------------------------------
             // boardList 가 null 이 아니면, 검색결과물이 있으면,   + boardList 에는 ListMap 객체가 들어있다.  
             // ---------------------------------------------------------------------------
@@ -736,15 +575,14 @@
                                     +"<td>" + xxx + subject + "<td>"+writer+"<td>"+readcount+"<td>"+reg_date);
 
                 }
-            }   
-        */    
+            }    
         %>
         </table>
     </div>
 
 
     <hr> 
-    <!-- <input type="button" value="로그아웃" onclick="location.replace('/loginForm.do')"> -->
+    <input type="button" value="로그아웃" onclick="location.replace('/loginForm.do')">
 
     <!-- ********************************************************* -->
     <!-- 게시판 상세보기 화면 이동하는 form 태그 선언하기 -->

@@ -27,7 +27,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>boardContentForm</title>
+<title>boardContentForm2</title>
 
     <script>
 
@@ -59,11 +59,7 @@
             // name=boardRegForm 을 가진 form 태그의 action 값을 URL로 서버에 접속하라
             // -----------------------------------------
             document.boardRegForm.submit();
-
-
-
         }
-
 
 
     </script>
@@ -74,17 +70,17 @@
 
     
     <span style="font-size:30px; font-weight: bold; color: blue;">
-        boardContentForm.jsp 접속 성공!!
+        boardContentForm2.jsp 접속 성공!!
     </span>
 
     <% System.out.println("============================"); %>
     <% System.out.println("boardContentForm.jsp 접속 성공!!"); %>
     <% System.out.println("============================"); %>
 
-
         <hr> 
 
     <%
+    /*
         BoardDTO boardDTO = (BoardDTO)request.getAttribute("boardDTO");
         int b_no = 0;
         if( boardDTO!=null ){
@@ -95,36 +91,40 @@
             String content = boardDTO.getContent();
             int readcount = boardDTO.getReadcount();
             String email = boardDTO.getEmail();
-        
+    */  
     %>
 
-    <b>[글 상세 보기]</b>
+    <c:if test="${!empty requestScope.boardDTO}">
 
-    <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
+        <b>[글 상세 보기]</b>
 
-    <table border="1" style="border-collapse:collapse" cellpadding=5>
-        <tr align="center">
-            <th bgcolor="lightgray">글번호</th>
-            <td><%=b_no%></td>
-            <th bgcolor="lightgray">조회수</th>
-            <td><% out.print(readcount); %></td>
-        </tr>
-        <tr align="center">
-            <th bgcolor="lightgray">작성자</th>
-            <td><% out.print(writer); %></td>
-            <th bgcolor="lightgray">작성일</th>
-            <td><% out.print(reg_date); %></td>
-        </tr>
-        <tr align="center">
-            <th bgcolor="lightgray">글제목</th>
-            <td colspan="3"><% out.print(subject); %></td>
-        </tr>
-        <tr align="center">
-            <th bgcolor="lightgray">글내용</th>
-            <td colspan="3">
-                <textarea name="content" rows="13" cols="45" style="border: 0;" readonly><% out.print(content); %></textarea></td>
-        </tr>
+        <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
+        <!-- 아래는 requestScope. 을 생략한 키값 EL 을 작성함 -->
+        <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding=5>
+            <tr align="center">
+                <th bgcolor="${requestScope.thBgColor}">글번호</th>
+                <td>${boardDTO.b_no}</td>
+                <th bgcolor="${thBgColor}">조회수</th>
+                <td>${boardDTO.readcount}</td>
+            </tr>
+            <tr align="center">
+                <th bgcolor="${thBgColor}">작성자</th>
+                <td>${boardDTO.writer}</td>
+                <th bgcolor="${thBgColor}">작성일</th>
+                <td>${boardDTO.reg_date}</td>
+            </tr>
+            <tr align="center">
+                <th bgcolor="${thBgColor}">글제목</th>
+                <td colspan="3">${boardDTO.subject}</td>
+            </tr>
+            <tr align="center">
+                <th bgcolor="${thBgColor}">글내용</th>
+                <td colspan="3">
+                    <textarea name="content" rows="13" cols="45" style="border: 0;" readonly>${boardDTO.content}</textarea></td>
+            </tr>
+
+    </c:if>
 
 
 
@@ -133,24 +133,34 @@
     <input type="button" value="수정/삭제" onclick="goBoardUpDelForm();">&nbsp;
     <input type="button" value="글 목록 보기" onclick="location.replace('/boardList.do')">
     <%
+    /*
     }
     else{
         out.print("<script>alert('삭제된 글입니다.'); location.replace('/boardList.do');</script>");
     }
+    */
     %>
+
+    <c:if test="${empty requestScope.boardDTO}">
+        <script>
+            alert('삭제된 글입니다.'); 
+            location.replace('/boardList.do');
+        </script>
+    </c:if>
+
 
     <!-- ****************************************************** -->
     <!-- [게시판 수정/삭제] 화면으로 이동하는 form 태그 선언 -->
     <!-- ****************************************************** -->
     <form name="boardUpDelForm" method="POST" action="/boardUpDelForm.do">
-        <input type="hidden" name="b_no" value="<%=b_no%>">
+        <input type="hidden" name="b_no" value="${requestScope.boardDTO.b_no}">
     </form>
 
     <!-- ****************************************************** -->
     <!-- [게시판 댓글쓰기] 화면으로 이동하는 form 태그 선언 -->
     <!-- ****************************************************** -->
     <form name="boardRegForm" method="POST" action="/boardRegForm.do">
-        <input type="hidden" name="b_no" value="<%=b_no%>">
+        <input type="hidden" name="b_no" value="${requestScope.boardDTO.b_no}">
     </form>
 
 
