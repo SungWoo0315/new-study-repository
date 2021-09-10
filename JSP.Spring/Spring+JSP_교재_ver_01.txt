@@ -1171,6 +1171,75 @@
 
 
 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<문12> 답변형 게시판에서 만들어야할 자바 클래스, JSP 페이지는?
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+============================================================================================================
+URL 주소               컨트롤러 클래스                                                             JSP 페이지
+============================================================================================================
+/loginForm.do          LoginController 클래스의 @RequestMapping("/loginForm.do") 메소드            loginForm.jsp 
+------------------------------------------------------------------------------------------------------------
+/loginProc.do          LoginController 클래스의 @RequestMapping("/loginProc.do") 메소드            loginProc.jsp (with자바코드)
+------------------------------------------------------------------------------------------------------------
+/boardList.do          BoardController 클래스의 @RequestMapping("/boardList.do") 메소드            boardList.jsp 
+------------------------------------------------------------------------------------------------------------
+/baordContentForm.do   BoardController 클래스의 @RequestMapping("/baordContentForm.do") 메소드     baordContentForm.jsp 
+------------------------------------------------------------------------------------------------------------
+/boardRegForm.do       BoardController 클래스의 @RequestMapping("/boardRegForm.do") 메소드         boardRegForm.jsp 
+------------------------------------------------------------------------------------------------------------
+/boardRegProc.do       BoardController 클래스의 @RequestMapping("/boardRegProc.do") 메소드         boardRegProc.jsp 
+------------------------------------------------------------------------------------------------------------
+/boardUpDelForm.do     BoardController 클래스의 @RequestMapping("/boardUpDelForm.do") 메소드       boardUpDelForm.jsp 
+------------------------------------------------------------------------------------------------------------
+/boardUpDelProc.do     BoardController 클래스의 @RequestMapping("/boardUpDelProc.do") 메소드       boardUpDelProc.jsp 
+------------------------------------------------------------------------------------------------------------
+/logout.do             LoginController 클래스의 @RequestMapping("/logout.do") 메소드               logout.jsp 
+------------------------------------------------------------------------------------------------------------
+/login_alert.do        LoginController 클래스의 @RequestMapping("/login_alert.do") 메소드          login_alert.jsp 
+------------------------------------------------------------------------------------------------------------
+
+컨트롤러 클래스 
+    LoginController 클래스
+        로그인 관련 URL 주소로 접근할 때 호출되는 메소드를 소유하고 있다. 
+    BoardController 클래스
+        게시판 관련 URL 주소로 접근할 때 호출되는 메소드를 소유하고 있다. 
+        
+
+서비스 클래스
+    BoardServiceImpl 클래스 
+서비스 인터페이스 
+    BoardService 인터페이스 
+DAO 클래스 
+    loginDAOImpl 클래스
+    BoardDAOImpl 클래스
+DAO 인터페이스  
+    loginDAO 인터페이스
+    BoardDAO 인터페이스
+DTO 클래스 
+    BoardDTO 클래스 
+    BoardSearchDTO 클래스 
+JSP 페이지 
+    boardList.jsp   
+    boardRegForm.jsp   
+    boardRegProc.jsp   
+    boardUpDelForm.jsp   
+    boardUpDelProc.jsp   
+    common.jsp   
+    error.jsp   
+    login_alert.jsp   
+    loginForm.jsp   
+    loginProc.jsp   
+    logout.jsp   
+
+
+
+
+
+
+
+
+
+
 
 
 
