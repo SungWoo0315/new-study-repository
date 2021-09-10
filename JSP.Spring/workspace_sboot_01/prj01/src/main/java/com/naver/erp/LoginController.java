@@ -13,7 +13,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 // ---------------------------------------------------------------
@@ -252,6 +254,191 @@ public class LoginController {
 
         return mav;
     }
+
+
+    // ********************************************
+    // 가상주소 /loginProc3.do 로 접근하면 호출되는 메소드 선언
+    // 메소드 앞에 @RequestMapping(~,~,produces = "application/json;charset=UTF8") 하고
+    // @ResponseBody 가 붙으면 리턴하는 데이터가 클라이언트에게 전송된다.  
+    // ModelAndView 객체를 리턴하면 JSP 를 호출하고 그 JSP 페이지의 실행결과인 HTML 문서가 응답 메시지에 저장되어 전송되지만  
+    // @RequestMapping(~) 와 @ResponseBody 가 붙으면 리턴하는 데이터가 JSON 형태로 응답메시지에 저장되어 전송된다.  
+    // ********************************************
+    // 아래 코드 원본과 loginProc() 매서드 매개변수가 달라진 코딩이다.  
+    @RequestMapping( 
+        value="/loginProc3.do"
+        ,method = RequestMethod.POST
+        ,produces = "application/json;charset=UTF8"
+    )
+    @ResponseBody
+    public int loginProc3(
+        // ---------------------------------------
+        // "login_id" 라는 파라미터명에 해당하는 파라미터값을 꺼내서 매개변수 login_id 에 저장하고 들어온다.
+        // ---------------------------------------
+        @RequestParam( value="login_id" ) String login_id 
+        // ---------------------------------------
+        // "pwd" 라는 파라미터명에 해당하는 파라미터값을 꺼내서 매개변수 pwd 에 저장하고 들어온다.
+        // ---------------------------------------
+        ,@RequestParam( value="pwd" ) String pwd
+
+        // ---------------------------------------
+        // "is_login" 라는 파라미터명에 해당하는 파라미터값을 꺼내서 매개변수 is_login 에 저장하고 들어온다.
+        // ---------------------------------------
+        ,@RequestParam( value="is_login", required = false ) String is_login
+
+
+        // ---------------------------------------
+        // HttpSession 객체의 메위주를 저장하는 매개변수 session 선언하기
+        // ---------------------------------------
+        ,HttpSession session
+        // ---------------------------------------
+        // [HttpServletResponse객체] 가 들어올 매개변수 선언
+        // ---------------------------------------
+        ,HttpServletResponse response
+     ){
+
+        // --------------------------------------------------
+        // HashMap 객체 생성하기
+        // HashMap 객체에 로그인 아이디 저장하기
+        // HashMap 객체에 암호 저장하기
+        // --------------------------------------------------
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("login_id", login_id);
+        map.put("pwd", pwd);
+
+        // --------------------------------------------------
+        // loginDAOImpl 객체의 getLogin_idCnt 메소드를 호출하여 
+        // 로그인 아이디와 암호의 전체 개수 얻기
+        // --------------------------------------------------
+        System.out.println("LoginController.loginProc 해시맵 객체 => " + map);
+
+        int login_idCnt = loginDAO.getLogin_idCnt(map);
+
+        // --------------------------------------------------
+        // 만약 login_idCnt q변수 안의 데이터가 1이면
+        // 즉, 만약 입력한 아이디 암호가 DB에 존재하면
+        // 즉, 만약 로그인이 성공했으면
+        // --------------------------------------------------
+        if( login_idCnt==1 ){
+            
+            // HttpSession 객체에 로그인 아이디 저장하기  
+            // HttpSession 객체에 로그인 아이디를 저장하면 재 접속 했을 때 다시 꺼내 볼 수 있다.  
+            // <참고> HttpSession 객체는 접속한 이우에도 제거되지 않고, 지정된 기간동안 살아 있는 객체이다.  
+            // <참고> HttpServlet Request,  HttpServlet Response 객체는 접속할때 생성되고, 응답이후 삭제되는 객체이다.
+            session.setAttribute( "login_id", login_id );
+
+            // -------------------------------------------
+            // 매개변수 is_login 에 null 이 저장되어 있으면 (+ [아이디,암호 자동입력]의사 없을 경우 )
+            // -------------------------------------------
+            if(is_login==null){
+
+                /* 공용함수로 인해서 주석처리.
+                // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["login_id"-null]로 하기
+                Cookie cookie1 = new Cookie("login_id",null);
+                // Cookie 객체 저장된 쿠키의 수명은 0으로 하기
+                cookie1.setMaxAge(0);  
+                // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["pwd"-null]로 하기
+                Cookie cookie2 = new Cookie("pwd",null);
+                // Cookie 객체 저장된 쿠키의 수명은 0으로 하기
+                cookie2.setMaxAge(0); 
+
+                // Cookie 객체가 소유한 쿠키를 응답메시지에 저장하기.  
+                // 결국 Cookie 객체가 소유한 쿠키명-쿠키값이 응답메시지에 저장되는 셈이다.
+                // 응답메시지에 저장된 쿠키는 클라이언튼쪽으로 전송되어 클라이언트쪽에 저장된다.  
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
+                */
+
+                // Util.java 에서 함수 호출해서 사용.  
+                Util.addCookie(
+                    "login_id"
+                    ,null
+                    ,0
+                    ,response
+                );
+                Util.addCookie(
+                    "pwd"
+                    ,null
+                    ,0
+                    ,response
+                );
+                
+
+            } 
+            // -------------------------------------------
+            // 매개변수 is_login 에 "yes" 가 저장되어 있으면(=[아이디, 암호 자동입력]의사 있을 경우)
+            // -------------------------------------------
+            else{
+
+                /* 공용함수로 인한 주석처리.
+                // -------------------------------------------
+                // 클라이언트가 보낸 아이디, 암호를 응답메시지에 쿠키명-쿠키값으로 저장하기. 
+                // -------------------------------------------
+                // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["login_id"-"입력아이디"]로 하기
+                Cookie cookie1 = new Cookie("login_id",login_id);
+                // Cookie 객체에 저장된 쿠키의 수명은 60*60*24 로 하기.(하루)
+                cookie1.setMaxAge(60*60*24);  
+
+                // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["pwd"-"입력암호"]로 하기
+                Cookie cookie2 = new Cookie("pwd",pwd);
+                // Cookie 객체에 저장된 쿠키의 수명은 60*60*24 로 하기.(하루)
+                cookie2.setMaxAge(60*60*24);  
+
+                // Cookie 객체가 소유한 쿠키를 응답메시지에 저장하기.  
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
+                */
+
+                // Util.java 에서 함수 호출해서 사용.  
+                Util.addCookie(
+                    "login_id"
+                    ,login_id
+                    ,60*60*24
+                    ,response
+                );
+                Util.addCookie(
+                    "pwd"
+                    ,pwd
+                    ,60*60*24
+                    ,response
+                );
+            }
+
+        }
+
+        System.out.println("LoginController.loginProc login_idCnt 보기 => " + login_idCnt);
+        // System.out.println( "login_id => " + login_id ); // 입력된 아이디값 콘솔출력.
+        // System.out.println( "pwd => " + pwd );           // 입력된 암호값 콘솔 출력.   
+
+        return login_idCnt;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // ********************************************
     // 가상주소 /logout.do 로 접근하면 호출되는 메소드 선언
