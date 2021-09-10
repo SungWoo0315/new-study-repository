@@ -114,6 +114,8 @@ public class BoardController {
 
     ){
 
+        return getBoardList2(boardSearchDTO);
+        
     /* 비효율적인 중복코드 대신 다르게 작성하기위해 주석처리.  
         // ***************************************
         // 로그인 성공 여부 확인하기
@@ -131,10 +133,10 @@ public class BoardController {
         }
     */
 
+    
 
 
-
-
+/*
         System.out.println("====================================");
         System.out.println("컨트롤러 /boardList.do 진행...시작... ");
 
@@ -226,7 +228,7 @@ public class BoardController {
         mav.addObject("selectPageNo", selectPageNo);
         mav.addObject("rowCntPerPage", rowCntPerPage);
         mav.addObject("pageNoCntPerPage", pageNoCntPerPage);
-
+*/
 
         // 공용함수처리, 페이징 예시...
         // mav.addObject( "pagingNos", Uti.getPagingNos(~~~~) );
@@ -237,23 +239,13 @@ public class BoardController {
             List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
         */
 
-
-
-
-
         // mav.addObject("start_searial_no", start_searial_no);
 
-
+/*
         System.out.println("컨트롤러 /boardList.do 들어온 체크박스 값 확인 => " + boardSearchDTO.getDay());
-
         System.out.println("컨트롤러 /boardList.do 들어온 키워드1 값 확인 => " + boardSearchDTO.getKeyword1());
-
         System.out.println("컨트롤러 /boardList.do 들어온 키워드2 값 확인 => " + boardSearchDTO.getKeyword2());
-
-
         System.out.println("컨트롤러 /boardList.do 들어온 셀렉트 값 확인 => " + boardSearchDTO.getOrAnd());
-        
-
         System.out.println("컨트롤러 /boardList.do 진행...완료... ");
         System.out.println("====================================");
 
@@ -261,6 +253,8 @@ public class BoardController {
         // [ModelAndView 객체] 리턴하기
         // ***************************************
         return mav;
+*/
+
     }
 
 
@@ -277,7 +271,9 @@ public class BoardController {
 */
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-    // 공용함수 Util.java 꺼내서 쓰는법. 
+    // 공용함수 Util.java 꺼내서 쓰는법.
+    //  
+    // 위 getBoardList 메소드 안의 내용을 심플하게 줄인 메소드
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     public ModelAndView getBoardList2(
         // --------------------------------------------------
@@ -285,27 +281,32 @@ public class BoardController {
         // --------------------------------------------------
         BoardSearchDTO boardSearchDTO
     ){
-
         // ***************************************
         // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
         // ***************************************
         int getBoardListCount = this.boardDAO.getBoardListCount( boardSearchDTO );
-        int selectPageNo = boardSearchDTO.getSelectPageNo();
-        int rowCntPerPage = boardSearchDTO.getRowCntPerPage();
-        int pageNoCntPerPage = 10;
+        // ***************************************
+        // 페이징 처리 관련 번호가 저장된 HashMap<String,Integer> 객체 구하기
         // ***************************************
         Map<String,Integer> map = Util.getPagingNos(
-        getBoardListCount              // 검색 결과물에 총 개수.  
-        ,selectPageNo       // 유저가 선택한 페이지 번호
-        ,rowCntPerPage      // 한 화면에 보여줄 [행]의 개수  
-        ,pageNoCntPerPage   // 한 화면에 보여줄 [페이지번호]의 개수   
+            getBoardListCount                       // 검색 결과물에 총 개수.  
+            ,boardSearchDTO.getSelectPageNo()       // 유저가 선택한 페이지 번호
+            ,boardSearchDTO.getRowCntPerPage()     // 한 화면에 보여줄 [행]의 개수  
+            ,10                                     // 한 화면에 보여줄 [페이지번호]의 개수   
         );
+        // HashMap<String,Integer> 객체에 저장된 보정된 선택 페이지 번호를
+        // boardSearchDTO 객체에 setSelectPageNo 메소드 호출로 덮어 씌우기  
         boardSearchDTO.setSelectPageNo(map.get("selectPageNo"));
         // ***************************************
-        // 오라클 board 테이블 안의 데이터를 검색해와 자바 객체에 저장하기 즉, [게시판 목록] 얻기
-        // 검색 조건에 맞는 [게시판 목록] 얻기
+        // 검색 결과물 얻기
         // ***************************************
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
+        // ***************************************
+        // ModelAndView 객체 생성하기
+        // ModelAndView 객체에 검색 결과물 저장하기
+        // ModelAndView 객체에 검색 결과물 총개수 저장하기
+        // ModelAndView 객체에 페이징 처리 관련 번호가 저장된 HashMap<String,Integer> 객체 저장하기
+        // [ModelAndView 객체] 리턴하기
         // ***************************************
         ModelAndView mav = new ModelAndView();
         mav.setViewName("boardList2.jsp");
@@ -313,14 +314,9 @@ public class BoardController {
         mav.addObject("getBoardListCount", getBoardListCount);
         mav.addObject("pagingNos", map);  
         // 해시맵 객체로 저장. EL로 꺼내려면. ${pagingNos.selectPageNo}, ${pagingNos.min_pageNo}
-       
-        // ***************************************
-        // [ModelAndView 객체] 리턴하기
         // ***************************************
         return mav;
     }
-
-
 
 
 

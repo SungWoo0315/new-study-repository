@@ -493,14 +493,14 @@
             <!-- ==================================================== -->
             <!-- 선택한 페이지 번호가 1보다 크면 [처음], [이전] 글씨 보이기. 단, 클릭하면 함수 호출하도록 이벤트 걸기 -->
             <!-- ==================================================== -->
-            <c:if test="${requestScope.selectPageNo>1}">
+            <c:if test="${requestScope.pagingNos.selectPageNo>1}">
                 <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(1);'>[[처음으로]]&nbsp;</span>
-                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}-1);'>&nbsp;[[이전]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${pagingNos.selectPageNo}-1);'>&nbsp;[[이전]]&nbsp;</span>
             </c:if>
             <!-- ==================================================== -->
             <!-- 선택한 페이지 번호가 1이면 [처음], [이전] 글씨 보이기. 단 클릭하면 함수 호출하는 이벤트 걸지 말기 -->
             <!-- ==================================================== -->
-            <c:if test="${requestScope.selectPageNo<=1}">
+            <c:if test="${requestScope.pagingNos.selectPageNo<=1}">
                 <span>[[처음으로]]&nbsp;</span>
                 <span>&nbsp;[[이전]]&nbsp;</span>
             </c:if>
@@ -527,17 +527,17 @@
                     </c:forEach> 
                 --------------------------------------------
             --%>
-            <c:forEach var="i" begin="${requestScope.min_pageNo}" end="${requestScope.max_pageNo}" step="1">
+            <c:forEach var="i" begin="${requestScope.pagingNos.min_pageNo}" end="${requestScope.pagingNos.max_pageNo}" step="1">
                 <!-- ======================================== -->
                 <!-- 만약 출력되는 페이지번호와 선택한 페이지 번호가 일치하면 그냥 번호만 표현하기 -->
                 <!-- ======================================== -->
-                <c:if test="${i==requestScope.selectPageNo}">
+                <c:if test="${i==requestScope.pagingNos.selectPageNo}">
                     <span style='font-weight:bold; color:red;'>${i}</span>
                 </c:if>
                 <!-- ======================================== -->
                 <!-- 만약 출력되는 페이지번호와 선택한 페이지 번호가 일치하지 않으면 클릭하면 함수호출하도록 클릭이벤트 걸기 -->
                 <!-- ======================================== -->
-                <c:if test="${i!=requestScope.selectPageNo}">
+                <c:if test="${i!=requestScope.pagingNos.selectPageNo}">
                     <span style='cursor: pointer;' onclick='search_with_changePageNo("${i}");'>[${i}]</span>
                 </c:if>
 
@@ -549,15 +549,15 @@
             <!-- 선택한 페이지 번호가 마지막 페이지 번호보다 작으면 [다음], [마지막으로] 문자 표현하기 -->
             <!-- 단, 클릭하면 함수 호출하도록 클릭 이벤트 걸기 -->
             <!-- ==================================================== -->
-            <c:if test="${requestScope.selectPageNo<requestScope.last_pageNo}">
-                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.selectPageNo}+1);'>&nbsp;[[다음]]&nbsp;</span>
-                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(${requestScope.last_pageNo});'>&nbsp;[[마지막으로]]</span>
+            <c:if test="${requestScope.pagingNos.selectPageNo<requestScope.pagingNos.last_pageNo}">
+                <span style='cursor: pointer; font-weight:bold; color:#9400D3;' onclick='search_with_changePageNo(${requestScope.pagingNos.selectPageNo}+1);'>&nbsp;[[다음]]&nbsp;</span>
+                <span style='cursor: pointer; font-weight:bold; color:#6495ED;' onclick='search_with_changePageNo(${requestScope.pagingNos.last_pageNo});'>&nbsp;[[마지막으로]]</span>
             </c:if>
             <!-- ==================================================== -->
             <!-- 선택한 페이지 번호가 마지막 페이지 번호보다 크거나 같으면 [다음], [마지막으로] 문자 표현하기 -->
             <!-- 단, 클릭하면 함수 호출하는 이벤트는 걸지 않기 -->
             <!-- ==================================================== -->
-            <c:if test="${requestScope.selectPageNo>=requestScope.last_pageNo}">
+            <c:if test="${requestScope.pagingNos.selectPageNo>=requestScope.pagingNos.last_pageNo}">
                 <span>&nbsp;[[다음]]&nbsp;</span>
                 <span>&nbsp;[[마지막으로]]</span>
             </c:if>
