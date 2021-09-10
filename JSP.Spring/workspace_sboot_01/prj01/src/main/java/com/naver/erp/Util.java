@@ -85,12 +85,12 @@ public class Util {
         // HashMap 객체에 한 화면에 보여줄 [행]의 개수 저장하기
         // HashMap 객체에 한 화면에 보여줄 [페이지 번호]의 개수 저장하기
         // ----------------------------------
-        map.put("last_pageNo", 0);
-        map.put("min_pageNo", 0);
-        map.put("max_pageNo", 0);
-        map.put("selectPageNo", 0);
-        map.put("rowCntPerPage", 0);
-        map.put("pageNoCntPerPage", 0);
+        map.put("last_pageNo", last_pageNo);
+        map.put("min_pageNo", min_pageNo);
+        map.put("max_pageNo", max_pageNo);
+        map.put("selectPageNo", selectPageNo);
+        map.put("rowCntPerPage", rowCntPerPage);
+        map.put("pageNoCntPerPage", pageNoCntPerPage);
         // ----------------------------------
         // HashMap 객체 리턴하기
         // ----------------------------------
