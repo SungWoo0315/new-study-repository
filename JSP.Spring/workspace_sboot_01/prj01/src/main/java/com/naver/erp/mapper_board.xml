@@ -467,6 +467,12 @@
             subject=#{subject}
             ,writer=#{writer}
             ,content=#{content}
+
+            <if test="pic!=null and pic.length()>0">
+            ,pic=#{pic}
+            </if>
+
+
             ,email=#{email}
         where 
             b_no=#{b_no}
@@ -542,5 +548,28 @@
             print_no > (select print_no from board where b_no=#{b_no}) 
 
     </update>
+
+
+    <!-- ********************************************************************* -->
+    <!-- 게시판 이미지 이름가져오는 select 문을 내포한 select 태그 선언 -->
+    <!-- ********************************************************************* -->
+    <select id="getPic" parameterType="com.naver.erp.BoardDTO" resultType="String">
+    
+        select 
+            pic
+        from 
+            board 
+        where 
+            b_no = #{b_no}
+            and 
+            pwd = #{pwd}
+    
+    </select>
+
+
+
+
+
+
 
 </mapper>

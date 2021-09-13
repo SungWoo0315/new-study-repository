@@ -644,11 +644,14 @@ public class BoardController {
         // ***********************************************
         BoardDTO boardDTO
 
+
         // **********************************************
         // <input type=file name=img> 입력양식의 파일이 저장된 MultipartFile 객체 저장 매개변수 선언.
         // <주의> 업로드된 파일이 없어도 MultipartFile 객체는 생성되어 들어온다. 
         // **********************************************
         ,@RequestParam("img") MultipartFile multi
+
+
 
         // ***********************************************
         // "upDel" 라는 파라미터명의 파라미터값이 저장된 매개변수 b_no 선언
@@ -659,7 +662,7 @@ public class BoardController {
         // 유효성 검사결과를 관리
         // **********************************************
         , BindingResult bindingResult
-    ){
+    )throws Exception{
 
         // **********************************************
         // 업로드 파일의 크기와 확장자 체크하기
@@ -725,6 +728,9 @@ public class BoardController {
                 // -----------------------------------------
                 boardUpDelCnt = this.boardService.updateBoard(boardDTO,multi);
  
+                System.out.println( "멀티 확인 ==>>>" + multi);
+
+
                 System.out.println( "유효성체크 통과." );
             }
         }

@@ -53,6 +53,7 @@ public class BoardServiceImpl implements BoardService {
 
             // 고유한 새 파일명 얻기. 파일명에는 확장자가 포함한다. 
             newFileName = UUID.randomUUID() + "." + file_extension;
+            // boardDTO 객체에 새로운 파일명 저장하기.
             boardDTO.setPic(newFileName);
         }
 
@@ -124,7 +125,7 @@ public class BoardServiceImpl implements BoardService {
     // ****************************************************
     // [1개 게시판] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
     // ****************************************************
-    public int updateBoard(BoardDTO boardDTO, MultipartFile multi) {
+    public int updateBoard(BoardDTO boardDTO, MultipartFile multi) throws Exception{
         // --------------------------------------
         // [BoardDAOImpl 객체]의 getBoardCnt 메소드를 호출하여
         // 수정할 게시판의 존재 개수를 얻는다.
@@ -137,11 +138,60 @@ public class BoardServiceImpl implements BoardService {
         // --------------------------------------
         int pwdCnt = this.boardDAO.getPwdCnt(boardDTO);
         if(pwdCnt==0) {return -2;}
+
+
+        // ---------------------------------------
+        // 업로드한 파일의 새로운 이름정하기
+        // ---------------------------------------
+        // 업로드한 파일의 파일확장자 포함 새 파일명 저장변수 선언하기. 파일명에는 확장자가 포함한다.  
+        String newFileName = null;
+        // 만약 업로드된 파일이 있으면 
+        if( multi!=null && multi.isEmpty()==false ){
+            // 업로드한 파일의 원래 파일명 얻기. 파일명에는 확장자가 포함한다.  
+            String oriFileName = multi.getOriginalFilename();
+            // 업로드한 파일의 파일 확장자 얻기
+            String file_extension = oriFileName.substring( oriFileName.lastIndexOf(".")+1 );
+
+            // 고유한 새 파일명 얻기. 파일명에는 확장자가 포함한다. 
+            newFileName = UUID.randomUUID() + "." + file_extension;
+            // boardDTO 객체에 새로운 파일명 저장하기.
+            boardDTO.setPic(newFileName);
+        }
+        // --------------------------------------
+        // board 테이블에 있는 기존 이미지 이름 가져오기
+        // --------------------------------------
+         String pic = this.boardDAO.getPic(boardDTO);
+
         // --------------------------------------
         // [BoardDAOImpl 객체]의 updateBoard 메소드를 호출하여
         // 게시판 수정 명령한 후 수정 적용행의 개수를 얻는다.
         // --------------------------------------
         int updateCnt = this.boardDAO.updateBoard(boardDTO);
+
+
+
+        // ---------------------------------------
+        // 파일 업로드 하기
+        // ---------------------------------------
+        // 만약 업로드된 파일이 있으면 
+        if( multi!=null && multi.isEmpty()==false ){
+            // ---------------------------------------
+            // 기존 이미지 파일 삭제 하기
+            // ---------------------------------------
+           
+            // board 테이블에 이미지 이름이 있으면 파일 삭제하기 
+            if(pic!=null && pic.length()>0){
+                File file = new File( uploadDir + pic);
+                file.delete();
+            }
+            // 새 파일을 생성하기 File 객체를 생성하면 새 파일을 생성할 수 있다.  
+            File file = new File( uploadDir + newFileName );
+            // 업로드한 파일을 새 파일에 전송하여 덮어쓰기
+            multi.transferTo(file);
+        }
+
+
+
         // --------------------------------------
         // 게시판 수정 명령한 후 수정 적용행의 개수를 리턴하기.
         // --------------------------------------
