@@ -1,5 +1,8 @@
 package com.naver.erp;
 
+import java.io.File;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +28,35 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     private BoardDAO boardDAO;
 
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // 업로드 파일의 저장 경로 저장하는 속성변수 선언하기. 
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    String uploadDir = "C:\\Users\\SungWoo\\Desktop\\GitHub\\new-study-repository\\JSP.Spring\\workspace_sboot_01\\prj01\\src\\main\\resources\\static\\resources\\img\\";
+    
     
 	// ****************************************************
     // [1개 게시판 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
 	// ****************************************************
-    public int insertBoard( BoardDTO boardDTO, MultipartFile multi ){
+    public int insertBoard( BoardDTO boardDTO, MultipartFile multi ) throws Exception{
+
+        // ---------------------------------------
+        // 업로드한 파일의 새로운 이름정하기
+        // ---------------------------------------
+        // 업로드한 파일의 파일확장자 포함 새 파일명 저장변수 선언하기. 파일명에는 확장자가 포함한다.  
+        String newFileName = null;
+        // 만약 업로드된 파일이 있으면 
+        if( multi!=null && multi.isEmpty()==false ){
+            // 업로드한 파일의 원래 파일명 얻기. 파일명에는 확장자가 포함한다.  
+            String oriFileName = multi.getOriginalFilename();
+            // 업로드한 파일의 파일 확장자 얻기
+            String file_extension = oriFileName.substring( oriFileName.lastIndexOf(".")+1 );
+
+            // 고유한 새 파일명 얻기. 파일명에는 확장자가 포함한다. 
+            newFileName = UUID.randomUUID() + "." + file_extension;
+            boardDTO.setPic(newFileName);
+        }
+
+
 
         // ---------------------------------------
         // 만약 엄마글의 글 번호가 1 이상이면 댓글쓰기 이므로
@@ -48,17 +75,29 @@ public class BoardServiceImpl implements BoardService {
         // BoardDAOImpl 객체의 insertBoard 메소드 호출하여 게시판 글 입력 후 입력 적용 행의 개수 얻기
         // ---------------------------------------
         int boardRegCnt = this.boardDAO.insertBoard(boardDTO);
-        // ---------------------------------------
-        // 1개 게시판 글 입력 적용 행의 개수 리턴하기
-        // ---------------------------------------
+
        
-
-        // 파일 업로드 실행
-
+        // ---------------------------------------
+        // 파일 업로드 하기
+        // ---------------------------------------
+        // 만약 업로드된 파일이 있으면 
+        if( multi!=null && multi.isEmpty()==false ){
+            // 새 파일을 생성하기 File 객체를 생성하면 새 파일을 생성할 수 있다.  
+            File file = new File( uploadDir + newFileName );
+            // 업로드한 파일을 새 파일에 전송하여 덮어쓰기
+            multi.transferTo(file);
+    
+    
+    
+    
+        }
 
 
         System.out.println("BoardServiceImpl. insertBoard() 메서드 수행완료\r");
        
+        // ---------------------------------------
+        // 1개 게시판 글 입력 적용 행의 개수 리턴하기
+        // ---------------------------------------
         return boardRegCnt;
 
 
