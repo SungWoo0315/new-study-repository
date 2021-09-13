@@ -291,8 +291,12 @@
         <!-- **************************************************** -->
         <form name="boardUpDelForm">
 
+            
             <input type="hidden" name="b_no" value="${requestScope.boardDTO.b_no}">
             <input type="hidden" name="upDel" value="">
+
+
+
         
             <table class="tbcss2" border="1" class="upDeltable" style="border-collapse:collapse" cellpadding=5>
                 <caption>게시판 수정/삭제</caption>
@@ -336,7 +340,8 @@
                     <th bgcolor="${thBgColor}">이미지</th>
                     <td>
                     <!-- ------------------------------------------------- -->
-                    <input type="file" name="img" class="img">
+                    <input type="file" name="img" class="img"><br>
+                    <input type="checkbox" name="img_delete" class="img_delete">이미지파일 삭제 (이미지 파일을 삭제할때 클릭하세요)
                     <!-- ------------------------------------------------- -->
                     <c:if test="${!empty requestScope.boardDTO.pic}">
                         <div style="height: 3pt;"></div>    

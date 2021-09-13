@@ -223,6 +223,16 @@ public class BoardServiceImpl implements BoardService {
         // --------------------------------------
         int childrenCnt = this.boardDAO.getChildrenCnt(boardDTO);
         if(childrenCnt>0) {return -3;}
+
+
+
+        // --------------------------------------
+        // board 테이블에 있는 기존 이미지 이름 가져오기
+        // --------------------------------------
+        String pic = this.boardDAO.getPic(boardDTO);
+
+
+
         // --------------------------------------
         // [BoardDAOImpl 객체]의 downPrintNo 메소드를 호출하여
         // [삭제될 게시판 이후 글의 출력 순서번호를 1씩 감소 시킨 후 수정 적용행의 개수]를 얻는다
@@ -233,6 +243,19 @@ public class BoardServiceImpl implements BoardService {
         // [게시판 삭제 명령 한 후 삭제 적용행의 개수]를 얻는다.
         // --------------------------------------
         int deleteCnt = this.boardDAO.deleteBoard(boardDTO);
+
+
+        // --------------------------------------
+        // 파일 삭제하기
+        // --------------------------------------
+        if( pic!=null && pic.length()>0 ){
+            File file = new File( uploadDir + pic);
+            file.delete();
+        }
+
+
+
+
 
         return deleteCnt;
 
