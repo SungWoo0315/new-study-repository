@@ -160,7 +160,7 @@ public class BoardServiceImpl implements BoardService {
         // --------------------------------------
         // board 테이블에 있는 기존 이미지 이름 가져오기
         // --------------------------------------
-         String pic = this.boardDAO.getPic(boardDTO);
+        String pic = this.boardDAO.getPic(boardDTO);
 
         // --------------------------------------
         // [BoardDAOImpl 객체]의 updateBoard 메소드를 호출하여
