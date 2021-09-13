@@ -432,13 +432,17 @@ public class BoardController {
             }
 
             // 만약에 업로드된 파일의 확장자가 이미지 확장자가 아니면 
-            String fileName = multi.getName();
+            String fileName = multi.getOriginalFilename();
+
+            System.out.println("파일이름 확인하기 =>>> " + fileName);
+            
             if( fileName.endsWith(".jpg")==false && fileName.endsWith(".gif")==false && fileName.endsWith(".png")==false ){
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("boardRegCnt", "0");
                 map.put("msg", "이미지 파일 형식이 아닙니다.");
                 return map;
             }
+            
         }
 
 
@@ -483,7 +487,7 @@ public class BoardController {
                 System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
             }
 
-            
+
 
 
             System.out.println("BoardController. insertBoard() 메서드 수행완료");

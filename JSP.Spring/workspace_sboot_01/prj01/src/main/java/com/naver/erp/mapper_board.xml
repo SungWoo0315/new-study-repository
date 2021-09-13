@@ -250,6 +250,11 @@
             --,reg_date       
             ,readcount
             ,content
+
+            <if test="pic!=null and pic.length()>0">
+            ,pic  
+            </if>
+
             ,pwd
             ,email
             ,group_no
@@ -262,6 +267,11 @@
             ,#{writer}  <!-- BoardDTO 객체의 writer 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
             ,0
             ,#{content} <!-- BoardDTO 객체의 content 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
+            
+            <if test="pic!=null and pic.length()>0">
+            ,#{pic}  
+            </if>
+            
             ,#{pwd}     <!-- BoardDTO 객체의 pwd 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
             ,#{email}   <!-- BoardDTO 객체의 email 속성변수 안의 값 삽입하기. 문자면 '' 를 앞뒤에 붙여준다. -->
             

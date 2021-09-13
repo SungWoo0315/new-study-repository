@@ -86,18 +86,14 @@ public class BoardServiceImpl implements BoardService {
             File file = new File( uploadDir + newFileName );
             // 업로드한 파일을 새 파일에 전송하여 덮어쓰기
             multi.transferTo(file);
-    
-    
-    
-    
+       
         }
 
 
-        System.out.println("BoardServiceImpl. insertBoard() 메서드 수행완료\r");
-       
         // ---------------------------------------
         // 1개 게시판 글 입력 적용 행의 개수 리턴하기
         // ---------------------------------------
+        System.out.println("BoardServiceImpl. insertBoard() 메서드 수행완료\r");
         return boardRegCnt;
 
 
