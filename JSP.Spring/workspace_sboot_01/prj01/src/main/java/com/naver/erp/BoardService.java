@@ -1,11 +1,13 @@
 package com.naver.erp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public interface BoardService {
 
     // ****************************************************
     // [게시판 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
     // ****************************************************
-    int insertBoard(BoardDTO boardDTO);
+    int insertBoard(BoardDTO boardDTO, MultipartFile multi);
 	
     // ****************************************************
 	// [1개 게시판 글] 리턴하는 메소드 선언

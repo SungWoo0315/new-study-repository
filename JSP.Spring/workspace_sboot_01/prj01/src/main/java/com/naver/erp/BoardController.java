@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 // ---------------------------------------------------------------
@@ -401,6 +402,14 @@ public class BoardController {
             // 즉, HttpServletRequest 객체에 boardDTO 라는 키값명으로 저장된다.  
 
         BoardDTO boardDTO
+
+
+        // **********************************************
+        // <input type=file name=img> 입력양식의 파일이 저장된 MultipartFile 객체 저장 매개변수 선언.
+        // <주의> 업로드된 파일이 없어도 MultipartFile 객체는 생성되어 들어온다. 
+        // **********************************************
+        ,@RequestParam("img") MultipartFile multi
+
         // **********************************************
         // Error 객체를 관리하는 BindingResult 객체가 저장되어 들어오는 매개변수 bindingResult 선언
         // **********************************************
@@ -408,6 +417,31 @@ public class BoardController {
 
 
     ){
+        // **********************************************
+        // 업로드 파일의 크기와 확장자 체크하기
+        // **********************************************
+        // 만약에 업로드된 파일이 있으면
+        if( multi.isEmpty()==false ){
+     
+            // 만약에 업로드된 파일의 크기가 1000000 byte(=1000kb) 보다 크면 
+            if( multi.getSize()>1000000){
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("boardRegCnt", "0");
+                map.put("msg", "업로드 파일이 1000kb 보다 크면 업로드 할 수 없습니다.");
+                return map;
+            }
+
+            // 만약에 업로드된 파일의 확장자가 이미지 확장자가 아니면 
+            String fileName = multi.getName();
+            if( fileName.endsWith(".jpg")==false && fileName.endsWith(".gif")==false && fileName.endsWith(".png")==false ){
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("boardRegCnt", "0");
+                map.put("msg", "이미지 파일 형식이 아닙니다.");
+                return map;
+            }
+        }
+
+
         // *********************************************
         // 게시판 등록 성공여부가 저장된 변수 선언. 1이 저장되면 성공했다는 의미
         // 유효성 체크 에러 메시지 저장할 변수 msg 선언
@@ -444,10 +478,14 @@ public class BoardController {
                 // [BoardServiceImpl 객체]의 insertBoard 메소드 호출로
                 // 게시판 글 입력하고 [게시판 입력 적용행의 개수] 얻기
                 // *********************************************
-                boardRegCnt = this.boardService.insertBoard(boardDTO); 
+                boardRegCnt = this.boardService.insertBoard(boardDTO, multi); 
 
                 System.out.println( "boardRegCnt 값 확인 => " + boardRegCnt );  
             }
+
+            
+
+
             System.out.println("BoardController. insertBoard() 메서드 수행완료");
 
         }catch(Exception ex){

@@ -3,6 +3,7 @@ package com.naver.erp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 // [서비스 클래스]인 [BoardServiceImpl 클래스]선언
@@ -28,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
 	// ****************************************************
     // [1개 게시판 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
 	// ****************************************************
-    public int insertBoard( BoardDTO boardDTO ){
+    public int insertBoard( BoardDTO boardDTO, MultipartFile multi ){
 
         // ---------------------------------------
         // 만약 엄마글의 글 번호가 1 이상이면 댓글쓰기 이므로
@@ -42,11 +43,7 @@ public class BoardServiceImpl implements BoardService {
             // 게시판 테이블 분석 요망. 오늘 집에 가서 게시판 테이블 분석해야함.  
             // ---------------------------------------
             int updatePrintNoCnt = this.boardDAO.updatePrintNo(boardDTO); 
-
-
         }
-
-
         // ---------------------------------------
         // BoardDAOImpl 객체의 insertBoard 메소드 호출하여 게시판 글 입력 후 입력 적용 행의 개수 얻기
         // ---------------------------------------
@@ -55,6 +52,11 @@ public class BoardServiceImpl implements BoardService {
         // 1개 게시판 글 입력 적용 행의 개수 리턴하기
         // ---------------------------------------
        
+
+        // 파일 업로드 실행
+
+
+
         System.out.println("BoardServiceImpl. insertBoard() 메서드 수행완료\r");
        
         return boardRegCnt;
