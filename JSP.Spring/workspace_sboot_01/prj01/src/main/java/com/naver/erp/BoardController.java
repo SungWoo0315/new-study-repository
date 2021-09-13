@@ -643,6 +643,13 @@ public class BoardController {
         // 파라미터값을 저장할 [BoardDTO 객체]를 매개변수로 선언
         // ***********************************************
         BoardDTO boardDTO
+
+        // **********************************************
+        // <input type=file name=img> 입력양식의 파일이 저장된 MultipartFile 객체 저장 매개변수 선언.
+        // <주의> 업로드된 파일이 없어도 MultipartFile 객체는 생성되어 들어온다. 
+        // **********************************************
+        ,@RequestParam("img") MultipartFile multi
+
         // ***********************************************
         // "upDel" 라는 파라미터명의 파라미터값이 저장된 매개변수 b_no 선언
         // ***********************************************
@@ -653,6 +660,38 @@ public class BoardController {
         // **********************************************
         , BindingResult bindingResult
     ){
+
+        // **********************************************
+        // 업로드 파일의 크기와 확장자 체크하기
+        // **********************************************
+        // 만약에 업로드된 파일이 있으면
+        if( multi.isEmpty()==false ){
+     
+            // 만약에 업로드된 파일의 크기가 1000000 byte(=1000kb) 보다 크면 
+            if( multi.getSize()>1000000){
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("boardUpDelCnt", "0");
+                map.put("msg", "업로드 파일이 1000kb 보다 크면 업로드 할 수 없습니다.");
+                return map;
+            }
+
+            // 만약에 업로드된 파일의 확장자가 이미지 확장자가 아니면 
+            String fileName = multi.getOriginalFilename();
+
+            System.out.println("파일이름 확인하기 =>>> " + fileName);
+
+            // 아래 세개의 조건문은 같은 코드이다.  
+            // if( !(fileName.endsWith(".jpg") || fileName.endsWith(".gif") || fileName.endsWith(".png")) ){
+            // if( !fileName.endsWith(".jpg") && !fileName.endsWith(".gif") && !fileName.endsWith(".png") ){
+            if( fileName.endsWith(".jpg")==false && fileName.endsWith(".gif")==false && fileName.endsWith(".png")==false ){
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("boardUpDelCnt", "0");
+                map.put("msg", "이미지 파일 형식이 아닙니다.");
+                return map;
+            }
+            
+        }
+
 
         int boardUpDelCnt = 0;
         String msg ="";
@@ -684,7 +723,7 @@ public class BoardController {
                 // BoardServiceImpl 객체의 updateBoard 라는 메소드 호출로
                 // 게시판 수정 실행하고 수정 적용행의 개수 얻기
                 // -----------------------------------------
-                boardUpDelCnt = this.boardService.updateBoard(boardDTO);
+                boardUpDelCnt = this.boardService.updateBoard(boardDTO,multi);
  
                 System.out.println( "유효성체크 통과." );
             }

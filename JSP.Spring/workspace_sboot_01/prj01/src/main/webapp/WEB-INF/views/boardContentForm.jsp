@@ -114,14 +114,22 @@
                 <th bgcolor="${thBgColor}">작성일</th>
                 <td>${boardDTO.reg_date}</td>
             </tr>
-            <tr align="center">
+            <tr >
                 <th bgcolor="${thBgColor}">글제목</th>
                 <td colspan="3">${boardDTO.subject}</td>
             </tr>
-            <tr align="center">
+            <tr >
                 <th bgcolor="${thBgColor}">글내용</th>
                 <td colspan="3">
                     <textarea name="content" rows="13" cols="45" style="border: 0;" readonly>${boardDTO.content}</textarea></td>
+            </tr>
+            <tr >
+                <th bgcolor="${thBgColor}">이미지</th>
+                <td colspan="3">
+                    <c:if test="${!empty requestScope.boardDTO.pic}">
+                        <img src="/resources/img/${requestScope.boardDTO.pic}" width="30%">
+                    </c:if>
+                </td>
             </tr>
 
     </c:if>

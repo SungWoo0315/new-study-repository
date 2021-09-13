@@ -411,6 +411,9 @@
             ,to_char(reg_date, 'YY-MM-DD (dy) HH24:MI:SS')       "reg_date"
             ,readcount      "readcount"
             ,content        "content"
+
+            ,pic            "pic"
+
             ,pwd            "pwd"
             ,email          "email"
             ,group_no       "group_no"

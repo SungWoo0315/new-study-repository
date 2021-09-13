@@ -124,7 +124,7 @@ public class BoardServiceImpl implements BoardService {
     // ****************************************************
     // [1개 게시판] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
     // ****************************************************
-    public int updateBoard(BoardDTO boardDTO) {
+    public int updateBoard(BoardDTO boardDTO, MultipartFile multi) {
         // --------------------------------------
         // [BoardDAOImpl 객체]의 getBoardCnt 메소드를 호출하여
         // 수정할 게시판의 존재 개수를 얻는다.
