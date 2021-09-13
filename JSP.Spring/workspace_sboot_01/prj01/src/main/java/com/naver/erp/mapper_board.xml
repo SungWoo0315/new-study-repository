@@ -472,6 +472,10 @@
             ,pic=#{pic}
             </if>
 
+            <if test="img_delete!=null and img_delete.length()>0 and pic==null">
+            ,pic=null
+            </if>
+
 
             ,email=#{email}
         where 

@@ -13,6 +13,7 @@ public class BoardDTO {
     
     private String pic;
 
+    private String img_delete;
 
     private String pwd;
     private String email;
@@ -94,7 +95,18 @@ public class BoardDTO {
 	public void setPrint_level(int print_level) {
 		this.print_level = print_level;
 	}
+	
+	
+	public String getImg_delete() {
+		return img_delete;
+	}
+	public void setImg_delete(String img_delete) {
+		this.img_delete = img_delete;
+	}
     
+	
+	
+	
 
     
 }

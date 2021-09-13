@@ -57,6 +57,13 @@
         // [게시판 등록 화면]에 입력된 데이터의 유효성 체크 함수 선언
         // ***************************************************
         function checkBoardUpDelForm( upDel ){
+
+            // 이미지 삭제 체크박스로 이미지 삭제
+            if($(".img_delete").prop("checked")==true){
+                alert("체크 확인 테스트.")
+
+                $("[name=img_delete]").val("img_delete");
+            }
             
             // -----------------------------------------------------
             // 매개변수로 들어온 upDel 에 "up" 이 저장되었으면
@@ -295,6 +302,7 @@
             <input type="hidden" name="b_no" value="${requestScope.boardDTO.b_no}">
             <input type="hidden" name="upDel" value="">
 
+            <input type="hidden" name="img_delete" value="">
 
 
         
