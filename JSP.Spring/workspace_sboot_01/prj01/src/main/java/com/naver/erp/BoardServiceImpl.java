@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService {
     public int insertBoard( BoardDTO boardDTO, MultipartFile multi ) throws Exception{
 
         // ---------------------------------------
-        // FileUpLoad 객체 생성하기    
+        // 사용자 정의 FileUpLoad 객체 생성하기    
         // ---------------------------------------
         FileUpLoad fileUpLoad = new FileUpLoad(multi);
         // ---------------------------------------
@@ -75,10 +75,11 @@ public class BoardServiceImpl implements BoardService {
         System.out.println("BoardServiceImpl. insertBoard() 메서드 수행완료\r");
         return boardRegCnt;
 
-
-
-
     }
+
+
+
+
 	// ****************************************************
     // [1개 게시판 글] 리턴하는 메소드 선언
 	// ****************************************************
@@ -101,6 +102,88 @@ public class BoardServiceImpl implements BoardService {
 
     }
 
+
+
+
+
+    // ****************************************************
+    // [1개 게시판] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
+    // ****************************************************
+    public int updateBoard(BoardDTO boardDTO, MultipartFile multi) throws Exception{
+        // --------------------------------------
+        // [BoardDAOImpl 객체]의 getBoardCnt 메소드를 호출하여
+        // 수정할 게시판의 존재 개수를 얻는다.
+        // --------------------------------------
+        int boardCnt = this.boardDAO.getBoardCnt(boardDTO);
+        if(boardCnt==0) {return -1;}
+        // --------------------------------------
+        // [BoardDAOImpl 객체]의 getPwdCnt 메소드를 호출하여
+        // 수정할 게시판의 비밀번호 존재 개수를 얻는다.
+        // --------------------------------------
+        int pwdCnt = this.boardDAO.getPwdCnt(boardDTO);
+        if(pwdCnt==0) {return -2;}
+
+
+        // ---------------------------------------
+        // 사용자 정의 FileUpLoad 객체 생성하기    
+        // 업로드한 파일의 새로운 이름정하기
+        // 삭제 체크 여부 구하기
+        // ---------------------------------------
+        FileUpLoad fileUpLoad = new FileUpLoad(multi);
+        String newFileName = null;
+        String is_del = boardDTO.getIs_del();
+        // ---------------------------------------
+        System.out.println("BoardServiceImpl.java 에서, getIs_del 값 확인 -====>" + is_del);
+        // ---------------------------------------
+        // 업로드한 파일의 새로운 이름 구하기
+        // BoardDTO 객체에 새로운 파일명 저장하기
+        // ---------------------------------------
+        newFileName = fileUpLoad.getNewFileName(is_del==null);
+        boardDTO.setPic(newFileName);
+
+
+
+        // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        // DB 연동.
+        // ---------------------------------------
+        // board 테이블에 있는 기존 이미지 이름가져오기
+        // ---------------------------------------
+        String pic = this.boardDAO.getPic(boardDTO);
+        // --------------------------------------
+        // [BoardDAOImpl 객체]의 updateBoard 메소드를 호출하여
+        // 게시판 수정 명령한 후 수정 적용행의 개수를 얻는다.
+        // --------------------------------------
+        int updateCnt = this.boardDAO.updateBoard(boardDTO);
+        // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+        // ---------------------------------------
+        // 삭제가 체크 안돼 있으면
+        // ---------------------------------------
+        if( is_del==null ){
+            // board 테이블에 이미지 이름이 있으면 파일 삭제하기 
+            fileUpLoad.delete(
+                uploadDir+pic
+                , multi!=null && multi.isEmpty()==false && pic!=null && pic.length()>0
+            );
+            // 파일 업로드하기
+            fileUpLoad.uploadFile(uploadDir);
+        } 
+        // ---------------------------------------
+        // 삭제가 체크되어 있으면
+        // ---------------------------------------
+        else{
+            fileUpLoad.delete(uploadDir+pic, pic!=null && pic.length()>0 );
+        }
+        // --------------------------------------
+        // 게시판 수정 명령한 후 수정 적용행의 개수를 리턴하기.
+        // --------------------------------------
+        return updateCnt;
+    }
+
+    
+/*
     // ****************************************************
     // [1개 게시판] 수정 실행하고 수정 적용행의 개수를 리턴하는 메소드 선언
     // ****************************************************
@@ -145,23 +228,21 @@ public class BoardServiceImpl implements BoardService {
         // --------------------------------------
         String pic = this.boardDAO.getPic(boardDTO);
 
-        /*
-        // --------------------------------------
-        // 만약에 삭제가 체크되어 있고, 기존 이미지 파일 명이 board 테이블에 존재하면,  
-        // --------------------------------------
-        if( is_del!=null && pic!=null ){
-            // board 테이블에 이미지파일 이름을 삭제하기  
-            int picDelCnt = this.boardDAO.delPic(boardDTO);
-        }
-        */
+        
+    // // --------------------------------------
+    // // 만약에 삭제가 체크되어 있고, 기존 이미지 파일 명이 board 테이블에 존재하면,  
+    // // --------------------------------------
+    // if( is_del!=null && pic!=null ){
+    //     // board 테이블에 이미지파일 이름을 삭제하기  
+    //     int picDelCnt = this.boardDAO.delPic(boardDTO);
+    // }
+        
 
         // --------------------------------------
         // [BoardDAOImpl 객체]의 updateBoard 메소드를 호출하여
         // 게시판 수정 명령한 후 수정 적용행의 개수를 얻는다.
         // --------------------------------------
         int updateCnt = this.boardDAO.updateBoard(boardDTO);
-
-
 
         // ---------------------------------------
         // 파일 업로드 하기
@@ -199,10 +280,9 @@ public class BoardServiceImpl implements BoardService {
         // 게시판 수정 명령한 후 수정 적용행의 개수를 리턴하기.
         // --------------------------------------
         return updateCnt;
-
-
-
     }
+*/
+
 
     // ****************************************************
     // [1개 게시판] 삭제 후 삭제 적용행의 개수를 리턴하는 메소드 선언

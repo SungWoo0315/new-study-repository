@@ -27,6 +27,11 @@ public class FileUpLoad {
 		
 		return newFileName;
 	}
+	// ---------------------------------------
+	public String getNewFileName(boolean flag){
+	
+		return flag?newFileName:null;  // 삼항연산자
+	}
 	// ------------------------------
 	public void uploadFile( String upLoadDir ) throws Exception {
 		// 만약 업로드된 파일이 있으면 
@@ -41,6 +46,12 @@ public class FileUpLoad {
 	public void delete( String filePath ) {
 		File file = new File( filePath );
 		file.delete();
+	}
+	// ------------------------------
+	public void delete( String filePath, boolean flag ) {
+		if( flag==true ){
+			delete( filePath );
+		}
 	}
 }
 
