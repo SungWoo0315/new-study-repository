@@ -12,9 +12,6 @@ public class FileUpLoad {
 	// ---------------------------------------
 	public FileUpLoad(MultipartFile multi){
 		this.multi = multi;
-	}
-	// ---------------------------------------
-	public String getNewFileName(){
 		// 만약 업로드된 파일이 존재하면
 		if( multi!=null && multi.isEmpty()==false ){
 			// 업로드한 파일의 원래 파일명 얻기. 파일명에는 확장자가 포함한다.  
@@ -24,6 +21,10 @@ public class FileUpLoad {
 			// 고유한 새 파일명 얻기. 파일명에는 확장자가 포함한다. 
 			newFileName = UUID.randomUUID() + "." + file_extension;
 		}
+	}
+	// ---------------------------------------
+	public String getNewFileName(){
+		
 		return newFileName;
 	}
 	// ------------------------------
