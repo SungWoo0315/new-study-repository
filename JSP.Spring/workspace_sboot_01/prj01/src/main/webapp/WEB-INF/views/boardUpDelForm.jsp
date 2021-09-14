@@ -31,6 +31,9 @@
 
         $(document).ready(function(){
 
+            // 암호 자동입력. 테스트용.
+            $(".pwd").val("1234");
+
 
             $(".subject").val("${boardDTO.subject}");
 
