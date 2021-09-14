@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,10 +31,19 @@ public class BoardServiceImpl implements BoardService {
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     // 업로드 파일의 저장 경로 저장하는 속성변수 선언하기. 
+    // Info 클래스의 속성변수 board_pic_dir 안의 데이터를 속성변수 uploadDir 에 저장하기.  
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-    String uploadDir = "C:\\Users\\SungWoo\\Desktop\\GitHub\\new-study-repository\\JSP.Spring\\workspace_sboot_01\\prj01\\src\\main\\resources\\static\\resources\\img\\";
-    
-    
+    // String uploadDir = "C:\\Users\\SungWoo\\Desktop\\GitHub\\new-study-repository\\JSP.Spring\\workspace_sboot_01\\prj01\\src\\main\\resources\\static\\resources\\img\\";
+    String uploadDir = Info.board_pic_dir;
+
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // application.properties 파일에 board_pic_dir 라는 변수에 설정된 문자를 속성변수 uploadDir 에 저장하기
+    // 어노테이션 방법. 
+    // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    // @Value("${board_pic_dir}")
+    // String uploadDir2;
+
+
 	// ****************************************************
     // [1개 게시판 글 입력 후 입력 적용 행의 개수] 리턴하는 메소드 선언
 	// ****************************************************
