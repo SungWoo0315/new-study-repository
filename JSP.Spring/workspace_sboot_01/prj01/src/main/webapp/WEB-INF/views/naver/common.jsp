@@ -7,7 +7,10 @@
     <!-- 모든 JSP 페이지 상단에는 무조건 아래 설정이 들어간다. -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
+<!-- ***************************************************** -->
+<!-- 현재 JSP 페이지에서 사용할 Info 클래스 수입하기 -->
+<!-- ***************************************************** -->
+<%@ page import="com.naver.erp.Info"%>
 
 <!-- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
 <!-- JSP 페이지에서 사용할 [사용자 정의 태그]의 한 종류인 [JSTL의 C 코어 태그]를 사용하겠다고 선언 -->
@@ -53,6 +56,14 @@
 <c:set var="bodyColor" value="#F0F8FF" scope="request"/>
 
 
+<!-- ======================================================================== -->
+<!-- naver/ 넣게 해주는 코드 -->
+<!-- ======================================================================== -->
+<!-- <c:set var="naverPath" value="naver/" scope="request"/> -->
+<!-- 위 아래는 같은 코드이다. 아래는 자바클래스 Info 를 이용해서 문자를 넣은것이다 -->
+<c:set var="naverPath" value="<%=Info.naverPath%>" scope="request"/>
+<!-- ======================================================================== -->
+
 
 
 <!-- --------------------------------------------------------------------- -->
@@ -79,7 +90,7 @@
 $(document).ready(function(){
     $("body").prepend(    
         "<center><div><span style='cursor:pointer; font-weight:bold; color:#9400D3;' "
-           + "onclick='location.replace(\"/logout.do\");'>[로그아웃]</span></div></center>"
+           + "onclick='location.replace(\"/${requestScope.naverPath}logout.do\");'>[로그아웃]</span></div></center>"
     );
 
 	$("body").attr("bgcolor","${bodyColor}")

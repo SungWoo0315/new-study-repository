@@ -8,11 +8,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
+<!-- *********************************************************** -->
+<!-- JSP 기술의 한 종류인 [Include Directive]를 이용하여 -->
+<!-- common.jsp 파일 내의 소스를 삽입하기 -->
+<!-- *********************************************************** -->
+<%@include file="common.jsp"%>  
 
 
 <script>
 
 	alert("로그인하고 접속해야 합니다. \n로그인 하십시오!!!!!");
-	location.replace("/loginForm.do")
+	location.replace("/${requestScope.naverPath}loginForm.do")
 
 </script>

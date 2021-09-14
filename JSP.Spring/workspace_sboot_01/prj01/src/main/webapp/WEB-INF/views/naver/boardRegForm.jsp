@@ -72,7 +72,7 @@
                 // ----------------------------------------------------------
                 // 서버쪽 호출 URL 주소 지정
                 // ----------------------------------------------------------
-                url       : "/boardRegProc.do"
+                url       : "/${requestScope.naverPath}boardRegProc.do"
                 // ----------------------------------------------------------
                 // form 태그 안의 입력양식 데이터 즉, 파라미터값을 보내는 방법 지정
                 // ----------------------------------------------------------
@@ -140,7 +140,7 @@
                             alert("댓글 쓰기 성공!")
                         </c:if>
 
-                        location.replace("/boardList.do")
+                        location.replace("/${requestScope.naverPath}boardList.do")
                     } 
                     else{
                         <c:if test="${empty param.b_no}">
@@ -185,7 +185,7 @@
     <!-- **************************************************** -->
     <!-- [게시판 글쓰기] 화면을 출력하는 form 태그 선언 -->
     <!-- **************************************************** -->
-    <form name="boardRegForm" method="POST" action="/boardRegProc.do" enctype="multipart/form-data">
+    <form name="boardRegForm" method="POST" action="/${requestScope.naverPath}boardRegProc.do" enctype="multipart/form-data">
     
         <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding=5>
 
@@ -274,7 +274,7 @@
         <div style="height: 6px;"></div> <!-- 공백조절용 div 태그 -->
         <input type="button" value="저장" onclick="checkBoardRegForm()">
         <input type="reset" value="다시작성">
-        <input type="button" value="목록보기" onclick="location.replace('/boardList.do')">
+        <input type="button" value="목록보기" onclick="location.replace('/${requestScope.naverPath}boardList.do')">
     
         
         <!-- ------------------------------------------------- -->

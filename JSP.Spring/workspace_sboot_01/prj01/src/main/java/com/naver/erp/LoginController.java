@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 // @Controller 를 붙임으로써 [컨트롤러 클래스]임을 지정한다.
 // ---------------------------------------------------------------
 @Controller
+@RequestMapping(value="/naver")
 public class LoginController {
 
     /*  잘못된 코딩 
@@ -59,7 +60,8 @@ public class LoginController {
 
 
 
-
+    private String path = Info.naverPath;
+    
     // ********************************************
     // 가상주소 /loginForm.do 로 접근하면 호출되는 메소드 선언
     // ********************************************
@@ -67,12 +69,8 @@ public class LoginController {
     public ModelAndView loginForm(
         
      ){
-
-
         System.out.print("==================================\r");  
-
         System.out.print("접속 성공, 로그인화면 진입했습니다..!\r");   
-
         System.out.print("==================================\r");   
         // ---------------------------
         // [ModelAndView 객체] 생성하기.
@@ -80,9 +78,8 @@ public class LoginController {
         // [ModelAndView 객체] 리턴하기.
         // ---------------------------
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("loginForm.jsp");
+        mav.setViewName(path+"loginForm.jsp");
         return mav;
-
     }
 
 
@@ -292,7 +289,7 @@ public class LoginController {
         // [ModelAndView 객체] 리턴하기.
         // ----------------------------------------------------------
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("logout.jsp");
+        mav.setViewName(path+"logout.jsp");
         System.out.println("/logout.do 호출");
         return mav;
     } 
@@ -308,7 +305,7 @@ public class LoginController {
         // [ModelAndView 객체] 리턴하기.
         // ----------------------------------------------------------
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("login_alert.jsp");
+        mav.setViewName(path+"login_alert.jsp");
         System.out.println("/login_alert.do 호출");
         return mav;
 

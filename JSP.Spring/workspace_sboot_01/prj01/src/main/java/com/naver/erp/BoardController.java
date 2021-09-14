@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 // @Controller 를 붙임으로써 [컨트롤러 클래스]임을 지정한다.
 // ---------------------------------------------------------------
 @Controller
+@RequestMapping(value="/naver")
 public class BoardController {
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -95,10 +96,8 @@ public class BoardController {
 
 
 
-
-
-
-
+    // 파일 경로 Info 에서 가져오기.
+    private String path = Info.naverPath;
 
 
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -313,7 +312,7 @@ public class BoardController {
         // [ModelAndView 객체] 리턴하기
         // ***************************************
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("boardList.jsp");
+        mav.setViewName(path+"boardList.jsp");
         mav.addObject("boardList", boardList);
         mav.addObject("getBoardListCount", getBoardListCount);
         mav.addObject("pagingNos", map);  
@@ -361,7 +360,7 @@ public class BoardController {
         // ***************************************
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
         // ***************************************
-        mav.setViewName("boardRegForm.jsp");
+        mav.setViewName(path+"boardRegForm.jsp");
         // ***************************************
         // [ModelAndView 객체] 리턴하기
         // ***************************************
@@ -576,7 +575,7 @@ public class BoardController {
         // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
         //*******************************************
         ModelAndView mav = new ModelAndView( );
-        mav.setViewName("boardContentForm.jsp");
+        mav.setViewName(path+"boardContentForm.jsp");
         mav.addObject("boardDTO", boardDTO);
 
         //*******************************************
@@ -606,7 +605,7 @@ public class BoardController {
         // [ModelAndView 객체]에 [호출 JSP 페이지명]을 저장하기
         //*******************************************
         ModelAndView mav = new ModelAndView( );
-        mav.setViewName("boardUpDelForm.jsp");
+        mav.setViewName(path+"boardUpDelForm.jsp");
         mav.addObject("boardDTO", boardDTO);
         return mav;
     }

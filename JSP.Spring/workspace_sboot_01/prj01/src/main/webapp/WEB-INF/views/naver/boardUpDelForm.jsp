@@ -104,7 +104,7 @@
                 // ----------------------------------------------------------
                 // 서버쪽 호출 URL 주소 지정
                 // ----------------------------------------------------------
-                url       : "/boardUpDelProc.do"
+                url       : "/${requestScope.naverPath}boardUpDelProc.do"
                 // ----------------------------------------------------------
                 // form 태그 안의 입력양식 데이터 즉, 파라미터값을 보내는 방법 지정
                 // ----------------------------------------------------------
@@ -166,7 +166,7 @@
 
                         if( boardUpDelCnt==-1 ){
                             alert("게시판 글이 이미 삭제 되었습니다.");
-                            location.replace("/boardList.do");
+                            location.replace("/${requestScope.naverPath}boardList.do");
 
                         }
                         else if( boardUpDelCnt==-2 ){
@@ -198,14 +198,14 @@
 
                             if( boardUpDelCnt == 1 ){
                                 alert("삭제 성공!");
-                                location.replace("/boardList.do");
+                                location.replace("/${requestScope.naverPath}boardList.do");
                                 xxx = "삭제 성공!";
                                 System.out.print(xxx);
 
                             }
                             else if( boardUpDelCnt == -1 ){
                                 alert("게시판 글이 이미 삭제 되었습니다.");
-                                location.replace("/boardList.do")
+                                location.replace("/${requestScope.naverPath}boardList.do")
 
                             }
                             else if( boardUpDelCnt == -2 ){
@@ -380,7 +380,7 @@
             
             <input type="button" value="수정" onclick="checkBoardUpDelForm('up')">
             <input type="button" value="삭제" onclick="checkBoardUpDelForm('del')">
-            <input type="button" value="목록보기" onclick="location.replace('/boardList.do');">
+            <input type="button" value="목록보기" onclick="location.replace('/${requestScope.naverPath}boardList.do');">
         
             <br>
             <hr>
@@ -392,7 +392,7 @@
 
     <c:if test="${empty boardDTO}">
         <script>
-            alert('삭제된 글입니다.'); location.replace('/boardList.do');
+            alert('삭제된 글입니다.'); location.replace('/${requestScope.naverPath}boardList.do');
         </script>
     </c:if>
 
@@ -400,7 +400,7 @@
     /*
     }
     else{
-        out.print("<script>alert('삭제된 글입니다.'); location.replace('/boardList.do');</script>");
+        out.print("<script>alert('삭제된 글입니다.'); location.replace('/${requestScope.naverPath}boardList.do');</script>");
     }
     */
     %>
@@ -409,7 +409,7 @@
     <!-- ****************************************************** -->
     <!-- [게시판 수정/삭제] 화면으로 이동하는 form 태그 선언 -->
     <!-- ****************************************************** -->
-    <form name="boardContentForm" method="POST" action="/boardContentForm.do">
+    <form name="boardContentForm" method="POST" action="/${requestScope.naverPath}boardContentForm.do">
         <input type="hidden" name="b_no" value="${boardDTO.b_no}">
     </form>
 

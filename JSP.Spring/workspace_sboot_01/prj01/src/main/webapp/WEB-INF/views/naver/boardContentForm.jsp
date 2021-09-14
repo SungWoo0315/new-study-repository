@@ -139,12 +139,12 @@
     </table><br>
     <input type="button" value="댓글쓰기" onclick="goBoardRegFrom();">&nbsp;
     <input type="button" value="수정/삭제" onclick="goBoardUpDelForm();">&nbsp;
-    <input type="button" value="글 목록 보기" onclick="location.replace('/boardList.do')">
+    <input type="button" value="글 목록 보기" onclick="location.replace('/${requestScope.naverPath}boardList.do')">
     <%
     /*
     }
     else{
-        out.print("<script>alert('삭제된 글입니다.'); location.replace('/boardList.do');</script>");
+        out.print("<script>alert('삭제된 글입니다.'); location.replace('/${requestScope.naverPath}boardList.do');</script>");
     }
     */
     %>
@@ -152,7 +152,7 @@
     <c:if test="${empty requestScope.boardDTO}">
         <script>
             alert('삭제된 글입니다.'); 
-            location.replace('/boardList.do');
+            location.replace('/${requestScope.naverPath}boardList.do');
         </script>
     </c:if>
 
@@ -160,14 +160,14 @@
     <!-- ****************************************************** -->
     <!-- [게시판 수정/삭제] 화면으로 이동하는 form 태그 선언 -->
     <!-- ****************************************************** -->
-    <form name="boardUpDelForm" method="POST" action="/boardUpDelForm.do">
+    <form name="boardUpDelForm" method="POST" action="/${requestScope.naverPath}boardUpDelForm.do">
         <input type="hidden" name="b_no" value="${requestScope.boardDTO.b_no}">
     </form>
 
     <!-- ****************************************************** -->
     <!-- [게시판 댓글쓰기] 화면으로 이동하는 form 태그 선언 -->
     <!-- ****************************************************** -->
-    <form name="boardRegForm" method="POST" action="/boardRegForm.do">
+    <form name="boardRegForm" method="POST" action="/${requestScope.naverPath}boardRegForm.do">
         <input type="hidden" name="b_no" value="${requestScope.boardDTO.b_no}">
     </form>
 

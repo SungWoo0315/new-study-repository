@@ -7,6 +7,12 @@
     <!-- 모든 JSP 페이지 상단에는 무조건 아래 설정이 들어간다. -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- *********************************************************** -->
+<!-- JSP 기술의 한 종류인 [Include Directive]를 이용하여 -->
+<!-- common.jsp 파일 내의 소스를 삽입하기 -->
+<!-- *********************************************************** -->
+<%@include file="common.jsp"%>  
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -95,7 +101,7 @@
                         // ----------------------------------------------------------
                         // 서버쪽 호출 URL 주소 지정
                         // ----------------------------------------------------------
-                        url       : "/loginProc.do"
+                        url       : "/${requestScope.naverPath}loginProc.do"
                         // ----------------------------------------------------------
                         // form 태그 안의 입력양식 데이터 즉, 파라미터값을 보내는 방법 지정
                         // ----------------------------------------------------------
@@ -118,7 +124,7 @@
                             // ------------------------------------
                             if( idCnt == 1 ){
                                 alert("로그인 성공!")	// 테스트용 확인.  
-                                location.replace("/boardList.do")
+                                location.replace("/${requestScope.naverPath}boardList.do")
                             }
                             // ------------------------------------
                             // 그렇지 않으면, 즉, 아이디, 암호가 존재하지 않으면
@@ -265,7 +271,7 @@
     
     <hr>
 
-    <span style="cursor: pointer;" onclick="location.replace('/boardList.do')">localhost:8081/boardList.do</span><br>
+    <span style="cursor: pointer;" onclick="location.replace('/${requestScope.naverPath}boardList.do')">localhost:8081/boardList.do</span><br>
 </body>
 
 </html>
