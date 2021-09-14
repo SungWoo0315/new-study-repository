@@ -40,25 +40,13 @@ public class BoardServiceImpl implements BoardService {
     public int insertBoard( BoardDTO boardDTO, MultipartFile multi ) throws Exception{
 
         // ---------------------------------------
-        // 업로드한 파일의 새로운 이름정하기
+        // FileUpLoad 객체 생성하기    
         // ---------------------------------------
-        // 업로드한 파일의 파일확장자 포함 새 파일명 저장변수 선언하기. 파일명에는 확장자가 포함한다.  
-        String newFileName = null;
-        // 만약 업로드된 파일이 있으면 
-        if( multi!=null && multi.isEmpty()==false ){
-            // 업로드한 파일의 원래 파일명 얻기. 파일명에는 확장자가 포함한다.  
-            String oriFileName = multi.getOriginalFilename();
-            // 업로드한 파일의 파일 확장자 얻기
-            String file_extension = oriFileName.substring( oriFileName.lastIndexOf(".")+1 );
-
-            // 고유한 새 파일명 얻기. 파일명에는 확장자가 포함한다. 
-            newFileName = UUID.randomUUID() + "." + file_extension;
-            // boardDTO 객체에 새로운 파일명 저장하기.
-            boardDTO.setPic(newFileName);
-        }
-
-
-
+        FileUpLoad fileUpLoad = new FileUpLoad(multi);
+        // ---------------------------------------
+        // boardDTO 객체에 새로운 파일명 저장하기.
+        // ---------------------------------------
+        boardDTO.setPic(fileUpLoad.getNewFileName());
         // ---------------------------------------
         // 만약 엄마글의 글 번호가 1 이상이면 댓글쓰기 이므로
         // 엄마 글 이후의 게시판 글에 대해 출력순서번호를 1 증가 시키기.
@@ -77,25 +65,16 @@ public class BoardServiceImpl implements BoardService {
         // ---------------------------------------
         int boardRegCnt = this.boardDAO.insertBoard(boardDTO);
 
-       
         // ---------------------------------------
         // 파일 업로드 하기
         // ---------------------------------------
-        // 만약 업로드된 파일이 있으면 
-        if( multi!=null && multi.isEmpty()==false ){
-            // 새 파일을 생성하기 File 객체를 생성하면 새 파일을 생성할 수 있다.  
-            File file = new File( uploadDir + newFileName );
-            // 업로드한 파일을 새 파일에 전송하여 덮어쓰기
-            multi.transferTo(file);
-       
-        }
-
-
+        fileUpLoad.uploadFile(uploadDir);
         // ---------------------------------------
         // 1개 게시판 글 입력 적용 행의 개수 리턴하기
         // ---------------------------------------
         System.out.println("BoardServiceImpl. insertBoard() 메서드 수행완료\r");
         return boardRegCnt;
+
 
 
 
