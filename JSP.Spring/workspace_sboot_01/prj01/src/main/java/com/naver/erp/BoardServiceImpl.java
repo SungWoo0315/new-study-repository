@@ -145,8 +145,12 @@ public class BoardServiceImpl implements BoardService {
         // ---------------------------------------
         // 업로드한 파일의 파일확장자 포함 새 파일명 저장변수 선언하기. 파일명에는 확장자가 포함한다.  
         String newFileName = null;
+        String is_del = boardDTO.getIs_del();
+
+        System.out.println("BoardServiceImpl.java 에서, getIs_del 값 확인 -====>" + is_del);
+
         // 만약 업로드된 파일이 있으면 
-        if( multi!=null && multi.isEmpty()==false ){
+        if( multi!=null && multi.isEmpty()==false && is_del==null ){
             // 업로드한 파일의 원래 파일명 얻기. 파일명에는 확장자가 포함한다.  
             String oriFileName = multi.getOriginalFilename();
             // 업로드한 파일의 파일 확장자 얻기
@@ -162,6 +166,16 @@ public class BoardServiceImpl implements BoardService {
         // --------------------------------------
         String pic = this.boardDAO.getPic(boardDTO);
 
+        /*
+        // --------------------------------------
+        // 만약에 삭제가 체크되어 있고, 기존 이미지 파일 명이 board 테이블에 존재하면,  
+        // --------------------------------------
+        if( is_del!=null && pic!=null ){
+            // board 테이블에 이미지파일 이름을 삭제하기  
+            int picDelCnt = this.boardDAO.delPic(boardDTO);
+        }
+        */
+
         // --------------------------------------
         // [BoardDAOImpl 객체]의 updateBoard 메소드를 호출하여
         // 게시판 수정 명령한 후 수정 적용행의 개수를 얻는다.
@@ -173,41 +187,34 @@ public class BoardServiceImpl implements BoardService {
         // ---------------------------------------
         // 파일 업로드 하기
         // ---------------------------------------
-        // 만약 업로드된 파일이 있으면 
-        if( multi!=null && multi.isEmpty()==false ){
-            // ---------------------------------------
-            // 기존 이미지 파일 삭제 하기
-            // ---------------------------------------
-           
-            // board 테이블에 이미지 이름이 있으면 파일 삭제하기 
-            if(pic!=null && pic.length()>0){
-                File file = new File( uploadDir + pic);
-                file.delete();
+        if( is_del==null ){
+            // 만약 업로드된 파일이 있으면 
+            if( multi!=null && multi.isEmpty()==false && is_del==null ){
+                // ---------------------------------------
+                // 기존 이미지 파일 삭제 하기
+                // ---------------------------------------
+            
+                // board 테이블에 이미지 이름이 있으면 파일 삭제하기 
+                if(pic!=null && pic.length()>0){
+                    File file = new File( uploadDir + pic);
+                    file.delete();
+                }
+                // 새 파일을 생성하기 File 객체를 생성하면 새 파일을 생성할 수 있다.  
+                File file = new File( uploadDir + newFileName );
+                // 업로드한 파일을 새 파일에 전송하여 덮어쓰기
+                multi.transferTo(file);
             }
-            // 새 파일을 생성하기 File 객체를 생성하면 새 파일을 생성할 수 있다.  
-            File file = new File( uploadDir + newFileName );
-            // 업로드한 파일을 새 파일에 전송하여 덮어쓰기
-            multi.transferTo(file);
-        }
+        } else{
+            if( pic!=null ){
 
-
-        // 체크박스 이미지 삭제 버튼 클릭하고 수정하면 삭제되도록...
-        String xxx = boardDTO.getImg_delete();
-        System.out.println("getImag_delete 값 확인 -====>" + xxx);
-
-        if( xxx.equals("img_delete,img_delete") && xxx.isEmpty()==false ){
-            // ---------------------------------------
-            // 기존 이미지 파일 삭제 하기
-            // ---------------------------------------
-           
-            // board 테이블에 이미지 이름이 있으면 파일 삭제하기 
-            if(pic!=null && pic.length()>0 && xxx!=null && xxx.length()>0){
                 File file = new File( uploadDir + pic);
+
                 System.out.println("삭제대상 파일이름확인 =====> " + file);
+
                 file.delete();
+
             }
         }
-
 
         // --------------------------------------
         // 게시판 수정 명령한 후 수정 적용행의 개수를 리턴하기.

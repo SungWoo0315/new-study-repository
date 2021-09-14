@@ -349,13 +349,14 @@
                     <td>
                     <!-- ------------------------------------------------- -->
                     <input type="file" name="img" class="img"><br>
-                    <input type="checkbox" name="img_delete" class="img_delete">이미지파일 삭제 (이미지 파일을 삭제할때 클릭하세요)
                     <!-- ------------------------------------------------- -->
                     <c:if test="${!empty requestScope.boardDTO.pic}">
                         <div style="height: 3pt;"></div>    
                         <img src="/resources/img/${requestScope.boardDTO.pic}" width="30%">
 
                     </c:if>
+                    <input type="checkbox" name="is_del" class="is_del" value="yes">이미지파일 삭제 (이미지 파일을 삭제할때 클릭하세요)
+
                     </td>
                 </tr>
 

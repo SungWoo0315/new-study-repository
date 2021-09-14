@@ -468,14 +468,15 @@
             ,writer=#{writer}
             ,content=#{content}
 
-            <if test="pic!=null and pic.length()>0">
-            ,pic=#{pic}
-            </if>
-
-            <if test="img_delete!=null and img_delete.length()>0 and pic==null">
+            <if test="is_del!=null and is_del.length()>0">
             ,pic=null
             </if>
 
+            <if test="is_del==null or is_del.length()==0">
+                <if test="pic!=null and pic.length()>0">
+                ,pic=#{pic}
+                </if>
+            </if>
 
             ,email=#{email}
         where 

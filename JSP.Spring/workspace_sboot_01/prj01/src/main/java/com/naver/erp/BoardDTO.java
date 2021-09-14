@@ -10,10 +10,9 @@ public class BoardDTO {
     private int readcount;
     private String content;
 
-    
-    private String pic;
+	private String pic;
 
-    private String img_delete;
+    private String is_del;
 
     private String pwd;
     private String email;
@@ -22,8 +21,9 @@ public class BoardDTO {
     private int print_level;
     
     
+
     
-	public int getB_no() {
+    public int getB_no() {
 		return b_no;
 	}
 	public void setB_no(int b_no) {
@@ -65,6 +65,12 @@ public class BoardDTO {
 	public void setPic(String pic) {
 		this.pic = pic;
 	}
+	public String getIs_del() {
+		return is_del;
+	}
+	public void setIs_del(String is_del) {
+		this.is_del = is_del;
+	}
 	public String getPwd() {
 		return pwd;
 	}
@@ -95,16 +101,6 @@ public class BoardDTO {
 	public void setPrint_level(int print_level) {
 		this.print_level = print_level;
 	}
-	
-	
-	public String getImg_delete() {
-		return img_delete;
-	}
-	public void setImg_delete(String img_delete) {
-		this.img_delete = img_delete;
-	}
-    
-	
 	
 	
 
