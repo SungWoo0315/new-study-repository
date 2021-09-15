@@ -126,6 +126,7 @@ public class LoginController {
         ,HttpServletResponse response
      ){
 
+        System.out.println("이것이 콘솔에 안찍히면 매개변수쪽이 잘못된 것이다.");
         // --------------------------------------------------
         // HashMap 객체 생성하기
         // HashMap 객체에 로그인 아이디 저장하기
@@ -141,7 +142,7 @@ public class LoginController {
         // --------------------------------------------------
         System.out.println("LoginController.loginProc 해시맵 객체 => " + map);
 
-        int login_idCnt = loginDAO.getLogin_idCnt(map);
+        int login_idCnt = this.loginDAO.getLogin_idCnt(map);
 
         // --------------------------------------------------
         // 만약 login_idCnt q변수 안의 데이터가 1이면
@@ -149,11 +150,12 @@ public class LoginController {
         // 즉, 만약 로그인이 성공했으면
         // --------------------------------------------------
         if( login_idCnt==1 ){
-            
+            // -------------------------------------------
             // HttpSession 객체에 로그인 아이디 저장하기  
             // HttpSession 객체에 로그인 아이디를 저장하면 재 접속 했을 때 다시 꺼내 볼 수 있다.  
             // <참고> HttpSession 객체는 접속한 이우에도 제거되지 않고, 지정된 기간동안 살아 있는 객체이다.  
             // <참고> HttpServlet Request,  HttpServlet Response 객체는 접속할때 생성되고, 응답이후 삭제되는 객체이다.
+            // -------------------------------------------
             session.setAttribute( "login_id", login_id );
 
             // -------------------------------------------
@@ -162,12 +164,16 @@ public class LoginController {
             if(is_login==null){
 
                 // Util.java 에서 함수 호출해서 사용.  
+                // 쿠키명 "login_id" 에 쿠키값 null 로 응답메시지에 쿠키 저장하기
+                // 응답메시지에 저장된 쿠키는 클라이언트쪽에 저장된다. 또는 이미 존재하면 덮어쓴다.  
                 Util.addCookie(
-                    "login_id"
-                    ,null
-                    ,0
-                    ,response
+                    "login_id"      // 쿠키명
+                    ,null           // 쿠키값
+                    ,0              // 유효기간
+                    ,response       // HttpServletResponse 객체
                 );
+                // 쿠키명 "pwd" 에 쿠키값 null 로 응답메시지에 쿠키 저장하기
+                // 응답메시지에 저장된 쿠키는 클라이언트쪽에 저장된다. 또는 이미 존재하면 덮어쓴다.  
                 Util.addCookie(
                     "pwd"
                     ,null
@@ -200,7 +206,11 @@ public class LoginController {
             // -------------------------------------------
             else{
                 // Util.java 에서 함수 호출해서 사용.  
+                // 쿠키명 "login_id" 에 쿠키값 매개변수 login_id 로 응답메시지에 쿠키 저장하기
+                // 응답메시지에 저장된 쿠키는 클라이언트쪽에 저장된다. 또는 이미 존재하면 덮어쓴다.  
                 Util.addCookie( "login_id", login_id, 60*60*24, response );
+                // 쿠키명 "pwd" 에 쿠키값 매개변수 pwd 로 응답메시지에 쿠키 저장하기
+                // 응답메시지에 저장된 쿠키는 클라이언트쪽에 저장된다. 또는 이미 존재하면 덮어쓴다. 
                 Util.addCookie( "pwd", pwd, 60*60*24, response );
 
 
@@ -242,7 +252,10 @@ public class LoginController {
         System.out.println("LoginController.loginProc login_idCnt 보기 => " + login_idCnt);
         // System.out.println( "login_id => " + login_id ); // 입력된 아이디값 콘솔출력.
         // System.out.println( "pwd => " + pwd );           // 입력된 암호값 콘솔 출력.   
-
+        
+        // -------------------------------------------
+        // 로그인 아이디와 암호의 존재 개수 리턴하기
+        // -------------------------------------------
         return login_idCnt;
     }
 

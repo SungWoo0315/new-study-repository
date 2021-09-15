@@ -106,7 +106,7 @@
                 return;
             }
 
-
+            // var is_login = $(".is_login").prop("checked")?$(".is_login").val():"";   //삼항연산자. 체크박스값 JSON 으로 보낼때 사용되어지는것.
             // ---------------------------------------------------
             // 현재 화면에서 페이지 이동 없이(=비동기 방식으로)
             // 서버쪽 loginProc.do 로 접속하여 아이디, 암호의 존재 개수를 얻기
@@ -130,7 +130,7 @@
                         ,data     : $("[name=loginForm]").serialize()       // "name값=value값&name값=value값~" 이렇게 들어간다.
                             // 위 설정은 아래 처럼도 가능
                             //"id=" + id + "&pwd=" + pwd
-                            // ,data : {'id':id, 'pwd':pwd}   // JSON 형태로도 가능.
+                            // ,data : {'login_id':login_id, 'pwd':pwd}   // JSON 형태로도 가능.
                         // ----------------------------------------------------------
                         // 서버의 응답을 성공적으로 받았을 경우 실행할 익명함수 설정.
                         // 익명함수의 매개변수에는 서버가 보내온 아이디 암호의 존재 개수가 들어온다.
@@ -266,7 +266,7 @@
             <tr align=center>
                 <td>
                     <input type="button" value="로그인" class="login">
-                    <input type="checkbox" name="is_login" value="yes" ${empty cookie.login_id.value?'':'checked'}>아이디/암호 기억
+                    <input type="checkbox" name="is_login" class="is_login" value="yes" ${empty cookie.login_id.value?'':'checked'}>아이디/암호 기억
 
             </tr>
             <tr align=center>

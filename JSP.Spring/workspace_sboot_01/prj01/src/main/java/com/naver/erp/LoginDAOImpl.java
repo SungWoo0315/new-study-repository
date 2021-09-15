@@ -34,7 +34,9 @@ public class LoginDAOImpl implements LoginDAO {
 
 		// ------------------------------------------------------
 		// SqlSessionTemplate 객체의 selectOne 메소드 호출로
-		// mybatis 프레임워크가 관리하는 SQL 구문을 호출하여
+		// mybatis 프레임워크가 관리하는 SQL select 구문을 호출하여 얻은
+		// 1행 m열의 데이터를 리턴받는다.  
+		// 이 데이터는 mybatis 쪽에서 resultType 속성값에 설정된다.  
 		// 1행의 데이터인 [로그인 아이디, 암호 존재개수]를 얻기
 		// ------------------------------------------------------
 		int login_idCnt = this.sqlSession.selectOne(
