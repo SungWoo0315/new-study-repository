@@ -61,27 +61,27 @@ function getRandomData( arr ){
 
 	return randomData;
 }
-// --------------------------------------------------------------------------
-function getRandomDataArr( arr, cnt ){
-	var randomDataArr = [];
+// // --------------------------------------------------------------------------
+// function getRandomDataArr( arr, cnt ){
+// 	var randomDataArr = [];
 
-	// ???
+// 	// ???
 
-	return randomDataArr;
-}
+// 	return randomDataArr;
+// }
 
-// --------------------------------------------------------------------------
-function getRandomDataArr2( arr, min_cnt, max_cnt ){
-	var randomDataArr = [];
+// // --------------------------------------------------------------------------
+// function getRandomDataArr2( arr, min_cnt, max_cnt ){
+// 	var randomDataArr = [];
 
-	for (i = min_cnt; i <= max_cnt; i += 1) {
-		var 랜덤숫자 = Math.floor(Math.random() * 20) + 1;
-		if (randomDataArr.indexOf(랜덤숫자) === -1) {
-			randomDataArr.push(랜덤숫자);
-		} 
+// 	for (i = min_cnt; i <= max_cnt; i += 1) {
+// 		var 랜덤숫자 = Math.floor(Math.random() * 20) + 1;
+// 		if (randomDataArr.indexOf(랜덤숫자) === -1) {
+// 			randomDataArr.push(랜덤숫자);
+// 		} 
 
-	return randomDataArr;
-}
+// 	return randomDataArr;
+// }
 
 
 
