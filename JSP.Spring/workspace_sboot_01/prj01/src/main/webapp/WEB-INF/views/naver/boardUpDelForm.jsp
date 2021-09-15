@@ -309,7 +309,7 @@
 
 
         
-            <table class="tbcss2" border="1" class="upDeltable" style="border-collapse:collapse" cellpadding=5>
+            <table class="tbcss2" border="1" class="upDeltable" style="border-collapse:collapse" cellpadding='${requestScope.cellpadding}'>
                 <caption>게시판 수정/삭제</caption>
                 
                 <tr>
@@ -355,7 +355,7 @@
                     <!-- ------------------------------------------------- -->
                     <c:if test="${!empty requestScope.boardDTO.pic}">
                         <div style="height: 3pt;"></div>    
-                        <img src="/resources/img/${requestScope.boardDTO.pic}" width="30%">
+                        <img src="/resources/img/${requestScope.boardDTO.pic}" width="${requestScope.boardImgRate1}">
 
                         <input type="checkbox" name="is_del" class="is_del" value="yes">이미지파일 삭제 (이미지 파일을 삭제할때 클릭하세요)
                     </c:if>

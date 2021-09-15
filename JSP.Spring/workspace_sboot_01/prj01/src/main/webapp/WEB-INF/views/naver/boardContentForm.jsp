@@ -101,7 +101,7 @@
         <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
         <!-- 아래는 requestScope. 을 생략한 키값 EL 을 작성함 -->
-        <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding=5>
+        <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding='${requestScope.cellpadding}'>
             <tr align="center">
                 <th bgcolor="${requestScope.thBgColor}">글번호</th>
                 <td>${boardDTO.b_no}</td>
@@ -127,7 +127,7 @@
                 <th bgcolor="${thBgColor}">이미지</th>
                 <td colspan="3">
                     <c:if test="${!empty requestScope.boardDTO.pic}">
-                        <img src="/resources/img/${requestScope.boardDTO.pic}" width="30%">
+                        <img src="/resources/img/${requestScope.boardDTO.pic}" width="${requestScope.boardImgRate1}">
                     </c:if>
                 </td>
             </tr>

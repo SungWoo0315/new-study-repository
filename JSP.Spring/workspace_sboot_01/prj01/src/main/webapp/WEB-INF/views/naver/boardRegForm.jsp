@@ -187,7 +187,7 @@
     <!-- **************************************************** -->
     <form name="boardRegForm" method="POST" action="/${requestScope.naverPath}boardRegProc.do" enctype="multipart/form-data">
     
-        <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding=5>
+        <table class="tbcss2" border="1" style="border-collapse:collapse" cellpadding='${requestScope.cellpadding}'>
 
         <%-- if문 두종류가 있다. 아래의 choose when 보면서 비교하기.  
             <c:if test="${empty param.b_no}">

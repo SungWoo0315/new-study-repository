@@ -54,8 +54,8 @@
 
 <!-- body 태그 색상지정. -->
 <!-- 같은걸 복사하고 적용하면 맨 밑에 코드 수치가 반영된다. 코드 순서만 바꿔서 비율 조절 가능. -->
+<c:set var="bodyColor" value="#FFE1E6" scope="request"/>
 <c:set var="bodyColor" value="#F0F8FF" scope="request"/>
-<c:set var="bodyColor" value="#FAEBD7" scope="request"/>
 
 
 <!-- ======================================================================== -->
@@ -71,74 +71,10 @@
 <!-- 같은걸 복사하고 적용하면 맨 밑에 코드 수치가 반영된다. 코드 순서만 바꿔서 비율 조절 가능. -->
 <c:set var="boardImgRate1" value="70%" scope="request"/>
 <c:set var="boardImgRate1" value="30%" scope="request"/>
-
 <c:set var="cellpadding" value="5" scope="request"/>
 <c:set var="cellpadding" value="7" scope="request"/>
 
 
-<!-- 헤더, 짝수행, 홀수행 색상 -->
-<c:set var="headerTrColor" value="#1E9E9E" scope="request"/>
-<c:set var="headerTrColor" value="#FF8C8C" scope="request"/>
-<c:set var="oddTrColor" value="#F4FFFF" scope="request"/>
-<c:set var="evenTrColor" value="#FAEBD7" scope="request"/>
-
-
-
-
-
-
-
-<!-- --------------------------------------------------------------------- -->
-<!-- JQuery 라이브러리 수입하기 -->
-<!-- --------------------------------------------------------------------- -->
-<script src="/resources/jquery-1.11.0.min.js" type="text/javascript"></script>
-
-
-<!-- --------------------------------------------------------------------- -->
-<!-- 공용함수 수입하기 -->
-<!-- --------------------------------------------------------------------- -->
-<script src="/resources/common_func.js"></script>
-<script src="/resources/common.js"></script>
-
-
-<!-- --------------------------------------------------------------------- -->
-<!-- CSS 파일 수입하기 -->
-<!-- --------------------------------------------------------------------- -->
-<link href="/resources/common.css" rel="stylesheet" type="text/css">
-
-
-
-<script>
-$(document).ready(function(){
-    $("body").prepend(    
-        "<center><div><span style='cursor:pointer; font-weight:bold; color:#9400D3;' "
-           + "onclick='location.replace(\"/${requestScope.naverPath}logout.do\");'>[로그아웃]</span></div></center>"
-    );
-
-	$("body").attr("bgcolor","${bodyColor}")
-});
-
-
-// *****************************************
-// table 태그 내부의 배경색 바꾸는 함수 선언
-// *****************************************
-function changeBgColor(  ){
-	setTrBgcolor( 
-		// ---------------------------------------------------
-		"tbcss0"        //tableClassV  //테이블 태그의 클래스값
-		// ---------------------------------------------------
-		,"${requestScope.headerTrColor}"   //"#AD9AEE"        //headBgcolor  //헤드 tr 의 배경색값
-		// ---------------------------------------------------
-		,"${requestScope.oddTrColor}"   //"#eef7ff"     //oddTrBgcolor //헤드 tr 이후의 홀수 tr 배경색값
-		// , "white"	//주석 바꿔가면서 색상변경 할 수 있다.
-		// , "red"
-		// ---------------------------------------------------
-		,"${requestScope.evenTrColor}"   //"#D2D2FF"   //evenTrBgcolor//헤드 tr 이후의 짝수 tr 배경색값
-		// ---------------------------------------------------
-		, "lightyellow"   //mouseOverBgcolor//마우스 댔을 때 배경색값
-	);
-}
-</script>
 
 
 
