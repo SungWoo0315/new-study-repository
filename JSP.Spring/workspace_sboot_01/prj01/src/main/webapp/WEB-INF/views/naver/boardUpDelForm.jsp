@@ -396,6 +396,9 @@
         </script>
     </c:if>
 
+    <br>
+    [현재 게시글 총개수 : ${requestScope.totCnt}개]
+
     <%
     /*
     }

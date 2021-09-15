@@ -452,8 +452,9 @@
     <!-- <참고> EL 은 JSP 페이지에서 사용가능한 언어이다. -->
     <!--        즉, EL 은 JSP 기술의 한 종류이다. -->
     <!-- *********************************************************** -->
-    <span class="boardListAllCnt" style="height: 10px;">총 ${requestScope.getBoardListCount}개</span> <!-- EL 예시. 위 코드랑 비교. -->
+    검색 총 개수 => <span class="boardListAllCnt" style="height: 10px;">${requestScope.getBoardListCount}</span> / ${requestScope.totCnt}개 <!-- EL 예시. 위 코드랑 비교. -->
 
+    <br>
         <!-- --------------------------------------------------- -->
         <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
         <!-- 페이징 처리 관련 데이터이다. -->
