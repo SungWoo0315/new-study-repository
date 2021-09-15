@@ -60,7 +60,7 @@ public class LoginController {
 
 
 
-    private String path = Info.naverPath;
+    private String path = Info.naverPath;   // naver/ 가 들어있다.
     
     // ********************************************
     // 가상주소 /loginForm.do 로 접근하면 호출되는 메소드 선언
@@ -78,7 +78,7 @@ public class LoginController {
         // [ModelAndView 객체] 리턴하기.
         // ---------------------------
         ModelAndView mav = new ModelAndView();
-        mav.setViewName(path+"loginForm.jsp");
+        mav.setViewName(path+"loginForm.jsp"); // 경로에 "/WEB-INF/views/" 가 붙고 나머지가 붙는다.
         return mav;
     }
 
