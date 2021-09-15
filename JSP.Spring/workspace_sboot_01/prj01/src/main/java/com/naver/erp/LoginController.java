@@ -161,6 +161,23 @@ public class LoginController {
             // -------------------------------------------
             if(is_login==null){
 
+                // Util.java 에서 함수 호출해서 사용.  
+                Util.addCookie(
+                    "login_id"
+                    ,null
+                    ,0
+                    ,response
+                );
+                Util.addCookie(
+                    "pwd"
+                    ,null
+                    ,0
+                    ,response
+                );
+
+
+
+
                 /* 공용함수로 인해서 주석처리.
                 // Cookie 객체를 생성하고 쿠키명-쿠키값을 ["login_id"-null]로 하기
                 Cookie cookie1 = new Cookie("login_id",null);
@@ -177,27 +194,18 @@ public class LoginController {
                 response.addCookie(cookie1);
                 response.addCookie(cookie2);
                 */
-
-                // Util.java 에서 함수 호출해서 사용.  
-                Util.addCookie(
-                    "login_id"
-                    ,null
-                    ,0
-                    ,response
-                );
-                Util.addCookie(
-                    "pwd"
-                    ,null
-                    ,0
-                    ,response
-                );
-                
-
             } 
             // -------------------------------------------
             // 매개변수 is_login 에 "yes" 가 저장되어 있으면(=[아이디, 암호 자동입력]의사 있을 경우)
             // -------------------------------------------
             else{
+                // Util.java 에서 함수 호출해서 사용.  
+                Util.addCookie( "login_id", login_id, 60*60*24, response );
+                Util.addCookie( "pwd", pwd, 60*60*24, response );
+
+
+
+
 
                 /* 공용함수로 인한 주석처리.
                 // -------------------------------------------
@@ -216,22 +224,18 @@ public class LoginController {
                 // Cookie 객체가 소유한 쿠키를 응답메시지에 저장하기.  
                 response.addCookie(cookie1);
                 response.addCookie(cookie2);
-                */
-
-                // Util.java 에서 함수 호출해서 사용.  
-                Util.addCookie(
-                    "login_id"
-                    ,login_id
-                    ,60*60*24
-                    ,response
-                );
-                Util.addCookie(
-                    "pwd"
-                    ,pwd
-                    ,60*60*24
-                    ,response
-                );
+                */              
             }
+
+            // --------------------------------------------------
+            // HttpSession 객체에 메시지 저장하기.
+            // HttpSession 객체에 저장된 데이터는 모든 JSP 페이지에서 ${sessionScope.키값명} 으로 꺼내 표현 할 수 있다.
+            // sessionScope 는 생략 가능하다.  
+            // --------------------------------------------------
+            session.setAttribute( 
+                "msg"
+                , " HttpSession 테스트 입니다.  ...! " 
+            );
 
         }
 

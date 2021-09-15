@@ -357,8 +357,8 @@
                         <div style="height: 3pt;"></div>    
                         <img src="/resources/img/${requestScope.boardDTO.pic}" width="30%">
 
+                        <input type="checkbox" name="is_del" class="is_del" value="yes">이미지파일 삭제 (이미지 파일을 삭제할때 클릭하세요)
                     </c:if>
-                    <input type="checkbox" name="is_del" class="is_del" value="yes">이미지파일 삭제 (이미지 파일을 삭제할때 클릭하세요)
 
                     </td>
                 </tr>
@@ -398,6 +398,8 @@
 
     <br>
     [현재 게시글 총개수 : ${requestScope.totCnt}개]
+    <div>${sessionScope.msg}</div>
+
 
     <%
     /*

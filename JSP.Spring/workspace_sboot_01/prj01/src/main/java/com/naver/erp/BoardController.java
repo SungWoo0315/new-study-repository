@@ -55,6 +55,7 @@ public class BoardController {
     // @RequestMapping 이 붙은 메소드가 호출되기 전에 호출되는 메소드 선언  
     // @ModelAttribute 가 붙은 메소드는 @RequestMapping 이 붙은 메소드가 호출되기 전에 호출되는 메소드이다.    
     // @ModelAttribute("키값명")이 붙은 메소드가 리턴하는 데이터는
+    // 스프링이 HttpServletRequest 객체에 setAttribute( "키값명", 리턴데이터 ) 메소드를 호출하므로
     // @RequestMapping(~)이 붙은 메소드 호출 후에 이동하는 JSP 페이지에서 ${requestScope.키값명}으로 꺼낼 수 있다.  
     // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     @ModelAttribute("totCnt")
