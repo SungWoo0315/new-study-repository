@@ -126,6 +126,7 @@ public class BoardController {
     
         // --------------------------------------------------
         // 파라미터 값을 저장하고 있는 BoardSearchDTO 객체를 받아오는 매개변수 선언
+        // 파라미터명과 동일한 이름을 가진 속성변수에 파라미터값이 저장된다.  
         // --------------------------------------------------
         BoardSearchDTO boardSearchDTO
         
@@ -158,6 +159,15 @@ public class BoardController {
 /*
         System.out.println("====================================");
         System.out.println("컨트롤러 /boardList.do 진행...시작... ");
+
+
+        // MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+        // MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+        // 아래 로직은 공식과도 같은 로직이므로 복사해서 쓰면된다.
+        // 아래 로직에서 복사해서 사용 시 BoardSearchDTO 객체 이름만 바꾸면 된다.    
+        // 그래서 공용처리해서 주석 다음 코드로 실행하였다.  
+        // MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+        // MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
         // ***************************************
         // 검색 조건에 맞는 [게시판 목록의 총개수] 얻기
