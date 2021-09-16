@@ -49,7 +49,7 @@
                 function(){
                     // 아이디와 암호의 유효성 체크하는 
                     // checkLoginForm() 함수 호출하기.
-                    // checkLoginForm();
+                    checkLoginForm();
 
 
                     // 랜덤 확인.

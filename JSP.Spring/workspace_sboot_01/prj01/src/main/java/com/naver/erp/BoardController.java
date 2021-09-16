@@ -225,11 +225,11 @@ public class BoardController {
         // ***************************************
         List<Map<String, String>> boardList = this.boardDAO.getBoardList( boardSearchDTO );
 
-
         // ***************************************
         // [ModelAndView 객체] 생성하기
         // ***************************************
         ModelAndView mav = new ModelAndView();
+
         // ***************************************
         // [ModelAndView 객체] 에 [호출 JSP 페이지명]을 저장하기
         // ***************************************
@@ -249,14 +249,15 @@ public class BoardController {
         // ***************************************
         mav.addObject("boardList", boardList);
         mav.addObject("getBoardListCount", getBoardListCount);
-        
-        mav.addObject("last_pageNo", last_pageNo);
-        mav.addObject("min_pageNo", min_pageNo);
-        mav.addObject("max_pageNo", max_pageNo);
-        
+        // -----
+        mav.addObject("last_pageNo", last_pageNo);      // JSP 페이지에서 페이징 번호 출력 시 사용할 데이터
+        mav.addObject("min_pageNo", min_pageNo);        // JSP 페이지에서 페이징 번호 출력 시 사용할 데이터
+        mav.addObject("max_pageNo", max_pageNo);        // JSP 페이지에서 페이징 번호 출력 시 사용할 데이터
+        // -----
         mav.addObject("selectPageNo", selectPageNo);
         mav.addObject("rowCntPerPage", rowCntPerPage);
         mav.addObject("pageNoCntPerPage", pageNoCntPerPage);
+        
 */
 
         // 공용함수처리, 페이징 예시...

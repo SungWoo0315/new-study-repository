@@ -416,21 +416,32 @@
             
             <hr>
 
+            <!-- 어제, 오늘, 그제 체크박스들 -->
             <input type="checkbox" name="day" class="day" value="오늘" > 오늘
             <input type="checkbox" name="day" class="day" value="어제" > 어제
             <input type="checkbox" name="day" class="day" value="그제" > 그제
             <!-- 다음주 숙제 부분 -->
             <input type="checkbox" name="day" class="day" value="최근7일" > 최근7일
 
+
             <!-- --------------------------------------------------- -->
             <!-- 선택한, 클릭한 페이지번호를 저장할 hidden 입력양식 선언 -->
             <!-- 페이징 처리 관련 데이터이다. -->
+            <!-- 등록일 정렬 관련 데이터를 저장할 hidden 입력양식 선언 -->
             <!-- --------------------------------------------------- -->
             <input type="hidden" name="selectPageNo" class="selectPageNo" value="1">
             <input type="hidden" name="sort" class="sort" value="">
               
+
+
+            <div style="height: 3px;"></div> <!-- div 태그 활용 공백 조절 -->
+
+
             <!-- --------------------------------------------------- -->
-            <div style="height: 3px;"></div> <!-- 공백 조절 -->
+            <!-- 검색 버튼 입력양식 선언 -->
+            <!-- 모두검색 버튼 입력양식 선언 -->
+            <!-- 새글쓰기 글씨에 링크 걸기. 클릭 시 goBoardRegForm() 함수 호출하기 -->
+            <!-- --------------------------------------------------- -->
             <input type="button" value="검색" class="boardSearch" onclick="search();">&nbsp;
             <input type="button" value="모두검색" class="boardSearchAll" onclick="searchAll();">&nbsp;
             <hr>
@@ -442,31 +453,31 @@
     
     <center>
 
-    <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
+        <div style="height: 10px;"></div> <!-- 공백조절용 div 태그 -->
 
-    <!-- *********************************************************** -->
-    <!-- 검색된 목록의 총개수 출력하기 -->
-    <!-- *********************************************************** -->
-    <!-- EL(Expression Language) 을 사용하여 HttpServletRequest 객체에  -->
-    <!-- setAttribute 메소드로 저장된 키값 "getBoardListCount" 로 저장된 데이터를 꺼내서 표현하기 -->
-    <!-- <참고> EL 은 JSP 페이지에서 사용가능한 언어이다. -->
-    <!--        즉, EL 은 JSP 기술의 한 종류이다. -->
-    <!-- *********************************************************** -->
-    검색 총 개수 => <span class="boardListAllCnt" style="height: 10px;">${requestScope.getBoardListCount}</span> / ${requestScope.totCnt}개 <!-- EL 예시. 위 코드랑 비교. -->
+        <!-- *********************************************************** -->
+        <!-- 검색된 목록의 총개수 출력하기 -->
+        <!-- *********************************************************** -->
+        <!-- EL(Expression Language) 을 사용하여 HttpServletRequest 객체에  -->
+        <!-- setAttribute 메소드로 저장된 키값 "getBoardListCount" 로 저장된 데이터를 꺼내서 표현하기 -->
+        <!-- <참고> EL 은 JSP 페이지에서 사용가능한 언어이다. -->
+        <!--        즉, EL 은 JSP 기술의 한 종류이다. -->
+        <!-- *********************************************************** -->
+        검색 총 개수 => <span class="boardListAllCnt" style="height: 10px;">${requestScope.getBoardListCount}</span> / ${requestScope.totCnt}개 <!-- EL 예시. 위 코드랑 비교. -->
 
-    <br>
-        <!-- --------------------------------------------------- -->
-        <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
-        <!-- 페이징 처리 관련 데이터이다. -->
-        <!-- --------------------------------------------------- -->
-        <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20" selected>20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-            <option value="100">100</option>
-        </select> 행보기
+        <br>
+            <!-- --------------------------------------------------- -->
+            <!-- 한 화면에 보여줄 검색 결과물 행의 개수 관련 입력양식 선언 -->
+            <!-- 페이징 처리 관련 데이터이다. -->
+            <!-- --------------------------------------------------- -->
+            <select  name="rowCntPerPage" class="rowCntPerPage" onchange="search();">  
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20" selected>20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="100">100</option>
+            </select> 행보기
 
     </form>
 
