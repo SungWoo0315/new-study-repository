@@ -51,9 +51,11 @@
                     // checkLoginForm() 함수 호출하기.
                     // checkLoginForm();
 
-                    var arr= [1,2,3,4,5,6,7,8,9];
 
-                    var alr = getRandomData(arr)
+                    // 랜덤 확인.
+                    var arr= [1,2,3,4,5];
+
+                    var alr = getRandomDataArr(arr,2)
 
                     alert(alr);
 

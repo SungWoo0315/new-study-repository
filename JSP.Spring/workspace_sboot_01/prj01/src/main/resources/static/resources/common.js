@@ -51,24 +51,42 @@ function setTrBgcolor( tableClassV, headBgcolor, oddTrBgcolor, evenTrBgcolor, mo
 	}
 }
 
-
+// --------------------------------------------------------------------------
+// 1차원 Array 객체에 저장된 데이터 중에 랜덤하게 
+// 하나의 데이터를 복사해서 리턴하는 함수  
 // --------------------------------------------------------------------------
 function getRandomData( arr ){
-	var randomData = "";
+	// Array 객체의 배열변수의 개수, null 값도 개수에 들어간다.  
 	var cnt = arr.length;
+	// 랜덤한 인덱스번호 구하기  
 	var idx = Math.floor(Math.random()*cnt)
-	randomData = arr[idx];
-
-	return randomData;
+	// 랜덤한 인덱스번호에 해당하는 배열변수의 데이터 리턴하기  
+	return arr[idx];
 }
-// // --------------------------------------------------------------------------
-// function getRandomDataArr( arr, cnt ){
-// 	var randomDataArr = [];
+// --------------------------------------------------------------------------
+// 1차원 Array 객체에 저장된 데이터 중에 랜덤하게 
+// 원하는 개수의 데이터를 복사해서 또 다른 Array 객체에 담아 리턴하는 함수.  
+// --------------------------------------------------------------------------
+function getRandomDataArr( arr, cnt ){
+	var randomDataArr = [];
+	var tmpArr = [];
 
-// 	// ???
-
-// 	return randomDataArr;
-// }
+	while( true ){
+		var randomData = getRandomData( arr );
+		var tmp_cnt = 0;
+		for( var i=0; i<tmpArr.length; i++){
+			if( randomData==tmpArr[i] ){
+				tmp_cnt++;
+				break;
+			}
+		}
+		if( tmp_cnt>0 ){ continue; }
+		randomDataArr.push(randomData);
+		tmpArr.push(randomData);
+		if( randomDataArr.length==cnt ){ break; }
+	}
+	return randomDataArr;
+}
 
 // // --------------------------------------------------------------------------
 // function getRandomDataArr2( arr, min_cnt, max_cnt ){
