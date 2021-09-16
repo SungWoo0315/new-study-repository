@@ -64,10 +64,41 @@ function getRandomData( arr ){
 	return arr[idx];
 }
 // --------------------------------------------------------------------------
+// 원본을 훼손하는 랜덤뽑기.
+function getRandomData_with_del( arr ){
+	var cnt = arr.length;
+	var idx = Math.floor( Math.random()*cnt );
+	var randomData = arr[idx];
+	arr.splice(idx,1)
+	return randomData;
+}
+
+
+
+// --------------------------------------------------------------------------
 // 1차원 Array 객체에 저장된 데이터 중에 랜덤하게 
 // 원하는 개수의 데이터를 복사해서 또 다른 Array 객체에 담아 리턴하는 함수.  
 // --------------------------------------------------------------------------
 function getRandomDataArr( arr, cnt ){
+	if(arr==null || arr.length==0){
+		alert("배열변수의 개수가 없습니다.");
+		return null;
+	}
+	if(arr.length<cnt){
+		alert("배열변수의 개수보다 랜덤하게 뽑을 개수가 큽니다.");
+		return null;
+	}
+	var randomDataArr = [];
+	var arr2 = arr.slice(0); // 0번부터 끝까지 복사.
+
+	for( var i=1; i<=cnt; i++){
+		randomDataArr.push( getRandomData_with_del(arr2) )
+	}
+	return randomDataArr;
+
+
+
+	/* 공부용.
 	var randomDataArr = [];
 	var tmpArr = [];
 
@@ -86,20 +117,35 @@ function getRandomDataArr( arr, cnt ){
 		if( randomDataArr.length==cnt ){ break; }
 	}
 	return randomDataArr;
+	*/
 }
 
-// // --------------------------------------------------------------------------
-// function getRandomDataArr2( arr, min_cnt, max_cnt ){
-// 	var randomDataArr = [];
+// --------------------------------------------------------------------------
+// 1차원 Array 객체에 저장된 데이터 중에 랜덤하게 
+// min_cnt ~ max_cnt 사이 개수 하나 골라서 그 개수 만큼 데이터를 복사해서 또 다른 Array 객체에 담아 리턴하는 함수.  
+// --------------------------------------------------------------------------
+function getRandomDataArr2( arr, min_cnt, max_cnt ){
+	if(arr==null || arr.length==0){
+		alert("배열변수의 개수가 없습니다.");
+		return null;
+	}
+	if(arr.length<min_cnt){
+		alert("배열변수의 개수보다 랜덤하게 뽑을 개수가 큽니다.");
+		return null;
+	}
+	if(max_cnt<min_cnt){
+		alert("뽑을 개수의 범위가 맞지않습니다.");
+		return null;
+	}
+	var randomCntArr = [];
 
-// 	for (i = min_cnt; i <= max_cnt; i += 1) {
-// 		var 랜덤숫자 = Math.floor(Math.random() * 20) + 1;
-// 		if (randomDataArr.indexOf(랜덤숫자) === -1) {
-// 			randomDataArr.push(랜덤숫자);
-// 		} 
-
-// 	return randomDataArr;
-// }
+	for ( i=min_cnt; i <= max_cnt; i++ ) {
+		randomCntArr.push(i);
+	} 	
+	var randomCnt = getRandomData( randomCntArr );
+	var arr2 = arr.slice(0);
+	return getRandomDataArr(arr2, randomCnt);
+}
 
 
 
