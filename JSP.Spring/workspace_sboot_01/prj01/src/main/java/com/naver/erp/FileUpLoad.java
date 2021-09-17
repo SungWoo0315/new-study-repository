@@ -11,6 +11,7 @@ public class FileUpLoad {
 	private	String newFileName;
 	// ---------------------------------------
 	public FileUpLoad(MultipartFile multi){
+		// 매개변수로 들어온 MultipartFile 객체를 속성변수 multi 에 저장하기.
 		this.multi = multi;
 		// 만약 업로드된 파일이 존재하면
 		if( multi!=null && multi.isEmpty()==false ){
