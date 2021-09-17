@@ -318,14 +318,133 @@ loginForm.jsp 에는 DB 연동 결과물이 없다. 왜? 로그인 화면은 누
 
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<문12> JSP 페이지에서 ${requestScope.xxx.yyy} 코딩이 있으면 어떻게 분석하나?  
+<문12> JSP 페이지에서 ${requestScope.xxx.name} 코딩이 있으면 어떻게 분석하나?  
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+    -----------------------------------------
+    HashMap 객체에 데이터 저장한 후
+    HttpServletRequest 객체에 HashMap 객체 저장한 경우
+    -----------------------------------------
+    Map xxx = new HashMap<String,String>();
+    xxx.push("name","홍길동");
+    xxx.push("age","23");
+    request.setAttribute("xxx",xxx);        // request 에는 HttpservletRequest 객체가 저장되어 있다.
+    -----------------------------------------
+    HashMap 객체에 데이터 저장한 후
+    ModelAndView 객체에 HashMap 객체 저장한 경우
+    -----------------------------------------
+    Map xxx = new HashMap<String,String>();
+    xxx.push("name","홍길동");
+    xxx.push("age","23");
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("호출할JSP페이지명");
+    mav.addObject("xxx",xxx);
+    -----------------------------------------
+
+    -----------------------------------------
+    위 두 경우에 "xxx" 라는 키값으로 저장된 HashMap 객체 안의 "name" 키값의 "홍길동"을 
+    JSP 페이지에서 꺼내서 표현할 때 아래처럼 한다.  
+    -----------------------------------------
+    ${requestScope.xxx.name}
+    -----------------------------------------
+
+
+
+    Employee 가 DTO 객체일 때. 
+    -----------------------------------------
+    Employee 객체에 데이터 저장한 후
+    HttpServletRequest 객체에 Employee 객체 저장한 경우
+    -----------------------------------------
+    Employee xxx = new Employee();
+    xxx.setName("홍길동");               // name 이란 속성변수에 "홍길동" 저장하기
+    xxx.setAge("23");                   // age 라는 속성변수에 "23" 저장하기
+    request.setAttribute("xxx",xxx);    // request 에는 HttpservletRequest 객체가 저장되어 있다.
+    -----------------------------------------
+    Employee 객체에 데이터 저장한 후
+    ModelAndView 객체에 Employee 객체 저장한 경우
+    -----------------------------------------
+    Employee xxx = new Employee();
+    xxx.setName("홍길동");              // name 이란 속성변수에 "홍길동" 저장하기
+    xxx.setAge("23");                   // age 라는 속성변수에 "23" 저장하기
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("호출할JSP페이지명");
+    mav.addObject("xxx",xxx);
+    -----------------------------------------
+
+    -----------------------------------------
+    위 두 경우에 "xxx" 라는 키값으로 저장된 Employee 객체 안의 name 속성변수 안의 "홍길동"을 
+    JSP 페이지에서 꺼내서 표현할 때 아래처럼 한다.  
+    -----------------------------------------
+    ${requestScope.xxx.name}
+    -----------------------------------------
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<문13> JSP 페이지에서 ${sessionScope.xxx.name} 코딩이 있으면 어떻게 분석하나?  
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+    -----------------------------------------
+    HashMap 객체에 데이터 저장한 후
+    HttpSession 객체에 HashMap 객체 저장한 경우
+    -----------------------------------------
+    Map xxx = new HashMap<String,String>();
+    xxx.push("name","홍길동");
+    xxx.push("age","23");
+    sessionScope.setAttribute("xxx",xxx);       // session 에는 HttpSession 객체가 저장되어 있다.
+    -----------------------------------------
+
+    Employee 가 DTO 객체일 때. 
+    -----------------------------------------
+    Employee 객체에 데이터 저장한 후
+    HttpSession 객체에 Employee 객체 저장한 경우
+    -----------------------------------------
+    Employee xxx = new Employee();
+    xxx.setName("홍길동");                      // name 이란 속성변수에 "홍길동" 저장하기
+    xxx.setAge("23");                          // age 라는 속성변수에 "23" 저장하기
+    sessionScope.setAttribute("xxx",xxx);      // session 에는 HttpSession 객체가 저장되어 있다.
+   
+    -----------------------------------------
+    위 두 경우에 "xxx" 라는 키값으로 저장된 Employee 객체 안의 name 속성변수 안의 "홍길동"을 
+    JSP 페이지에서 꺼내서 표현할 때 아래처럼 한다.  
+    -----------------------------------------
+    ${sessionScope.xxx.name}
+    -----------------------------------------
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<문14> JSP 페이지에서 ${xxx.name} 코딩이 있으면 어떻게 분석하나?  
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    ${sessionScope.xxx.name} 으로 찾아서 표현하거나 
+    없으면,  
+    ${requestScope.xxx.name} 으로 찾아서 표현한다.  
+    그래도 없으면 아무것도 표현하지 않는다.  
 
 
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<문13> JSP 페이지에서 ${xxx.yyy} 코딩이 있으면 어떻게 분석하나?  
+<문15> JSP 페이지에서 아래와 같은 코딩이 있으면 어떻게 분석하나? 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    <div>
+    <c:if test="${empty request.xxx}">
+        <span>
+            홍길동
+        </span>
+    </c:if>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
