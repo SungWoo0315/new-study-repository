@@ -451,10 +451,10 @@ public class BoardController {
         if( multi.isEmpty()==false ){
      
             // 만약에 업로드된 파일의 크기가 1000000 byte(=1000kb) 보다 크면 
-            if( multi.getSize()>1000000){
+            if( multi.getSize()>10000000){
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("boardRegCnt", "0");
-                map.put("msg", "업로드 파일이 1000kb 보다 크면 업로드 할 수 없습니다.");
+                map.put("msg", "업로드 파일이 10mb 보다 크면 업로드 할 수 없습니다.");
                 return map;
             }
 
@@ -463,7 +463,7 @@ public class BoardController {
 
             System.out.println("파일이름 확인하기 =>>> " + fileName);
             
-            if( fileName.endsWith(".jpg")==false && fileName.endsWith(".gif")==false && fileName.endsWith(".png")==false ){
+            if( fileName.endsWith(".jpeg")==false && fileName.endsWith(".jpg")==false && fileName.endsWith(".gif")==false && fileName.endsWith(".png")==false ){
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("boardRegCnt", "0");
                 map.put("msg", "이미지 파일 형식이 아닙니다.");
