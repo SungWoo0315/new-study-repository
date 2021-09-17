@@ -318,14 +318,183 @@ loginForm.jsp 에는 DB 연동 결과물이 없다. 왜? 로그인 화면은 누
 
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<문12> JSP 페이지에서 ${requestScope.xxx.yyy} 코딩이 있으면 어떻게 분석하나?  
+<문12> JSP 페이지에서 ${requestScope.xxx.name} 코딩이 있으면 어떻게 분석하나?  
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+    -----------------------------------------
+    HashMap 객체에 데이터 저장한 후
+    HttpServletRequest 객체에 HashMap 객체 저장한 경우
+    -----------------------------------------
+    Map xxx = new HashMap<String,String>();
+    xxx.push("name","홍길동");
+    xxx.push("age","23");
+    request.setAttribute("xxx",xxx);        // request 에는 HttpservletRequest 객체가 저장되어 있다.
+    -----------------------------------------
+    HashMap 객체에 데이터 저장한 후
+    ModelAndView 객체에 HashMap 객체 저장한 경우
+    -----------------------------------------
+    Map xxx = new HashMap<String,String>();
+    xxx.push("name","홍길동");
+    xxx.push("age","23");
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("호출할JSP페이지명");
+    mav.addObject("xxx",xxx);
+    -----------------------------------------
+
+    -----------------------------------------
+    위 두 경우에 "xxx" 라는 키값으로 저장된 HashMap 객체 안의 "name" 키값의 "홍길동"을 
+    JSP 페이지에서 꺼내서 표현할 때 아래처럼 한다.  
+    -----------------------------------------
+    ${requestScope.xxx.name}
+    -----------------------------------------
+
+
+
+    Employee 가 DTO 객체일 때. 
+    -----------------------------------------
+    Employee 객체에 데이터 저장한 후
+    HttpServletRequest 객체에 Employee 객체 저장한 경우
+    -----------------------------------------
+    Employee xxx = new Employee();
+    xxx.setName("홍길동");               // name 이란 속성변수에 "홍길동" 저장하기
+    xxx.setAge("23");                   // age 라는 속성변수에 "23" 저장하기
+    request.setAttribute("xxx",xxx);    // request 에는 HttpservletRequest 객체가 저장되어 있다.
+    -----------------------------------------
+    Employee 객체에 데이터 저장한 후
+    ModelAndView 객체에 Employee 객체 저장한 경우
+    -----------------------------------------
+    Employee xxx = new Employee();
+    xxx.setName("홍길동");              // name 이란 속성변수에 "홍길동" 저장하기
+    xxx.setAge("23");                   // age 라는 속성변수에 "23" 저장하기
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("호출할JSP페이지명");
+    mav.addObject("xxx",xxx);
+    -----------------------------------------
+
+    -----------------------------------------
+    위 두 경우에 "xxx" 라는 키값으로 저장된 Employee 객체 안의 name 속성변수 안의 "홍길동"을 
+    JSP 페이지에서 꺼내서 표현할 때 아래처럼 한다.  
+    -----------------------------------------
+    ${requestScope.xxx.name}
+    -----------------------------------------
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<문13> JSP 페이지에서 ${sessionScope.xxx.name} 코딩이 있으면 어떻게 분석하나?  
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+    -----------------------------------------
+    HashMap 객체에 데이터 저장한 후
+    HttpSession 객체에 HashMap 객체 저장한 경우
+    -----------------------------------------
+    Map xxx = new HashMap<String,String>();
+    xxx.push("name","홍길동");
+    xxx.push("age","23");
+    sessionScope.setAttribute("xxx",xxx);       // session 에는 HttpSession 객체가 저장되어 있다.
+    -----------------------------------------
+
+    Employee 가 DTO 객체일 때. 
+    -----------------------------------------
+    Employee 객체에 데이터 저장한 후
+    HttpSession 객체에 Employee 객체 저장한 경우
+    -----------------------------------------
+    Employee xxx = new Employee();
+    xxx.setName("홍길동");                      // name 이란 속성변수에 "홍길동" 저장하기
+    xxx.setAge("23");                          // age 라는 속성변수에 "23" 저장하기
+    sessionScope.setAttribute("xxx",xxx);      // session 에는 HttpSession 객체가 저장되어 있다.
+   
+    -----------------------------------------
+    위 두 경우에 "xxx" 라는 키값으로 저장된 Employee 객체 안의 name 속성변수 안의 "홍길동"을 
+    JSP 페이지에서 꺼내서 표현할 때 아래처럼 한다.  
+    -----------------------------------------
+    ${sessionScope.xxx.name}
+    -----------------------------------------
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<문14> JSP 페이지에서 ${xxx.name} 코딩이 있으면 어떻게 분석하나?  
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    ${sessionScope.xxx.name} 으로 찾아서 표현하거나 
+    없으면,  
+    ${requestScope.xxx.name} 으로 찾아서 표현한다.  
+    그래도 없으면 아무것도 표현하지 않는다.  
 
 
 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-<문13> JSP 페이지에서 ${xxx.yyy} 코딩이 있으면 어떻게 분석하나?  
+<문15> JSP 페이지에서 아래와 같은 코딩이 있으면 어떻게 분석하나? 
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    -----------------------------------------
+    <div>
+    <c:if test="${!empty requestScope.xxx}">
+            홍길동
+    </c:if>
+    </div>
+    -----------------------------------------
+    <c: 로 시작하는 태그는 
+    자카르타라는 단체에서 만든 JSTL [사용자 정의 태그=custom tag]중에 c코어 태그이다.  
+    사용자 정의 태그(=custom tag)란 코딩은 HTML 태그의 형식을 가지고 있지만
+    실행시 뒤에서 자바코드로 바꾸어 실행되는 태그를 말한다.  
+    초급개발자, 디자이너, 퍼블리셔 들의 접근성을 높이기 위함이다.  
+    그리고 null 처리에 대해 관대하다. 즉, null 같은 경우 무시하거나 표현을 하지 않는다.  
+    위 코딩을 아래 자바로 바꾸면 금방 이해가 갈것이다.  
+    ${EL문법} 에서 EL문법 중에 empty 는 연산자로서 오른쪽 데이터가 null 이거나 길이가 없으면 
+    true 를 리턴하는 EL 연산자이다.  
+    <참고> 위 코딩을 EL 의 삼항연산자로 쓰면 간단하게 표현될 수 있다.
+
+        <div>${empty requestScope.xxx?null:'홍길동'}</div>  // EL 안에서는 문자는 싱글쿼트로 감싸줘야 한다.  
+    -----------------------------------------
+    <div>
+    <%
+        String xxx = (String)request.getAttribute("xxx");
+        if( xxx!=null && xxx.length()>0 ){
+            out.print( "홍길동" );
+        }
+    
+    %>
+    </div>
+
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+<문16> JSP 페이지에서 아래와 같은 코딩이 있으면 어떻게 분석하나? 
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    -----------------------------------------
+    HttpservletRequest 객체에 "boardList" 라는 키값으로 
+    List<Map<String,String>> 객체가 저장되었다는 가정하에
+    아래코드가 있다.
+    -----------------------------------------
+    <c:forEach var="board" items="${requestScope.boardList}" varStatus="loopStatus">
+
+        ${loopStatus.index+1}<br>
+        ${baord.subject}<br>
+        ${baord.writer}<br>
+
+    </c:forEach>
+    -----------------------------------------
+    위 코드를 자바코드로 바꾸면 아래와 같다.  
+    -----------------------------------------
+    <%
+        List<Map<String,String>> boardList = (List<Map<String,String>>)request.getAttribute("boardList");
+        if( boardList!=null && boardList.size()>0 ){
+           
+            for( int i =0; i<boardList.size(); i++){
+
+                Map board = boardList.get(i);
+                out.print( (i+1) +"<br>");
+                out.print( board.get("subject")+"<br>" );
+                out.print( board.get("writer")+"<br>" );
+
+            }    
+        }
+    
+    %>
+    -----------------------------------------
+
+
+    자바의 단위 프로그램 => 클래스, 인터페이스  
+
+    react 단위 프로그램 => 클래스 컴포넌트, 함수컴포넌트  
+
 
 
 

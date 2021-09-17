@@ -359,7 +359,7 @@ public class BoardController {
         // 파라미터명이 b_no 인 파라미터값을 받아오는 매개변수 b_no 선언하기
         // ---------------------------------------------------------------
         @RequestParam(
-            value="b_no"            // 파라미터명 설정
+            value="b_no"            // 파라미터명 설정. 이 파명에 해당하는 파값은 댓글 쓸때 엄마의 PK 번호 이다.   
             , required = false      // 파라미터명, 값이 안들어와도 허용한다는 의미
             , defaultValue = "0"    // 파라미터값 없으면 파라미터값을 0으로 저장
             ) int b_no
@@ -438,6 +438,7 @@ public class BoardController {
 
         // **********************************************
         // Error 객체를 관리하는 BindingResult 객체가 저장되어 들어오는 매개변수 bindingResult 선언
+        // 매개변수에 BindingResult 객체가 있으면 내부에는 유효성 체크코드가 나온다.  
         // **********************************************
         , BindingResult bindingResult
 
@@ -453,7 +454,7 @@ public class BoardController {
             if( multi.getSize()>1000000){
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("boardRegCnt", "0");
-                map.put("msg", "업로드 파일이 1000kb 보다 크면 업로드 할 수 없습니다.");
+                map.put("msg", "업로드 파일이 10mb 보다 크면 업로드 할 수 없습니다.");
                 return map;
             }
 
@@ -462,7 +463,7 @@ public class BoardController {
 
             System.out.println("파일이름 확인하기 =>>> " + fileName);
             
-            if( fileName.endsWith(".jpg")==false && fileName.endsWith(".gif")==false && fileName.endsWith(".png")==false ){
+            if( fileName.endsWith(".jpeg")==false && fileName.endsWith(".jpg")==false && fileName.endsWith(".gif")==false && fileName.endsWith(".png")==false ){
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("boardRegCnt", "0");
                 map.put("msg", "이미지 파일 형식이 아닙니다.");
@@ -500,6 +501,9 @@ public class BoardController {
             // *********************************************
             // check_BoardDTO 메소드를 호출하여 [유효성 체크]하고 [에러 메시지] 문자 얻기
             msg = check_BoardDTO( boardDTO, bindingResult );  
+
+
+            // ##############################################################  DB 연동코드 
             // *********************************************
             // 만약 msg 안에 "" 가 저장되어 있으면, 즉, 유효성 체크를 통과했으면  
             // *********************************************
@@ -697,10 +701,10 @@ public class BoardController {
         if( multi.isEmpty()==false ){
      
             // 만약에 업로드된 파일의 크기가 1000000 byte(=1000kb) 보다 크면 
-            if( multi.getSize()>1000000){
+            if( multi.getSize()>10000000){
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("boardUpDelCnt", "0");
-                map.put("msg", "업로드 파일이 1000kb 보다 크면 업로드 할 수 없습니다.");
+                map.put("msg", "업로드 파일이 10mb 보다 크면 업로드 할 수 없습니다.");
                 return map;
             }
 
@@ -721,7 +725,10 @@ public class BoardController {
             
         }
 
-
+        // **********************************************
+        // 수정 또는 삭제 행의 적용 개수 저장할 변수 선언 
+        // 유효성 체크 시 경고메시지 저장할 변수 msg 선언.
+        // **********************************************
         int boardUpDelCnt = 0;
         String msg ="";
         // **********************************************

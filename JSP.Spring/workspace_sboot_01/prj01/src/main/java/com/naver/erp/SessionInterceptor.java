@@ -60,7 +60,7 @@ public class SessionInterceptor implements HandlerInterceptor{
 			// 클라이언트가 /loginForm.do 로 재 접속하라고 설정하기
 			// 응답 메시지를 받은 클라이언트는 이 URL 주소로 강제로 재 접속을 한다.  
 			// ------------------------------------------------
-			response.sendRedirect( "/login_alert.do" );
+			response.sendRedirect( "/naver/login_alert.do" );
 			// ------------------
 			// false 값을 리턴하기
 			// false 값을 리턴하면 @RequestMapping 가 붙은 메소드는 호출되지 않는다.
