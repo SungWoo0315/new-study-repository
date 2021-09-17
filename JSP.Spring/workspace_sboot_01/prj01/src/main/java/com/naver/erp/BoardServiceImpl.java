@@ -57,6 +57,12 @@ public class BoardServiceImpl implements BoardService {
         // boardDTO 객체에 새로운 파일명 저장하기.
         // ---------------------------------------
         boardDTO.setPic(fileUpLoad.getNewFileName());
+  
+
+
+        // MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+        // DB 연동코드
+        // MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
         // ---------------------------------------
         // 만약 엄마글의 글 번호가 1 이상이면 댓글쓰기 이므로
         // 엄마 글 이후의 게시판 글에 대해 출력순서번호를 1 증가 시키기.
@@ -74,6 +80,10 @@ public class BoardServiceImpl implements BoardService {
         // BoardDAOImpl 객체의 insertBoard 메소드 호출하여 게시판 글 입력 후 입력 적용 행의 개수 얻기
         // ---------------------------------------
         int boardRegCnt = this.boardDAO.insertBoard(boardDTO);
+        // MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+
+
+
 
         // ---------------------------------------
         // 파일 업로드 하기
@@ -99,6 +109,11 @@ public class BoardServiceImpl implements BoardService {
         // [조회수 증가]하고 수정한 행의 개수를 얻는다
         // -------------------------------------------
         int updateCnt = this.boardDAO.updateReadcount(b_no);
+        // -------------------------------------------
+        // 수정한 행의 개수가 0이면 null 리턴하기
+        // 즉, 수정한 행의 개수가 0이면 대상 게시판 글이 누군가 삭제했다면, null 리턴하기.
+        // <참고> 업데이트의 결과가 0이면 조건에 맞는 것이 없어서 업데이트를 못한것이다.  
+        // -------------------------------------------
         if( updateCnt == 0 ){ return null; }
         // -------------------------------------------
         // BoardDAOImpl 객체의 getBoard 메소드를 호출하여
