@@ -62,6 +62,7 @@ public class LoginController {
 
     private String path = Info.naverPath;   // naver/ 가 들어있다.
     
+    /*
     // ********************************************
     // 가상주소 /loginForm.do 로 접근하면 호출되는 메소드 선언
     // ********************************************
@@ -81,9 +82,23 @@ public class LoginController {
         mav.setViewName(path+"loginForm.jsp"); // 경로에 "/WEB-INF/views/" 가 붙고 나머지가 붙는다.
         return mav;
     }
+    */
 
+    // 위 메소드는 아래처럼도 가능하다.  
+    // DB 연동 필요없고 바로 jsp 페이지 이동할때.  
+    // ********************************************
+    // 가상주소 /loginForm.do 로 접근하면 호출되는 메소드 선언
+    // ********************************************
+    @RequestMapping( value="/loginForm.do")
+    public String loginForm( ){
+        System.out.print("==================================\r");  
+        System.out.print("접속 성공, 로그인화면 진입했습니다..!\r");   
+        System.out.print("==================================\r");   
 
+        return path+"loginForm.jsp";
+    }
 
+    
 
 
     // ********************************************
