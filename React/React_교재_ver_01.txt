@@ -595,6 +595,8 @@
         this.속성변수 내포하는 바로 위 객체의 속성변수를 가르킨다. 
 
 
+
+
 function Xxx(){
     this.name = "흰둥이"
     return{
