@@ -713,7 +713,7 @@ const twice = (value) => value*2;
         전개 연산자 사용
         ---------------------
             var student = {sno:1, sname:'사오정', jumin_num:'001225-1018333'};
-            var [sno,sname,jumin_num] = student;
+            var {sno,sname,jumin_num} = student;
 
 
     -------------------------------------------------------------------------
